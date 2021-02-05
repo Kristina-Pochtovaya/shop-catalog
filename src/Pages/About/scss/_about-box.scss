@@ -1,0 +1,58 @@
+$colorHeaderAbout: #11b1f6;
+$fontH1HeaderAbout: 30px Tahoma, Geneva, sans-serif;
+$fontH2HeaderAbout: 24px Tahoma, Geneva, sans-serif;
+$fontH3HeaderAbout: 22px Tahoma, Geneva, sans-serif;
+
+%header-boxAbout {
+  margin: 0;
+  padding: 0;
+  color: $colorHeaderAbout;
+}
+
+%font-aboutParagraps {
+  font: 14px Tahoma, Geneva, sans-serif;
+
+  color: #000;
+}
+
+.about-wrap {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 10px;
+
+  .-block{
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .aboutHeaderH1 {
+   @extend %header-boxAbout;
+
+    font: $fontH1HeaderAbout;
+  }
+
+  .aboutHeaderH2 {
+    @extend %header-boxAbout;
+
+    font: $fontH2HeaderAbout;
+  }
+
+  .aboutHeaderH3 {
+    @extend %header-boxAbout;
+
+    font: $fontH3HeaderAbout;
+  }
+
+  .aboutParagraph {
+    @extend %font-aboutParagraps;
+  }
+
+  
+  .aboutList {
+    padding: 0;
+
+    .aboutListItem {
+      margin-left: 50px;
+    }
+  }
+}
