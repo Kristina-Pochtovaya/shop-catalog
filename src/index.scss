@@ -1,5 +1,7 @@
-@import './Pages/Main/_header-box.scss';
-@import './Pages/Main/_header-wrap.scss';
+@import './Pages/Main/sass/header-box';
+@import './Pages/Main/sass/header-wrap';
+@import './Pages/Main/sass/catalog-box';
+
 
 body {
   margin: 0;
