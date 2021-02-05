@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './App';
+import AppShopCatalog from './AppShopCatalog';
 
 ReactDOM.render(
-    <App />,
+    <AppShopCatalog />,
   document.getElementById('root')
 );
 
