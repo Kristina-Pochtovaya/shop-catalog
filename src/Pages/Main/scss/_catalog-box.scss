@@ -1,0 +1,94 @@
+%title-itemCard{
+  margin: 0;
+  width: 256px;
+
+  color: white;
+};
+
+$colorLightBrowItem: #baad99;
+$colorLightGreenItem: #c3ce36;
+$colorLightPupleItem: #7674b4;
+
+.catalog-box {
+  width: 800px;
+  margin: 0 auto;
+  margin-top: 10px;
+
+  .catalog {
+    width: 100%;
+    margin-bottom: 15px;
+
+    font-family: 'mb';
+    font-size: 36px;
+    line-height: 40px;
+  }
+
+  .items-wrap{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    width: 800px;
+  }
+
+  .item {
+    position: relative;
+
+    width: calc(33.333% - 3px);
+    margin-bottom: 5px;
+
+    .titleElectricalGoodsAndLights {
+      background-color: $colorLightPupleItem; 
+
+      @extend %title-itemCard;
+    }
+
+    .titleGarden {
+      background-color: $colorLightGreenItem; 
+
+      @extend %title-itemCard;
+    }
+
+    .titleHouseholAppliancies {
+      background-color: $colorLightPupleItem; 
+
+      @extend %title-itemCard;
+    }
+
+    .titleKitchen {
+      background-color: $colorLightBrowItem;
+
+      @extend %title-itemCard;
+    }
+    
+    .titleDecor {
+      background-color: $colorLightPupleItem; 
+
+      @extend %title-itemCard;
+    }
+
+    .titleColors {
+      background-color: $colorLightGreenItem; 
+
+      @extend %title-itemCard;
+    }
+
+    .titleHouseholdGoods {
+      background-color: $colorLightGreenItem;
+
+      @extend %title-itemCard;      
+    }
+
+    .titleDecorationMaterials {
+      background-color: $colorLightBrowItem; 
+
+      @extend %title-itemCard;
+    }
+
+    .titleSanitaryEngineering {
+      background-color: $colorLightPupleItem;
+      
+      @extend %title-itemCard;      
+    }
+  }
+}
