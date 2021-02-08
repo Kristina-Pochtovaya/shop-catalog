@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header} from '../../../Main/jsx/Header';
+import { Footer } from '../../../Main/Footer/jsx/Footer';
+import {Header} from '../../../Main/Header/jsx/Header';
 import householdGoods1 from '../img/householdGoods1.jpg';
 
 export const HouseholdGoods = () => (
@@ -9,11 +10,12 @@ export const HouseholdGoods = () => (
       <div className="items-wrap">
         <div className="item">
           <img src={householdGoods1} alt="Комлект постельного белья" title="Комлект постельного белья" />
-          <p>155 РУБ.</p>
+          <p>5 РУБ.</p>
           <h4>Комлект постельного белья</h4>
         </div>
       </div>
     </div>
+    <Footer />
   </>
 );
 

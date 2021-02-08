@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
-import {Header} from './Pages/Main/jsx/Header';
-import {Catalog} from './Pages/Main/jsx/Catalog';
-import {Footer} from './Pages/Main/jsx/Footer';
+import {Header} from './Pages/Main/Header/jsx/Header';
+import {Catalog} from './Pages/Main/Catalog/jsx/Catalog';
+import {Footer} from './Pages/Main/Footer/jsx/Footer';
 import {ElectricalGoodsAndLights} from './Pages/Catalog/ElectricalGoodsAndLights/jsx/ElectricalGoodsAndLights';
 import {Garden} from './Pages/Catalog/Garden/jsx/Garden';
 import {HouseholdAppliancies} from './Pages/Catalog/HouseholdAppliancies/jsx/HouseholdAppliancies';
@@ -13,7 +13,7 @@ import {HouseholdGoods} from "./Pages/Catalog/HouseholdGoods/jsx/HouseholdGoods"
 import {DecorationMaterials} from "./Pages/Catalog/DecorationMaterials/jsx/DecorationMaterials";
 import {SanitaryEngineering} from "./Pages/Catalog/SanitaryEngineering/jsx/SanitaryEngineering";
 import {About} from './Pages/About/jsx/About';
-import aboutUS from './Pages/Main/img/about-us.png';
+import aboutUS from './Pages/Main/Header/img/about-us.png';
 
 function AppShopCatalog() {
   return (

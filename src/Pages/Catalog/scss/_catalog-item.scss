@@ -1,6 +1,6 @@
 %title-itemCard{
   margin: 0;
-  width: 256px;
+  max-width: 256px;
 
   color: white;
 };
@@ -11,9 +11,10 @@ $colorLightPupleItem: #7674b4;
 
 .container {
   margin: 0 auto;
-  width: 800px;
+  max-width: 800px;
   margin-top: 10px;
-
+	flex: 1 0 auto;
+  
 .items-wrap{
   display: flex;
   justify-content: space-between;
@@ -21,7 +22,20 @@ $colorLightPupleItem: #7674b4;
 }
 
 .item {
-  width: calc(33.333% - 3px);
+  flex: 0 1 33.333%;
   margin-bottom: 5px;
   }
+}
+
+@media screen and (max-width: 500px) {
+  .catalog-box {
+    max-width: none;
+
+  .items-wrap{
+    display: flex;
+    flex-direction: column;
+    max-width: none
+
+  }
+}
 }

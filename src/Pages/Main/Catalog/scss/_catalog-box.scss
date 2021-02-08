@@ -1,6 +1,6 @@
 %title-itemCard{
   margin: 0;
-  width: 256px;
+  max-width: 256px;
 
   color: white;
 };
@@ -10,10 +10,10 @@ $colorLightGreenItem: #c3ce36;
 $colorLightPupleItem: #7674b4;
 
 .catalog-box {
-  width: 800px;
+  max-width: 800px;
   margin: 0 auto;
-  margin-top: 10px;
-
+	flex: 1 0 auto;
+  
   .catalog {
     width: 100%;
     margin-bottom: 15px;
@@ -27,14 +27,12 @@ $colorLightPupleItem: #7674b4;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    max-width: 800px;
 
-    width: 800px;
   }
 
   .item {
-    position: relative;
-
-    width: calc(33.333% - 3px);
+    flex: 0 1 33.333%;
     margin-bottom: 5px;
 
     .titleElectricalGoodsAndLights {
@@ -91,4 +89,17 @@ $colorLightPupleItem: #7674b4;
       @extend %title-itemCard;      
     }
   }
+}
+
+@media screen and (max-width: 500px) {
+  .catalog-box {
+    max-width: none;
+
+  .items-wrap{
+    display: flex;
+    flex-direction: column;
+    max-width: none
+
+  }
+}
 }

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header} from '../../../Main/jsx/Header';
+import { Footer } from '../../../Main/Footer/jsx/Footer';
+import {Header} from '../../../Main/Header/jsx/Header';
 import decor1 from '../img/decor1.jpg';
 import decor2 from '../img/decor2.jpg';
 import decor3 from '../img/decor3.jpg';
@@ -26,6 +27,7 @@ export const Decor = () => (
         </div>
       </div>
     </div>
+    <Footer />
   </>
 );
 

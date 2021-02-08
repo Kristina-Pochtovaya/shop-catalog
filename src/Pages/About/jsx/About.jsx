@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header} from '../../Main/jsx/Header';
+import {Header} from '../../Main/Header/jsx/Header';
+import {Footer} from '../../Main/Footer/jsx/Footer';
 
 export const About= () => (
   <>
@@ -55,6 +56,7 @@ export const About= () => (
 
      <h3 className="aboutHeaderH3">Добро пожаловать в строительную цивилизацию «ВСЕ ДЛЯ ДОМА»</h3>
   </div>
+  <Footer />
   </>
 );
 

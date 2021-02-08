@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header} from '../../../Main/jsx/Header';
+import { Footer } from '../../../Main/Footer/jsx/Footer';
+import {Header} from '../../../Main/Header/jsx/Header';
 import colors1 from '../img/colors1.jpg';
 
 export const Colors = () => (
@@ -14,6 +15,7 @@ export const Colors = () => (
         </div>
       </div>
     </div>
+    <Footer />
   </>
 );
 

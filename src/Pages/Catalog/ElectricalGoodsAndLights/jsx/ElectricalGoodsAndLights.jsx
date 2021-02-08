@@ -1,5 +1,6 @@
 import React from 'react';
-import {Header} from '../../../Main/jsx/Header';
+import { Footer } from '../../../Main/Footer/jsx/Footer';
+import {Header} from '../../../Main/Header/jsx/Header';
 import light1 from '../img/light1.jpg';
 import light2 from '../img/light2.jpg';
 import light3 from '../img/light3.jpg';
@@ -26,6 +27,7 @@ export const ElectricalGoodsAndLights = () => (
         </div>
       </div>
     </div>
+    <Footer />
   </>
 );
 

@@ -1,16 +1,11 @@
-@import './Pages/Main/scss/header-box';
-@import './Pages/Main/scss/header-wrap';
-@import './Pages/Main/scss/catalog-box';
+@import './Pages/Main/Header/scss/header-box';
+@import './Pages/Main/Header/scss/header-wrap';
+@import './Pages/Main/Catalog/scss/catalog-box';
+@import './Pages/Main/Footer/scss/footer-box';
+@import './Pages/Main/Footer/scss/footer-wrap';
 @import './Pages/About/scss/about-box';
 @import './Pages/Catalog/scss/catalog-item';
-@import './Pages/Main/scss/footer-wrap';
-@import './Pages/Main/scss/footer-box';
-
-body,
-html {
-
-    background-color: orange;
-}
+@import './Pages/Main/Footer/scss/social-buttons';
 
 body {
   margin: 0;
@@ -25,5 +20,17 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+html, body{
+  height: 100%;
+
+  #root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+  }
+
 }
 
