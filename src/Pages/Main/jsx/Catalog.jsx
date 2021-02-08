@@ -18,49 +18,55 @@ export const Catalog = () => (
       <Link to="/electrical-goods-and-lights" >
         <img src={electricalGoodsAndLights} alt="Электротовары и свет" title="Электротовары и свет" />
       </Link>
-
       <h3 className="titleElectricalGoodsAndLights">Электротовары и свет</h3>
     </div>
     <div className="item">
-      <a href="" className="foto">
+      <Link to="/garden" >
         <img src={garden} alt="Сад" title="Сад" />
-      </a>
+      </Link>
       <h3 className="titleGarden">Сад</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="/household-appliancies" >
         <img src={householdAppliancies} alt="Бытовая техника" title="Бытовая техника" />
-        <h3 className="titleHouseholAppliancies">Бытовая техника</h3>
+      </Link>
+      <h3 className="titleHouseholAppliancies">Бытовая техника</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="/kitchen">
         <img src={kitchen} alt="Кухня" title="Кухня" />
-        <h3 className="titleKitchen">Кухня</h3>
+        </Link>
+      <h3 className="titleKitchen">Кухня</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="/decor">
         <img src={decor} alt="Декор" title="Декор" />
+        </Link>  
         <h3 className="titleDecor">Декор</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="/colors">
         <img src={colors} alt="Краски" title="Краски" />
-        <h3 className="titleColors">Краски</h3>
+      </Link>  
+      <h3 className="titleColors">Краски</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="/household-goods">
         <img src={householdGoods} alt="Товары для дома" title="Товары для дома" />
-        <h3 className="titleHouseholdGoods">Товары для дома</h3>
+        </Link>  
+      <h3 className="titleHouseholdGoods">Товары для дома</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="/decoration-materials">
         <img src={decorationMaterials} alt="Отделочные материалы" title="Отделочные материалы" />
-        <h3 className="titleDecorationMaterials">Отделочные материалы</h3>
+      </Link>
+      <h3 className="titleDecorationMaterials">Отделочные материалы</h3>
     </div>
     <div className="item">
-      <a href="" className="foto"></a>
+      <Link to="sanitary-engineering">
         <img src={sanitaryEngineering} alt="Сантехника" title="Сантехника" />
-        <h3 className="titleSanitaryEngineering">Сантехника</h3>
+      </Link>
+      <h3 className="titleSanitaryEngineering">Сантехника</h3>
     </div>
 </div>
 </div>
