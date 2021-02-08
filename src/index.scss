@@ -3,10 +3,18 @@
 @import './Pages/Main/scss/catalog-box';
 @import './Pages/About/scss/about-box';
 @import './Pages/Catalog/scss/catalog-item';
+@import './Pages/Main/scss/footer-wrap';
+@import './Pages/Main/scss/footer-box';
 
+body,
+html {
+
+    background-color: orange;
+}
 
 body {
   margin: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

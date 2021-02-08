@@ -1,0 +1,15 @@
+%footer-card {
+  color: #6d6d75;
+
+  font-size: 26px;
+  font-family: 'Times New Roman', serif;
+  font-weight: 900;
+}
+
+.footer-box {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-end;
+  width: 800px;
+  margin: 0 auto;
+}

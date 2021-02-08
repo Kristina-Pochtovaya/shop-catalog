@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Redirect} from 'react-router-dom';
 import {Header} from './Pages/Main/jsx/Header';
 import {Catalog} from './Pages/Main/jsx/Catalog';
+import {Footer} from './Pages/Main/jsx/Footer';
 import {ElectricalGoodsAndLights} from './Pages/Catalog/ElectricalGoodsAndLights/jsx/ElectricalGoodsAndLights';
 import {Garden} from './Pages/Catalog/Garden/jsx/Garden';
 import {HouseholdAppliancies} from './Pages/Catalog/HouseholdAppliancies/jsx/HouseholdAppliancies';
@@ -23,6 +24,7 @@ function AppShopCatalog() {
       <Route path = "/main-page">
         <Header linkItem={<img src={aboutUS} alt="О нас"/>} link="/about"/>
         <Catalog />
+        <Footer />
       </Route>
       <Route path ="/about">
         <About />
