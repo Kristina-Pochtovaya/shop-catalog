@@ -28,7 +28,6 @@ $colorLightPupleItem: #7674b4;
     justify-content: space-between;
     flex-wrap: wrap;
     max-width: 800px;
-
   }
 
     .item {
@@ -87,6 +86,16 @@ $colorLightPupleItem: #7674b4;
         background-color: $colorLightPupleItem;
       
         @extend %title-itemCard;      
+      }
+  }
+}
+
+@media screen and (max-width: 788px) {
+  .catalog-wrap {
+    max-width: 570px;
+
+      .item {
+        flex: 0 1 40%;
       }
   }
 }

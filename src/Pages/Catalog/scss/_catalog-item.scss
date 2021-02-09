@@ -28,15 +28,22 @@ $colorLightPupleItem: #7674b4;
     }
 }
 
-@media screen and (max-width: 500px) {
-  .catalog-box {
-    max-width: none;
+@media screen and (max-width: 788px) {
+  .container-wrap {
+    max-width: 570px;
 
-  .items-wrap{
-    display: flex;
-    flex-direction: column;
-    max-width: none
-
+      .item {
+        flex: 0 1 40%;
+      }
   }
 }
+
+@media screen and (max-width: 529px) {
+  .container-wrap {
+    max-width: 529px;
+
+      .item {
+        flex: 0 1 49%;
+      }
+  }
 }
