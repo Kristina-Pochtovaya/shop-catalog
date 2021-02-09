@@ -8,8 +8,8 @@ import light3 from '../img/light3.jpg';
 export const ElectricalGoodsAndLights = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
-    <div className="container">
-      <div className="items-wrap">
+    <div className="container-wrap">
+      <div className="items">
         <div className="item">
           <img src={light1} alt="Светильник потолочный" title="Светильник потолочный" />
           <p>163 РУБ.</p>

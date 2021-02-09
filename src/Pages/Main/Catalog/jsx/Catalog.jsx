@@ -11,9 +11,9 @@ import decorationMaterials from '../img/decoration-materials.jpg';
 import sanitaryEngineering from '../img/sanitary-engineering.jpg';
 
 export const Catalog = () => (
-  <div className="catalog-box">
+  <div className="catalog-wrap">
   <h1 className="catalog"> Каталог </h1>
-  <div className="items-wrap">
+  <div className="items">
     <div className="item">
       <Link to="/electrical-goods-and-lights" >
         <img src={electricalGoodsAndLights} alt="Электротовары и свет" title="Электротовары и свет" />

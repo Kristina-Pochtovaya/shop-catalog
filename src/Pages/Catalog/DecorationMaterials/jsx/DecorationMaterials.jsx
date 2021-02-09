@@ -7,8 +7,8 @@ import decorationMaterials2 from '../img/decorationMaterials2.jpg';
 export const DecorationMaterials = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
-    <div className="container">
-      <div className="items-wrap">
+    <div className="container-wrap">
+      <div className="items">
         <div className="item">
           <img src={decorationMaterials1} alt="Ковер" title="Ковер" />
           <p>267 РУБ.</p>

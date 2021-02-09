@@ -9,24 +9,23 @@ $colorLightBrowItem: #baad99;
 $colorLightGreenItem: #c3ce36;
 $colorLightPupleItem: #7674b4;
 
-.container {
+.container-wrap {
   margin: 0 auto;
   max-width: 800px;
-
   width:100%;
   margin-top: 10px;
 	flex: 1 0 auto;
   
-.items-wrap{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.item {
-  flex: 0 1 33.333%;
-  margin-bottom: 5px;
+  .items{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
+
+    .item {
+      flex: 0 1 33.333%;
+      margin-bottom: 5px;
+    }
 }
 
 @media screen and (max-width: 500px) {

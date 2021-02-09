@@ -1,11 +1,11 @@
-@import './Pages/Main/Header/scss/header-box';
 @import './Pages/Main/Header/scss/header-wrap';
+@import './Pages/Main/Header/scss/header-box';
 @import './Pages/Main/Catalog/scss/catalog-box';
-@import './Pages/Main/Footer/scss/footer-box';
 @import './Pages/Main/Footer/scss/footer-wrap';
+@import './Pages/Main/Footer/scss/footer-box';
+@import './Pages/Main/Footer/scss/social-buttons';
 @import './Pages/About/scss/about-box';
 @import './Pages/Catalog/scss/catalog-item';
-@import './Pages/Main/Footer/scss/social-buttons';
 
 body {
   margin: 0;

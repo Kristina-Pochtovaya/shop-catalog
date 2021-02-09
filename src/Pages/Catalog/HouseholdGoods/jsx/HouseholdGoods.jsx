@@ -6,8 +6,8 @@ import householdGoods1 from '../img/householdGoods1.jpg';
 export const HouseholdGoods = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
-    <div className="container">
-      <div className="items-wrap">
+    <div className="container-wrap">
+      <div className="items">
         <div className="item">
           <img src={householdGoods1} alt="Комлект постельного белья" title="Комлект постельного белья" />
           <p>5 РУБ.</p>

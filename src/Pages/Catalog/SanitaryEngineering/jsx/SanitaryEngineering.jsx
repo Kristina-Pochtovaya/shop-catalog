@@ -8,8 +8,8 @@ import sanitaryEngineering3 from '../img/sanitaryEngineering3.jpg';
 export const SanitaryEngineering = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
-    <div className="container">
-      <div className="items-wrap">
+    <div className="container-wrap">
+      <div className="items">
         <div className="item">
           <img src={sanitaryEngineering1} alt="Душевой уголок" title="Душевой уголок" />
           <p>403 РУБ.</p>

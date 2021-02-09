@@ -1,10 +1,16 @@
 @import '../../Catalog/scss/catalog-box';
 
-%header-card {
-  color: #6d6d75;
+%buttonBack {
+  margin-bottom: 15px;
+  padding: .375rem .75rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
 
-  font-size: 26px;
-  font-family: 'Times New Roman', serif;
+  color: #fff;
+  background-color: $colorLightGreenItem;
+  border-color: $colorLightGreenItem;
+
+  font-size: 1rem;
   font-weight: 900;
 }
 
@@ -16,19 +22,8 @@
   max-width: 800px;
   margin: 0 auto;
 
-  @extend %header-card; 
 
   .buttonBack {
-    margin-bottom: 15px;
-    padding: .375rem .75rem;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-
-    color: #fff;
-    background-color: $colorLightGreenItem;
-    border-color: $colorLightGreenItem;
-
-    font-size: 1rem;
-    font-weight: 900;
+    @extend %buttonBack;
   }
 }

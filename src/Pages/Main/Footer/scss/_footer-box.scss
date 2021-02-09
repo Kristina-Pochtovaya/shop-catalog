@@ -1,3 +1,11 @@
+%copyright {
+  margin-right: 10px;
+    
+  color: rgb(158, 154, 154);
+
+  font-size: 15px;
+}
+
 .footer-box {
   display: flex;
   flex-direction: row-reverse;
@@ -9,10 +17,6 @@
   margin-top: 15px;
   
   .copyright{
-    margin-right: 10px;
-    
-    color: rgb(158, 154, 154);
-
-    font-size: 15px;
+    @extend %copyright;
   }
 }

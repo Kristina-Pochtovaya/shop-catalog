@@ -7,8 +7,8 @@ import kitchen2 from '../img/kitchen2.jpg';
 export const Kitchen = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
-    <div className="container">
-      <div className="items-wrap">
+    <div className="container-wrap">
+      <div className="items">
         <div className="item">
           <img src={kitchen1} alt="Духовой шкаф" title="Духовой шкаф" />
           <p>690 РУБ.</p>

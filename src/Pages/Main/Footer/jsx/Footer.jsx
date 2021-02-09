@@ -9,7 +9,7 @@ export const Footer = () => (
         <SocialButton type="facebook" />
         <SocialButton type="instagram" />
       </div>
-      <p className="copyright">© 2018 Все для дома</p>
+      <p className="copyright">© 2021 Все для дома</p>
     </div>
     </div>
 );

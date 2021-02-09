@@ -8,8 +8,8 @@ import decor3 from '../img/decor3.jpg';
 export const Decor = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
-    <div className="container">
-      <div className="items-wrap">
+    <div className="container-wrap">
+      <div className="items">
         <div className="item">
           <img src={decor1} alt="Часы настенные" title="Часы настенные" />
           <p>33 РУБ.</p>

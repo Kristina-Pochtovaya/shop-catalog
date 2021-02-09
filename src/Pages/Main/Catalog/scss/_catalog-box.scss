@@ -9,7 +9,7 @@ $colorLightBrowItem: #baad99;
 $colorLightGreenItem: #c3ce36;
 $colorLightPupleItem: #7674b4;
 
-.catalog-box {
+.catalog-wrap {
   max-width: 800px;
   margin: 0 auto;
 	flex: 1 0 auto;
@@ -23,7 +23,7 @@ $colorLightPupleItem: #7674b4;
     line-height: 40px;
   }
 
-  .items-wrap{
+  .items{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -31,75 +31,74 @@ $colorLightPupleItem: #7674b4;
 
   }
 
-  .item {
-    flex: 0 1 33.333%;
-    margin-bottom: 5px;
+    .item {
+      flex: 0 1 33.333%;
+      margin-bottom: 5px;
 
-    .titleElectricalGoodsAndLights {
-      background-color: $colorLightPupleItem; 
+      .titleElectricalGoodsAndLights {
+        background-color: $colorLightPupleItem; 
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
 
-    .titleGarden {
-      background-color: $colorLightGreenItem; 
+      .titleGarden {
+        background-color: $colorLightGreenItem; 
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
 
-    .titleHouseholAppliancies {
-      background-color: $colorLightPupleItem; 
+      .titleHouseholAppliancies {
+        background-color: $colorLightPupleItem; 
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
 
-    .titleKitchen {
-      background-color: $colorLightBrowItem;
+      .titleKitchen {
+        background-color: $colorLightBrowItem;
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
     
-    .titleDecor {
-      background-color: $colorLightPupleItem; 
+      .titleDecor {
+        background-color: $colorLightPupleItem; 
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
 
-    .titleColors {
-      background-color: $colorLightGreenItem; 
+      .titleColors {
+        background-color: $colorLightGreenItem; 
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
 
-    .titleHouseholdGoods {
-      background-color: $colorLightGreenItem;
+      .titleHouseholdGoods {
+        background-color: $colorLightGreenItem;
 
-      @extend %title-itemCard;      
-    }
+        @extend %title-itemCard;      
+      }
 
-    .titleDecorationMaterials {
-      background-color: $colorLightBrowItem; 
+      .titleDecorationMaterials {
+        background-color: $colorLightBrowItem; 
 
-      @extend %title-itemCard;
-    }
+        @extend %title-itemCard;
+      }
 
-    .titleSanitaryEngineering {
-      background-color: $colorLightPupleItem;
+      .titleSanitaryEngineering {
+        background-color: $colorLightPupleItem;
       
-      @extend %title-itemCard;      
-    }
+        @extend %title-itemCard;      
+      }
   }
 }
 
 @media screen and (max-width: 529px) {
-  .catalog-box {
+  .catalog-wrap {
     max-width: none;
 
-  .items-wrap{
+  .items{
     display: flex;
     flex-direction: column;
     max-width: none
-
   }
 }
 }
