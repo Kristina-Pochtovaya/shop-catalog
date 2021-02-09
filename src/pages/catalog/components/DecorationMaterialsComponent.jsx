@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from '../../Main/Footer/components/FooterComponent';
-import Header from '../../Main/Header/components/HeaderComponent';
+import Footer from '../../main/footer/components/FooterComponent';
+import Header from '../../main/header/components/HeaderComponent';
 import decorationMaterials1 from '../../../assets/catalog-items/decorationMaterials/decorationMaterials1.jpg';
 import decorationMaterials2 from '../../../assets/catalog-items/decorationMaterials/decorationMaterials2.jpg';
 

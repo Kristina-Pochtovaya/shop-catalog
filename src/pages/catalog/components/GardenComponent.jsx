@@ -1,6 +1,6 @@
 import React from 'react';
-import Footer from '../../Main/Footer/components/FooterComponent';
-import Header from '../../Main/Header/components/HeaderComponent';
+import Footer from '../../main/footer/components/FooterComponent';
+import Header from '../../main/header/components/HeaderComponent';
 import garden1 from '../../../assets/catalog-items/garden/garden1.jpg';
 
 const Garden = () => (
