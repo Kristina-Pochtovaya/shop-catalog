@@ -1,10 +1,10 @@
 import React from 'react';
-import { Footer } from '../../../Main/Footer/jsx/Footer';
-import {Header} from '../../../Main/Header/jsx/Header';
+import Footer from '../../../Main/Footer/jsx/Footer';
+import Header from '../../../Main/Header/jsx/Header';
 import decorationMaterials1 from '../img/decorationMaterials1.jpg';
 import decorationMaterials2 from '../img/decorationMaterials2.jpg';
 
-export const DecorationMaterials = () => (
+const DecorationMaterials = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
     <div className="container-wrap">
@@ -25,5 +25,4 @@ export const DecorationMaterials = () => (
   </>
 );
 
-
-
+export default DecorationMaterials;

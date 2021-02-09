@@ -1,9 +1,9 @@
 import React from 'react';
-import { Footer } from '../../../Main/Footer/jsx/Footer';
-import {Header} from '../../../Main/Header/jsx/Header';
+import Footer from '../../../Main/Footer/jsx/Footer';
+import Header from '../../../Main/Header/jsx/Header';
 import householdGoods1 from '../img/householdGoods1.jpg';
 
-export const HouseholdGoods = () => (
+const HouseholdGoods = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
     <div className="container-wrap">
@@ -19,5 +19,4 @@ export const HouseholdGoods = () => (
   </>
 );
 
-
-
+export default HouseholdGoods;

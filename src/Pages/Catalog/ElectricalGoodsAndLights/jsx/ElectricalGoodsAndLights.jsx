@@ -1,11 +1,11 @@
 import React from 'react';
-import { Footer } from '../../../Main/Footer/jsx/Footer';
-import {Header} from '../../../Main/Header/jsx/Header';
+import Footer from '../../../Main/Footer/jsx/Footer';
+import Header from '../../../Main/Header/jsx/Header';
 import light1 from '../img/light1.jpg';
 import light2 from '../img/light2.jpg';
 import light3 from '../img/light3.jpg';
 
-export const ElectricalGoodsAndLights = () => (
+const ElectricalGoodsAndLights = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
     <div className="container-wrap">
@@ -31,5 +31,4 @@ export const ElectricalGoodsAndLights = () => (
   </>
 );
 
-
-
+export default ElectricalGoodsAndLights;

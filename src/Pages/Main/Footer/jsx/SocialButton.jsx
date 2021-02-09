@@ -1,11 +1,9 @@
 import React from 'react';
 
-export const SocialButton = ({type}) => (
-    <a href="" className={type === "facebook" ? "fa fa-facebook" : "fa fa-instagram"}   >
+const SocialButton = ({ type }) => (
 
-    </a>
+  <link href="" className={type === 'facebook' ? 'fa fa-facebook' : 'fa fa-instagram'} />
 
 );
 
-
-
+export default SocialButton;

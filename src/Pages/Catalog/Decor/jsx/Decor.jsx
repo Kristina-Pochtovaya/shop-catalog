@@ -1,11 +1,11 @@
 import React from 'react';
-import { Footer } from '../../../Main/Footer/jsx/Footer';
-import {Header} from '../../../Main/Header/jsx/Header';
+import Footer from '../../../Main/Footer/jsx/Footer';
+import Header from '../../../Main/Header/jsx/Header';
 import decor1 from '../img/decor1.jpg';
 import decor2 from '../img/decor2.jpg';
 import decor3 from '../img/decor3.jpg';
 
-export const Decor = () => (
+const Decor = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
     <div className="container-wrap">
@@ -31,5 +31,4 @@ export const Decor = () => (
   </>
 );
 
-
-
+export default Decor;

@@ -1,9 +1,9 @@
 import React from 'react';
-import {SocialButton} from './SocialButton';
+import SocialButton from './SocialButton';
 
-export const Footer = () => (
+const Footer = () => (
   <div className="footer-wrap">
-   
+
     <div className="footer-box">
       <div>
         <SocialButton type="facebook" />
@@ -11,8 +11,7 @@ export const Footer = () => (
       </div>
       <p className="copyright">© 2021 Все для дома</p>
     </div>
-    </div>
+  </div>
 );
 
-
-
+export default Footer;

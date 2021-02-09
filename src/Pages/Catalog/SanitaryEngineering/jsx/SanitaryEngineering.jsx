@@ -1,11 +1,11 @@
 import React from 'react';
-import { Footer } from '../../../Main/Footer/jsx/Footer';
-import {Header} from '../../../Main/Header/jsx/Header';
+import Footer from '../../../Main/Footer/jsx/Footer';
+import Header from '../../../Main/Header/jsx/Header';
 import sanitaryEngineering1 from '../img/sanitaryEngineering1.jpg';
 import sanitaryEngineering2 from '../img/sanitaryEngineering2.jpg';
 import sanitaryEngineering3 from '../img/sanitaryEngineering3.jpg';
 
-export const SanitaryEngineering = () => (
+const SanitaryEngineering = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
     <div className="container-wrap">
@@ -31,5 +31,4 @@ export const SanitaryEngineering = () => (
   </>
 );
 
-
-
+export default SanitaryEngineering;
