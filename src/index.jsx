@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import { AppShopCatalog } from './AppShopCatalog';
+import './common/styles/index.scss';
+import { AppShopCatalog } from './common/components/AppShopCatalogComponent';
 
 ReactDOM.render(
   <AppShopCatalog />,

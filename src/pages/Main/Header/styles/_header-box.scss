@@ -1,0 +1,29 @@
+@import '../../Catalog/styles/catalog-box';
+
+%buttonBack {
+  margin-bottom: 15px;
+  padding: .375rem .75rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+
+  color: #fff;
+  background-color: $colorLightGreenItem;
+  border-color: $colorLightGreenItem;
+
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  max-width: 800px;
+  margin: 0 auto;
+
+
+  .buttonBack {
+    @extend %buttonBack;
+  }
+}
