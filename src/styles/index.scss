@@ -6,6 +6,7 @@
 @import '../pages/main/footer/styles/social-buttons';
 @import '../pages/about/styles/about-box';
 @import '../pages/catalog/styles/catalog-item';
+@import '../pages/bucket/styles/busket-box';
 
 body {
   margin: 0;
@@ -33,3 +34,6 @@ html, body{
 
 }
 
+.-disabled {
+  display: none;
+}

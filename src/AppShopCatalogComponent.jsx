@@ -14,6 +14,7 @@ import DecorationMaterials from './pages/catalog/components/DecorationMaterialsC
 import SanitaryEngineering from './pages/catalog/components/SanitaryEngineeringComponent';
 import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
+import Basket from './pages/bucket/components/BasketComponent';
 
 export function AppShopCatalog() {
   return (
@@ -22,12 +23,15 @@ export function AppShopCatalog() {
         <Redirect to="/main-page" />
       </Route>
       <Route path="/main-page">
-        <Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" />
+        <Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
         <Catalog />
         <Footer />
       </Route>
       <Route path="/about">
         <About />
+      </Route>
+      <Route path="/basket">
+        <Basket />
       </Route>
       <Route path="/electrical-goods-and-lights">
         <ElectricalGoodsAndLights />

@@ -1,3 +1,5 @@
+@import '../../main/header/styles/header-box';
+
 %title-itemCard{
   margin: 0;
   max-width: 256px;
@@ -8,6 +10,7 @@
 $colorLightBrowItem: #baad99;
 $colorLightGreenItem: #c3ce36;
 $colorLightPupleItem: #7674b4;
+$colorNoRed: #f00;
 
 .container-wrap {
   margin: 0 auto;
@@ -22,9 +25,59 @@ $colorLightPupleItem: #7674b4;
     flex-wrap: wrap;
   }
 
-    .item {
-      flex: 0 1 33.333%;
+    .item-wrap {
+      position: relative;
+
+      flex: 0 1 31%;
       margin-bottom: 5px;
+      padding-left: 10px;
+
+      border: dotted 1px #e0e0e0;
+
+      >.info {
+        position: absolute;
+        right: 10px;
+
+        color: #777777;
+
+        font-size: 12px;
+
+        svg {
+          width: 15px;
+          margin-right: 5px;
+        }
+
+        .-yes{
+          fill: $colorLightGreenItem;
+        }
+
+        .-no{
+          fill: $colorNoRed;
+        }
+      }
+
+      .imgItem {
+          margin-top: 15px;
+        }
+
+      .purchase {
+        display: flex;
+        justify-content: space-between;
+
+        .busketButton  {
+          @extend %button;
+          
+          height: 46px;
+
+          margin-right: 5px;
+          color:$colorLightGreenItem;
+
+          background-color: white;
+
+          font-size: 0.9em;
+        }
+      }
+      
     }
 }
 
@@ -32,17 +85,17 @@ $colorLightPupleItem: #7674b4;
   .container-wrap {
     max-width: 570px;
 
-      .item {
+      .item-wrap {
         flex: 0 1 40%;
       }
   }
 }
 
-@media screen and (max-width: 529px) {
+@media screen and (max-width: 610px) {
   .container-wrap {
     max-width: 529px;
 
-      .item {
+      .item-wrap {
         flex: 0 1 49%;
       }
   }

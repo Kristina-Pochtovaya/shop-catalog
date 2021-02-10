@@ -1,6 +1,6 @@
 @import '../../catalog/styles/catalog-box';
 
-%buttonBack {
+%button {
   margin-bottom: 15px;
   padding: .375rem .75rem;
   border: 1px solid transparent;
@@ -15,15 +15,21 @@
 }
 
 .header-box {
+  position: relative;
+
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-
   max-width: 800px;
   margin: 0 auto;
 
+  .basket {
+    position: absolute;
+    top: 110px;
+    right: 100px;
+  }
 
   .buttonBack {
-    @extend %buttonBack;
+    @extend %button;
   }
 }

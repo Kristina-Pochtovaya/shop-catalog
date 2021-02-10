@@ -4,7 +4,7 @@ import Footer from '../../main/footer/components/FooterComponent';
 
 const About = () => (
   <>
-    <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />
+    <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
 
     <div className="about-wrap">
       <h1 className="headerH1">
