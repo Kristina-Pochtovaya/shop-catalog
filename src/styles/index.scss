@@ -1,11 +1,11 @@
-@import '../../pages/main/header/styles//header-wrap';
-@import '../../pages/main/header/styles/header-box';
-@import '../../pages/main/catalog/styles/catalog-box';
-@import '../../pages/main/footer/styles/footer-wrap';
-@import '../../pages/main/footer/styles/footer-box';
-@import '../../pages/main/footer/styles/social-buttons';
-@import '../../pages/about/styles/about-box';
-@import '../../pages/catalog/styles/catalog-item';
+@import '../pages/main/header/styles/header-wrap';
+@import '../pages/main/header/styles/header-box';
+@import '../pages/main/catalog/styles/catalog-box';
+@import '../pages/main/footer/styles/footer-wrap';
+@import '../pages/main/footer/styles/footer-box';
+@import '../pages/main/footer/styles/social-buttons';
+@import '../pages/about/styles/about-box';
+@import '../pages/catalog/styles/catalog-item';
 
 body {
   margin: 0;
