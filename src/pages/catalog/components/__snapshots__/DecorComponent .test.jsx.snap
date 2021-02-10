@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render an Decor 1`] = `
+<Fragment>
+  <Header
+    link="/main-page"
+    linkItem={
+      <button
+        className="buttonBack"
+        type="button"
+      >
+        Назад
+      </button>
+    }
+  />
+  <div
+    className="container-wrap"
+  >
+    <div
+      className="items"
+    >
+      <div
+        className="item"
+      >
+        <img
+          alt="Часы настенные"
+          src="decor1.jpg"
+          title="Часы настенные"
+        />
+        <p>
+          33 РУБ.
+        </p>
+        <h4>
+          Часы настенные
+        </h4>
+      </div>
+      <div
+        className="item"
+      >
+        <img
+          alt="Репродукция в раме"
+          src="decor2.jpg"
+          title="Репродукция в раме"
+        />
+        <p>
+          42 РУБ.
+        </p>
+        <h4>
+          Репродукция в раме
+        </h4>
+      </div>
+      <div
+        className="item"
+      >
+        <img
+          alt="Подушка декоративная"
+          src="decor3.jpg"
+          title="Подушка декоративная"
+        />
+        <p>
+          28 РУБ.
+        </p>
+        <h4>
+          Подушка декоративная
+        </h4>
+      </div>
+    </div>
+  </div>
+  <Footer />
+</Fragment>
+`;

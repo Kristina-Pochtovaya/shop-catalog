@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header Component 1`] = `
+<div
+  className="header-wrap"
+>
+  <div
+    className="header-box"
+  >
+    <div
+      className="logo"
+    >
+      <img
+        alt="Все для дома"
+        src="logo.png"
+        title="Все для дома"
+      />
+    </div>
+    <Link
+      to="/main-page"
+    >
+      <button
+        className="buttonBack"
+        type="button"
+      >
+        Назад
+      </button>
+    </Link>
+  </div>
+</div>
+`;
+
+exports[`should render an Header with button Назад 1`] = `
+<div
+  className="header-wrap"
+>
+  <div
+    className="header-box"
+  >
+    <div
+      className="logo"
+    >
+      <img
+        alt="Все для дома"
+        src="logo.png"
+        title="Все для дома"
+      />
+    </div>
+    <Link
+      to="/main-page"
+    >
+      <button
+        className="buttonBack"
+        type="button"
+      >
+        Назад
+      </button>
+    </Link>
+  </div>
+</div>
+`;
