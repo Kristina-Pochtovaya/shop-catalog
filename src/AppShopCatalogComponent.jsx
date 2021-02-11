@@ -1,4 +1,5 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Header from './pages/main/header/components/HeaderComponent';
 import Catalog from './pages/main/catalog/components/CatalogComponent';
@@ -15,51 +16,54 @@ import SanitaryEngineering from './pages/catalog/components/SanitaryEngineeringC
 import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
 import Basket from './pages/bucket/components/BasketComponent';
+import store from './redux/store';
 
 export function AppShopCatalog() {
   return (
     <BrowserRouter>
-      <Route path="/">
-        <Redirect to="/main-page" />
-      </Route>
-      <Route path="/main-page">
-        <Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
-        <Catalog />
-        <Footer />
-      </Route>
-      <Route path="/about">
-        <About />
-      </Route>
-      <Route path="/basket">
-        <Basket />
-      </Route>
-      <Route path="/electrical-goods-and-lights">
-        <ElectricalGoodsAndLights />
-      </Route>
-      <Route path="/garden">
-        <Garden />
-      </Route>
-      <Route path="/household-appliancies">
-        <HouseholdAppliancies />
-      </Route>
-      <Route path="/kitchen">
-        <Kitchen />
-      </Route>
-      <Route path="/decor">
-        <Decor />
-      </Route>
-      <Route path="/colors">
-        <Colors />
-      </Route>
-      <Route path="/household-goods">
-        <HouseholdGoods />
-      </Route>
-      <Route path="/decoration-materials">
-        <DecorationMaterials />
-      </Route>
-      <Route path="/sanitary-engineering">
-        <SanitaryEngineering />
-      </Route>
+      <Provider store={store}>
+        <Route path="/">
+          <Redirect to="/main-page" />
+        </Route>
+        <Route path="/main-page">
+          <Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
+          <Catalog />
+          <Footer />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/basket">
+          <Basket />
+        </Route>
+        <Route path="/electrical-goods-and-lights">
+          <ElectricalGoodsAndLights />
+        </Route>
+        <Route path="/garden">
+          <Garden />
+        </Route>
+        <Route path="/household-appliancies">
+          <HouseholdAppliancies />
+        </Route>
+        <Route path="/kitchen">
+          <Kitchen />
+        </Route>
+        <Route path="/decor">
+          <Decor />
+        </Route>
+        <Route path="/colors">
+          <Colors />
+        </Route>
+        <Route path="/household-goods">
+          <HouseholdGoods />
+        </Route>
+        <Route path="/decoration-materials">
+          <DecorationMaterials />
+        </Route>
+        <Route path="/sanitary-engineering">
+          <SanitaryEngineering />
+        </Route>
+      </Provider>
     </BrowserRouter>
   );
 }
