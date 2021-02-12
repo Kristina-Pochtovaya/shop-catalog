@@ -1,7 +1,6 @@
 import React from 'react';
 
-// eslint-disable-next-line no-unused-vars
-const PopUp = ({ active, setActive }) => (
+const PopUp = ({ active, setActive, children }) => (
   <div
     className={active ? 'popup-box -active' : 'popup-box'}
     onClick={() => setActive(false)}
@@ -10,13 +9,13 @@ const PopUp = ({ active, setActive }) => (
     tabIndex="0"
   >
     <div
-      className="content"
+      className={active ? 'content -active' : 'content'}
       onClick={(e) => e.stopPropagation()}
       onKeyDown={(e) => e.stopPropagation}
       role="button"
       tabIndex="0"
     >
-      544
+      {children}
     </div>
   </div>
 );

@@ -1,0 +1,92 @@
+@import '../../main/header/styles/header-box';
+
+%required{
+    content: '*';
+    color: #ff1010;
+}
+
+%stringPopup{
+    margin: 0px;
+    margin-bottom: 6px;
+
+    font-size: 16px;
+    font-family: Arial sans-serif;
+}
+
+%inputPopup{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+
+    box-shadow: 0px 3px 7px 0px  rgba(0, 0, 0, 35%);
+    border-color: white;
+
+    font-size: 16px;
+}
+
+.popupOrder-box{
+    position: relative;
+
+    padding: 10px;
+
+    .backSymbol{
+        position: absolute;
+        top:0px;
+        right: 0px;
+
+        width: 30px;
+        
+        cursor: pointer;
+        fill:red;
+    }
+
+    .name .nameString{
+        @extend %stringPopup;
+
+        &.-required::after{
+            @extend %required;
+        }
+    }
+    .name .nameInput{
+        @extend %inputPopup;
+    }
+
+    .phone .phoneString{
+        @extend %stringPopup;
+
+        &.-required::after{
+            @extend %required;
+        }
+    }
+    .phone .phoneInput{
+        @extend %inputPopup;
+    }
+
+    .address .addressString{
+        @extend %stringPopup;
+
+        &.-required::after{
+            @extend %required;
+        }
+    }
+    .address .addressInput{
+        @extend %inputPopup;
+    }
+
+    .message .messageString{
+        @extend %stringPopup;
+    }
+    .message .messageInput{
+        @extend %inputPopup;
+
+        height: 90px;
+            resize: none;
+    }
+
+    .buttonOrder{
+        @extend %button;
+
+        margin-left: 140px;
+    }
+}

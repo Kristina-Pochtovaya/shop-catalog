@@ -1,0 +1,25 @@
+@import '../../main/catalog/styles/catalog-box';
+
+.popupThanks-box{
+    padding: 10px;
+    position: relative;
+
+    .backSymbol{
+        position: absolute;
+        top:0px;
+        right: 0px;
+
+        width: 30px;
+        
+        cursor: pointer;
+        fill:red;
+    }
+
+    .thanksTitle{
+        color: $colorLightGreenItem;
+    }
+
+    .thanksContent {
+        font-size: 13px;
+    }
+}

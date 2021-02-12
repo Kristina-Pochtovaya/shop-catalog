@@ -6,9 +6,12 @@
 @import '../pages/main/footer/styles/social-buttons';
 @import '../pages/about/styles/about-box';
 @import '../pages/catalog/styles/catalog-item';
-@import '../pages/bucket/styles/busket-box';
+@import '../pages/basket/styles/busket-box';
 @import '../common/counter/styles/counter-box';
 @import '../common/popup/styles/popup-box';
+@import '../pages/basket/styles/popupOrder-box';
+@import '../pages/basket/styles/popupThanks-box';
+@import '../pages/catalog/styles/popupBasket-box';
 
 body {
   margin: 0;

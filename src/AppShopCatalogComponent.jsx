@@ -15,7 +15,7 @@ import DecorationMaterials from './pages/catalog/components/DecorationMaterialsC
 import SanitaryEngineering from './pages/catalog/components/SanitaryEngineeringComponent';
 import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
-import Basket from './pages/bucket/components/BasketComponent';
+import Basket from './pages/basket/components/BasketComponent';
 import store from './redux/store';
 
 export function AppShopCatalog() {
