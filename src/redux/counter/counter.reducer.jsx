@@ -8,7 +8,9 @@ function reducerCounter(state = initialState, action) {
       return state + 1;
 
     case actionsCounter.DECREASE:
-      return state - 1;
+      if (state > 0) {
+        return state - 1;
+      } return state;
 
     default:
       return initialState;

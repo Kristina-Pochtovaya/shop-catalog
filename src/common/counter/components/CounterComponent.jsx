@@ -2,12 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import actionsCounter from '../../../redux/counter/counter.actions';
 
-const Counter = ({ counter, dispatch }) => (
+const Counter = ({ counter, onIncrease, onDecrease }) => (
   <div className="counter-box">
     <div
       className="plus"
-      onClick={() => dispatch({ type: actionsCounter.INCREASE })}
-      onKeyDown={dispatch}
+      onClick={() => onIncrease()}
+      onKeyDown={onIncrease}
       role="button"
       tabIndex="0"
     >
@@ -20,8 +20,8 @@ const Counter = ({ counter, dispatch }) => (
     </div>
     <div
       className="minus"
-      onClick={() => dispatch({ type: actionsCounter.DECREASE })}
-      onKeyDown={dispatch}
+      onClick={() => onDecrease()}
+      onKeyDown={onDecrease}
       role="button"
       tabIndex="0"
     >
@@ -33,7 +33,10 @@ const Counter = ({ counter, dispatch }) => (
 const ConnectedCounter = connect(
   (state) => ({
     counter: state,
-  }), (dispatch) => ({ dispatch }),
+  }), (dispatch) => ({
+    onIncrease: () => dispatch({ type: actionsCounter.INCREASE }),
+    onDecrease: () => dispatch({ type: actionsCounter.DECREASE }),
+  }),
 )(Counter);
 
 export default ConnectedCounter;
