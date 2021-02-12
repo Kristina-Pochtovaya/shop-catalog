@@ -44,7 +44,7 @@ $colorShadow: #635e60;
             background: $colorLightGrey;
 
             .titleGood, .columnGood {
-                flex-basis: 45%;
+                flex-basis: 60%;
             }
             
             .titlePrice, .titleQuantity, .titleAmount, .titleDelete, .columnPrice, .columnQuantity, .columnAmount, .columnDelete {
@@ -52,13 +52,22 @@ $colorShadow: #635e60;
    
             }
 
-            .titleQuantity,.titleAmount, .columnQuantity, .columnAmount {
+            .titleQuantity,  .columnQuantity, .columnAmount {
                 text-align: center;
+            }
+            .titleAmount{
+                text-align: end;
             }
             }
 
         .columns {
             @extend %busketTable;
+
+            .columnGoodNameTitle{
+                font-size: 13px;
+                padding: 0;
+                margin: 0;
+            }
 
             .priceNumbers{
                 font-family: tahoma;

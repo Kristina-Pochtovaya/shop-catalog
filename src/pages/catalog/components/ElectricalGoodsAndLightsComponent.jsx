@@ -28,7 +28,7 @@ const ElectricalGoodsAndLights = () => {
               </p>
             </div>
             <img className="imgItem" src={light1} alt="Светильник потолочный" title="Светильник потолочный" />
-            <h4>Светильник потолочный</h4>
+            <h4 className="itemName">Светильник потолочный Box Silver</h4>
             <div className="purchase">
               <p>163 РУБ.</p>
               <button
@@ -53,7 +53,7 @@ const ElectricalGoodsAndLights = () => {
               </p>
             </div>
             <img className="imgItem" src={light2} alt="Светильник потолочный" title="Светильник потолочный" />
-            <h4>Светильник потолочный</h4>
+            <h4 className="itemName">Светильник потолочный Globo FORREST</h4>
             <div className="purchase">
               <p>101 РУБ.</p>
               <button
@@ -78,7 +78,7 @@ const ElectricalGoodsAndLights = () => {
               </p>
             </div>
             <img className="imgItem" src={light3} alt="Лампа настольная" title="Лампа настольная" />
-            <h4>Лампа настольная</h4>
+            <h4 className="itemName">Лампа настольная SURPA SL-27</h4>
             <div className="purchase">
               <p>78 РУБ.</p>
               <button

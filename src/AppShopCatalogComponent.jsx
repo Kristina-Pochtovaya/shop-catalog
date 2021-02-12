@@ -21,7 +21,7 @@ import store from './redux/store';
 export function AppShopCatalog() {
   return (
     <BrowserRouter>
-      <Provider store={store}>
+      <Provider store={store()}>
         <Route path="/">
           <Redirect to="/main-page" />
         </Route>

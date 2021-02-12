@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
-import ConnectedCounter from '../../../common/counter/components/CounterComponent';
+/* import ConnectedCounter from '../../../common/counter/components/CounterComponent'; */
 import electricalGoodsAndLights from '../../../assets/catalog-items/electricalGoodsAndLights/light1.jpg';
 
 const Busket = () => {
@@ -23,9 +23,10 @@ const Busket = () => {
             <p className="titleDelete"> </p>
           </div>
           <div className="columns">
-            <p className="columnGood">
+            <div className="columnGood">
               <img src={electricalGoodsAndLights} alt="Электротовары и свет" title="Электротовары и свет" />
-            </p>
+              <h4 className="columnGoodNameTitle">Светильник потолочный Globo FORREST</h4>
+            </div>
             <p className="columnPrice">
               <span className="priceNumbers">163</span>
               {' '}
@@ -33,7 +34,8 @@ const Busket = () => {
               <span className="priceLetters">руб. за шт</span>
             </p>
             <div className="columnQuantity">
-              <ConnectedCounter />
+              {/*      <ConnectedCounter /> */}
+              123
             </div>
             <p className="columnAmount">
               163 руб.

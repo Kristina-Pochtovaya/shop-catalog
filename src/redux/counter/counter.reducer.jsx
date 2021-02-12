@@ -13,7 +13,7 @@ function reducerCounter(state = initialState, action) {
       } return state;
 
     default:
-      return initialState;
+      return state;
   }
 }
 
