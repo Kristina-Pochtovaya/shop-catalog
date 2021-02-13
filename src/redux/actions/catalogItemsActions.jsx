@@ -1,6 +1,19 @@
-import { createStore } from 'redux';
-import reducerCounter from './counter/counter.reducer';
+export const CatalogItemsActions = {
+  ADD: 'add',
+  DELETE: 'delete',
+};
 
-const store = createStore(reducerCounter);
+export const ADD = {
+  type: CatalogItemsActions.ADD,
+  item: {
+    id: 0,
+    description: '',
+    img: '',
+    price: 0,
+  },
+};
 
-export default store;
+export const DELETE = {
+  type: CatalogItemsActions.DELETE,
+  itemId: 0,
+};

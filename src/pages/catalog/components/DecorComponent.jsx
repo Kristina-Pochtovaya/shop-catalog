@@ -3,10 +3,10 @@ import Footer from '../../main/footer/components/FooterComponent';
 import Header from '../../main/header/components/HeaderComponent';
 import Popup from '../../../common/popup/components/PopUpComponent';
 import PopupBasket from './PopupBasketComponent';
+import { CatalogItem } from './CatalogItemComponent';
 import decor1 from '../../../assets/catalog-items/decor/decor1.jpg';
 import decor2 from '../../../assets/catalog-items/decor/decor2.jpg';
 import decor3 from '../../../assets/catalog-items/decor/decor3.jpg';
-import basket from '../../../assets/common/basket.png';
 
 const Decor = () => {
   const [popupBasketActive, setPopupBasketctive] = useState(false);
@@ -16,81 +16,30 @@ const Decor = () => {
       <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
       <div className="container-wrap">
         <div className="items">
-          <div className="item-wrap">
-            <div className="info">
-              <p className="-yes">
-                <svg viewBox="0 0 15 15">
-                  <g>
-                    <path d="M7.5,0A7.5,7.5,0,1,0,15,7.5,7.51,7.51,0,0,0,7.5,0Zm4.31,6.23L7.09,10.94a1.06,1.06,0,0,1-1.5,0l-2.4-2.4A1.06,1.06,0,1,1,4.69,7L6.34,8.69l4-4a1.06,1.06,0,0,1,1.5,1.5Z" />
-                  </g>
-                </svg>
-                Наличие
-              </p>
-            </div>
-            <img className="imgItem" src={decor1} alt="Часы настенные" title="Часы настенные" />
-            <h4>Часы настенные</h4>
-            <div className="purchase">
-              <p>33 РУБ.</p>
-              <button
-                className="busketButton"
-                type="button"
-                onClick={() => setPopupBasketctive(true)}
-              >
-                <img className="imgBascet" src={basket} alt="Корзина" title="Корзина" />
-                <span>В корзину</span>
-              </button>
-            </div>
-          </div>
-          <div className="item-wrap">
-            <div className="info">
-              <p className="-yes">
-                <svg viewBox="0 0 15 15">
-                  <g>
-                    <path d="M7.5,0A7.5,7.5,0,1,0,15,7.5,7.51,7.51,0,0,0,7.5,0Zm4.31,6.23L7.09,10.94a1.06,1.06,0,0,1-1.5,0l-2.4-2.4A1.06,1.06,0,1,1,4.69,7L6.34,8.69l4-4a1.06,1.06,0,0,1,1.5,1.5Z" />
-                  </g>
-                </svg>
-                Наличие
-              </p>
-            </div>
-            <img className="imgItem" src={decor2} alt="Репродукция в раме" title="Репродукция в раме" />
-            <h4>Репродукция в раме</h4>
-            <div className="purchase">
-              <p>42 РУБ.</p>
-              <button
-                className="busketButton"
-                type="button"
-                onClick={() => setPopupBasketctive(true)}
-              >
-                <img className="imgBascet" src={basket} alt="Корзина" title="Корзина" />
-                <span>В корзину</span>
-              </button>
-            </div>
-          </div>
-          <div className="item-wrap">
-            <div className="info">
-              <p className="-yes">
-                <svg viewBox="0 0 15 15">
-                  <g>
-                    <path d="M7.5,0A7.5,7.5,0,1,0,15,7.5,7.51,7.51,0,0,0,7.5,0Zm4.31,6.23L7.09,10.94a1.06,1.06,0,0,1-1.5,0l-2.4-2.4A1.06,1.06,0,1,1,4.69,7L6.34,8.69l4-4a1.06,1.06,0,0,1,1.5,1.5Z" />
-                  </g>
-                </svg>
-                Наличие
-              </p>
-            </div>
-            <img className="imgItem" src={decor3} alt="Подушка декоративная" title="Подушка декоративная" />
-            <h4>Подушка декоративная</h4>
-            <div className="purchase">
-              <p>28 РУБ.</p>
-              <button
-                className="busketButton"
-                type="button"
-                onClick={() => setPopupBasketctive(true)}
-              >
-                <img className="imgBascet" src={basket} alt="Корзина" title="Корзина" />
-                <span>В корзину</span>
-              </button>
-            </div>
-          </div>
+          <CatalogItem
+            id={9}
+            img={<img className="imgItem" src={decor1} alt="Часы настенные Troyka 91900929 (230)" title="Часы настенные Troyka 91900929 (230)" />}
+            description="Часы настенные Troyka 91900929 (230)"
+            inStock
+            price={33}
+            setPopupBasketctive={setPopupBasketctive}
+          />
+          <CatalogItem
+            id={10}
+            img={<img className="imgItem" src={decor2} alt="Репродукция в раме Styler Осень-1 (OB-02591) 500x500" title="Репродукция в раме Styler Осень-1 (OB-02591) 500x500" />}
+            description="Репродукция в раме Styler Осень-1 (OB-02591) 500x500"
+            inStock
+            price={42}
+            setPopupBasketctive={setPopupBasketctive}
+          />
+          <CatalogItem
+            id={11}
+            img={<img className="imgItem" src={decor3} alt="Подушка декоративная Nivasan Дино" title="Подушка декоративная Nivasan Дино" />}
+            description="Подушка декоративная Nivasan Дино"
+            inStock
+            price={28}
+            setPopupBasketctive={setPopupBasketctive}
+          />
         </div>
       </div>
       <Popup active={popupBasketActive} setActive={setPopupBasketctive}>

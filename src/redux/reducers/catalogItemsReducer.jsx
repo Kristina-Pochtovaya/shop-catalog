@@ -1,17 +1,11 @@
-/* eslint-disable no-undef */
-const initialState = {
-  items: [],
-};
+import { ADD } from '../actions/catalogItemsActions';
+
+const initialState = [];
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case ADD_ITEM:
-      return {
-        items: [
-          ...state.items,
-          action.payload,
-        ],
-      };
+    case ADD.type:
+      return [...state, action.payload.item];
 
     default:
       return state;
