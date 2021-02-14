@@ -3,9 +3,11 @@ import { connect } from 'react-redux';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
-/* import ConnectedCounter from '../../../common/counter/components/CounterComponent'; */
+import { INCREASE, DECREASE, DELETE } from '../../../redux/actions/catalogItemsActions';
 
-const Busket = ({ items }) => {
+const Busket = ({
+  items, onIncrease, onDecrease, OnDelete,
+}) => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);
 
@@ -36,20 +38,50 @@ const Busket = ({ items }) => {
                   <span className="priceLetters">руб. за шт</span>
                 </p>
                 <div className="columnQuantity">
-                  {/*      <ConnectedCounter /> */}
-                  123
+                  <div className="counter-box">
+                    <div
+                      className="plus"
+                      onClick={() => onIncrease(item.id, item.counter)}
+                      onKeyDown={onIncrease}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      +
+                    </div>
+                    <div
+                      className="counter"
+                    >
+                      {item.counter}
+                    </div>
+                    <div
+                      className="minus"
+                      onClick={() => onDecrease(item.id, item.counter)}
+                      onKeyDown={onDecrease}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      -
+                    </div>
+                  </div>
                 </div>
                 <p className="columnAmount">
                   {item.price}
                 </p>
-                <p className="columnDelete">
-                  <svg viewBox="0 0 20 20">
-                    <g>
-                      <path d="M17.89,0H2.11A2.11,2.11,0,0,0,0,2.11V17.89A2.11,2.11,0,0,0,2.11,20H17.89A2.11,2.11,0,0,0,20,17.89V2.11A2.11,2.11,0,0,0,17.89,0ZM19,17.89A1.11,1.11,0,0,1,17.89,19H2.11A1.11,1.11,0,0,1,1,17.89V2.11A1.11,1.11,0,0,1,2.11,1H17.89A1.11,1.11,0,0,1,19,2.11V17.89Z" />
-                      <path d="M13,7a.5.5,0,0,0-.71,0L10,9.29,7.68,7A.5.5,0,0,0,7,7.68L9.29,10,7,12.32a.5.5,0,0,0,.71.71L10,10.71,12.32,13a.5.5,0,0,0,.71-.71L10.71,10,13,7.68A.5.5,0,0,0,13,7Z" />
-                    </g>
-                  </svg>
-                </p>
+                <div className="columnDelete">
+                  <div
+                    onClick={() => OnDelete(item.id)}
+                    onKeyDown={OnDelete}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <svg viewBox="0 0 20 20">
+                      <g>
+                        <path d="M17.89,0H2.11A2.11,2.11,0,0,0,0,2.11V17.89A2.11,2.11,0,0,0,2.11,20H17.89A2.11,2.11,0,0,0,20,17.89V2.11A2.11,2.11,0,0,0,17.89,0ZM19,17.89A1.11,1.11,0,0,1,17.89,19H2.11A1.11,1.11,0,0,1,1,17.89V2.11A1.11,1.11,0,0,1,2.11,1H17.89A1.11,1.11,0,0,1,19,2.11V17.89Z" />
+                        <path d="M13,7a.5.5,0,0,0-.71,0L10,9.29,7.68,7A.5.5,0,0,0,7,7.68L9.29,10,7,12.32a.5.5,0,0,0,.71.71L10,10.71,12.32,13a.5.5,0,0,0,.71-.71L10.71,10,13,7.68A.5.5,0,0,0,13,7Z" />
+                      </g>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </li>
 
@@ -171,6 +203,20 @@ const Busket = ({ items }) => {
 const ConnectedBusket = connect(
   (state) => ({
     items: state,
+  }),
+  (dispatch) => ({
+    onIncrease: (itemId, counter) => dispatch({
+      type: INCREASE.type,
+      payload: { itemId, counter },
+    }),
+    onDecrease: (itemId, counter) => dispatch({
+      type: DECREASE.type,
+      payload: { itemId, counter },
+    }),
+    OnDelete: (itemId) => dispatch({
+      type: DELETE.type,
+      payload: { itemId },
+    }),
   }),
 )(Busket);
 

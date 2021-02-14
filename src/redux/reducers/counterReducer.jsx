@@ -1,8 +1,8 @@
-import actionsCounter from './counter.actions';
+import actionsCounter from '../actions/counterActions';
 
 const initialState = 1;
 
-function reducerCounter(state = initialState, action) {
+function counterReducer(state = initialState, action) {
   switch (action.type) {
     case actionsCounter.INCREASE:
       return state + 1;
@@ -17,4 +17,4 @@ function reducerCounter(state = initialState, action) {
   }
 }
 
-export default reducerCounter;
+export default counterReducer;

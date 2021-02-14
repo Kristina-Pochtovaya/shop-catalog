@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import actionsCounter from '../../../redux/counter/counter.actions';
+import actionsCounter from '../../../redux/actions/counterActions';
 
 const Counter = ({ counter, onIncrease, onDecrease }) => (
   <div className="counter-box">
@@ -16,7 +16,7 @@ const Counter = ({ counter, onIncrease, onDecrease }) => (
     <div
       className="counter"
     >
-      {counter}
+      {counter.counterReducer}
     </div>
     <div
       className="minus"

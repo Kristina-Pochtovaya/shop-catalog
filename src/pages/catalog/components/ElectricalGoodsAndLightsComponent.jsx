@@ -23,6 +23,7 @@ const ElectricalGoodsAndLights = () => {
             inStock
             price={163}
             setPopupBasketctive={setPopupBasketctive}
+            counter={1}
 
           />
 
@@ -33,6 +34,7 @@ const ElectricalGoodsAndLights = () => {
             inStock={false}
             price={101}
             setPopupBasketctive={setPopupBasketctive}
+            counter={1}
           />
           <ConnectedCatalogItem
             id={3}
@@ -41,6 +43,7 @@ const ElectricalGoodsAndLights = () => {
             inStock
             price={78}
             setPopupBasketctive={setPopupBasketctive}
+            counter={1}
           />
 
         </div>
