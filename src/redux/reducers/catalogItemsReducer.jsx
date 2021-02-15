@@ -1,10 +1,10 @@
 import {
-  ADD, DELETE, INCREASE, DECREASE,
+  ADD, DELETE, INCREASE, DECREASE, DELETEALL,
 } from '../actions/catalogItemsActions';
 
 const initialState = [];
 
-export default (state = initialState, action) => {
+const catalogItemsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD.type: {
       const index = state.findIndex((item) => item.id === action.payload.item.id);
@@ -39,7 +39,13 @@ export default (state = initialState, action) => {
       ];
     }
 
+    case DELETEALL.type: {
+      return [];
+    }
+
     default:
       return state;
   }
 };
+
+export default catalogItemsReducer;

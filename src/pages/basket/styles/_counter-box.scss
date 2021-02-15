@@ -33,6 +33,14 @@
     bottom: 18px;
   }
 
+  .plus:active, .plus:focus  { 
+    outline: none !important;
+   }
+
+   .minus:active, .minus:focus  { 
+    outline: none !important;
+   }
+
   .minus {
     @extend %counterButtons;
 

@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
-import { INCREASE, DECREASE, DELETE } from '../../../redux/actions/catalogItemsActions';
+import {
+  INCREASE, DECREASE, DELETE, DELETEALL,
+} from '../../../redux/actions/catalogItemsActions';
 
 const Busket = ({
-  items, onIncrease, onDecrease, OnDelete,
+  items, onIncrease, onDecrease, OnDelete, OnDeleteAll,
 }) => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);
@@ -41,10 +43,10 @@ const Busket = ({
                   <div className="counter-box">
                     <div
                       className="plus"
-                      onClick={() => onIncrease(item.id, item.counter)}
-                      onKeyDown={onIncrease}
-                      role="button"
-                      tabIndex="0"
+                      onClick={() => {
+                        onIncrease(item.id, item.counter);
+                      }}
+                      role="presentation"
                     >
                       +
                     </div>
@@ -55,22 +57,26 @@ const Busket = ({
                     </div>
                     <div
                       className="minus"
-                      onClick={() => onDecrease(item.id, item.counter)}
-                      onKeyDown={onDecrease}
-                      role="button"
-                      tabIndex="0"
+                      onClick={() => {
+                        onDecrease(item.id, item.counter);
+                      }}
+                      role="presentation"
                     >
                       -
                     </div>
                   </div>
                 </div>
                 <p className="columnAmount">
-                  {item.price}
+                  {item.price * item.counter}
+                  {' '}
+                  руб.
                 </p>
                 <div className="columnDelete">
                   <div
-                    onClick={() => OnDelete(item.id)}
-                    onKeyDown={OnDelete}
+                    onClick={() => {
+                      OnDelete(item.id);
+                    }}
+                    onKeyPress={OnDelete}
                     role="button"
                     tabIndex="0"
                   >
@@ -84,43 +90,65 @@ const Busket = ({
                 </div>
               </div>
             </li>
-
           ))}
+          <div
+            className="deleteAll"
+          >
+            <span
+              className="deleteAllSpan"
+              onClick={() => {
+                OnDeleteAll(items);
+              }}
+              onKeyPress={OnDeleteAll}
+              role="button"
+              tabIndex="0"
+            >
+              <span className="deleteAllString">Удалить все товары</span>
+              <svg className="deleteAllSymbol" viewBox="0 0 20 20">
+                <g>
+                  <path d="M17.89,0H2.11A2.11,2.11,0,0,0,0,2.11V17.89A2.11,2.11,0,0,0,2.11,20H17.89A2.11,2.11,0,0,0,20,17.89V2.11A2.11,2.11,0,0,0,17.89,0ZM19,17.89A1.11,1.11,0,0,1,17.89,19H2.11A1.11,1.11,0,0,1,1,17.89V2.11A1.11,1.11,0,0,1,2.11,1H17.89A1.11,1.11,0,0,1,19,2.11V17.89Z" />
+                  <path d="M13,7a.5.5,0,0,0-.71,0L10,9.29,7.68,7A.5.5,0,0,0,7,7.68L9.29,10,7,12.32a.5.5,0,0,0,.71.71L10,10.71,12.32,13a.5.5,0,0,0,.71-.71L10.71,10,13,7.68A.5.5,0,0,0,13,7Z" />
+                </g>
+              </svg>
+            </span>
 
-          <div className="deleteAll">
-            <span className="deleteAllString">Удалить все товары</span>
-            <svg className="deleteAllSymbol" viewBox="0 0 20 20">
-              <g>
-                <path d="M17.89,0H2.11A2.11,2.11,0,0,0,0,2.11V17.89A2.11,2.11,0,0,0,2.11,20H17.89A2.11,2.11,0,0,0,20,17.89V2.11A2.11,2.11,0,0,0,17.89,0ZM19,17.89A1.11,1.11,0,0,1,17.89,19H2.11A1.11,1.11,0,0,1,1,17.89V2.11A1.11,1.11,0,0,1,2.11,1H17.89A1.11,1.11,0,0,1,19,2.11V17.89Z" />
-                <path d="M13,7a.5.5,0,0,0-.71,0L10,9.29,7.68,7A.5.5,0,0,0,7,7.68L9.29,10,7,12.32a.5.5,0,0,0,.71.71L10,10.71,12.32,13a.5.5,0,0,0,.71-.71L10.71,10,13,7.68A.5.5,0,0,0,13,7Z" />
-              </g>
-            </svg>
+          </div>
+          <div className="result">
+            <h2 className="resultSum">
+              Итого:
+              {' '}
+              {items.catalogItemsReducer.reduce((sum, current) => sum
+              + (current.price * current.counter), 0)}
+              {' '}
+              руб
+            </h2>
           </div>
         </ul>
-        <div className="result">
-          <h2 className="resultSum">
-            Итого: 44.9 руб
-          </h2>
-        </div>
         <div className="buttonOrderBox">
           <button
+            id="continueBut"
             className="buttonOrder"
             type="button"
-            onClick={() => setPopupOrderActive(true)}
+            onClick={() => {
+              setPopupOrderActive(true);
+            }}
           >
             Продолжить
           </button>
         </div>
       </div>
       <Footer />
-      <PopUp active={popupOrderActive} setActive={setPopupOrderActive}>
+      <PopUp
+        active={popupOrderActive}
+        setActive={setPopupOrderActive}
+      >
         <div className="popupOrder-box">
           <h2>Купить в 1 клик</h2>
           <div
-            onClick={() => setPopupOrderActive(false)}
-            onKeyDown={setPopupOrderActive}
-            role="button"
-            tabIndex="0"
+            onClick={() => {
+              setPopupOrderActive(false);
+            }}
+            role="presentation"
           >
             <svg className="backSymbol" viewBox="0 0 20 20">
               <g>
@@ -177,13 +205,17 @@ const Busket = ({
           </form>
         </div>
       </PopUp>
-      <PopUp active={popupThanksActive} setActive={setPopupThanksActive}>
+      <PopUp
+        active={popupThanksActive}
+        setActive={setPopupThanksActive}
+        activeOrder={popupOrderActive}
+      >
         <div className="popupThanks-box">
           <div
-            onClick={() => setPopupThanksActive(false)}
-            onKeyDown={setPopupThanksActive}
-            role="button"
-            tabIndex="0"
+            onClick={() => {
+              setPopupThanksActive(false);
+            }}
+            role="presentation"
           >
             <svg className="backSymbol" viewBox="0 0 20 20">
               <g>
@@ -216,6 +248,10 @@ const ConnectedBusket = connect(
     OnDelete: (itemId) => dispatch({
       type: DELETE.type,
       payload: { itemId },
+    }),
+    OnDeleteAll: (items) => dispatch({
+      type: DELETEALL.type,
+      payload: { items },
     }),
   }),
 )(Busket);

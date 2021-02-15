@@ -27,7 +27,6 @@
 
 .popupOrder-box{
     position: relative;
-
     padding: 10px;
 
     .backSymbol{
@@ -80,13 +79,13 @@
     .message .messageInput{
         @extend %inputPopup;
 
-        height: 90px;
+        max-height: 90px;
             resize: none;
     }
 
     .buttonOrder{
         @extend %button;
 
-        margin-left: 140px;
+        margin-left: 35%;
     }
 }

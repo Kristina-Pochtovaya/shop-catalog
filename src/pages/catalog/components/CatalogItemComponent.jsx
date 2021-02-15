@@ -36,7 +36,7 @@ export const CatalogItem = ({
         }}
       >
         <img className="imgBascet" src={basket} alt="Корзина" title="Корзина" />
-        <span>В корзину</span>
+        <span className="stringBascet">В корзину</span>
       </button>
     </div>
   </div>

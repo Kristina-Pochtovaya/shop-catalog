@@ -9,12 +9,13 @@ $colorShadow: #635e60;
     justify-content: space-between;
     align-items: center;
     padding: 5px 15px;
+    border-left: solid 1px $colorBorder;
+    border-right: solid 1px $colorBorder;
+    border-bottom: solid 1px $colorBorder;
 
     color: $colorShadow;
 
     font-size: 14px;
-
-    border-bottom: solid 1px $colorBorder;
 }
 
 .order-wrap {
@@ -32,7 +33,9 @@ $colorShadow: #635e60;
     .listOrder-wrap {
         width: 100%;
         border: solid 1px $colorBorder;
-        border-bottom: dashed 1px $colorBorder;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;    
         margin-bottom: 15px;
         padding: 0;
 
@@ -94,25 +97,33 @@ $colorShadow: #635e60;
 
         .deleteAll {
             height: 40px;
-            margin-top: 10px;
-            margin-right: 10px;
-
+            border-bottom: dashed 1px $colorBorder;
+            border-left: solid 1px $colorBorder;
+            border-right: solid 1px $colorBorder;
+  
             text-align: end;
 
             cursor: pointer;
 
-            .deleteAllString {
-                color:$colorShadow;
-                font-size: 12px;
-                border-bottom: dashed 1px;
-            }
+            .deleteAllSpan {
+                display: inline-block;
+                margin-top: 10px;
 
-            .deleteAllSymbol {
-                width: 15px;
-                vertical-align: middle;
-                margin-left: 5px;
+                .deleteAllString {
+                    color:$colorShadow;
+                    font-size: 12px;
+                    border-bottom: dashed 1px;
+                }
 
-                fill: red;
+                .deleteAllSymbol {
+                    width: 15px;
+                    vertical-align: middle;
+                    margin-left: 5px;
+                    margin-right: 10px;
+
+
+                    fill: red;
+                }
             }
         }
     }
@@ -137,8 +148,23 @@ $colorShadow: #635e60;
         }
     }
 
+    .buttonOrder:active, .buttonOrder:focus  { 
+        outline: none !important;
+       }
+
     li {
         list-style-type: none;
     }
 
 }
+
+@media screen and (max-width: 529px) {
+    .titleGood, .titlePrice, .titleQuantity, .titleAmount, .titleDelete{
+        display: none;
+    }
+
+    .columns {
+        flex-direction: column;
+    }
+  }
+  

@@ -7,7 +7,7 @@
 @import '../pages/about/styles/about-box';
 @import '../pages/catalog/styles/catalog-item';
 @import '../pages/basket/styles/busket-box';
-@import '../common/counter/styles/counter-box';
+@import '../pages/basket/styles/counter-box';
 @import '../common/popup/styles/popup-box';
 @import '../pages/basket/styles/popupOrder-box';
 @import '../pages/basket/styles/popupThanks-box';
@@ -31,6 +31,10 @@ code {
 html, body{
   height: 100%;
 
+  .-noOverflow {
+    overflow: hidden;
+  }
+  
   #root {
     display: flex;
     flex-direction: column;
@@ -42,3 +46,5 @@ html, body{
 .-disabled {
   display: none;
 }
+
+

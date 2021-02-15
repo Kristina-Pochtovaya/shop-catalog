@@ -1,23 +1,35 @@
 import React from 'react';
 
-const PopUp = ({ active, setActive, children }) => (
-  <div
-    className={active ? 'popup-box -active' : 'popup-box'}
-    onClick={() => setActive(false)}
-    onKeyDown={setActive}
-    role="button"
-    tabIndex="0"
-  >
+const PopUp = ({
+  activeOrder, active, setActive, children,
+}) => {
+  const body = document.getElementById('body');
+  if (active || activeOrder) {
+    body.setAttribute('class', '-noOverflow');
+  } else {
+    body.setAttribute('class', '');
+  }
+  return (
+
     <div
-      className={active ? 'content -active' : 'content'}
-      onClick={(e) => e.stopPropagation()}
-      onKeyDown={(e) => e.stopPropagation}
-      role="button"
-      tabIndex="0"
+      className={active ? 'popup-box -active' : 'popup-box'}
+      onClick={() => {
+        setActive(false);
+      }}
+      role="presentation"
     >
-      {children}
+      <div
+        className={active ? 'content -active' : 'content'}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
+        role="presentation"
+      >
+        {children}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default PopUp;

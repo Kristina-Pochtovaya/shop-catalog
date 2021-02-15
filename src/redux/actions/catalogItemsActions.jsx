@@ -1,6 +1,7 @@
 export const CatalogItemsActions = {
   ADD: 'add',
   DELETE: 'delete',
+  DELETEALL: 'deleteAll',
   INCREASE: 'increaseCounter',
   DECREASE: 'decreaseCounter',
 };
@@ -30,4 +31,8 @@ export const DECREASE = {
 export const DELETE = {
   type: CatalogItemsActions.DELETE,
   itemId: 0,
+};
+
+export const DELETEALL = {
+  type: CatalogItemsActions.DELETEALL,
 };

@@ -101,6 +101,11 @@ $colorNoRed: #f00;
 
       .item-wrap {
         flex: 0 1 49%;
+        margin: 0 auto;
+
+        .stringBascet{
+          display: none;
+        }
       }
   }
 }
