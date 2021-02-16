@@ -80,6 +80,7 @@ const Busket = ({
                     onKeyPress={OnDelete}
                     role="button"
                     tabIndex="0"
+                    className="deleteOneItem"
                   >
                     <svg viewBox="0 0 20 20">
                       <g>

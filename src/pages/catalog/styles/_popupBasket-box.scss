@@ -22,5 +22,13 @@
         .popupBasketButton{
             @extend %button;
         }
+
+        .popupBasketButton{
+            cursor: pointer;
+        }
     }
 }
+
+.popupBasketButton:active, .popupBasketButton:focus  { 
+    outline: none !important;
+   }

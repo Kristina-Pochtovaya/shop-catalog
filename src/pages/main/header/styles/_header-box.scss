@@ -31,6 +31,8 @@
 
   .buttonBack {
     @extend %button;
+
+    cursor: pointer;
   }
 }
 
@@ -48,3 +50,7 @@
     }
   }
 }
+
+.buttonBack:active, .buttonBack:focus  { 
+  outline: none !important;
+ }

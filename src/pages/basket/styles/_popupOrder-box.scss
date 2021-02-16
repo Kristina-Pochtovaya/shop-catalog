@@ -88,5 +88,11 @@
         @extend %button;
 
         margin-left: 35%;
+
+        cursor: pointer;
     }
 }
+
+.buttonOrder:active, .buttonOrder:focus  { 
+    outline: none !important;
+   }

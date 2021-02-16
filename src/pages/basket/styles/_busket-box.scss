@@ -145,6 +145,8 @@ $colorShadow: #635e60;
             text-align: end;
 
             border-radius: 0;
+
+            cursor: pointer;
         }
     }
 
@@ -157,6 +159,10 @@ $colorShadow: #635e60;
     }
 
 }
+
+.deleteAllSpan:active, .deleteOneItem:active, .deleteAllSpan:focus, .deleteOneItem:focus  { 
+    outline: none !important;
+   }
 
 @media screen and (max-width: 529px) {
     .titleGood, .titlePrice, .titleQuantity, .titleAmount, .titleDelete{
