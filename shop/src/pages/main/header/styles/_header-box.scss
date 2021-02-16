@@ -1,0 +1,56 @@
+@import '../../catalog/styles/catalog-box';
+
+%button {
+  margin-bottom: 15px;
+  padding: .375rem .75rem;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+
+  color: #fff;
+  background-color: $colorLightGreenItem;
+  border-color: $colorLightGreenItem;
+
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.header-box {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 800px;
+  margin: 0 auto;
+
+  .basket {
+    position: absolute;
+    top: 110px;
+    right: 100px;
+  }
+
+  .buttonBack {
+    @extend %button;
+
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header-box {
+    position: relative;
+  
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    
+    .basket {
+      top:160px;
+      right: 120px;
+    }
+  }
+}
+
+.buttonBack:active, .buttonBack:focus  { 
+  outline: none !important;
+ }

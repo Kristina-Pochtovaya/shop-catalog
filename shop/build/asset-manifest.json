@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/shop-catalog/static/css/main.effe0e16.chunk.css",
+    "main.js": "/shop-catalog/static/js/main.5e1d9c35.chunk.js",
+    "main.js.map": "/shop-catalog/static/js/main.5e1d9c35.chunk.js.map",
+    "runtime-main.js": "/shop-catalog/static/js/runtime-main.6ee17188.js",
+    "runtime-main.js.map": "/shop-catalog/static/js/runtime-main.6ee17188.js.map",
+    "static/js/2.a5971013.chunk.js": "/shop-catalog/static/js/2.a5971013.chunk.js",
+    "static/js/2.a5971013.chunk.js.map": "/shop-catalog/static/js/2.a5971013.chunk.js.map",
+    "index.html": "/shop-catalog/index.html",
+    "static/css/main.effe0e16.chunk.css.map": "/shop-catalog/static/css/main.effe0e16.chunk.css.map",
+    "static/js/2.a5971013.chunk.js.LICENSE.txt": "/shop-catalog/static/js/2.a5971013.chunk.js.LICENSE.txt",
+    "static/media/colors.acba7609.jpg": "/shop-catalog/static/media/colors.acba7609.jpg",
+    "static/media/decor.89f10f52.jpg": "/shop-catalog/static/media/decor.89f10f52.jpg",
+    "static/media/decoration-materials.3210a541.jpg": "/shop-catalog/static/media/decoration-materials.3210a541.jpg",
+    "static/media/garden.f5ffd286.jpg": "/shop-catalog/static/media/garden.f5ffd286.jpg",
+    "static/media/household-goods.db4336fb.jpg": "/shop-catalog/static/media/household-goods.db4336fb.jpg",
+    "static/media/kitchen.4b15d007.jpg": "/shop-catalog/static/media/kitchen.4b15d007.jpg",
+    "static/media/logo.26231c24.png": "/shop-catalog/static/media/logo.26231c24.png",
+    "static/media/sanitary-engineering.533f3132.jpg": "/shop-catalog/static/media/sanitary-engineering.533f3132.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6ee17188.js",
+    "static/js/2.a5971013.chunk.js",
+    "static/css/main.effe0e16.chunk.css",
+    "static/js/main.5e1d9c35.chunk.js"
+  ]
+}
