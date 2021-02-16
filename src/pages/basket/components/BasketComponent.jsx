@@ -6,6 +6,7 @@ import PopUp from '../../../common/popup/components/PopUpComponent';
 import {
   INCREASE, DECREASE, DELETE, DELETEALL,
 } from '../../../redux/actions/catalogItemsActions';
+import InputPhone from '../../../common/inputPhone/components/InputPhoneComponent';
 
 const Busket = ({
   items, onIncrease, onDecrease, OnDelete, OnDeleteAll,
@@ -169,14 +170,13 @@ const Busket = ({
             </div>
             <div className="phone">
               <p className="phoneString -required">Телефон</p>
-              <input
+              <InputPhone
                 className="phoneInput"
-                type="tel"
                 name="PHONE"
-                minLength="12"
-                maxLength="12"
+                type="tel"
+                minLength="13"
+                maxLength="13"
                 placeholder="+375 (__) ___-__-__"
-                required
               />
             </div>
             <div className="address">
