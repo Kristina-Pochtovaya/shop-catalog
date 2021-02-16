@@ -8,13 +8,13 @@ import aboutUS from '../../../../assets/header/about-us.png';
 configure({ adapter: new Adapter() });
 
 test('should render Header Component', () => {
-  const header = shallow(<Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page"/>);
+  const header = shallow(<Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />);
 
   expect(toJson(header)).toMatchSnapshot();
 });
 
 test('if componenent has props with element button, it renders it', () => {
-  const header = shallow(<Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page"/>);
+  const header = shallow(<Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" />);
 
   expect(header.find('button')).toHaveLength(1);
 });
@@ -22,6 +22,6 @@ test('if componenent has props with element button, it renders it', () => {
 test('if componenent has props with img element, it renders it', () => {
   const header = shallow(<Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" />);
 
-  expect(header.find('img')).toHaveLength(2);
+  expect(header.find('img')).toHaveLength(3);
   expect(header.find('button')).toHaveLength(0);
 });

@@ -16,35 +16,18 @@ exports[`should render Header Component 1`] = `
         title="Все для дома"
       />
     </div>
-    <Link
-      to="/main-page"
-    >
-      <button
-        className="buttonBack"
-        type="button"
-      >
-        Назад
-      </button>
-    </Link>
-  </div>
-</div>
-`;
-
-exports[`should render an Header with button Назад 1`] = `
-<div
-  className="header-wrap"
->
-  <div
-    className="header-box"
-  >
     <div
-      className="logo"
+      className="basket"
     >
-      <img
-        alt="Все для дома"
-        src="logo.png"
-        title="Все для дома"
-      />
+      <Link
+        to="/basket"
+      >
+        <img
+          alt="Корзина"
+          src="basket.png"
+          title="Корзина"
+        />
+      </Link>
     </div>
     <Link
       to="/main-page"
