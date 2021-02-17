@@ -1,21 +1,31 @@
-const express = require('express');
+import express from 'express';
+import path from 'path';
+import { requestTime, logger } from './middleware.js';
+
+const __dirname = path.resolve();
+const PORT = process.env.PORT ?? 8080;
 const app = express();
 
-app.get('/', function(request, response) {
-    console.log(request.url);
-    response.send('<h1>Hello, World!</h1>')
+/* app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'static','index.html'))
 });
 
-app.get('/products', function(request, response){
-    console.log(request.url);
-    response.send('<h1>Products Page</h1>');
+app.get('/features', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'static','features.html'))
+}); */
+
+app.use(express.static(path.resolve(__dirname, 'static')));
+app.use(requestTime);
+app.use(logger);
+
+app.get('/download', (req, res) => {
+    console.log(req.requestTime);
+    res.download(path.resolve(__dirname, 'static','index.html'))
 });
 
-app.all('*', function(request,response) {
-    console.log('method: '+ request.method);
-    console.log('protocol:'+ request.protocol);
-    
-    response.end();
+app.listen(PORT, () => {
+    console.log(`Server has been started on port ${PORT}...`)
 });
 
-app.listen(8080);
+
+
