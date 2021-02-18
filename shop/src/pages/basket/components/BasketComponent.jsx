@@ -7,12 +7,33 @@ import {
   INCREASE, DECREASE, DELETE, DELETEALL,
 } from '../../../redux/actions/catalogItemsActions';
 import InputPhone from '../../../common/inputPhone/components/InputPhoneComponent';
+import  axios  from 'axios';
 
 const Busket = ({
   items, onIncrease, onDecrease, OnDelete, OnDeleteAll,
 }) => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);
+  const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(false);
+
+  async function makeGetRequest() {
+                  
+    let payload = { 
+      id: items.catalogItemsReducer.map((item) => item.id),
+      description: items.catalogItemsReducer.map((item) => item.description),
+      price: items.catalogItemsReducer.map((item) => item.price),
+      counter: items.catalogItemsReducer.map((item) => item.counter),
+    };
+
+    let res = await axios.post('http://localhost:8080/data', payload);
+
+    let data = res.data;
+    let status = res.status;
+    console.log(data,status);
+    res.status === 200 ? 
+    setPopupThanksActive(true): 
+    setpopupSmthWentWrongActive(true);
+}
 
   return (
     <>
@@ -194,16 +215,18 @@ const Busket = ({
               <textarea className="messageInput" name="MESSAGE" />
             </div>
             <button
-              type="button"
+              type="submit"
               className="buttonOrder"
-              onClick={() => {
-                setPopupThanksActive(true);
+              onClick= {(event) => {
+                event.preventDefault()
+                event.stopPropagation()
                 setPopupOrderActive(false);
+                makeGetRequest();
               }}
             >
               Купить
             </button>
-          </form>
+            </form>
         </div>
       </PopUp>
       <PopUp
@@ -227,6 +250,29 @@ const Busket = ({
           </div>
           <h2 className="thanksTitle">Ваш заказ принят!</h2>
           <div className="thanksContent">В ближайшее время с вами свяжется наш специалист</div>
+        </div>
+      </PopUp>
+      <PopUp
+        active={popupSmthWentWrongActive}
+        setActive={setpopupSmthWentWrongActive}
+        activeOrder={popupOrderActive}
+      >
+        <div className="popupThanks-box">
+          <div
+            onClick={() => {
+              setpopupSmthWentWrongActive(false);
+            }}
+            role="presentation"
+          >
+            <svg className="backSymbol" viewBox="0 0 20 20">
+              <g>
+                <path d="M17.89,0H2.11A2.11,2.11,0,0,0,0,2.11V17.89A2.11,2.11,0,0,0,2.11,20H17.89A2.11,2.11,0,0,0,20,17.89V2.11A2.11,2.11,0,0,0,17.89,0ZM19,17.89A1.11,1.11,0,0,1,17.89,19H2.11A1.11,1.11,0,0,1,1,17.89V2.11A1.11,1.11,0,0,1,2.11,1H17.89A1.11,1.11,0,0,1,19,2.11V17.89Z" />
+                <path d="M13,7a.5.5,0,0,0-.71,0L10,9.29,7.68,7A.5.5,0,0,0,7,7.68L9.29,10,7,12.32a.5.5,0,0,0,.71.71L10,10.71,12.32,13a.5.5,0,0,0,.71-.71L10.71,10,13,7.68A.5.5,0,0,0,13,7Z" />
+              </g>
+            </svg>
+          </div>
+          <h2 className="thanksTitle">Sorry! Something went wrong</h2>
+          <div className="thanksContent">Попробуйте, сделать заказ еще раз</div>
         </div>
       </PopUp>
     </>

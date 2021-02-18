@@ -17,6 +17,23 @@ import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
 import ConnectedBusket from './pages/basket/components/BasketComponent';
 import createStore from './redux/store';
+/* 
+import axios  from 'axios';
+
+// Make a request for a user with a given ID
+axios.get('http://localhost:8080')
+  .then(function (response) {
+    // handle success
+    console.log(response.status);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  }); */
+
 
 const store = createStore();
 
