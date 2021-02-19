@@ -8,10 +8,10 @@ const router = express.Router()
 const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 8080;
 const app = express();
+
 app.use(cors()) 
 app.use(express.json());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'static','index.html'))
@@ -20,10 +20,6 @@ app.get('/', (req, res) => {
 app.get('/features', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'static','features.html'))
 });
-
-/* app.use(express.static(path.resolve(__dirname, 'static'))); */
-/* app.use(requestTime);
-app.use(logger); */
 
 app.get('/download', (req, res) => {
     console.log(req.requestTime);
@@ -34,21 +30,22 @@ app.post('/', function (req, res) {
     res.send('POST request to the homepage');
 
   });
+ 
+app.get("/data", urlencodedParser, function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'static','data.html'));
+});
 
-/* router.get('/data', function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'static','data.json'))
-   console.log(router.get('content-type') )
-  });
- */
-  
-
-router.post('/data', function (req, res) {
+  app.post('/data', urlencodedParser,function (req, res) {
+    if(!req.body) return res.sendStatus(500);
     console.log(req.body)
-    res.send( `This is what you sent me: ${
-        (req.body)
-    }`,);
+    res.send(`
+    id: ${req.body.id}
+    description:${req.body.description}
+    price:${req.body.price}
+    counter:${req.body.counter}
+    `
+    );
   });
-
 
 app.use(router);
 

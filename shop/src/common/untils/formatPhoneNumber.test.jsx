@@ -1,6 +1,6 @@
 import formatPhoneNumber from './formatPhoneNumber';
 
-test('should return results only if input value includes number or + ', () => {
+test('should return results only if input value includes number or +', () => {
   expect((formatPhoneNumber('+1'))).toBe('+1');
 
   expect((formatPhoneNumber('+'))).toBe('+');

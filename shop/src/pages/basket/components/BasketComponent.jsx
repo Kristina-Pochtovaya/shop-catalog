@@ -7,7 +7,7 @@ import {
   INCREASE, DECREASE, DELETE, DELETEALL,
 } from '../../../redux/actions/catalogItemsActions';
 import InputPhone from '../../../common/inputPhone/components/InputPhoneComponent';
-import  axios  from 'axios';
+import getBasketItemsRequests from '../api/get/getBasketItemsRequests';
 
 const Busket = ({
   items, onIncrease, onDecrease, OnDelete, OnDeleteAll,
@@ -15,25 +15,6 @@ const Busket = ({
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(false);
-
-  async function makeGetRequest() {
-                  
-    let payload = { 
-      id: items.catalogItemsReducer.map((item) => item.id),
-      description: items.catalogItemsReducer.map((item) => item.description),
-      price: items.catalogItemsReducer.map((item) => item.price),
-      counter: items.catalogItemsReducer.map((item) => item.counter),
-    };
-
-    let res = await axios.post('http://localhost:8080/data', payload);
-
-    let data = res.data;
-    let status = res.status;
-    console.log(data,status);
-    res.status === 200 ? 
-    setPopupThanksActive(true): 
-    setpopupSmthWentWrongActive(true);
-}
 
   return (
     <>
@@ -217,16 +198,18 @@ const Busket = ({
             <button
               type="submit"
               className="buttonOrder"
-              onClick= {(event) => {
-                event.preventDefault()
-                event.stopPropagation()
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
                 setPopupOrderActive(false);
-                makeGetRequest();
+                getBasketItemsRequests(
+                  items.catalogItemsReducer, setPopupThanksActive, setpopupSmthWentWrongActive,
+                );
               }}
             >
               Купить
             </button>
-            </form>
+          </form>
         </div>
       </PopUp>
       <PopUp

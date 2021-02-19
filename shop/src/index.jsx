@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.scss';
-import { AppShopCatalog } from './AppShopCatalogComponent';
+import FileUpload from './FileUpload';
 
 ReactDOM.render(
-  <AppShopCatalog />,
+  <FileUpload />,
   document.getElementById('root'),
 );
