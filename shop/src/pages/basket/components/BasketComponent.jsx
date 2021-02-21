@@ -202,9 +202,9 @@ const Busket = ({
                 event.preventDefault();
                 event.stopPropagation();
                 setPopupOrderActive(false);
-                getBasketItemsRequests(
+                console.log(getBasketItemsRequests(
                   items.catalogItemsReducer, setPopupThanksActive, setpopupSmthWentWrongActive,
-                );
+                ));
               }}
             >
               Купить
