@@ -17,6 +17,15 @@ $colorShadow: #635e60;
 
     font-size: 14px;
 }
+%buttonOrder {
+    height: 40px;   
+
+    text-align: end;
+
+    border-radius: 0;
+
+    cursor: pointer;
+}
 
 .order-wrap {
     margin: 0 auto;
@@ -140,19 +149,22 @@ $colorShadow: #635e60;
         .buttonOrder {
             @extend %button;
             
-            height: 40px;   
-
-            text-align: end;
-
-            border-radius: 0;
-
-            cursor: pointer;
+            @extend %buttonOrder;
+        }
+        .buttonOrderBuy {
+            @extend %button;
+            
+            @extend %buttonOrder;
         }
     }
 
     .buttonOrder:active, .buttonOrder:focus  { 
         outline: none !important;
        }
+
+    .buttonOrderBuy:active, .buttonOrderBuy:focus  { 
+        outline: none !important;
+       }    
 
     li {
         list-style-type: none;

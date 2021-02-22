@@ -15,7 +15,7 @@ import DecorationMaterials from './pages/catalog/components/DecorationMaterialsC
 import SanitaryEngineering from './pages/catalog/components/SanitaryEngineeringComponent';
 import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
-import ConnectedBusket from './pages/basket/components/BasketComponent';
+import ConnectedBasket from './pages/basket/containers/ConnectedBasketComponent';
 import createStore from './redux/store';
 
 const store = createStore();
@@ -36,7 +36,7 @@ export function AppShopCatalog() {
           <About />
         </Route>
         <Route path="/basket">
-          <ConnectedBusket />
+          <ConnectedBasket />
         </Route>
         <Route path="/electrical-goods-and-lights">
           <ElectricalGoodsAndLights />

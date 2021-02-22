@@ -20,7 +20,9 @@
     "react-scripts": "4.0.2",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
+    "wait-for-expect": "^3.0.2",
     "web-vitals": "^1.1.0",
     "webfontloader": "^1.6.28"
   },
@@ -37,10 +39,10 @@
   },
   "eslintConfig": {
     "settings": {
-			"react": {
-				"version": "999.999.999"
-			}
-		},
+      "react": {
+        "version": "999.999.999"
+      }
+    },
     "extends": [
       "react-app",
       "react-app/jest"

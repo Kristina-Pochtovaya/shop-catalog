@@ -31,11 +31,11 @@ app.get('/download', (req, res) => {
     res.download(path.resolve(__dirname, 'static','index.html'))
 });
  
-app.get("/data", urlencodedParser, function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'static','data.html'));
+app.get("/basket", urlencodedParser, function (req, res) {
+    res.sendFile(path.resolve(__dirname, 'static','basket.html'));
 });
 
-  app.post('/data', urlencodedParser,function (req, res) {
+  app.post('/basket', urlencodedParser,function (req, res) {
     if(!req.body) return res.sendStatus(500);
     console.log(req.body)
     res.send(`

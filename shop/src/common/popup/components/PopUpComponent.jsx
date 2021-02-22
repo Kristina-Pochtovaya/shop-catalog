@@ -11,24 +11,28 @@ const PopUp = ({
   }
   return (
 
-    <div
-      className={active ? 'popup-box -active' : 'popup-box'}
-      onClick={() => {
-        setActive(false);
-      }}
-      role="presentation"
-    >
-      <div
-        className={active ? 'content -active' : 'content'}
-        onClick={(e) => {
-          e.stopPropagation();
-          e.preventDefault();
-        }}
-        role="presentation"
-      >
-        {children}
-      </div>
-    </div>
+    active
+      ? (
+        <div
+          className={active ? 'popup-box -active' : 'popup-box'}
+          onClick={() => {
+            setActive(false);
+          }}
+          role="presentation"
+        >
+          <div
+            className={active ? 'content -active' : 'content'}
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+            role="presentation"
+          >
+            {children}
+          </div>
+        </div>
+      )
+      : null
   );
 };
 

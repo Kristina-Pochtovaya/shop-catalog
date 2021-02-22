@@ -23,3 +23,27 @@
         font-size: 13px;
     }
 }
+
+.popupThanks-box-second {
+    padding: 10px;
+    position: relative;
+    
+    .backSymbol{
+        position: absolute;
+        top:0px;
+        right: 0px;
+
+        width: 30px;
+        
+        cursor: pointer;
+        fill:red;
+    }
+
+    .thanksTitle{
+        color: $colorLightGreenItem;
+    }
+
+    .thanksContent {
+        font-size: 13px;
+    }
+}
