@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "Kristina Pochtovaya",
+    "password": "28Kris2021",
+    "database": "catalogItemsDB",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "Kristina Pochtovaya",
+    "password": "28Kris2021",
+    "database": "catalogItemsDB",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "Kristina Pochtovaya",
+    "password": "28Kris2021",
+    "database": "catalogItemsDB",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
