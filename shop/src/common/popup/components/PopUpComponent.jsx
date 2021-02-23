@@ -6,33 +6,29 @@ const PopUp = ({
   const body = document.getElementById('body');
   if (active || activeOrder) {
     body.setAttribute('class', '-noOverflow');
-  } else {
-    body.setAttribute('class', '');
   }
+  /*   else {
+    body.setAttribute('class', '');
+  } */
   return (
-
-    active
-      ? (
-        <div
-          className={active ? 'popup-box -active' : 'popup-box'}
-          onClick={() => {
-            setActive(false);
-          }}
-          role="presentation"
-        >
-          <div
-            className={active ? 'content -active' : 'content'}
-            onClick={(e) => {
-              e.stopPropagation();
-              e.preventDefault();
-            }}
-            role="presentation"
-          >
-            {children}
-          </div>
-        </div>
-      )
-      : null
+    <div
+      className={active ? 'popup-box -active' : 'popup-box'}
+      onClick={() => {
+        setActive(false);
+      }}
+      role="presentation"
+    >
+      <div
+        className={active ? 'content -active' : 'content'}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
+        role="presentation"
+      >
+        {children}
+      </div>
+    </div>
   );
 };
 
