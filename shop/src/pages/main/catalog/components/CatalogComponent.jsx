@@ -63,7 +63,7 @@ const Catalog = () => (
         <h3 className="titleDecorationMaterials">Отделочные материалы</h3>
       </div>
       <div className="item">
-        <Link to="sanitary-engineering">
+        <Link to="/sanitary-engineering">
           <img src={sanitaryEngineering} alt="Сантехника" title="Сантехника" />
         </Link>
         <h3 className="titleSanitaryEngineering">Сантехника</h3>
