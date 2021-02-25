@@ -4,6 +4,9 @@ import { requestTime, logger } from './middleware.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import Sequelize from 'sequelize';
+import { Category, categories } from './models/Category.js';
+import Products from './models/Products.js';
+import BasketOrders from './models/BasketOrders.js';
 
 const router = express.Router()
 const __dirname = path.resolve();
@@ -14,10 +17,11 @@ app.use(cors())
 app.use(express.json());
 const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-const sequelize = new Sequelize("catalogItemsDB", "Kristina Pochtovaya", "28Kris2021", {
+export const sequelize = new Sequelize("catalogItemsDB", "Kristina Pochtovaya", "28Kris2021", {
   dialect: "mysql",
-  host: "localhost"
+    host: "localhost"
 });
+
 
 try {
   await sequelize.authenticate();
@@ -45,7 +49,7 @@ app.get('/download', (req, res) => {
 });
  
 app.get("/basket", urlencodedParser, function (req, res) {
-    res.sendFile(path.resolve(__dirname, 'static','basket.html'));
+/*     res.sendFile(path.resolve(__dirname, 'static','basket.html')); */
 });
 
   app.post('/basket', urlencodedParser,function (req, res) {
@@ -64,6 +68,23 @@ app.get("/basket", urlencodedParser, function (req, res) {
     res.sendFile(path.resolve(__dirname, 'static','garden1.jpg'));
 });
 
+app.get("/category", urlencodedParser, function (req, res) {
+  res.send(categories);
+});
+/* app.post('/category', urlencodedParser,function (req, res) {
+res.send(categories);
+}); 
+ */
+
+/* sequelize
+  .query('SHOW Tables', {
+    type: sequelize.QueryTypes.SHOWTABLES
+  })
+  .then(result => {
+    console.log(result)
+  })
+ */
+
 app.use(router);
 
 app.listen(PORT, () => {
@@ -71,4 +92,4 @@ app.listen(PORT, () => {
 });
 
 
-
+export default sequelize;

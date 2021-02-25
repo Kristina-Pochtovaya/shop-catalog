@@ -7,26 +7,29 @@ module.exports = {
         primaryKey: true,
         allowNull: false
       },
-      type: {
+      category: {
         type: Sequelize.DataTypes.STRING
       },
       description: {
         type: Sequelize.DataTypes.STRING
-      },
-      imgAlt: {
-        type: Sequelize.DataTypes.STRING,
-      },
-      imgTitle: {
-        type: Sequelize.DataTypes.STRING
-      },
-      price: {
-        type: Sequelize.DataTypes.DECIMAL(10, 2) 
       },
       counter: {
         type: Sequelize.DataTypes.INTEGER
       },
       sum: {
         type: Sequelize.DataTypes.DECIMAL(10, 2) 
+      },
+      clientName: {
+        type: Sequelize.DataTypes.STRING
+      },
+      clientPhone: {
+        type: Sequelize.DataTypes.STRING
+      },
+      clientAddress: {
+        type: Sequelize.DataTypes.STRING
+      },
+      clientNotes: {
+        type: Sequelize.DataTypes.STRING
       },
       createdAt: {
         type: Sequelize.DataTypes.DATE,

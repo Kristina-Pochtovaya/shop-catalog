@@ -4,20 +4,23 @@
     "password": "28Kris2021",
     "database": "catalogItemsDB",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "freezeTableName": true
   },
   "test": {
     "username": "Kristina Pochtovaya",
     "password": "28Kris2021",
     "database": "catalogItemsDB",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "freezeTableName": true
   },
   "production": {
     "username": "Kristina Pochtovaya",
     "password": "28Kris2021",
     "database": "catalogItemsDB",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "freezeTableName": true
   }
 }

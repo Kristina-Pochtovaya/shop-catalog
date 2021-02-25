@@ -4,7 +4,7 @@ import Footer from '../../main/footer/components/FooterComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import InputPhone from '../../../common/inputPhone/components/InputPhoneComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
-import postBasketItemsRequest from '../api/get/postBasketItemsRequest';
+import postBasketItemsRequest from '../api/post/postBasketItemsRequest';
 
 const Basket = ({
   items,
