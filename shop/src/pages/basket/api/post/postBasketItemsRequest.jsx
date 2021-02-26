@@ -7,10 +7,19 @@ async function postBasketItemsRequest(
   itemsArray,
 ) {
   const payload = {
-    id: itemsArray.map((item) => item.id),
-    description: itemsArray.map((item) => item.description),
-    price: itemsArray.map((item) => item.price),
-    counter: itemsArray.map((item) => item.counter),
+    data: itemsArray.map((item) => (
+      {
+        id: item.id,
+        description: item.description,
+        counter: item.counter,
+        sum: item.counter * item.price,
+        category: item.category,
+        clientName: item.clientInformation.clientName,
+        clientPhone: item.clientInformation.clientPhone,
+        clientAddress: item.clientInformation.clientAddress,
+        clientMessage: item.clientInformation.clientMessage,
+      }
+    )),
   };
 
   try {

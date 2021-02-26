@@ -1,4 +1,5 @@
 import React from 'react';
+import addRemoveScroll from '../../untils/addRemoveScroll';
 
 const PopUp = ({
   activeOrder, active, setActive, children,
@@ -6,15 +7,20 @@ const PopUp = ({
   const body = document.getElementById('body');
   if (active || activeOrder) {
     body.setAttribute('class', '-noOverflow');
-  }
-  /*   else {
+  } else {
     body.setAttribute('class', '');
-  } */
+  }
+  if (!activeOrder && !active) {
+    body.setAttribute('class', '');
+  } else {
+    body.setAttribute('class', '-noOverflow');
+  }
   return (
     <div
       className={active ? 'popup-box -active' : 'popup-box'}
       onClick={() => {
         setActive(false);
+        addRemoveScroll();
       }}
       role="presentation"
     >
@@ -31,5 +37,4 @@ const PopUp = ({
     </div>
   );
 };
-
 export default PopUp;

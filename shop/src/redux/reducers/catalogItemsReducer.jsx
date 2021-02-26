@@ -1,5 +1,5 @@
 import {
-  ADD, DELETE, INCREASE, DECREASE, DELETEALL,
+  ADD, DELETE, INCREASE, DECREASE, DELETEALL, ADDCLIENTINFORMATION,
 } from '../actions/catalogItemsActions';
 
 const initialState = [];
@@ -41,6 +41,18 @@ const catalogItemsReducer = (state = initialState, action) => {
 
     case DELETEALL.type: {
       return [];
+    }
+
+    case ADDCLIENTINFORMATION.type: {
+      let i = 0;
+      for (i; i <= state.length; i += 1) {
+        const item = state[i];
+        if (item !== undefined) {
+          item.clientInformation = action.payload.clientName;
+        }
+      }
+
+      return state;
     }
 
     default:

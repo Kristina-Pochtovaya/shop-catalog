@@ -4,7 +4,7 @@ import basket from '../../../assets/common/basket.png';
 import { ADD } from '../../../redux/actions/catalogItemsActions';
 
 export const CatalogItem = ({
-  img, description, price, inStock, id, setPopupBasketctive, counter, onAdd,
+  img, description, price, inStock, id, setPopupBasketctive, counter, onAdd, category,
 }) => (
   <div className="item-wrap" id={id}>
     <div className="info">
@@ -31,7 +31,12 @@ export const CatalogItem = ({
         onClick={() => {
           setPopupBasketctive(true);
           onAdd({
-            img, description, id, price, counter,
+            img,
+            description,
+            id,
+            price,
+            counter,
+            category,
           });
         }}
       >

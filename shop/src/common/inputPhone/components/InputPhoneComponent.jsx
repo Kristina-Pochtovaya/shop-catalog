@@ -12,13 +12,15 @@ class InputPhone extends React.Component {
       className, name, type, minLength, maxLength, placeholder,
     } = this.props;
     const { phone } = this.state;
-
+    const { setClientInformation, clinetPhone } = this.props;
     return (
       <>
         <input
           value={phone}
           onFocus={() => this.setState({ phone: '+375' })}
-          onChange={(event) => this.setState({ phone: formatPhoneNumber(event.target.value) })}
+          onChange={(event) => this.setState({
+            phone: formatPhoneNumber(event.target.value),
+          })}
           className={className}
           name={name}
           type={type}

@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import addRemoveScroll from '../../../common/untils/addRemoveScroll';
 
 const PopupBasket = ({ closePopup }) => (
   <div className="popupBasket-box">
     <div
       onClick={() => closePopup(false)}
-      onKeyDown={closePopup}
-      role="button"
-      tabIndex="0"
+      role="presentation"
     >
       <svg className="backSymbol" viewBox="0 0 20 20">
         <g>
@@ -29,6 +28,10 @@ const PopupBasket = ({ closePopup }) => (
         <button
           type="button"
           className="popupBasketButton"
+          onClick={() => {
+            closePopup(false);
+            addRemoveScroll();
+          }}
         >
           Перейти в корзину
         </button>

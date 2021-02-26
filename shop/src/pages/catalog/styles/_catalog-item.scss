@@ -14,7 +14,7 @@ $colorNoRed: #f00;
 
 .container-wrap {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 830px;
   width:100%;
   margin-top: 10px;
 	flex: 1 0 auto;
@@ -58,6 +58,7 @@ $colorNoRed: #f00;
 
       .itemName {
         margin-right: 5px;
+        height: 30px;
       }
 
       .imgItem {
@@ -98,6 +99,9 @@ $colorNoRed: #f00;
 
       .item-wrap {
         flex: 0 1 40%;
+      }
+      .stringBascet{
+        display: none;
       }
   }
 }

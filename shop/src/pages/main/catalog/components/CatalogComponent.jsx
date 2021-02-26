@@ -1,24 +1,25 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import getCategoriesCatalogRequest from '../api/get/getCategoriesCatalogRequest';
-import setImgCategory from '../utils/setImgCategory';
+import setImg from '../../../../common/untils/setImg';
+import addScroll from '../../../../common/untils/addScroll';
 
 const Catalog = () => {
   const [categoriesArray, setCategories] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  addScroll();
 
   useEffect(() => {
     getCategoriesCatalogRequest(
       setCategories, setLoading, setError,
     );
   }, []);
-
   if (!isLoading) {
-    return '...isLoading...';
+    return <div className="-isLoading"> </div>;
   }
   if (error) {
-    return '...Oops, something went wrong. Please, try again...';
+    return <div className="-isCrushed"> </div>;
   }
 
   return (
@@ -32,7 +33,7 @@ const Catalog = () => {
           >
             <Link to={category.link}>
               <img
-                src={setImgCategory(category.category)}
+                src={setImg(category.category)}
                 alt={category.imgAlt}
                 title={category.imgTitle}
               />

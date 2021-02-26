@@ -12,7 +12,7 @@ const sequelize = new Sequelize("catalogItemsDB", "Kristina Pochtovaya", "28Kris
   host: "localhost"
 }, opts);
  
-const Products = sequelize.define('Products', {
+export const Products = sequelize.define('Products', {
   categoryId: {
     foreignKey: true,
     type: Sequelize.DataTypes.INTEGER,
@@ -49,9 +49,32 @@ const Products = sequelize.define('Products', {
 
 sequelize.sync();
 
-const products = await Products.findAll();
-/* console.log(products); */
-/* console.log(products.map((product) => product.description));
- */
+export const products = await Products.findAll();
+/* 
+Products.update(
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+  { link: '/electrical-goods-and-lights' },
+  { where: { _id: 1 } }
+)
+.then((res) => {
+  console.log(res)
+}) */
+/* .success(result => 
+  handleResult(result)
+)
+.error(err =>
+  handleError(err)
+) */
 
 export default Products;

@@ -4,6 +4,7 @@ export const CatalogItemsActions = {
   DELETEALL: 'deleteAll',
   INCREASE: 'increaseCounter',
   DECREASE: 'decreaseCounter',
+  ADDCLIENTINFORMATION: 'add client infrormation',
 };
 
 export const ADD = {
@@ -12,6 +13,7 @@ export const ADD = {
   item: {
     id: 0,
     description: '',
+    category: '',
     img: '',
     price: 0,
     counter: 1,
@@ -35,4 +37,14 @@ export const DELETE = {
 
 export const DELETEALL = {
   type: CatalogItemsActions.DELETEALL,
+};
+
+export const ADDCLIENTINFORMATION = {
+  type: CatalogItemsActions.ADDCLIENTINFORMATION,
+  item: {
+    clientName: '',
+    clientPhone: '',
+    clientAddress: '',
+    clientMessage: '',
+  },
 };

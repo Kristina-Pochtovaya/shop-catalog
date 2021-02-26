@@ -5,7 +5,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import Sequelize from 'sequelize';
 import { Category, categories } from './models/Category.js';
-import Products from './models/Products.js';
+import { Products, products } from './models/Products.js';
 import BasketOrders from './models/BasketOrders.js';
 
 const router = express.Router()
@@ -49,19 +49,19 @@ app.get('/download', (req, res) => {
 });
  
 app.get("/basket", urlencodedParser, function (req, res) {
-/*     res.sendFile(path.resolve(__dirname, 'static','basket.html')); */
 });
 
   app.post('/basket', urlencodedParser,function (req, res) {
     if(!req.body) return res.sendStatus(500);
     console.log(req.body)
-    res.send(`
-    id: ${req.body.id}
-    description:${req.body.description}
-    price:${req.body.price}
-    counter:${req.body.counter}
-    `
+    res.send( JSON.stringify(req.body)
     );
+/*     const body = request.body */
+/*     BasketOrders.create(body).then(() => {
+       response.end()
+    }).catch(error => {
+       response.status(404).end()
+    }) */
   });
 
   app.get("/image", urlencodedParser, function (req, res) {
@@ -71,10 +71,10 @@ app.get("/basket", urlencodedParser, function (req, res) {
 app.get("/category", urlencodedParser, function (req, res) {
   res.send(categories);
 });
-/* app.post('/category', urlencodedParser,function (req, res) {
-res.send(categories);
-}); 
- */
+
+app.get("/products", urlencodedParser, function (req, res) {
+  res.send(products);
+});
 
 /* sequelize
   .query('SHOW Tables', {

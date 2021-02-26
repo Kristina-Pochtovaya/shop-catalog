@@ -35,8 +35,5 @@ export const Category = sequelize.define('Category', {
 sequelize.sync();
 
 export const categories = await Category.findAll();
-/* console.log(categories.map((category) => category.category));
- */
-/* await sequelize.drop(); */
 
 export default Category;
