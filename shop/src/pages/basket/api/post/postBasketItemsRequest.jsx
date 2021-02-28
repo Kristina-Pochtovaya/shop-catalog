@@ -10,10 +10,10 @@ async function postBasketItemsRequest(
     data: itemsArray.map((item) => (
       {
         id: item.id,
+        category: item.category,
         description: item.description,
         counter: item.counter,
         sum: item.counter * item.price,
-        category: item.category,
         clientName: item.clientInformation.clientName,
         clientPhone: item.clientInformation.clientPhone,
         clientAddress: item.clientInformation.clientAddress,

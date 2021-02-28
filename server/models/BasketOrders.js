@@ -13,6 +13,9 @@ const sequelize = new Sequelize("catalogItemsDB", "Kristina Pochtovaya", "28Kris
 
 
 const BasketOrders = sequelize.define('Products', {
+  productId: {
+    type: Sequelize.DataTypes.INTEGER
+  },
   category: {
     type: Sequelize.DataTypes.STRING
   },

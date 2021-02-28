@@ -7,6 +7,9 @@ module.exports = {
         primaryKey: true,
         allowNull: false
       },
+      productId: {
+        type: Sequelize.DataTypes.INTEGER,
+      },
       category: {
         type: Sequelize.DataTypes.STRING
       },

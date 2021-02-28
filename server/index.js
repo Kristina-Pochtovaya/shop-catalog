@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-import { requestTime, logger } from './middleware.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import Sequelize from 'sequelize';
@@ -21,7 +20,6 @@ export const sequelize = new Sequelize("catalogItemsDB", "Kristina Pochtovaya", 
   dialect: "mysql",
     host: "localhost"
 });
-
 
 try {
   await sequelize.authenticate();
@@ -51,18 +49,29 @@ app.get('/download', (req, res) => {
 app.get("/basket", urlencodedParser, function (req, res) {
 });
 
-  app.post('/basket', urlencodedParser,function (req, res) {
-    if(!req.body) return res.sendStatus(500);
-    console.log(req.body)
-    res.send( JSON.stringify(req.body)
-    );
-/*     const body = request.body */
-/*     BasketOrders.create(body).then(() => {
-       response.end()
+app.post('/basket', urlencodedParser,function (req, res) {
+  if(!req.body) return res.sendStatus(500);
+  console.log(req.body.data)
+  res.send( JSON.stringify(req.body)
+  );
+  const response = req.body.data;
+  let i=1
+  for (1; i<= response.length; i++ ){
+    BasketOrders.create({
+      productId: response[i-1].id,
+      category: response[i-1].category,
+      description: response[i-1].description,
+      counter: response[i-1].counter,
+      sum: response[i-1].sum,
+      clientName: response[i-1].clientName,
+      clientPhone: response[i-1].clientPhone,
+      clientAddress: response[i-1].clientAddress,
+      clientNotes: response[i-1].clientMessage,
     }).catch(error => {
-       response.status(404).end()
-    }) */
-  });
+      res.status(404).end()
+    })
+  } 
+});
 
   app.get("/image", urlencodedParser, function (req, res) {
     res.sendFile(path.resolve(__dirname, 'static','garden1.jpg'));
@@ -78,7 +87,7 @@ app.get("/products", urlencodedParser, function (req, res) {
 
 /* sequelize
   .query('SHOW Tables', {
-    type: sequelize.QueryTypes.SHOWTABLES
+     type: sequelize.QueryTypes.SHOWTABLES
   })
   .then(result => {
     console.log(result)
