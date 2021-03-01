@@ -1,9 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import postBasketItemsRequest from '../api/post/postBasketItemsRequest';
 import addRemoveScroll from '../../../common/untils/addRemoveScroll';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
-import { ADDCLIENTINFORMATION } from '../../../redux/actions/catalogItemsActions';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
@@ -121,18 +119,4 @@ class PopUpBasketOrder extends React.Component {
   }
 }
 
-const ConnectedPopUpBasketOrder = connect(
-  (state) => ({
-    items: state,
-  }),
-  (dispatch) => ({
-    onAddClientInformation: (clientName, clientPhone, clientAddress, clientMessage) => dispatch({
-      type: ADDCLIENTINFORMATION.type,
-      payload: {
-        clientName, clientPhone, clientAddress, clientMessage,
-      },
-    }),
-  }),
-)(PopUpBasketOrder);
-
-export default ConnectedPopUpBasketOrder;
+export default PopUpBasketOrder;

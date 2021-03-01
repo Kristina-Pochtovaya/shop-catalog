@@ -5,7 +5,7 @@ import PopUp from '../../../common/popup/components/PopUpComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
 import PopupBasket from '../../catalog/components/PopupBasketComponent';
 import addRemoveScroll from '../../../common/untils/addRemoveScroll';
-import ConnectedPopUpBasketOrder from './PopUpBasketOrderComponent';
+import ConnectedPopUpBasketOrder from '../containers/ConnectedPopUpBasketOrderComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
 import PopUpThanks from '../../../common/popup/components/PopUpThanksComponent';
 
