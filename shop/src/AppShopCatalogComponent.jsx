@@ -9,11 +9,12 @@ import aboutUS from './assets/header/about-us.png';
 import ConnectedBasket from './pages/basket/containers/ConnectedBasketComponent';
 import createStore from './redux/store';
 import getCategoriesCatalogRequest from './pages/main/catalog/api/get/getCategoriesCatalogRequest';
-import Popup from './common/popup/components/PopUpComponent';
+import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalog/components/PopupBasketComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalog/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
+import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
 
 const store = createStore();
 
@@ -25,6 +26,7 @@ export function AppShopCatalog() {
   const [errorCategory, setErrorCategory] = useState(null);
   const [errorProducts, setErrorProducts] = useState(false);
   const [popupBasketActive, setPopupBasketctive] = useState(false);
+  const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(true);
 
   useEffect(() => {
     getCategoriesCatalogRequest(
@@ -38,7 +40,17 @@ export function AppShopCatalog() {
   }
 
   if (errorProducts || errorCategory) {
-    return <div className="-isCrushed"> </div>;
+    return (
+      <PopUp
+        active={popupSmthWentWrongActive}
+        setActive={setpopupSmthWentWrongActive}
+      >
+        <PopUpSomethingWentWrong
+          text="Попробуйте еще раз"
+          setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}
+        />
+      </PopUp>
+    );
   }
 
   return (
@@ -91,9 +103,9 @@ export function AppShopCatalog() {
                 ))}
               </div>
             </div>
-            <Popup active={popupBasketActive} setActive={setPopupBasketctive}>
+            <PopUp active={popupBasketActive} setActive={setPopupBasketctive}>
               <PopupBasket closePopup={setPopupBasketctive} />
-            </Popup>
+            </PopUp>
             <Footer />
           </Route>
         ))}

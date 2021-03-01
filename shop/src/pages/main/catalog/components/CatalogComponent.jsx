@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import getCategoriesCatalogRequest from '../api/get/getCategoriesCatalogRequest';
 import setImg from '../../../../common/untils/setImg';
 import addScroll from '../../../../common/untils/addScroll';
+import PopUp from '../../../../common/popup/components/PopUpComponent';
+import PopUpSomethingWentWrong from '../../../../common/popup/components/PopUpSomethingWentWrongComponent';
 
 const Catalog = () => {
+  const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(true);
   const [categoriesArray, setCategories] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -19,7 +22,17 @@ const Catalog = () => {
     return <div className="-isLoading"> </div>;
   }
   if (error) {
-    return <div className="-isCrushed"> </div>;
+    return (
+      <PopUp
+        active={popupSmthWentWrongActive}
+        setActive={setpopupSmthWentWrongActive}
+      >
+        <PopUpSomethingWentWrong
+          text="Попробуйте еще раз"
+          setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}
+        />
+      </PopUp>
+    );
   }
 
   return (

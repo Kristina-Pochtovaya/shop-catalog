@@ -55,8 +55,8 @@ app.post('/basket', urlencodedParser,function (req, res) {
   res.send( JSON.stringify(req.body)
   );
   const response = req.body.data;
-  let i=1
-  for (1; i<= response.length; i++ ){
+  let i=1;
+  for (1; i<= response.length; i++){
     BasketOrders.create({
       productId: response[i-1].id,
       category: response[i-1].category,
