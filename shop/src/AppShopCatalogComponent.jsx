@@ -2,13 +2,13 @@ import { React, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import Header from './pages/main/header/components/HeaderComponent';
-import Catalog from './pages/main/catalog/components/CatalogComponent';
+import CatalogItems from './pages/main/catalogItems/components/CatalogItemsComponent';
 import Footer from './pages/main/footer/components/FooterComponent';
 import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
 import ConnectedBasket from './pages/basket/containers/ConnectedBasketComponent';
 import createStore from './redux/store';
-import getCategoriesCatalogRequest from './pages/main/catalog/api/get/getCategoriesCatalogRequest';
+import getCatalogCategories from './pages/main/catalogItems/api/get/getCatalogCategories';
 import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalog/components/PopupBasketComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
@@ -29,7 +29,7 @@ export function AppShopCatalog() {
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(true);
 
   useEffect(() => {
-    getCategoriesCatalogRequest(
+    getCatalogCategories(
       setCategories, setLoadingCategory, setErrorCategory,
     );
     (getProductsRequest(setProducts, setLoadingProducts, setErrorProducts));
@@ -61,7 +61,7 @@ export function AppShopCatalog() {
         </Route>
         <Route path="/main-page">
           <Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
-          <Catalog />
+          <CatalogItems />
           <Footer />
         </Route>
         <Route path="/about">
