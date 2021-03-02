@@ -4,7 +4,7 @@ import serverUrl from '../../../../common/constants/urls';
 const basketItemPath = '/basket';
 
 async function postBasketItemsRequest(
-  itemsArray,
+  itemsArray, clientName, clientPhone, clientAddress, clientMessage,
 ) {
   const payload = {
     data: itemsArray.map((item) => (
@@ -14,10 +14,10 @@ async function postBasketItemsRequest(
         description: item.description,
         counter: item.counter,
         sum: item.counter * item.price,
-        clientName: item.clientInformation.clientName,
-        clientPhone: item.clientInformation.clientPhone,
-        clientAddress: item.clientInformation.clientAddress,
-        clientMessage: item.clientInformation.clientMessage,
+        clientName,
+        clientPhone,
+        clientAddress,
+        clientMessage,
       }
     )),
   };

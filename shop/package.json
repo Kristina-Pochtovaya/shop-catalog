@@ -24,7 +24,8 @@
     "redux-thunk": "^2.3.0",
     "wait-for-expect": "^3.0.2",
     "web-vitals": "^1.1.0",
-    "webfontloader": "^1.6.28"
+    "webfontloader": "^1.6.28",
+    "whatwg-fetch": "^3.6.2"
   },
   "proxy": "http://localhost:8080",
   "scripts": {

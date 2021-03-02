@@ -24,7 +24,8 @@ class PopUpBasketOrder extends React.Component {
     } = this.state;
     async function handleButtonClick() {
       setPopupOrderActive(false);
-      const result = await postBasketItemsRequest(items.catalogItemsReducer);
+      const result = await postBasketItemsRequest(items.catalogItemsReducer,
+        clientName, clientPhone, clientAddress, clientMessage);
       result === null ? setpopupSmthWentWrongActive(true) : setPopupThanksActive(true);
     }
     return (
