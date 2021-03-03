@@ -11,6 +11,7 @@ import createStore from './redux/store';
 import getCatalogCategories from './pages/main/catalogItems/api/get/getCatalogCategories';
 import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalog/components/PopupBasketComponent';
+import ChangePassword from './pages/changePassword/components/ChangePasswordComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalog/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
@@ -109,6 +110,9 @@ export function AppShopCatalog() {
             <Footer />
           </Route>
         ))}
+        <Route path="/change-password">
+          <ChangePassword />
+        </Route>
       </Provider>
     </BrowserRouter>
   );

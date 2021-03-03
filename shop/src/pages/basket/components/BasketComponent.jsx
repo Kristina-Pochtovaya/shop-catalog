@@ -10,7 +10,7 @@ import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomet
 import PopUpThanks from '../../../common/popup/components/PopUpThanksComponent';
 
 const Basket = ({
-  items,
+  setLoginForm,
 }) => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);

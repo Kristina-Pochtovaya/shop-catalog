@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 
-const About = () => (
+const About = ({ setLoginForm }) => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
 
