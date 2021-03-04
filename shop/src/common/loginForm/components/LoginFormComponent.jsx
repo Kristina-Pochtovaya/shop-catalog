@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import Login from './LoginComponent';
+import ConnectedLogin from './LoginComponent';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -31,8 +31,6 @@ class LoginForm extends React.Component {
        isVisible,
      } = this.state;
 
-     const { setLoginLoginFormForgetPassword, setLoginFormLoginPage } = this.props;
-
      if (!isVisible) {
        return null;
      }
@@ -59,10 +57,7 @@ class LoginForm extends React.Component {
              </g>
            </svg>
          </div>
-         <Login
-           setLoginFormLoginPage={setLoginFormLoginPage}
-           setLoginLoginFormForgetPassword={setLoginLoginFormForgetPassword}
-         />
+         <ConnectedLogin />
        </div>
      );
    }

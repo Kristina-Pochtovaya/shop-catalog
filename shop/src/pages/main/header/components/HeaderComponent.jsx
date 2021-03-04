@@ -1,16 +1,15 @@
-import { React, createRef, useState } from 'react';
+import { React, createRef } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import LoginForm from '../../../../common/loginForm/components/LoginFormComponent';
 import LoginFormForgetPassword from '../../../../common/loginForm/components/LoginFormForgetPasswordComponent';
 import logo from '../../../../assets/header/logo.png';
 import basket from '../../../../assets/common/basket.png';
+import { LOGIN } from '../../../../redux/actions/loginPersonalAccountActions';
 
 const Header = ({
-  linkItem, link, disabled,
+  linkItem, link, disabled, pages, onLogin,
 }) => {
-  const [loginFormVisible, setLoginFormVisible] = useState(false);
-  const [loginFormLoginPageVisible, setLoginFormLoginPage] = useState(true);
-  const [LoginFormForgetPasswordVisible, setLoginLoginFormForgetPassword] = useState(false);
   const divRef = createRef();
 
   return (
@@ -29,47 +28,81 @@ const Header = ({
             {linkItem}
           </Link>
         </div>
-        <div ref={divRef}>
-          <div
-            className="loginDiv"
 
-          >
-            <button
-              className="buttonLogin"
-              type="button"
-              onClick={() => {
-                setLoginFormVisible(true);
-              }}
-            >
-              Вход / регистрация
-            </button>
-          </div>
-          <div>
-            {loginFormVisible && loginFormLoginPageVisible
-              ? (
-                <LoginForm
-                  divRef={divRef}
-                  setLoginFormLoginPage={setLoginFormLoginPage}
-                  setLoginLoginFormForgetPassword={setLoginLoginFormForgetPassword}
-                />
-              )
-              : null}
+        { String(pages.loginPersonalAccountReducer.loginIsVisible) === 'true'
+          ? (
+            <div ref={divRef}>
+              <div
+                className="loginDiv"
+              >
+                <button
+                  className="buttonLogin"
+                  type="button"
+                  onClick={() => {
+                    onLogin(true, true, false);
+                  }}
+                >
+                  Вход / регистрация
+                </button>
+              </div>
+              <div>
+                {String(pages.loginPersonalAccountReducer.loginFormIsVisible) === 'true'
+                && String(pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible) === 'true'
+                  ? (
+                    <LoginForm
+                      divRef={divRef}
+                    />
+                  )
+                  : null}
 
-            {loginFormVisible && LoginFormForgetPasswordVisible
-              ? (
-                <LoginFormForgetPassword
-                  divRef={divRef}
-                  setLoginFormLoginPage={setLoginFormLoginPage}
-                  setLoginLoginFormForgetPassword={setLoginLoginFormForgetPassword}
-                />
-              )
-              : null}
+                {String(pages.loginPersonalAccountReducer.loginFormIsVisible) === 'true'
+                 && String(pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible) === 'true'
+                  ? (
+                    <LoginFormForgetPassword
+                      divRef={divRef}
+                    />
+                  )
+                  : null}
 
-          </div>
-        </div>
+              </div>
+            </div>
+          )
+          : null}
+
+        {String(pages.loginPersonalAccountReducer.personAccountIsVisible) === 'true'
+          ? (
+            <div className="personalAccountDiv">
+              <Link to="/personal">
+                <button
+                  className="personalAccountLink"
+                  type="button"
+                >
+                  Личный кабинет
+                </button>
+              </Link>
+            </div>
+          )
+          : null}
+
       </div>
-
     </div>
   );
 };
-export default Header;
+
+const ConnectedHeader = connect(
+  (state) => ({
+    pages: state,
+  }),
+  (dispatch) => ({
+    onLogin: (
+      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
+    ) => dispatch({
+      type: LOGIN.type,
+      payload: {
+        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
+      },
+    }),
+  }),
+)(Header);
+
+export default ConnectedHeader;

@@ -10,8 +10,15 @@
 
   width: 20px;
   
-  cursor: pointer;
   fill:red;
+}
+
+%errorText {
+  position: absolute;
+  top:146px;
+  right: 185px;
+
+  color:red;
 }
 
   .loginForm {
@@ -117,6 +124,28 @@
           @extend %errorSymbol;
         }
 
+        .errorText{
+          @extend %errorText;
+        }
+
+        .errorTextLogin{
+          @extend %errorText;
+
+          right: 185px;
+        }
+
+        .errorTextPassword{
+          @extend %errorText;
+
+          top:240px;
+          right: 173px;
+        }
+
+        .errorSymbolPassword{
+          @extend %errorSymbol;
+
+          top: 220px;;
+        }
         }
 
   .loginForm-box:after {

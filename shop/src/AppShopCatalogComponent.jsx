@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import Header from './pages/main/header/components/HeaderComponent';
+import ConnectedHeader from './pages/main/header/components/HeaderComponent';
 import CatalogItems from './pages/main/catalogItems/components/CatalogItemsComponent';
 import Footer from './pages/main/footer/components/FooterComponent';
 import About from './pages/about/components/AboutComponent';
@@ -12,6 +12,7 @@ import getCatalogCategories from './pages/main/catalogItems/api/get/getCatalogCa
 import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalog/components/PopupBasketComponent';
 import ChangePassword from './pages/changePassword/components/ChangePasswordComponent';
+import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalog/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
@@ -61,7 +62,7 @@ export function AppShopCatalog() {
           <Redirect to="/main-page" />
         </Route>
         <Route path="/main-page">
-          <Header linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
+          <ConnectedHeader linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
           <CatalogItems />
           <Footer />
         </Route>
@@ -73,7 +74,7 @@ export function AppShopCatalog() {
         </Route>
         {categoriesArray.categories.map((category) => (
           <Route path={category.link} key={category.id}>
-            <Header
+            <ConnectedHeader
               linkItem={<button type="button" className="buttonBack">Назад</button>}
               link="/main-page"
               disabled={false}
@@ -112,6 +113,9 @@ export function AppShopCatalog() {
         ))}
         <Route path="/change-password">
           <ChangePassword />
+        </Route>
+        <Route path="/personal">
+          <PersonalAccount />
         </Route>
       </Provider>
     </BrowserRouter>

@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
-import ForgetPassword from './ForgetPasswordComponent';
+import ConnectedForgetPassword from './ForgetPasswordComponent';
 
 class LoginFormForgetPassword extends React.Component {
   constructor(props) {
@@ -31,8 +31,6 @@ class LoginFormForgetPassword extends React.Component {
        isVisible,
      } = this.state;
 
-     const { setLoginLoginFormForgetPassword, setLoginFormLoginPage } = this.props;
-
      if (!isVisible) {
        return null;
      }
@@ -59,10 +57,7 @@ class LoginFormForgetPassword extends React.Component {
              </g>
            </svg>
          </div>
-         <ForgetPassword
-           setLoginFormLoginPage={setLoginFormLoginPage}
-           setLoginLoginFormForgetPassword={setLoginLoginFormForgetPassword}
-         />
+         <ConnectedForgetPassword />
        </div>
      );
    }
