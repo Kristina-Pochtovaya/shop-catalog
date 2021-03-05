@@ -1,6 +1,7 @@
 export const loginPersonalAccountActions = {
   ENTER: 'enter',
   LOGIN: 'login / change password',
+  ENTEREMAIL: 'enter email',
 };
 
 export const ENTER = {
@@ -14,4 +15,9 @@ export const LOGIN = {
   loginFormIsVisible: true,
   loginFormLoginPageIsVisible: true,
   loginFormForgetPasswordIsVisible: false,
+};
+
+export const ENTEREMAIL = {
+  type: loginPersonalAccountActions.ENTEREMAIL,
+  clientEmail: '',
 };

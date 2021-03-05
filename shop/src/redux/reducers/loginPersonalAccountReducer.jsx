@@ -1,5 +1,5 @@
 import {
-  ENTER, LOGIN,
+  ENTER, LOGIN, ENTEREMAIL,
 } from '../actions/loginPersonalAccountActions';
 
 const initialState = {
@@ -8,6 +8,7 @@ const initialState = {
   loginFormIsVisible: false,
   loginFormLoginPageIsVisible: false,
   loginFormForgetPasswordIsVisible: false,
+  clientEmail: '',
 };
 
 const loginPersonalAccountReducer = (state = initialState, action) => {
@@ -26,6 +27,13 @@ const loginPersonalAccountReducer = (state = initialState, action) => {
         loginFormIsVisible: action.payload.loginFormIsVisible,
         loginFormLoginPageIsVisible: action.payload.loginFormLoginPageIsVisible,
         loginFormForgetPasswordIsVisible: action.payload.loginFormForgetPasswordIsVisible,
+      };
+    }
+
+    case ENTEREMAIL.type: {
+      return {
+        ...state,
+        clientEmail: action.payload.clientEmail,
       };
     }
 

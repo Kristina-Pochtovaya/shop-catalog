@@ -7,6 +7,8 @@ function setClassNotNull() {
   const errorText = document.getElementById('errorText');
   const errorTextLogin = document.getElementById('errorTextLogin');
   const errorTextPassword = document.getElementById('errorTextPassword');
+  const errorSymbolPasswordNewRepeat = document.getElementById('errorSymbolPasswordNewRepeat');
+  const passwordNewRepeatInput = document.getElementById('passwordNewRepeatInput');
 
   if (emailInput) {
     if (emailInput.className === 'emailInput'
@@ -30,6 +32,9 @@ function setClassNotNull() {
       errorTextLogin.setAttribute('class', 'errorTextLogin');
       errorTextPassword.setAttribute('class', 'errorTextPassword');
     }
+  } else if (errorSymbolPasswordNewRepeat) {
+    errorSymbolPasswordNewRepeat.setAttribute('class', 'errorSymbolPasswordNewRepeat');
+    passwordNewRepeatInput.setAttribute('class', 'passwordNewRepeatInput -notNull');
   }
 }
 

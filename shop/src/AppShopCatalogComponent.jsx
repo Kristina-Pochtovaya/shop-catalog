@@ -2,19 +2,20 @@ import { React, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import ConnectedHeader from './pages/main/header/components/HeaderComponent';
-import CatalogItems from './pages/main/catalogItems/components/CatalogItemsComponent';
+import Catalog from './pages/main/catalog/components/CatalogComponent';
 import Footer from './pages/main/footer/components/FooterComponent';
 import About from './pages/about/components/AboutComponent';
 import aboutUS from './assets/header/about-us.png';
 import ConnectedBasket from './pages/basket/containers/ConnectedBasketComponent';
 import createStore from './redux/store';
-import getCatalogCategories from './pages/main/catalogItems/api/get/getCatalogCategories';
+import getCatalogCategories from './pages/main/catalog/api/get/getCatalogCategories';
 import PopUp from './common/popup/components/PopUpComponent';
-import PopupBasket from './pages/catalog/components/PopupBasketComponent';
-import ChangePassword from './pages/changePassword/components/ChangePasswordComponent';
+import PopupBasket from './pages/catalogItems/components/PopupBasketComponent';
+import ConnectedChangePassword from './pages/changePassword/components/ChangePasswordComponent';
 import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
+import Registration from './pages/registration/components/RegistrationComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
-import { ConnectedCatalogItem } from './pages/catalog/components/CatalogItemComponent';
+import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
 import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
 
@@ -63,7 +64,7 @@ export function AppShopCatalog() {
         </Route>
         <Route path="/main-page">
           <ConnectedHeader linkItem={<img src={aboutUS} alt="О нас" />} link="/about" disabled={false} />
-          <CatalogItems />
+          <Catalog />
           <Footer />
         </Route>
         <Route path="/about">
@@ -112,10 +113,13 @@ export function AppShopCatalog() {
           </Route>
         ))}
         <Route path="/change-password">
-          <ChangePassword />
+          <ConnectedChangePassword />
         </Route>
         <Route path="/personal">
           <PersonalAccount />
+        </Route>
+        <Route path="/registration">
+          <Registration />
         </Route>
       </Provider>
     </BrowserRouter>

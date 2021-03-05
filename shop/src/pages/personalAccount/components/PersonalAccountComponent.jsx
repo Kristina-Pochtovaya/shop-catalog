@@ -6,9 +6,7 @@ const PersonalAccount = () => (
   <>
     <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
 
-    <div className="about-wrap">
-      test
-    </div>
+    <div className="about-wrap" />
     <Footer />
   </>
 );

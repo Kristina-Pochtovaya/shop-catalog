@@ -1,4 +1,4 @@
-@import '../../catalogItems/styles/catalog-box';
+@import '../../catalog/styles/catalog-box';
 
 $colorGreenHeader: #e6fae7;
 
@@ -57,6 +57,32 @@ $colorGreenHeader: #e6fae7;
       cursor: pointer;
     }
   }
+
+  .personalAccountIcon{
+    position: absolute;
+    top: 19px;
+    right: 153px;
+
+    width: 13px;
+  
+    fill:$colorLightGreenItem;
+  }
+  
+  .personalAccountLink{
+    @extend %button;
+
+    position: absolute;
+    top: 10px;
+    right: 0px;
+
+    padding-left: 0px;
+
+    color: $colorLightGreenItem;
+    background-color: $colorGreenHeader;
+    border-color: $colorGreenHeader;
+
+    cursor: pointer;
+  }
 }
 
 @media screen and (max-width: 600px) {
@@ -79,5 +105,9 @@ $colorGreenHeader: #e6fae7;
  }
 
  .buttonLogin:active, .buttonLogin:focus  { 
+  outline: none !important;
+ }
+
+ .personalAccountLink:active, .personalAccountLink:focus  { 
   outline: none !important;
  }

@@ -24,7 +24,7 @@ class Login extends React.Component {
     return (
       <form className="form">
         <div className="login">
-          <p className="loginString">Логин:</p>
+          <p className="loginString">Email:</p>
           <input
             className="loginInput"
             id="loginInput"
@@ -94,12 +94,15 @@ class Login extends React.Component {
         >
           Забыли пароль?
         </button>
-        <button
-          type="button"
-          className="registrationButton"
-        >
-          Регистрация
-        </button>
+        <Link to="/registration">
+          <button
+            type="button"
+            className="registrationButton"
+            onClick={() => onLogin(false, false, false)}
+          >
+            Регистрация
+          </button>
+        </Link>
       </form>
 
     );

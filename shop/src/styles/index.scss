@@ -1,18 +1,19 @@
 @import '../pages/main/header/styles/header-wrap';
 @import '../pages/main/header/styles/header-box';
-@import '../pages/main/catalogItems/styles/catalog-box';
+@import '../pages/main/catalog/styles/catalog-box';
 @import '../pages/main/footer/styles/footer-wrap';
 @import '../pages/main/footer/styles/footer-box';
 @import '../pages/main/footer/styles/social-buttons';
 @import '../pages/about/styles/about-box';
-@import '../pages/catalog/styles/catalog-item';
+@import '../pages/catalogItems/styles/catalog-item';
 @import '../pages/basket/styles/busket-box';
 @import '../pages/basket/styles/counter-box';
 @import '../common/popup/styles/popup-box';
 @import '../pages/basket/styles/popupOrder-box';
 @import '../pages/basket/styles/popupThanks-box';
-@import '../pages/catalog/styles/popupBasket-box';
+@import '../pages/catalogItems/styles/popupBasket-box';
 @import '../common/loginForm/styles/loginForm-box';
+@import '../pages/changePassword/styles/change-password';
 
 $colorLightRedError: #fac1bd;
 

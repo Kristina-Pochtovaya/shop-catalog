@@ -3,7 +3,7 @@ import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
-import PopupBasket from '../../catalog/components/PopupBasketComponent';
+import PopupBasket from '../../catalogItems/components/PopupBasketComponent';
 import addRemoveScroll from '../../../common/untils/addRemoveScroll';
 import ConnectedPopUpBasketOrder from '../containers/ConnectedPopUpBasketOrderComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
