@@ -13,14 +13,6 @@
   fill:red;
 }
 
-%errorText {
-  position: absolute;
-  top:146px;
-  right: 185px;
-
-  color:red;
-}
-
   .loginForm {
         position: absolute;
         top: 35px;
@@ -50,22 +42,22 @@
           font-size: 18px;
         }
       
-        .loginInput{
-          @extend %inputPopup;
-
-          margin-bottom: 25px;
-        }
-      
         .passwordString{
           @extend %stringPopup;
       
           font-size: 18px;
         }
+
+        .loginString.-required:after, .passwordString.-required:after{
+          @extend %required;
+        }
+
+        .loginInput{
+          @extend %inputPopup;
+        }
       
         .passwordInput{
           @extend %inputPopup;
-
-          margin-bottom: 25px;
         }
 
         .emailInput{
@@ -124,27 +116,10 @@
           @extend %errorSymbol;
         }
 
-        .errorText{
-          @extend %errorText;
-        }
-
-        .errorTextLogin{
-          @extend %errorText;
-
-          right: 185px;
-        }
-
-        .errorTextPassword{
-          @extend %errorText;
-
-          top:240px;
-          right: 173px;
-        }
-
         .errorSymbolPassword{
           @extend %errorSymbol;
 
-          top: 220px;;
+          top: 213px;;
         }
         }
 

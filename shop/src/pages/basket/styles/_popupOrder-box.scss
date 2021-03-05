@@ -43,7 +43,7 @@
     .name .nameString{
         @extend %stringPopup;
 
-        &.-required::after{
+        &.-required:after{
             @extend %required;
         }
     }

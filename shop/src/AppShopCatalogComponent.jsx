@@ -13,7 +13,7 @@ import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalogItems/components/PopupBasketComponent';
 import ConnectedChangePassword from './pages/changePassword/components/ChangePasswordComponent';
 import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
-import Registration from './pages/registration/components/RegistrationComponent';
+import ConnectedRegistration from './pages/registration/components/RegistrationComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
@@ -119,7 +119,7 @@ export function AppShopCatalog() {
           <PersonalAccount />
         </Route>
         <Route path="/registration">
-          <Registration />
+          <ConnectedRegistration />
         </Route>
       </Provider>
     </BrowserRouter>
