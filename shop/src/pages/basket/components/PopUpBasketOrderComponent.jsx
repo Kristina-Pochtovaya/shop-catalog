@@ -2,14 +2,22 @@ import React from 'react';
 import postBasketItemsRequest from '../api/post/postBasketItemsRequest';
 import addRemoveScroll from '../../../common/untils/addRemoveScroll';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
+import setErrorNotNull from '../../../common/untils/setErrorNotNull';
+import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       clientName: '',
+      clinetNameInput: 'nameInput',
+      clientNameSymbol: 'nameSymbol',
       clientPhone: '+375(__)___-__-__',
+      clientPhoneInput: 'phoneInput',
+      clientPhoneSymbol: 'phoneSymbol',
       clientAddress: '',
+      clientAddresInput: 'addressInput',
+      clientAddresSymbol: 'addressSymbol',
       clientMessage: '',
     };
   }
@@ -20,7 +28,10 @@ class PopUpBasketOrder extends React.Component {
       setPopupThanksActive,
     } = this.props;
     const {
-      clientName, clientPhone, clientAddress, clientMessage,
+      clientName, clinetNameInput, clientNameSymbol,
+      clientPhone, clientPhoneInput, clientPhoneSymbol,
+      clientAddress, clientAddresInput, clientAddresSymbol,
+      clientMessage,
     } = this.state;
     async function handleButtonClick() {
       setPopupOrderActive(false);
@@ -50,20 +61,30 @@ class PopUpBasketOrder extends React.Component {
             <div className="name">
               <p className="nameString -required">Имя</p>
               <input
-                className="nameInput"
+                className={clinetNameInput}
+                id={clinetNameInput}
                 type="text"
                 name="NAME"
                 value={clientName}
-                onChange={(event) => this.setState({
-                  clientName: event.target.value,
-                })}
+                onChange={(event) => {
+                  this.setState({
+                    clientName: event.target.value,
+                  });
+                  removeErrorNotNull(clinetNameInput, clientNameSymbol);
+                }}
                 required
               />
+              <svg className={`${clientNameSymbol} -disabled`} viewBox="0 0 14.98 15" id={clientNameSymbol}>
+                <g>
+                  <path d="M7.49,0A7.5,7.5,0,1,0,15,7.51,7.49,7.49,0,0,0,7.49,0Zm0,14.27a6.77,6.77,0,1,1,6.76-6.76A6.78,6.78,0,0,1,7.49,14.27Zm.37-3.71a.39.39,0,1,1-.39-.39A.39.39,0,0,1,7.86,10.57ZM7.1,8.65V4.23a.35.35,0,1,1,.7,0V8.65A.35.35,0,0,1,7.45,9,.34.34,0,0,1,7.1,8.65Z" />
+                </g>
+              </svg>
             </div>
             <div className="phone">
-              <p className="phoneString -required">Телефон</p>
+              <p className="phoneString -required">Телефон:</p>
               <input
-                className="phoneInput"
+                className={clientPhoneInput}
+                id={clientPhoneInput}
                 name="PHONE"
                 type="tel"
                 minLength="13"
@@ -71,23 +92,40 @@ class PopUpBasketOrder extends React.Component {
                 placeholder="+375 (__) ___-__-__"
                 value={clientPhone}
                 onFocus={() => this.setState({ clientPhone: '+375' })}
-                onChange={(event) => this.setState({
-                  clientPhone: formatPhoneNumber(event.target.value),
-                })}
+                onChange={(event) => {
+                  this.setState({
+                    clientPhone: formatPhoneNumber(event.target.value),
+                  });
+                  removeErrorNotNull(clientPhoneInput, clientPhoneSymbol);
+                }}
               />
+              <svg className={`${clientPhoneSymbol} -disabled`} viewBox="0 0 14.98 15" id={clientPhoneSymbol}>
+                <g>
+                  <path d="M7.49,0A7.5,7.5,0,1,0,15,7.51,7.49,7.49,0,0,0,7.49,0Zm0,14.27a6.77,6.77,0,1,1,6.76-6.76A6.78,6.78,0,0,1,7.49,14.27Zm.37-3.71a.39.39,0,1,1-.39-.39A.39.39,0,0,1,7.86,10.57ZM7.1,8.65V4.23a.35.35,0,1,1,.7,0V8.65A.35.35,0,0,1,7.45,9,.34.34,0,0,1,7.1,8.65Z" />
+                </g>
+              </svg>
             </div>
             <div className="address">
-              <p className="addressString -required">Адрес</p>
+              <p className="addressString -required">Адрес:</p>
               <input
-                className="addressInput"
+                className={clientAddresInput}
+                id={clientAddresInput}
                 type="text"
                 name="ADDRESS"
                 value={clientAddress}
-                onChange={(event) => this.setState({
-                  clientAddress: event.target.value,
-                })}
+                onChange={(event) => {
+                  this.setState({
+                    clientAddress: event.target.value,
+                  });
+                  removeErrorNotNull(clientAddresInput, clientAddresSymbol);
+                }}
                 required
               />
+              <svg className={`${clientAddresSymbol} -disabled`} viewBox="0 0 14.98 15" id={clientAddresSymbol}>
+                <g>
+                  <path d="M7.49,0A7.5,7.5,0,1,0,15,7.51,7.49,7.49,0,0,0,7.49,0Zm0,14.27a6.77,6.77,0,1,1,6.76-6.76A6.78,6.78,0,0,1,7.49,14.27Zm.37-3.71a.39.39,0,1,1-.39-.39A.39.39,0,0,1,7.86,10.57ZM7.1,8.65V4.23a.35.35,0,1,1,.7,0V8.65A.35.35,0,0,1,7.45,9,.34.34,0,0,1,7.1,8.65Z" />
+                </g>
+              </svg>
             </div>
             <div className="message">
               <p className="messageString">Сообщение</p>
@@ -100,18 +138,40 @@ class PopUpBasketOrder extends React.Component {
                 })}
               />
             </div>
-            <button
-              type="submit"
-              className="buttonOrder"
-              onClick={() => {
-                onAddClientInformation({
-                  clientName, clientPhone, clientAddress, clientMessage,
-                });
-                handleButtonClick();
-              }}
-            >
-              Купить
-            </button>
+            { (clientName && clientPhone && clientAddress)
+              ? (
+                <button
+                  type="submit"
+                  className="buttonOrder"
+                  onClick={() => {
+                    onAddClientInformation({
+                      clientName, clientPhone, clientAddress, clientMessage,
+                    });
+                    handleButtonClick();
+                  }}
+                >
+                  Купить
+                </button>
+              )
+              : (
+                <button
+                  type="submit"
+                  className="buttonOrder"
+                  onClick={() => {
+                    if (!clientName) {
+                      setErrorNotNull(clinetNameInput, clientNameSymbol);
+                    }
+                    if (!clientPhone.length < 13) {
+                      setErrorNotNull(clientPhoneInput, clientPhoneSymbol);
+                    }
+                    if (!clientAddress) {
+                      setErrorNotNull(clientAddresInput, clientAddresSymbol);
+                    }
+                  }}
+                >
+                  Купить
+                </button>
+              )}
           </form>
         </div>
 

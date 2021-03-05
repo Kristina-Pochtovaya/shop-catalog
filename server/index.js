@@ -6,6 +6,7 @@ import product from './routes/productsRoute.js';
 import features from './routes/featuresRoute.js';
 import root from './routes/rootRoute.js';
 import basket from './routes/basketRoute.js';
+import users from './routes/usersRoute.js';
 import image from './routes/imageRoute.js';
 import download from './routes/downloadRoute.js';
 
@@ -35,6 +36,8 @@ Authicate();
 app.all('/', root);
 
 app.all('/basket', basket);
+
+app.all('/users', users);
 
 app.get('/category', category);
 

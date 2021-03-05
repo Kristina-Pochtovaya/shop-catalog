@@ -25,6 +25,16 @@
     font-size: 16px;
 }
 
+%errorPopUp {
+    position: absolute;
+    top:116px;
+    right: 19px;
+  
+    width: 20px;
+    
+    fill:red;
+  }
+
 .popupOrder-box{
     position: relative;
     padding: 10px;
@@ -81,7 +91,23 @@
         @extend %inputPopup;
 
         max-height: 90px;
-            resize: none;
+        resize: none;
+    }
+
+    .nameSymbol{
+        @extend %errorPopUp;
+    }
+
+    .phoneSymbol{
+        @extend %errorPopUp;
+
+        top: 198px;
+    }
+
+    .addressSymbol{
+        @extend %errorPopUp;
+
+        top: 281px;
     }
 
     .buttonOrder{

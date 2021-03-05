@@ -1,91 +1,87 @@
 const categoryList = [
   {
-    category: "Электротовары и свет",
-    link: "/electrical-goods-and-lights",
-    className: "titleElectricalGoodsAndLights",
-    imgAlt: "Электротовары и свет",
-    imgTitle: "Электротовары и свет",
+    category: 'Электротовары и свет',
+    link: '/electrical-goods-and-lights',
+    className: 'titleElectricalGoodsAndLights',
+    imgAlt: 'Электротовары и свет',
+    imgTitle: 'Электротовары и свет',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Сад",
-    link: "/garden",
-    className: "titleGarden",
-    imgAlt: "Сад",
-    imgTitle: "Сад",
+    category: 'Сад',
+    link: '/garden',
+    className: 'titleGarden',
+    imgAlt: 'Сад',
+    imgTitle: 'Сад',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Бытовая техника",
-    link: "/household-appliancies",
-    className: "titleHouseholAppliancies",
-    imgAlt: "Бытовая техника",
-    imgTitle: "Бытовая техника",
+    category: 'Бытовая техника',
+    link: '/household-appliancies',
+    className: 'titleHouseholAppliancies',
+    imgAlt: 'Бытовая техника',
+    imgTitle: 'Бытовая техника',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Кухня",
-    link: "/kitchen",
-    className: "titleKitchen",
-    imgAlt: "Кухня",
-    imgTitle: "Кухня",
+    category: 'Кухня',
+    link: '/kitchen',
+    className: 'titleKitchen',
+    imgAlt: 'Кухня',
+    imgTitle: 'Кухня',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Декор",
-    link: "/decor",
-    className: "titleDecor",
-    imgAlt: "Декор",
-    imgTitle: "Декор",
+    category: 'Декор',
+    link: '/decor',
+    className: 'titleDecor',
+    imgAlt: 'Декор',
+    imgTitle: 'Декор',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Краски",
-    link: "/colors",
-    className: "titleColors",
-    imgAlt: "Краски",
-    imgTitle: "Краски",
+    category: 'Краски',
+    link: '/colors',
+    className: 'titleColors',
+    imgAlt: 'Краски',
+    imgTitle: 'Краски',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Товары для дома",
-    link: "/household-goods",
-    className: "titleHouseholdGoods",
-    imgAlt: "Товары для дома",
-    imgTitle: "Товары для дома",
+    category: 'Товары для дома',
+    link: '/household-goods',
+    className: 'titleHouseholdGoods',
+    imgAlt: 'Товары для дома',
+    imgTitle: 'Товары для дома',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Отделочные материалы",
-    link: "/decoration-materials",
-    className: "titleDecorationMaterials",
-    imgAlt: "Отделочные материалы",
-    imgTitle: "Отделочные материалы",
+    category: 'Отделочные материалы',
+    link: '/decoration-materials',
+    className: 'titleDecorationMaterials',
+    imgAlt: 'Отделочные материалы',
+    imgTitle: 'Отделочные материалы',
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
   },
   {
-    category: "Сантехника",
-    link: "/sanitary-engineering",
-    className: "titleSanitaryEngineering",
-    imgAlt: "Сантехника",
-    imgTitle: "Сантехника",
+    category: 'Сантехника',
+    link: '/sanitary-engineering',
+    className: 'titleSanitaryEngineering',
+    imgAlt: 'Сантехника',
+    imgTitle: 'Сантехника',
     createdAt: new Date(),
-    updatedAt: new Date()
-  }
-]
+    updatedAt: new Date(),
+  },
+];
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Category', categoryList, {});
-  },
-  down:  (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Category', null, {});
-  }
+  up: (queryInterface) => queryInterface.bulkInsert('Category', categoryList, {}),
+  down: (queryInterface) => queryInterface.bulkDelete('Category', null, {}),
 };

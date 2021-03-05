@@ -10,16 +10,16 @@
     position: relative;
   }
   
-  .firstNameString, .lastNameString, .emailString, .passwordNewString, .passwordNewRepeatString{
+  .firstNameString, .lastNameString, .emailString, .phoneString, .addressString, .passwordNewString, .passwordNewRepeatString{
     @extend %changePasswordText;
     
   }
 
-  .firstNameString.-required:after, .lastNameString.-required:after, .emailString.-required:after, .passwordNewString.-required:after, .passwordNewRepeatString.-required:after{
+  .firstNameString.-required:after, .lastNameString.-required:after, .emailString.-required:after, .phoneString.-required:after, .addressString.-required:after, .passwordNewString.-required:after, .passwordNewRepeatString.-required:after{
     @extend %required;
 }
 
-  .firtNameInput, .lastNameInput, .emailRegistrationInput, .passwordNewInputRegistration, .passwordNewRepeatInputRegistration{
+  .firtNameInput, .lastNameInput, .emailRegistrationInput, .phoneRegistrationInput, .addressRegistrationInput, .passwordNewInputRegistration, .passwordNewRepeatInputRegistration{
     @extend %changePasswordInput;
   }
 
@@ -55,18 +55,33 @@
     top: 224px;
   }
 
-  .errorSymbolPasswordNewRegistration{
+  .errorSymbolRegistrationPhone{
     @extend %errorSymbol;
     @extend %errorSymbolChangePassword;
 
     top: 318px;
   }
 
-  .errorSymbolPasswordNewRepeatRegistration{
+  .errorSymbolRegistrationAddress{
     @extend %errorSymbol;
     @extend %errorSymbolChangePassword;
 
     top: 412px;
+  }
+
+  .errorSymbolPasswordNewRegistration{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 500px;
+  }
+
+
+  .errorSymbolPasswordNewRepeatRegistration{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 600px;
   }
 
   .-notNull{
