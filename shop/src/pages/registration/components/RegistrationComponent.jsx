@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
+import { withRouter } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
@@ -39,21 +37,21 @@ class Registration extends React.Component {
 
   render() {
     const {
-      firstName, idClassFirstNameInput, idClassFirstNameSymbol,
-      lastName, idClassLastNameInput, idClassLastNameSymbol,
-      email, idClassEmailInput, idClassEmailSymbol,
-      phoneNumber, clientPhoneInput, clientPhoneSymbol,
-      address, clientAddresInput, clientAddresSymbol,
-      password, idClassPasswordNewInput, idClassPasswordNewSymbol,
-      passwordNewRepeat, idClassPasswordRepeatInput, idClassPasswordRepeatSymbol,
+      firstName, idClassFirstNameInput, idClassFirstNameSymbol, lastName, idClassLastNameInput,
+      idClassLastNameSymbol, email, idClassEmailInput, idClassEmailSymbol, phoneNumber,
+      clientPhoneInput, clientPhoneSymbol, address, clientAddresInput, clientAddresSymbol, password,
+      idClassPasswordNewInput, idClassPasswordNewSymbol, passwordNewRepeat,
+      idClassPasswordRepeatInput, idClassPasswordRepeatSymbol,
     } = this.state;
-    const { onEnter, onLogin } = this.props;
+    const { onEnter, onLogin, history } = this.props;
 
     async function handleButtonClick() {
+      const existingUser = document.getElementById('existingUser');
       const result = await postUsersRequest(firstName,
         lastName, email, phoneNumber, address, password);
-      console.log(`front: ${result.data}`);
+      result === true ? existingUser.setAttribute('class', 'existingUserString') : history.push('/personal');
     }
+
     return (
       <>
         <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
@@ -165,7 +163,6 @@ class Registration extends React.Component {
                 </g>
               </svg>
             </div>
-
             <div className="passwordNew">
               <p className="passwordNewString -required">Пароль:</p>
               <input
@@ -204,21 +201,19 @@ class Registration extends React.Component {
                 </g>
               </svg>
             </div>
+            <p className="existingUserString -disabled" id="existingUser">Пользователь с таким email уже существует</p>
             {(firstName && lastName && email && passwordNewRepeat)
             && (password === passwordNewRepeat) ? (
-              <Link to="/personal">
-                <button
-                  type="button"
-                  className="registrationButton"
-                  onClick={() => {
-                    onEnter(false, true);
-                    onLogin(false, false, false);
-                    handleButtonClick();
-                  }}
-                >
-                  Зарегестрироваться
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="registrationButton"
+                onClick={() => {
+                  onEnter(false, true); onLogin(false, false, false); handleButtonClick();
+                }}
+              >
+                Зарегестрироваться
+              </button>
+
               )
               : (
                 <button
@@ -227,23 +222,17 @@ class Registration extends React.Component {
                   onClick={() => {
                     if (!firstName) {
                       setErrorNotNull(idClassFirstNameInput, idClassFirstNameSymbol);
-                    }
-                    if (!lastName) {
+                    } if (!lastName) {
                       setErrorNotNull(idClassLastNameInput, idClassLastNameSymbol);
-                    }
-                    if (!email) {
+                    } if (!email) {
                       setErrorNotNull(idClassEmailInput, idClassEmailSymbol);
-                    }
-                    if (!phoneNumber.length < 13) {
+                    } if (!phoneNumber.length < 13) {
                       setErrorNotNull(clientPhoneInput, clientPhoneSymbol);
-                    }
-                    if (!address) {
+                    } if (!address) {
                       setErrorNotNull(clientAddresInput, clientAddresSymbol);
-                    }
-                    if (!password) {
+                    } if (!password) {
                       setErrorNotNull(idClassPasswordNewInput, idClassPasswordNewSymbol);
-                    }
-                    if (password !== passwordNewRepeat) {
+                    } if (password !== passwordNewRepeat) {
                       setErrorNotNull(idClassPasswordRepeatInput, idClassPasswordRepeatSymbol);
                     }
                   }}
@@ -259,24 +248,4 @@ class Registration extends React.Component {
   }
 }
 
-const ConnectedRegistration = connect(
-  (state) => ({
-    pages: state,
-  }),
-  (dispatch) => ({
-    onEnter: (loginIsVisible, personAccountIsVisible) => dispatch({
-      type: ENTER.type,
-      payload: { loginIsVisible, personAccountIsVisible },
-    }),
-    onLogin: (
-      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-    ) => dispatch({
-      type: LOGIN.type,
-      payload: {
-        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-      },
-    }),
-  }),
-)(Registration);
-
-export default ConnectedRegistration;
+export default withRouter(Registration);

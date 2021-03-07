@@ -84,9 +84,14 @@
     top: 600px;
   }
 
+  .existingUserString{
+    color: red;
+  }
+
   .-notNull{
     background-color: #fac1bd;
   }
+
 }
 
 .registrationButton:active, .registrationButton:focus  { 

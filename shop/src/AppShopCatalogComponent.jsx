@@ -13,7 +13,7 @@ import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalogItems/components/PopupBasketComponent';
 import ConnectedChangePassword from './pages/changePassword/components/ChangePasswordComponent';
 import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
-import ConnectedRegistration from './pages/registration/components/RegistrationComponent';
+import ConnectedRegistration from './pages/registration/containers/ConnectedRegistrationComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
