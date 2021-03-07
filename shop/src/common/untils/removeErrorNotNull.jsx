@@ -1,9 +1,9 @@
-function removeErrorNotNull(IdClassInput, IdClassSymbol) {
-  const newClassInput = document.getElementById(IdClassInput);
-  const newClassSymbol = document.getElementById(IdClassSymbol);
+function removeErrorNotNull(ClassInput, ClassSymbol) {
+  const newClassInput = document.querySelector(`.${ClassInput}`);
+  const newClassSymbol = document.querySelector(`.${ClassSymbol}`);
 
-  newClassInput.setAttribute('class', IdClassInput);
-  newClassSymbol.setAttribute('class', `${IdClassSymbol} -disabled`);
+  newClassInput.setAttribute('class', ClassInput);
+  newClassSymbol.setAttribute('class', `${ClassSymbol} -disabled`);
 }
 
 export default removeErrorNotNull;

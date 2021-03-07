@@ -4,6 +4,7 @@ import addRemoveScroll from '../../../common/untils/addRemoveScroll';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
+import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
@@ -62,7 +63,6 @@ class PopUpBasketOrder extends React.Component {
               <p className="nameString -required">Имя</p>
               <input
                 className={clinetNameInput}
-                id={clinetNameInput}
                 type="text"
                 name="NAME"
                 value={clientName}
@@ -74,17 +74,12 @@ class PopUpBasketOrder extends React.Component {
                 }}
                 required
               />
-              <svg className={`${clientNameSymbol} -disabled`} viewBox="0 0 14.98 15" id={clientNameSymbol}>
-                <g>
-                  <path d="M7.49,0A7.5,7.5,0,1,0,15,7.51,7.49,7.49,0,0,0,7.49,0Zm0,14.27a6.77,6.77,0,1,1,6.76-6.76A6.78,6.78,0,0,1,7.49,14.27Zm.37-3.71a.39.39,0,1,1-.39-.39A.39.39,0,0,1,7.86,10.57ZM7.1,8.65V4.23a.35.35,0,1,1,.7,0V8.65A.35.35,0,0,1,7.45,9,.34.34,0,0,1,7.1,8.65Z" />
-                </g>
-              </svg>
+              <ErrorSymbol Class={`${clientNameSymbol} -disabled`} />
             </div>
             <div className="phone">
               <p className="phoneString -required">Телефон:</p>
               <input
                 className={clientPhoneInput}
-                id={clientPhoneInput}
                 name="PHONE"
                 type="tel"
                 minLength="13"
@@ -99,17 +94,12 @@ class PopUpBasketOrder extends React.Component {
                   removeErrorNotNull(clientPhoneInput, clientPhoneSymbol);
                 }}
               />
-              <svg className={`${clientPhoneSymbol} -disabled`} viewBox="0 0 14.98 15" id={clientPhoneSymbol}>
-                <g>
-                  <path d="M7.49,0A7.5,7.5,0,1,0,15,7.51,7.49,7.49,0,0,0,7.49,0Zm0,14.27a6.77,6.77,0,1,1,6.76-6.76A6.78,6.78,0,0,1,7.49,14.27Zm.37-3.71a.39.39,0,1,1-.39-.39A.39.39,0,0,1,7.86,10.57ZM7.1,8.65V4.23a.35.35,0,1,1,.7,0V8.65A.35.35,0,0,1,7.45,9,.34.34,0,0,1,7.1,8.65Z" />
-                </g>
-              </svg>
+              <ErrorSymbol Class={`${clientPhoneSymbol} -disabled`} />
             </div>
             <div className="address">
               <p className="addressString -required">Адрес:</p>
               <input
                 className={clientAddresInput}
-                id={clientAddresInput}
                 type="text"
                 name="ADDRESS"
                 value={clientAddress}
@@ -121,11 +111,7 @@ class PopUpBasketOrder extends React.Component {
                 }}
                 required
               />
-              <svg className={`${clientAddresSymbol} -disabled`} viewBox="0 0 14.98 15" id={clientAddresSymbol}>
-                <g>
-                  <path d="M7.49,0A7.5,7.5,0,1,0,15,7.51,7.49,7.49,0,0,0,7.49,0Zm0,14.27a6.77,6.77,0,1,1,6.76-6.76A6.78,6.78,0,0,1,7.49,14.27Zm.37-3.71a.39.39,0,1,1-.39-.39A.39.39,0,0,1,7.86,10.57ZM7.1,8.65V4.23a.35.35,0,1,1,.7,0V8.65A.35.35,0,0,1,7.45,9,.34.34,0,0,1,7.1,8.65Z" />
-                </g>
-              </svg>
+              <ErrorSymbol Class={`${clientAddresSymbol} -disabled`} />
             </div>
             <div className="message">
               <p className="messageString">Сообщение</p>
