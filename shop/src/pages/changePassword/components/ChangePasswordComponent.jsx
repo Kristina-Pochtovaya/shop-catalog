@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
-import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
-import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
+import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -22,6 +21,13 @@ class ChangePassword extends React.Component {
       passwordRepeatInput: 'passwordNewRepeatInput',
       passwordRepeatSymbol: 'errorSymbolPasswordNewRepeat',
     };
+    this.updateData = this.updateData.bind(this);
+  }
+
+  updateData(value, name) {
+    if (name === 'clientEmail') { this.setState({ clientEmail: value }); }
+    if (name === 'passwordNew') { this.setState({ passwordNew: value }); }
+    if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
   }
 
   render() {
@@ -38,45 +44,36 @@ class ChangePassword extends React.Component {
           <form className="changePassword">
             <div className="email">
               <p className="emailString -required">Email:</p>
-              <input
-                className={clientEmailInput}
+              <InputWitchCkeckingNotNull
+                initialValue={clientEmail}
                 type="email"
-                name="EMAIL"
-                value={clientEmail}
-                onChange={((event) => {
-                  this.setState({ clientEmail: event.target.value });
-                  removeErrorNotNull(clientEmailInput, clientEmailSymbol);
-                })}
+                name="clientEmail"
+                classInput={clientEmailInput}
+                classSymbol={clientEmailSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${clientEmailSymbol} -disabled`} />
             </div>
             <div className="passwordNew">
               <p className="passwordNewString -required">Пароль:</p>
-              <input
-                className={passwordNewInput}
+              <InputWitchCkeckingNotNull
+                initialValue={passwordNew}
                 type="password"
-                name="PASSWORD"
-                value={passwordNew}
-                onChange={((event) => {
-                  this.setState({ passwordNew: event.target.value });
-                  removeErrorNotNull(passwordNewInput, passwordNewSymbol);
-                })}
+                name="passwordNew"
+                classInput={passwordNewInput}
+                classSymbol={passwordNewSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${passwordNewSymbol} -disabled`} />
             </div>
             <div className="passwordNewRepeat">
               <p className="passwordNewRepeatString -required">Повторите пароль:</p>
-              <input
-                className={passwordRepeatInput}
+              <InputWitchCkeckingNotNull
+                initialValue={passwordNewRepeat}
                 type="password"
-                name="PASSWORD"
-                value={passwordNewRepeat}
-                onChange={((event) => {
-                  this.setState({ passwordNewRepeat: event.target.value });
-                  removeErrorNotNull(passwordRepeatInput, passwordRepeatSymbol);
-                })}
+                name="passwordNewRepeat"
+                classInput={passwordRepeatInput}
+                classSymbol={passwordRepeatSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${passwordRepeatSymbol} -disabled`} />
             </div>
             {(clientEmail && passwordNew && passwordNewRepeat)
             && (passwordNew === passwordNewRepeat) ? (
@@ -88,8 +85,7 @@ class ChangePassword extends React.Component {
                   Изменить пароль
                 </button>
               </Link>
-              )
-              : (
+              ) : (
                 <button
                   type="button"
                   className="changePasswordButton"

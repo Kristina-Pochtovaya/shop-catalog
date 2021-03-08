@@ -3,15 +3,18 @@ import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
 
 const InputWitchCkeckingNotNull = ({
-  classInput, initialValue, classSymbol, handleChange,
+  initialValue, classInput, classSymbol, updateData, type, name,
 }) => (
   <>
     <input
       className={classInput}
-      type="text"
-      name="firstName"
+      type={type}
+      name={name}
       value={initialValue}
-      onChange={(e) => handleChange(e, classInput, classSymbol)}
+      onChange={(e) => {
+        updateData(e.target.value, name);
+        removeErrorNotNull(classInput, classSymbol);
+      }}
     />
     <ErrorSymbol Class={`${classSymbol} -disabled`} />
   </>

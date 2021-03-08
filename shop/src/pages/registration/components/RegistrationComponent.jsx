@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
@@ -7,6 +8,7 @@ import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import postUsersRequest from '../api/post/postUsersRequest';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
+import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 
 class Registration extends React.Component {
   constructor(props) {
@@ -34,6 +36,16 @@ class Registration extends React.Component {
       ClassPasswordRepeatInput: 'passwordNewRepeatInputRegistration',
       ClassPasswordRepeatSymbol: 'errorSymbolPasswordNewRepeatRegistration',
     };
+    this.updateData = this.updateData.bind(this);
+  }
+
+  updateData(value, name) {
+    if (name === 'firstName') { this.setState({ firstName: value }); }
+    if (name === 'lastName') { this.setState({ lastName: value }); }
+    if (name === 'email') { this.setState({ email: value }); }
+    if (name === 'address') { this.setState({ address: value }); }
+    if (name === 'password') { this.setState({ password: value }); }
+    if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
   }
 
   render() {
@@ -52,7 +64,6 @@ class Registration extends React.Component {
         lastName, email, phoneNumber, address, password);
       result === true ? existingUser.setAttribute('class', 'existingUserString') : history.push('/personal');
     }
-
     return (
       <>
         <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
@@ -61,45 +72,36 @@ class Registration extends React.Component {
           <form className="registration">
             <div className="firstName">
               <p className="firstNameString -required">Имя:</p>
-              <input
-                className={ClassFirstNameInput}
+              <InputWitchCkeckingNotNull
+                initialValue={firstName}
                 type="text"
                 name="firstName"
-                value={firstName}
-                onChange={((event) => {
-                  this.setState({ firstName: event.target.value });
-                  removeErrorNotNull(ClassFirstNameInput, ClassFirstNameSymbol);
-                })}
+                classInput={ClassFirstNameInput}
+                classSymbol={ClassFirstNameSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${ClassFirstNameSymbol} -disabled`} />
             </div>
             <div className="lastName">
               <p className="lastNameString -required">Фамилия:</p>
-              <input
-                className={ClassLastNameInput}
+              <InputWitchCkeckingNotNull
+                initialValue={lastName}
                 type="text"
-                name="lasttName"
-                value={lastName}
-                onChange={((event) => {
-                  this.setState({ lastName: event.target.value });
-                  removeErrorNotNull(ClassLastNameInput, ClassLastNameSymbol);
-                })}
+                name="lastName"
+                classInput={ClassLastNameInput}
+                classSymbol={ClassLastNameSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${ClassLastNameSymbol} -disabled`} />
             </div>
             <div className="email">
               <p className="emailString -required">Email:</p>
-              <input
-                className={ClassEmailInput}
+              <InputWitchCkeckingNotNull
+                initialValue={email}
                 type="email"
-                name="EMAIL"
-                value={email}
-                onChange={((event) => {
-                  this.setState({ email: event.target.value });
-                  removeErrorNotNull(ClassEmailInput, ClassEmailSymbol);
-                })}
+                name="email"
+                classInput={ClassEmailInput}
+                classSymbol={ClassEmailSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${ClassEmailSymbol} -disabled`} />
             </div>
             <div className="phone">
               <p className="phoneString -required">Телефон:</p>
@@ -123,47 +125,36 @@ class Registration extends React.Component {
             </div>
             <div className="address">
               <p className="addressString -required">Адрес:</p>
-              <input
-                className={clientAddresInput}
+              <InputWitchCkeckingNotNull
+                initialValue={address}
                 type="text"
-                name="ADDRESS"
-                value={address}
-                onChange={(event) => {
-                  this.setState({
-                    address: event.target.value,
-                  });
-                  removeErrorNotNull(clientAddresInput, clientAddresSymbol);
-                }}
+                name="address"
+                classInput={clientAddresInput}
+                classSymbol={clientAddresSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${clientAddresSymbol} -disabled`} />
             </div>
             <div className="passwordNew">
               <p className="passwordNewString -required">Пароль:</p>
-              <input
-                className={ClassPasswordNewInput}
+              <InputWitchCkeckingNotNull
+                initialValue={password}
                 type="password"
-                name="PASSWORD"
-                value={password}
-                onChange={((event) => {
-                  this.setState({ password: event.target.value });
-                  removeErrorNotNull(ClassPasswordNewInput, ClassPasswordNewSymbol);
-                })}
+                name="password"
+                classInput={ClassPasswordNewInput}
+                classSymbol={ClassPasswordNewSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${ClassPasswordNewSymbol} -disabled`} />
             </div>
             <div className="passwordNewRepeat">
               <p className="passwordNewRepeatString -required">Повторите пароль:</p>
-              <input
-                className={ClassPasswordRepeatInput}
+              <InputWitchCkeckingNotNull
+                initialValue={passwordNewRepeat}
                 type="password"
-                name="PASSWORD"
-                value={passwordNewRepeat}
-                onChange={((event) => {
-                  this.setState({ passwordNewRepeat: event.target.value });
-                  removeErrorNotNull(ClassPasswordRepeatInput, ClassPasswordRepeatSymbol);
-                })}
+                name="passwordNewRepeat"
+                classInput={ClassPasswordRepeatInput}
+                classSymbol={ClassPasswordRepeatSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${ClassPasswordRepeatSymbol} -disabled`} />
             </div>
             <p className="existingUserString -disabled" id="existingUser">Пользователь с таким email уже существует</p>
             {(firstName && lastName && email && passwordNewRepeat && phoneNumber)

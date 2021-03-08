@@ -5,6 +5,7 @@ import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
+import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
@@ -21,6 +22,12 @@ class PopUpBasketOrder extends React.Component {
       clientAddresSymbol: 'addressSymbol',
       clientMessage: '',
     };
+    this.updateData = this.updateData.bind(this);
+  }
+
+  updateData(value, name) {
+    if (name === 'clientName') { this.setState({ clientName: value }); }
+    if (name === 'clientAddress') { this.setState({ clientAddress: value }); }
   }
 
   render() {
@@ -61,20 +68,14 @@ class PopUpBasketOrder extends React.Component {
           <form className="form">
             <div className="name">
               <p className="nameString -required">Имя</p>
-              <input
-                className={clinetNameInput}
+              <InputWitchCkeckingNotNull
+                initialValue={clientName}
                 type="text"
-                name="NAME"
-                value={clientName}
-                onChange={(event) => {
-                  this.setState({
-                    clientName: event.target.value,
-                  });
-                  removeErrorNotNull(clinetNameInput, clientNameSymbol);
-                }}
-                required
+                name="clientName"
+                classInput={clinetNameInput}
+                classSymbol={clientNameSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${clientNameSymbol} -disabled`} />
             </div>
             <div className="phone">
               <p className="phoneString -required">Телефон:</p>
@@ -98,20 +99,14 @@ class PopUpBasketOrder extends React.Component {
             </div>
             <div className="address">
               <p className="addressString -required">Адрес:</p>
-              <input
-                className={clientAddresInput}
+              <InputWitchCkeckingNotNull
+                initialValue={clientAddress}
                 type="text"
-                name="ADDRESS"
-                value={clientAddress}
-                onChange={(event) => {
-                  this.setState({
-                    clientAddress: event.target.value,
-                  });
-                  removeErrorNotNull(clientAddresInput, clientAddresSymbol);
-                }}
-                required
+                name="clientAddress"
+                classInput={clientAddresInput}
+                classSymbol={clientAddresSymbol}
+                updateData={this.updateData}
               />
-              <ErrorSymbol Class={`${clientAddresSymbol} -disabled`} />
             </div>
             <div className="message">
               <p className="messageString">Сообщение</p>
@@ -138,19 +133,16 @@ class PopUpBasketOrder extends React.Component {
                 >
                   Купить
                 </button>
-              )
-              : (
+              ) : (
                 <button
                   type="submit"
                   className="buttonOrder"
                   onClick={() => {
                     if (!clientName) {
                       setErrorNotNull(clinetNameInput, clientNameSymbol);
-                    }
-                    if (!clientPhone.length < 13) {
+                    } if (!clientPhone.length < 13) {
                       setErrorNotNull(clientPhoneInput, clientPhoneSymbol);
-                    }
-                    if (!clientAddress) {
+                    } if (!clientAddress) {
                       setErrorNotNull(clientAddresInput, clientAddresSymbol);
                     }
                   }}
@@ -160,7 +152,6 @@ class PopUpBasketOrder extends React.Component {
               )}
           </form>
         </div>
-
       </>
     );
   }

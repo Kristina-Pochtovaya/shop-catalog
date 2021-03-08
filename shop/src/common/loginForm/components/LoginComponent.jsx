@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
 import setErrorNotNull from '../../untils/setErrorNotNull';
-import removeErrorNotNull from '../../untils/removeErrorNotNull';
-import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
+import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,6 +16,12 @@ class Login extends React.Component {
       clientPasswordInput: 'passwordInput',
       clientPasswordSymbol: 'errorSymbolPassword',
     };
+    this.updateData = this.updateData.bind(this);
+  }
+
+  updateData(value, name) {
+    if (name === 'clientLogin') { this.setState({ clientLogin: value }); }
+    if (name === 'clientPassword') { this.setState({ clientPassword: value }); }
   }
 
   render() {
@@ -31,31 +36,25 @@ class Login extends React.Component {
       <form className="form">
         <div className="login">
           <p className="loginString -required">Email:</p>
-          <input
-            className={clientLoginInput}
-            type="text"
-            name="LOGIN"
-            value={clientLogin}
-            onChange={((event) => {
-              this.setState({ clientLogin: event.target.value });
-              removeErrorNotNull(clientLoginInput, clientLoginSymbol);
-            })}
+          <InputWitchCkeckingNotNull
+            initialValue={clientLogin}
+            type="email"
+            name="clientLogin"
+            classInput={clientLoginInput}
+            classSymbol={clientLoginSymbol}
+            updateData={this.updateData}
           />
-          <ErrorSymbol Class={`${clientLoginSymbol} -disabled`} />
         </div>
         <div className="password">
           <p className="passwordString -required">Пароль:</p>
-          <input
-            className={clientPasswordInput}
+          <InputWitchCkeckingNotNull
+            initialValue={clientPassword}
             type="password"
-            name="PASSWORD"
-            value={clientPassword}
-            onChange={((event) => {
-              this.setState({ clientPassword: event.target.value });
-              removeErrorNotNull(clientPasswordInput, clientPasswordSymbol);
-            })}
+            name="clientPassword"
+            classInput={clientPasswordInput}
+            classSymbol={clientPasswordSymbol}
+            updateData={this.updateData}
           />
-          <ErrorSymbol Class={`${clientPasswordSymbol} -disabled`} />
         </div>
         {clientLogin && clientPassword ? (
           <Link to="/personal">
