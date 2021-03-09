@@ -1,9 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
+import postUsersRequest from '../../../pages/registration/api/post/postUsersRequest';
 
 class Login extends React.Component {
   constructor(props) {
@@ -30,10 +31,25 @@ class Login extends React.Component {
       clientPassword, clientPasswordInput, clientPasswordSymbol,
     } = this.state;
     const {
-      onLogin, onEnter,
+      onLogin, onEnter, history,
     } = this.props;
+    async function handleButtonClick() {
+      const userNotFound = document.getElementById('userNotFound');
+      const incorrectLogin = document.getElementById('incorrectLogin');
+      const result = await postUsersRequest(clientLogin, clientPassword);
+      if (result === true) {
+        onEnter(false, true) && onLogin(false, false, false) && history.push('/personal');
+      } if (result === 'incorrectPassword') {
+        incorrectLogin.setAttribute('class', 'incorrectLogin');
+      } if (result === 'incorrectEmail') {
+        userNotFound.setAttribute('class', 'userNotFoundBlock');
+      }
+    }
+
     return (
       <form className="form">
+        <p id="userNotFound" className="userNotFoundBlock -disabled">Пользователя с таким email не существует</p>
+        <p id="incorrectLogin" className="incorrectLogin -disabled">Неверный пароль</p>
         <div className="login">
           <p className="loginString -required">Email:</p>
           <InputWitchCkeckingNotNull
@@ -57,18 +73,15 @@ class Login extends React.Component {
           />
         </div>
         {clientLogin && clientPassword ? (
-          <Link to="/personal">
-            <button
-              type="button"
-              className="entranceButton"
-              onClick={() => {
-                onEnter(false, true);
-                onLogin(false, false, false);
-              }}
-            >
-              Войти
-            </button>
-          </Link>
+          <button
+            type="button"
+            className="entranceButton"
+            onClick={() => {
+              handleButtonClick();
+            }}
+          >
+            Войти
+          </button>
         ) : (
           <button
             type="button"
@@ -129,4 +142,4 @@ const ConnectedLogin = connect(
   }),
 )(Login);
 
-export default ConnectedLogin;
+export default withRouter(ConnectedLogin);

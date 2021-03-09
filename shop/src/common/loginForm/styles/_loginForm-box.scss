@@ -119,7 +119,11 @@
         .errorSymbolPassword{
           @extend %errorSymbol;
 
-          top: 213px;;
+          top: 213px;
+        }
+
+        .userNotFoundBlock, .incorrectLogin{
+          color: red;
         }
         }
 

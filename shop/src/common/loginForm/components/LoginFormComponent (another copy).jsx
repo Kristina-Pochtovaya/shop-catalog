@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import ConnectedLogin from './LoginComponent';
 
@@ -10,34 +11,20 @@ class LoginForm extends React.Component {
   }
 
   componentDidMount() {
-    const { divRef } = this.props;
-    const onClick = this.onClick.bind(this);
-    document.addEventListener('click', (event) => onClick(event.target, divRef.current), false);
+    document.addEventListener('click', this.onClick, false);
   }
 
   componentWillUnmount() {
-    const { divRef } = this.props;
-    const onClick = this.onClick.bind(this);
-    document.removeEventListener('click', (event) => onClick(event.target, divRef.current), false);
+    document.removeEventListener('click', this.onClick, false);
   }
 
-   onClick = (value, divRef) => {
-     if (divRef.contains(value)) {
-       this.setState({ isVisible: true });
-       console.log(divRef);
-     } else {
-       this.setState({ isVisible: false });
-       console.log(divRef);
-     }
-   }
-
-   /*    onClick = (event) => {
+   onClick = (event) => {
      if (this.props.divRef.current.contains(event.target)) {
        this.setState({ isVisible: true });
      } else {
        this.setState({ isVisible: false });
      }
-   }; */
+   };
 
    render() {
      const {

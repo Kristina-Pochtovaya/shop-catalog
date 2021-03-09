@@ -7,6 +7,7 @@ import features from './routes/featuresRoute.js';
 import root from './routes/rootRoute.js';
 import basket from './routes/basketRoute.js';
 import users from './routes/usersRoute.js';
+import login from './routes/loginRoute.js';
 import image from './routes/imageRoute.js';
 import download from './routes/downloadRoute.js';
 
@@ -38,6 +39,8 @@ app.all('/', root);
 app.all('/basket', basket);
 
 app.all('/users', users);
+
+app.all('/login', login);
 
 app.get('/category', category);
 

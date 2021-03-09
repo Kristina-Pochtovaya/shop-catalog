@@ -62,7 +62,7 @@ class Registration extends React.Component {
       const existingUser = document.getElementById('existingUser');
       const result = await postUsersRequest(firstName,
         lastName, email, phoneNumber, address, password);
-      result === true ? existingUser.setAttribute('class', 'existingUserString') : history.push('/personal');
+      result === true ? existingUser.setAttribute('class', 'existingUserStringBlock') : history.push('/personal');
     }
     return (
       <>

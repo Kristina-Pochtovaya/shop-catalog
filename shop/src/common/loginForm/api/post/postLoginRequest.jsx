@@ -1,10 +1,9 @@
 import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import serverUrl from '../../../constants/urls';
 
 const usersPath = '/users';
-const loginPath = '/login';
 
-async function postUsersRequest(
+async function postLogin(
   email, password, firstName = '', lastName = '', phoneNumber = '', address = '',
 ) {
   const payload = {
@@ -20,11 +19,6 @@ async function postUsersRequest(
   };
 
   try {
-    if (payload.data.firstName === '' && payload.data.lastName === '' && payload.data.phoneNumber === '' && payload.data.address === '') {
-      const response = await axios.post(`${serverUrl}${loginPath}`, payload);
-      const result = response.data;
-      return result;
-    }
     const response = await axios.post(`${serverUrl}${usersPath}`, payload);
     const result = response.data;
     return result;
@@ -33,4 +27,4 @@ async function postUsersRequest(
   }
 }
 
-export default postUsersRequest;
+export default postLogin;
