@@ -2,6 +2,7 @@ export const loginPersonalAccountActions = {
   ENTER: 'enter',
   LOGIN: 'login / change password',
   ENTEREMAIL: 'enter email',
+  AUTOCOMPLETE: 'autocomplete user information',
 };
 
 export const ENTER = {
@@ -20,4 +21,11 @@ export const LOGIN = {
 export const ENTEREMAIL = {
   type: loginPersonalAccountActions.ENTEREMAIL,
   clientEmail: '',
+};
+
+export const AUTOCOMPLETE = {
+  type: loginPersonalAccountActions.AUTOCOMPLETE,
+  firstName: '',
+  phone: '',
+  address: '',
 };

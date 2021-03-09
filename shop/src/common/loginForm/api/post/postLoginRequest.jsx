@@ -1,25 +1,21 @@
 import axios from 'axios';
 import serverUrl from '../../../constants/urls';
 
-const usersPath = '/users';
+const loginPath = '/login';
 
-async function postLogin(
-  email, password, firstName = '', lastName = '', phoneNumber = '', address = '',
+async function postLoginRequest(
+  email, password,
 ) {
   const payload = {
     data: {
-      firstName,
-      lastName,
       email,
-      phoneNumber,
-      address,
       password,
     },
 
   };
 
   try {
-    const response = await axios.post(`${serverUrl}${usersPath}`, payload);
+    const response = await axios.post(`${serverUrl}${loginPath}`, payload);
     const result = response.data;
     return result;
   } catch (error) {
@@ -27,4 +23,4 @@ async function postLogin(
   }
 }
 
-export default postLogin;
+export default postLoginRequest;

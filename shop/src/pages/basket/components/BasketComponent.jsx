@@ -5,13 +5,11 @@ import PopUp from '../../../common/popup/components/PopUpComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
 import PopupBasket from '../../catalogItems/components/PopupBasketComponent';
 import addRemoveScroll from '../../../common/untils/addRemoveScroll';
-import ConnectedPopUpBasketOrder from '../containers/ConnectedPopUpBasketOrderComponent';
+import ConnectedPopUpBasketOrderToUsers from '../containers/ConnectedPopUpBasketOrderComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
 import PopUpThanks from '../../../common/popup/components/PopUpThanksComponent';
 
-const Basket = ({
-  setLoginForm,
-}) => {
+const Basket = () => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(false);
@@ -46,7 +44,7 @@ const Basket = ({
             active={popupOrderActive}
             setActive={setPopupOrderActive}
           >
-            <ConnectedPopUpBasketOrder
+            <ConnectedPopUpBasketOrderToUsers
               setPopupOrderActive={setPopupOrderActive}
               setPopupThanksActive={setPopupThanksActive}
               setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}

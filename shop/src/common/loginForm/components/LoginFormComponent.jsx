@@ -1,5 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { connect } from 'react-redux';
+import { LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
 import ConnectedLogin from './LoginComponent';
 
 class LoginForm extends React.Component {
@@ -23,6 +25,7 @@ class LoginForm extends React.Component {
        this.setState({ isVisible: true });
      } else {
        this.setState({ isVisible: false });
+       this.props.onLogin(false, false, false);
      }
    };
 
@@ -63,4 +66,20 @@ class LoginForm extends React.Component {
    }
 }
 
-export default LoginForm;
+const ConnectedLoginForm = connect(
+  (state) => ({
+    pages: state,
+  }),
+  (dispatch) => ({
+    onLogin: (
+      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
+    ) => dispatch({
+      type: LOGIN.type,
+      payload: {
+        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
+      },
+    }),
+  }),
+)(LoginForm);
+
+export default ConnectedLoginForm;

@@ -18,4 +18,10 @@ const ConnectedPopUpBasketOrder = connect(
   }),
 )(PopUpBasketOrder);
 
-export default ConnectedPopUpBasketOrder;
+const ConnectedPopUpBasketOrderToUsers = connect(
+  (state) => ({
+    pages: state,
+  }),
+)(ConnectedPopUpBasketOrder);
+
+export default ConnectedPopUpBasketOrderToUsers;

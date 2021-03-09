@@ -16,31 +16,8 @@ login.post('/login', urlencodedParser, (req, res) => {
     Users.findOne({ where: { email: req.body.data.email, password: req.body.data.password } })
       .then((existingUser) => {
         if (existingUser instanceof Users) {
-          res.send(true);
-        }
-      });
-  } if (Users.findOne({ where: { email: req.body.data.email } }
-   && { where: { password: !req.body.data.password } })) {
-    Users.findOne({ where: { email: req.body.data.email } })
-      .then((incorrectPassword) => {
-        if (incorrectPassword.dataValues.password !== req.body.data.password) {
-          res.send('incorrectPassword');
-        }
-      });
-  } if (Users.findOne({ where: { password: req.body.data.password } })) {
-    Users.findOne({ where: { password: req.body.data.password } })
-      .then((incorrectEmail) => {
-        if (incorrectEmail.dataValues.email !== req.body.data.email) {
-          res.send('incorrectEmail');
-        }
-      });
-  }
-  if (Users.findOne({ where: { password: !req.body.data.password } })) {
-    Users.findOne({ where: { password: !req.body.data.password } })
-      .then((incorrectEmail) => {
-        if (incorrectEmail) {
-          res.send('incorrectEmail');
-        }
+          res.send(existingUser);
+        } else res.send('incorrectUserOrPassword');
       });
   }
   return null;

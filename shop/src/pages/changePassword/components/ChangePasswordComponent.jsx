@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
+import postChangePasswordRequest from '../api/post/postChangePasswordRequest';
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -36,12 +37,23 @@ class ChangePassword extends React.Component {
       passwordNew, passwordNewInput, passwordNewSymbol,
       passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol,
     } = this.state;
+    const { history } = this.props;
+    async function handleButtonClick() {
+      const userNotFound = document.getElementById('notRealUser');
+      const result = await postChangePasswordRequest(clientEmail, passwordNew, passwordNewRepeat);
+      if (result === true) {
+        history.push('/main-page');
+      } if (result === 'incorrectUserOrPassword') {
+        userNotFound.setAttribute('class', 'userNotFoundBlock');
+      }
+    }
     return (
       <>
         <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
         <div className="changePassword-wrap">
           <h2> Смена пароля </h2>
           <form className="changePassword">
+            <p id="notRealUser" className="userNotFoundBlock -disabled">Пользователя с таким email не существует</p>
             <div className="email">
               <p className="emailString -required">Email:</p>
               <InputWitchCkeckingNotNull
@@ -77,14 +89,13 @@ class ChangePassword extends React.Component {
             </div>
             {(clientEmail && passwordNew && passwordNewRepeat)
             && (passwordNew === passwordNewRepeat) ? (
-              <Link to="/main-page">
-                <button
-                  type="button"
-                  className="changePasswordButton"
-                >
-                  Изменить пароль
-                </button>
-              </Link>
+              <button
+                type="button"
+                className="changePasswordButton"
+                onClick={() => handleButtonClick()}
+              >
+                Изменить пароль
+              </button>
               ) : (
                 <button
                   type="button"
@@ -116,4 +127,4 @@ const ConnectedChangePassword = connect(
   }),
 )(ChangePassword);
 
-export default ConnectedChangePassword;
+export default withRouter(ConnectedChangePassword);

@@ -1,7 +1,7 @@
 import { React, createRef } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import LoginForm from '../../../../common/loginForm/components/LoginFormComponent';
+import ConnectedLoginForm from '../../../../common/loginForm/components/LoginFormComponent';
 import LoginFormForgetPassword from '../../../../common/loginForm/components/LoginFormForgetPasswordComponent';
 import logo from '../../../../assets/header/logo.png';
 import basket from '../../../../assets/common/basket.png';
@@ -49,7 +49,7 @@ const Header = ({
                 {String(pages.loginPersonalAccountReducer.loginFormIsVisible) === 'true'
                 && String(pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible) === 'true'
                   ? (
-                    <LoginForm
+                    <ConnectedLoginForm
                       divRef={divRef}
                     />
                   )

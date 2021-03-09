@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
+import { ENTER, LOGIN, AUTOCOMPLETE } from '../../../redux/actions/loginPersonalAccountActions';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
-import postUsersRequest from '../../../pages/registration/api/post/postUsersRequest';
+import postLoginRequest from '../api/post/postLoginRequest';
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,25 +31,21 @@ class Login extends React.Component {
       clientPassword, clientPasswordInput, clientPasswordSymbol,
     } = this.state;
     const {
-      onLogin, onEnter, history,
+      onLogin, onEnter, history, onAdd,
     } = this.props;
     async function handleButtonClick() {
-      const userNotFound = document.getElementById('userNotFound');
-      const incorrectLogin = document.getElementById('incorrectLogin');
-      const result = await postUsersRequest(clientLogin, clientPassword);
-      if (result === true) {
+      const incorrectLoginOrPassword = document.getElementById('incorrectLoginOrPassword');
+      const result = await postLoginRequest(clientLogin, clientPassword);
+      if (result === 'incorrectUserOrPassword') {
+        incorrectLoginOrPassword.setAttribute('class', 'incorrectLoginOrPassword');
+      } else {
         onEnter(false, true) && onLogin(false, false, false) && history.push('/personal');
-      } if (result === 'incorrectPassword') {
-        incorrectLogin.setAttribute('class', 'incorrectLogin');
-      } if (result === 'incorrectEmail') {
-        userNotFound.setAttribute('class', 'userNotFoundBlock');
+        onAdd(result.firstName, result.phoneNumber, result.address);
       }
     }
-
     return (
       <form className="form">
-        <p id="userNotFound" className="userNotFoundBlock -disabled">Пользователя с таким email не существует</p>
-        <p id="incorrectLogin" className="incorrectLogin -disabled">Неверный пароль</p>
+        <p id="incorrectLoginOrPassword" className="userNotFoundBlock -disabled">Пользователя с таким email не существует или неверный пароль</p>
         <div className="login">
           <p className="loginString -required">Email:</p>
           <InputWitchCkeckingNotNull
@@ -137,6 +133,14 @@ const ConnectedLogin = connect(
       type: LOGIN.type,
       payload: {
         loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
+      },
+    }),
+    onAdd: (
+      firstName, phone, address,
+    ) => dispatch({
+      type: AUTOCOMPLETE.type,
+      payload: {
+        firstName, phone, address,
       },
     }),
   }),

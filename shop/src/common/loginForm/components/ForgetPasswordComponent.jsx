@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ENTER, ENTEREMAIL, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
 import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
+import postUsersRequest from '../../api/post/postUsersRequest';
 
 class ForgetPassword extends React.Component {
   constructor(props) {
@@ -17,11 +18,22 @@ class ForgetPassword extends React.Component {
 
   render() {
     const {
-      onEnter, onLogin, onEnterEmail, pages,
+      onEnter, onLogin, onEnterEmail, pages, history,
     } = this.props;
     const { emailInput, emailSymbol } = this.state;
+
+    async function handleButtonClick() {
+      const userNotFound = document.getElementById('userNotFoundChangePassword');
+      const result = await postUsersRequest(pages.loginPersonalAccountReducer.clientEmail);
+      if (result === true) {
+        onEnter(false, true) && onLogin(false, false, false) && history.push('/change-password');
+      } if (result === 'incorrectUserOrPassword') {
+        userNotFound.setAttribute('class', 'userNotFoundBlock');
+      }
+    }
     return (
       <form className="form">
+        <p id="userNotFoundChangePassword" className="userNotFoundBlock -disabled">Пользователя с таким email не существует</p>
         <div className="login">
           <p className="loginString -required">Email:</p>
           <input
@@ -41,18 +53,15 @@ class ForgetPassword extends React.Component {
           className=""
         >
           {pages.loginPersonalAccountReducer.clientEmail ? (
-            <Link to="/change-password">
-              <button
-                type="button"
-                className="entranceButton"
-                onClick={() => {
-                  onEnter(true, false);
-                  onLogin(false, false, false);
-                }}
-              >
-                Отправить
-              </button>
-            </Link>
+            <button
+              type="button"
+              className="entranceButton"
+              onClick={() => {
+                handleButtonClick();
+              }}
+            >
+              Отправить
+            </button>
           ) : (
             <button
               type="button"
@@ -120,4 +129,4 @@ const ConnectedForgetPassword = connect(
   }),
 )(ForgetPassword);
 
-export default ConnectedForgetPassword;
+export default withRouter(ConnectedForgetPassword);

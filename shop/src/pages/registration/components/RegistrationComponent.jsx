@@ -6,7 +6,7 @@ import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
-import postUsersRequest from '../api/post/postUsersRequest';
+import postUsersRequest from '../../../common/api/post/postUsersRequest';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 

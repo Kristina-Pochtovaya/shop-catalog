@@ -7,6 +7,10 @@ import features from './routes/featuresRoute.js';
 import root from './routes/rootRoute.js';
 import basket from './routes/basketRoute.js';
 import users from './routes/usersRoute.js';
+import addUnautherizedUserRoute from './routes/addUnautherizedUserRoute.js';
+import userInformation from './routes/usersInformationRoute.js';
+import forgetPassword from './routes/forgetPasswordRoute.js';
+import changePassword from './routes/changePasswordRoute.js';
 import login from './routes/loginRoute.js';
 import image from './routes/imageRoute.js';
 import download from './routes/downloadRoute.js';
@@ -40,7 +44,15 @@ app.all('/basket', basket);
 
 app.all('/users', users);
 
+app.all('/add-unautherizedUser', addUnautherizedUserRoute);
+
+app.all('/user-information', userInformation);
+
 app.all('/login', login);
+
+app.all('/change-password', changePassword);
+
+app.all('/forget-password', forgetPassword);
 
 app.get('/category', category);
 

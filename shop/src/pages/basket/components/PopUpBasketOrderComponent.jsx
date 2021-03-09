@@ -6,18 +6,20 @@ import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
+import postUnautherizedUser from '../api/post/postUnautherizedUserRequest';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
     super(props);
+    const { pages } = this.props;
     this.state = {
-      clientName: '',
+      clientName: '' || pages.loginPersonalAccountReducer.firstName,
       clinetNameInput: 'nameInput',
       clientNameSymbol: 'nameSymbol',
-      clientPhone: '+375(__)___-__-__',
+      clientPhone: pages.loginPersonalAccountReducer.phone ? pages.loginPersonalAccountReducer.phone : '+375(__)___-__-__',
       clientPhoneInput: 'phoneInput',
       clientPhoneSymbol: 'phoneSymbol',
-      clientAddress: '',
+      clientAddress: '' || pages.loginPersonalAccountReducer.address,
       clientAddresInput: 'addressInput',
       clientAddresSymbol: 'addressSymbol',
       clientMessage: '',
@@ -33,7 +35,7 @@ class PopUpBasketOrder extends React.Component {
   render() {
     const {
       onAddClientInformation, items, setPopupOrderActive, setpopupSmthWentWrongActive,
-      setPopupThanksActive,
+      setPopupThanksActive, pages,
     } = this.props;
     const {
       clientName, clinetNameInput, clientNameSymbol,
@@ -47,6 +49,10 @@ class PopUpBasketOrder extends React.Component {
         clientName, clientPhone, clientAddress, clientMessage);
       result === null ? setpopupSmthWentWrongActive(true) : setPopupThanksActive(true);
     }
+    async function handleAddUnautherizedUser() {
+      await postUnautherizedUser(clientName, clientPhone, clientAddress);
+    }
+
     return (
       <>
         <div className="popupOrder-box">
@@ -129,6 +135,11 @@ class PopUpBasketOrder extends React.Component {
                       clientName, clientPhone, clientAddress, clientMessage,
                     });
                     handleButtonClick();
+                    if (!pages.loginPersonalAccountReducer.firstName
+                      && !pages.loginPersonalAccountReducer.phone
+                      && !pages.loginPersonalAccountReducer.address) {
+                      handleAddUnautherizedUser();
+                    }
                   }}
                 >
                   Купить

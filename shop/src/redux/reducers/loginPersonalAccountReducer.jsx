@@ -1,5 +1,5 @@
 import {
-  ENTER, LOGIN, ENTEREMAIL,
+  ENTER, LOGIN, ENTEREMAIL, AUTOCOMPLETE,
 } from '../actions/loginPersonalAccountActions';
 
 const initialState = {
@@ -9,6 +9,9 @@ const initialState = {
   loginFormLoginPageIsVisible: false,
   loginFormForgetPasswordIsVisible: false,
   clientEmail: '',
+  firstName: '',
+  phone: '',
+  addres: '',
 };
 
 const loginPersonalAccountReducer = (state = initialState, action) => {
@@ -34,6 +37,15 @@ const loginPersonalAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         clientEmail: action.payload.clientEmail,
+      };
+    }
+
+    case AUTOCOMPLETE.type: {
+      return {
+        ...state,
+        firstName: action.payload.firstName,
+        phone: action.payload.phone,
+        address: action.payload.address,
       };
     }
 
