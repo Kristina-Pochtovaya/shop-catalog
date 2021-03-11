@@ -1,0 +1,123 @@
+/* eslint-disable react/destructuring-assignment */
+import React from 'react';
+import { connect } from 'react-redux';
+import personalAccount from '../../../assets/personal-account/personal-account.jpg';
+import { ADDPHOTO } from '../../../redux/actions/loginPersonalAccountActions';
+import postUserPhoto from '../api/post/postUserPhotoRequest';
+import getUserPhoto from '../api/get/getUserPhotoRequest';
+
+class ImageUpload extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      imagePreviewUrl: '',
+    };
+    this.updateData = this.updateData.bind(this);
+  }
+
+  async componentDidMount() {
+    await getUserPhoto(this.props.pages.loginPersonalAccountReducer.clientEmail,
+      this.updateData);
+  }
+
+  handleSubmit(e) {
+    this.e.preventDefault();
+  }
+
+  handleImageChange(e) {
+    e.preventDefault();
+
+    const reader = new FileReader();
+    const file = e.target.files[0];
+
+    if (file) {
+      reader.onloadend = async () => {
+        this.setState({
+          imagePreviewUrl: reader.result,
+        });
+        await postUserPhoto(
+          this.props.pages.loginPersonalAccountReducer.clientEmail,
+          this.state.imagePreviewUrl,
+        );
+      };
+
+      reader.readAsDataURL(file);
+    }
+  }
+
+  updateData(value) {
+    this.setState({
+      imagePreviewUrl: value,
+    });
+  }
+
+  render() {
+    const { imagePreviewUrl } = this.state;
+    const { pages } = this.props;
+    let $imagePreview = null;
+
+    if (imagePreviewUrl) {
+      $imagePreview = (
+        <img
+          src={imagePreviewUrl}
+          className="photoPersonalAccount"
+          title="photoPersonalAccount"
+          alt="photoPersonalAccount"
+        />
+      );
+    } else {
+      $imagePreview = (
+        <img
+          src={personalAccount}
+          title="photoPersonalAccount"
+          alt="photoPersonalAccount"
+          className="photoPersonalAccount"
+        />
+      );
+    }
+    return (
+      <div className="previewComponent">
+        <p className="errorPhoto -disabled" id="errorPhoto">Размер фото слишком большой</p>
+        <form onSubmit={(e) => this.handleSubmit(e)} id="upload-container">
+          {$imagePreview}
+          <div className="imgPreview">
+            <label htmlFor="avatar">
+              <p
+                className="choosePhotoButton"
+              >
+                Выберите фото
+              </p>
+              <input
+                id="avatar"
+                name="avatar"
+                className="avatar"
+                type="file"
+                onChange={async (e) => {
+                  this.handleImageChange(e);
+                  await postUserPhoto(
+                    pages.loginPersonalAccountReducer.clientEmail, imagePreviewUrl,
+                  );
+                }}
+                multiple
+              />
+            </label>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
+
+const ConnectedImageUpload = connect(
+  (state) => ({
+    pages: state,
+  }),
+  (dispatch) => ({
+    onAddPhoto: (photo) => dispatch({
+      type: ADDPHOTO.type,
+      payload: { photo },
+    }),
+  }),
+)(ImageUpload);
+
+export default ConnectedImageUpload;

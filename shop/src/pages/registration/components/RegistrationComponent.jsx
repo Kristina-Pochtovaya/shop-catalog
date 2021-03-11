@@ -6,7 +6,7 @@ import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
-import postUsersRequest from '../../../common/api/post/postUsersRequest';
+import postUsers from '../api/post/postUsersRequest';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 
@@ -60,8 +60,8 @@ class Registration extends React.Component {
 
     async function handleButtonClick() {
       const existingUser = document.getElementById('existingUser');
-      const result = await postUsersRequest(firstName,
-        lastName, email, phoneNumber, address, password);
+      const result = await postUsers(firstName,
+        lastName, email, password, phoneNumber, address);
       result === true ? existingUser.setAttribute('class', 'existingUserStringBlock') : history.push('/personal');
     }
     return (

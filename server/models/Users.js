@@ -32,6 +32,9 @@ export const Users = sequelize.define('Users', {
   role: {
     type: Sequelize.DataTypes.STRING,
   },
+  photo: {
+    type: Sequelize.DataTypes.TEXT('long'),
+  },
 },
 {
   tableName: 'Users',

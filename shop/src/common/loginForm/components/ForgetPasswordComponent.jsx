@@ -5,7 +5,7 @@ import { ENTER, ENTEREMAIL, LOGIN } from '../../../redux/actions/loginPersonalAc
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
 import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
-import postUsersRequest from '../../api/post/postUsersRequest';
+import postLoginForgetPassword from '../../api/post/postLoginForgetPasswordRequest';
 
 class ForgetPassword extends React.Component {
   constructor(props) {
@@ -24,9 +24,9 @@ class ForgetPassword extends React.Component {
 
     async function handleButtonClick() {
       const userNotFound = document.getElementById('userNotFoundChangePassword');
-      const result = await postUsersRequest(pages.loginPersonalAccountReducer.clientEmail);
+      const result = await postLoginForgetPassword(pages.loginPersonalAccountReducer.clientEmail);
       if (result === true) {
-        onEnter(false, true) && onLogin(false, false, false) && history.push('/change-password');
+        onEnter(true, false) && onLogin(false, false, false) && history.push('/change-password');
       } if (result === 'incorrectUserOrPassword') {
         userNotFound.setAttribute('class', 'userNotFoundBlock');
       }

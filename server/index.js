@@ -7,11 +7,14 @@ import features from './routes/featuresRoute.js';
 import root from './routes/rootRoute.js';
 import basket from './routes/basketRoute.js';
 import users from './routes/usersRoute.js';
+/* import { Users } from './models/Users.js'; */
 import addUnautherizedUserRoute from './routes/addUnautherizedUserRoute.js';
 import userInformation from './routes/usersInformationRoute.js';
 import forgetPassword from './routes/forgetPasswordRoute.js';
 import changePassword from './routes/changePasswordRoute.js';
 import login from './routes/loginRoute.js';
+import userRole from './routes/userRoleRoute.js';
+import avatar from './routes/avatarRoute.js';
 import image from './routes/imageRoute.js';
 import download from './routes/downloadRoute.js';
 
@@ -44,6 +47,10 @@ app.all('/basket', basket);
 
 app.all('/users', users);
 
+app.all('/avatar', avatar);
+
+app.all('/user-role', userRole);
+
 app.all('/add-unautherizedUser', addUnautherizedUserRoute);
 
 app.all('/user-information', userInformation);
@@ -64,6 +71,10 @@ app.get('/download', download);
 
 app.get('/image', image);
 
+/* Users.destroy({
+  truncate: true,
+});
+ */
 app.use(router);
 
 app.listen(PORT, () => {

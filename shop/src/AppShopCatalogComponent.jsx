@@ -18,6 +18,7 @@ import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
 import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
+import EditCategoryPage from './pages/editCategory/components/EditCategoryPageComponent';
 
 const store = createStore();
 
@@ -120,6 +121,9 @@ export function AppShopCatalog() {
         </Route>
         <Route path="/registration">
           <ConnectedRegistration />
+        </Route>
+        <Route path="/edit-category">
+          <EditCategoryPage />
         </Route>
       </Provider>
     </BrowserRouter>

@@ -1,0 +1,119 @@
+%adminColumns {
+  display: block;
+
+  padding: 15px 25px;
+  width: 100%;
+  border: solid 1px $colorBorder;
+
+  background-color: white;
+
+  font-size: 18px;
+  text-align: start;
+
+  cursor: pointer;
+}
+
+%adminRows{
+  margin-right: 60px;
+
+  border: 0;
+
+  background-color: white;
+
+  cursor: pointer;
+}
+
+.admin-box {
+  margin: 0 auto;
+  max-width: 830px;
+  width:100%;
+  margin-top: 10px;
+	flex: 1 0 auto;
+  
+  .admin-container{
+    display: flex;
+    max-width: 830px;
+
+    .admin-column{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 200px;
+      margin-right: 30px;
+
+      .categoryColumn, .catalogOfGoodsColumn, .personalDataColumn, .exitButton{
+        @extend %adminColumns;
+      }
+
+      .exitButton{
+        background-color: $colorBorder;
+      }
+
+      .exitLink{
+        width: 100%;
+        text-decoration: none;
+      }
+
+      .photoPersonalAccount{
+        width: 200px;
+      }
+
+      #upload-container div {
+        position: relative;
+        z-index: 10;
+      }
+   
+      #upload-container input[type=file] {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        position: absolute;
+        z-index: -10;
+      }
+
+      .errorPhoto{
+        color: red;
+      }
+
+      .choosePhotoButton{
+        @extend %adminColumns;
+
+        margin: 0px;
+        width: 147px;
+        margin-bottom: 30px;
+
+        cursor: pointer;
+      }
+    }
+
+    .admin-row{
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+
+      .categoryRow, .catalogOfGoodsRow, .personalDataRow{
+        @extend %adminRows;
+      }
+
+      .categoryString, .productsString, .personalAccountString{
+        font-size: 18px;
+      }
+
+      .personalAccountDiv{
+        width: 106px;
+        height: 94px;
+  
+        fill:$colorLightGreenItem;
+      }
+    }
+  }
+}
+
+
+.categoryColumn:active, .categoryColumn:focus, .catalogOfGoodsColumn:active, .catalogOfGoodsColumn:focus, .personalDataColumn:active, .personalDataColumn:focus, .exitButton:active, .exitButton:focus{ 
+  outline: none !important;
+ }
+
+ .categoryRow:active, .categoryRow:focus, .catalogOfGoodsRow:active, .catalogOfGoodsRow:focus, .personalDataRow:active, .personalDataRow:focus{
+  outline: none !important;
+ }

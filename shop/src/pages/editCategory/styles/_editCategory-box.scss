@@ -1,0 +1,19 @@
+.editCatalog-box{
+  margin: 0 auto;
+  max-width: 830px;
+  width:100%;
+  margin-top: 10px;
+	flex: 1 0 auto;
+  
+  .title{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+
+/* .categoryColumn:active, .categoryColumn:focus, .catalogOfGoodsColumn:active, .catalogOfGoodsColumn:focus, .personalDataColumn:active, .personalDataColumn:focus, .exitButton:active, .exitButton:focus{ 
+  outline: none !important;
+ }
+
+ */

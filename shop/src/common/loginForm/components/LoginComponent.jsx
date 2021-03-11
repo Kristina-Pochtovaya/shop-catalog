@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ENTER, LOGIN, AUTOCOMPLETE } from '../../../redux/actions/loginPersonalAccountActions';
+import {
+  ENTER, LOGIN, AUTOCOMPLETE, ENTEREMAIL,
+} from '../../../redux/actions/loginPersonalAccountActions';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
-import postLoginRequest from '../api/post/postLoginRequest';
+import postLoginForgetPassword from '../../api/post/postLoginForgetPasswordRequest';
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,16 +33,17 @@ class Login extends React.Component {
       clientPassword, clientPasswordInput, clientPasswordSymbol,
     } = this.state;
     const {
-      onLogin, onEnter, history, onAdd,
+      onLogin, onEnter, history, onAdd, onEnterEmail,
     } = this.props;
     async function handleButtonClick() {
       const incorrectLoginOrPassword = document.getElementById('incorrectLoginOrPassword');
-      const result = await postLoginRequest(clientLogin, clientPassword);
+      const result = await postLoginForgetPassword(clientLogin, clientPassword);
       if (result === 'incorrectUserOrPassword') {
         incorrectLoginOrPassword.setAttribute('class', 'incorrectLoginOrPassword');
       } else {
         onEnter(false, true) && onLogin(false, false, false) && history.push('/personal');
         onAdd(result.firstName, result.phoneNumber, result.address);
+        onEnterEmail(clientLogin);
       }
     }
     return (
@@ -141,6 +144,14 @@ const ConnectedLogin = connect(
       type: AUTOCOMPLETE.type,
       payload: {
         firstName, phone, address,
+      },
+    }),
+    onEnterEmail: (
+      clientEmail,
+    ) => dispatch({
+      type: ENTEREMAIL.type,
+      payload: {
+        clientEmail,
       },
     }),
   }),

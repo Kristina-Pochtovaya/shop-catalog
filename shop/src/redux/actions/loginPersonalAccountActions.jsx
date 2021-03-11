@@ -3,6 +3,7 @@ export const loginPersonalAccountActions = {
   LOGIN: 'login / change password',
   ENTEREMAIL: 'enter email',
   AUTOCOMPLETE: 'autocomplete user information',
+  ADDPHOTO: 'add photo',
 };
 
 export const ENTER = {
@@ -28,4 +29,9 @@ export const AUTOCOMPLETE = {
   firstName: '',
   phone: '',
   address: '',
+};
+
+export const ADDPHOTO = {
+  type: loginPersonalAccountActions.ADDPHOTO,
+  photo: '',
 };
