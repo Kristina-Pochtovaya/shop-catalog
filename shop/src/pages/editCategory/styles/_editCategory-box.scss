@@ -1,19 +1,93 @@
+%busketTable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+  border-left: solid 1px $colorBorder;
+  border-right: solid 1px $colorBorder;
+  border-bottom: solid 1px $colorBorder;
+}
+
+$colorLightGrey: #f3f4f6;
+
 .editCatalog-box{
   margin: 0 auto;
   max-width: 830px;
   width:100%;
   margin-top: 10px;
 	flex: 1 0 auto;
+
+  .addCategoryButton{
+    @extend %button;
+
+    height: 40px;
+
+    cursor: pointer;
+  }
   
+  .listOrder-wrap {
+    width: 100%;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;    
+    margin-bottom: 15px;
+    padding: 0;
+    
   .title{
-    display: flex;
-    justify-content: space-between;
+    @extend %busketTable;
+
+    height: 25px;
+    margin-top: 20px;
+    border: solid 1px $colorBorder;
+
+    background: $colorLightGrey; 
+  }
+
+  .columns {
+    @extend %busketTable;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: dashed 1px $colorBorder;
+
+    .columnImage{
+      flex-basis: 26%;
+
+      .imageCategory{
+        width:256px;
+        height: 162.99px;
+      }
+    }
+
+    .columnName{
+      flex-basis: 20%;
+    }
+
+
+    .columnDelete{
+      flex-basis: 15%;
+    }
+
+    .editCategoryButton, .deleteCategoryButton{
+      border: none;
+      border-bottom: dashed 1px blue;
+
+      background-color: white;
+      color: blue;
+      
+      cursor: pointer;
+    }
+  }
+
+  li {
+    list-style-type: none;
+  }
+
   }
 }
 
 
-/* .categoryColumn:active, .categoryColumn:focus, .catalogOfGoodsColumn:active, .catalogOfGoodsColumn:focus, .personalDataColumn:active, .personalDataColumn:focus, .exitButton:active, .exitButton:focus{ 
+.addCategoryButton:active, .addCategoryButton:focus, .editCategoryButton:active, .editCategoryButton:focus, .deleteCategoryButton:active, .deleteCategoryButton:focus{
   outline: none !important;
  }
 
- */

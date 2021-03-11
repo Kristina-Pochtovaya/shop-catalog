@@ -16,6 +16,8 @@ import login from './routes/loginRoute.js';
 import userRole from './routes/userRoleRoute.js';
 import avatar from './routes/avatarRoute.js';
 import image from './routes/imageRoute.js';
+import editCategoryName from './routes/editCategoryNameRoute.js';
+import categoryImage from './routes/editCategoryImageRoute.js';
 import download from './routes/downloadRoute.js';
 
 const router = express.Router();
@@ -62,6 +64,10 @@ app.all('/change-password', changePassword);
 app.all('/forget-password', forgetPassword);
 
 app.get('/category', category);
+
+app.all('/category-name', editCategoryName);
+
+app.all('/category-image', categoryImage);
 
 app.get('/products', product);
 

@@ -26,6 +26,9 @@ export const Category = sequelize.define('Category', {
   imgTitle: {
     type: Sequelize.DataTypes.STRING,
   },
+  image: {
+    type: Sequelize.DataTypes.TEXT('long'),
+  },
 },
 {
   tableName: 'Category',
