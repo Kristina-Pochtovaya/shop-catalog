@@ -22,12 +22,14 @@ const AdminPersonalAccount = ({ onEnter, onLogin }) => (
             Категории
           </button>
         </Link>
-        <button
-          type="button"
-          className="catalogOfGoodsColumn"
-        >
-          Каталог товаров
-        </button>
+        <Link to="/edit-products" className="exitLink">
+          <button
+            type="button"
+            className="catalogOfGoodsColumn"
+          >
+            Каталог товаров
+          </button>
+        </Link>
         <button
           type="button"
           className="personalDataColumn"
@@ -61,18 +63,20 @@ const AdminPersonalAccount = ({ onEnter, onLogin }) => (
             <p className="categoryString">Категории</p>
           </button>
         </Link>
-        <button
-          type="button"
-          className="catalogOfGoodsRow"
-        >
-          <img
-            src={adminProducts}
-            title="adminCatalog"
-            alt="adminCatalog"
-            className="adminCatalog"
-          />
-          <p className="productsString">Каталог товаров</p>
-        </button>
+        <Link to="/edit-products">
+          <button
+            type="button"
+            className="catalogOfGoodsRow"
+          >
+            <img
+              src={adminProducts}
+              title="adminCatalog"
+              alt="adminCatalog"
+              className="adminCatalog"
+            />
+            <p className="productsString">Каталог товаров</p>
+          </button>
+        </Link>
         <button
           type="button"
           className="personalDataRow"

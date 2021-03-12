@@ -20,7 +20,7 @@ const PersonalAccount = ({ pages }) => {
 
   return (
     <>
-      <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
+      <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
       {
          isAdminVisible ? <ConnectedAdminPersonalAccount /> : null
         }

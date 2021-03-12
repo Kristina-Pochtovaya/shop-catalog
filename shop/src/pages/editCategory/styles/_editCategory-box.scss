@@ -8,6 +8,7 @@
   border-bottom: solid 1px $colorBorder;
 }
 
+
 $colorLightGrey: #f3f4f6;
 
 .editCatalog-box{
@@ -84,8 +85,48 @@ $colorLightGrey: #f3f4f6;
   }
 
   }
+ 
+
+    #upload-containerImage div {
+      position: relative;
+      z-index: 10;
+    }
+
+    #upload-containerImage input[type=file] {
+      height: 0.1px;
+      width: 0.1px;
+      position: absolute;
+      opacity: 0;
+      z-index: -10;
+    }
+
+    .imageCategoryLabel{
+      cursor: pointer;
+  }
+
+  .errorImageString{
+    color: red;
+  }
+
+  .imageCategory{
+    width: 256px;
+    height: 162.99px;
+  }
 }
 
+.categoryNameString{
+  @extend %stringPopup;
+}
+
+.categoryNameInput{
+  @extend %inputPopup;
+}
+
+.addNewCategoryButton{
+  @extend %button;
+
+  margin-left: 130px;
+}
 
 .addCategoryButton:active, .addCategoryButton:focus, .editCategoryButton:active, .editCategoryButton:focus, .deleteCategoryButton:active, .deleteCategoryButton:focus{
   outline: none !important;

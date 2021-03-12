@@ -17,6 +17,8 @@ import userRole from './routes/userRoleRoute.js';
 import avatar from './routes/avatarRoute.js';
 import image from './routes/imageRoute.js';
 import editCategoryName from './routes/editCategoryNameRoute.js';
+import addCategory from './routes/addCategoryRoute.js';
+import deleteCategory from './routes/deleteCategoryRoute.js';
 import categoryImage from './routes/editCategoryImageRoute.js';
 import download from './routes/downloadRoute.js';
 
@@ -66,6 +68,10 @@ app.all('/forget-password', forgetPassword);
 app.get('/category', category);
 
 app.all('/category-name', editCategoryName);
+
+app.all('/add-category', addCategory);
+
+app.all('/delete-category', deleteCategory);
 
 app.all('/category-image', categoryImage);
 

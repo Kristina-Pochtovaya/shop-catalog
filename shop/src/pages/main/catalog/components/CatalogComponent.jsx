@@ -45,11 +45,22 @@ const Catalog = () => {
             key={category.id}
           >
             <Link to={category.link}>
-              <img
-                src={setImg(category.category)}
-                alt={category.imgAlt}
-                title={category.imgTitle}
-              />
+              {category.image
+                ? (
+                  <img
+                    className="imageCategory"
+                    src={category.image}
+                    alt={category.imgAlt}
+                    title={category.imgTitle}
+                  />
+                )
+                : (
+                  <img
+                    src={setImg(category.category)}
+                    alt={category.imgAlt}
+                    title={category.imgTitle}
+                  />
+                )}
             </Link>
             <h3 className={category.className}>{category.category}</h3>
           </div>

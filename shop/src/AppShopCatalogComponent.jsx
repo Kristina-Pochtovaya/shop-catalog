@@ -19,6 +19,8 @@ import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogIte
 import setImg from './common/untils/setImg';
 import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
 import EditCategoryPage from './pages/editCategory/components/EditCategoryPageComponent';
+import AddCategoryPage from './pages/editCategory/components/AddCategoryPageComponent';
+import EditProductsPage from './pages/editProducts/components/EditProductsPageComponent';
 
 const store = createStore();
 
@@ -124,6 +126,12 @@ export function AppShopCatalog() {
         </Route>
         <Route path="/edit-category">
           <EditCategoryPage />
+        </Route>
+        <Route path="/add-category">
+          <AddCategoryPage />
+        </Route>
+        <Route path="/edit-products">
+          <EditProductsPage />
         </Route>
       </Provider>
     </BrowserRouter>

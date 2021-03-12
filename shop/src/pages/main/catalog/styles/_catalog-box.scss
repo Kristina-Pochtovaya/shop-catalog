@@ -89,6 +89,11 @@ $colorLightGrey: #575b71;
         @extend %title-itemCard;      
       }
   }
+  
+  .imageCategory{
+    width:256px;
+    height: 162.99px;
+  }
 }
 
 @media screen and (max-width: 788px) {

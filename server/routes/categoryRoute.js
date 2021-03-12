@@ -11,3 +11,9 @@ category.get('/category', urlencodedParser, (req, res) => {
 });
 
 export default category;
+/*
+Category.destroy({
+  where: {},
+  truncate: true,
+});
+ */

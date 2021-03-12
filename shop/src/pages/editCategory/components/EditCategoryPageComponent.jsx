@@ -1,4 +1,6 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import getCategories from '../api/get/getCategories';
@@ -7,10 +9,9 @@ import InputEditCategoryName from './InputEditCategoryNameComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
 import EditCategoryImage from './EditCategoryImageComponent';
+import postDeleteCategory from '../api/post/postDeleteCategory';
 
 class EditCategoryPage extends React.Component {
-  _isMounted = false;
-
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +32,14 @@ class EditCategoryPage extends React.Component {
     this.interval = setTimeout(async () => {
       await getCategories(this.updateData, this.setError);
     }, 10);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.isEditActiveId !== this.state.isEditActiveId) {
+      this.interval = setTimeout(async () => {
+        await getCategories(this.updateData, this.setError);
+      }, 100);
+    }
   }
 
   componentWillUnmount() {
@@ -90,12 +99,14 @@ class EditCategoryPage extends React.Component {
         <div className="editCatalog-box">
           <h1 className="personalAccount"> Категории </h1>
           <div className="editCategory-table">
-            <button
-              type="button"
-              className="addCategoryButton"
-            >
-              Добавить категорию
-            </button>
+            <Link to="/add-category">
+              <button
+                type="button"
+                className="addCategoryButton"
+              >
+                Добавить категорию
+              </button>
+            </Link>
             <ul className="listOrder-wrap">
               <div className="title">
                 <p className="titleImage">Изображение</p>
@@ -110,8 +121,7 @@ class EditCategoryPage extends React.Component {
                       {(isEditActive && category.id) !== isEditActiveId
                         ? (
                           <>
-                            {' '}
-                            {category.img
+                            {category.image
                               ? (
                                 <img
                                   className="imageCategory"
@@ -167,6 +177,13 @@ class EditCategoryPage extends React.Component {
                       <button
                         type="button"
                         className="deleteCategoryButton"
+                        onClick={() => {
+                          this.setState({
+                            isEditActive: true,
+                            isEditActiveId: category.id,
+                          });
+                          postDeleteCategory(category.id);
+                        }}
                       >
                         Удалить
                       </button>
