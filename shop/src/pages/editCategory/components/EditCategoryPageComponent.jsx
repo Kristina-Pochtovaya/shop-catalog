@@ -142,6 +142,7 @@ class EditCategoryPage extends React.Component {
                         : (
                           <EditCategoryImage
                             id={category.id}
+                            category={category.category}
                           />
                         )}
                     </div>

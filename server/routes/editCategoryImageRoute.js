@@ -14,7 +14,7 @@ categoryImage.post('/category-image', urlencodedParser, (req, res) => {
   if (!req.body) {
     return res.sendStatus(500);
   }
-  /*   console.log(req.body.data.id); */
+
   if (Category.findOne({ where: { id: req.body.payload.data.id } })) {
     Category.findOne({ where: { id: req.body.payload.data.id } })
       .then((existingCategory) => {

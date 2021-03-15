@@ -31,15 +31,19 @@
     background: $colorLightGrey; 
 
     .titleImage{
-      flex-basis: 12%;
-    }
-
-    .titlePrice{
-      flex-basis: 4%;
+      flex-basis: 17%;
     }
 
     .titleName, .titleEdit, .titleDelete{
-      flex-basis: 6%
+      flex-basis: 0%
+    }
+
+    .titlePrice{
+      flex-basis: 0%;
+    }
+
+    .titleInStock{
+      flex-basis: 26%;
     }
   }
 
@@ -48,38 +52,48 @@
 
     padding-top: 10px;
     padding-bottom: 10px;
+    padding-right: 2px;
+    padding-left: 2px;
     border-bottom: dashed 1px $colorBorder;
 
     .columnImage{
-      flex-basis: 24%;
+      flex-basis: 17%;
 
-      .imageCategory{
-        width:256px;
-        height: 162.99px;
+      .imageProducts{
+        width:180px;
+        height: 140px;
       }
     }
 
    .columnEdit{
-    flex-basis: 22%;
+    flex-basis: 0%;
    }
    
    .columnDelete{
-      flex-basis: 20%;
+      flex-basis: 10%;
     }
 
      .columnCategory{
-      flex-basis: 24%;
-    }
-
-    .columnName{
-      flex-basis: 35%;
-    }
-    
-    .columnPrice{
       flex-basis: 12%;
     }
 
-    .editCategoryButton, .deleteCategoryButton{
+    .columnName{
+      flex-basis: 0%;
+    }
+    
+    .columnPrice{
+      flex-basis: 0%;
+    }
+
+    .columnInStock{
+      flex-basis: 10%;
+    }
+
+    .inStockString{
+      text-align: center;
+    }
+
+    .editProductsButton, .deleteProductsButton{
       border: none;
       border-bottom: dashed 1px blue;
 
@@ -110,7 +124,7 @@
       z-index: -10;
     }
 
-    .imageCategoryLabel{
+    .imageProductsLabel{
       cursor: pointer;
   }
 
@@ -124,21 +138,43 @@
   }
 }
 
-.categoryNameString{
+.productsNameNameString{
   @extend %stringPopup;
 }
 
-.categoryNameInput{
-  @extend %inputPopup;
+.productsCategory{
+  width: 127.75px;
+  height: 37px;
+
+  cursor: pointer;
 }
 
-.addNewCategoryButton{
+.productsNameInput{
+  width: 82.29px;
+  height: 80px;
+
+  word-wrap: break-word;
+  resize: none;
+}
+
+.productsInStockInput{
+  width: 51.84px;
+  height: 39.98px;
+}
+
+.productsPriceInput{
+  width: 47.87px;
+  height: 36px;
+  padding: 0px;
+}
+
+.addNewProductButton{
   @extend %button;
 
-  margin-left: 130px;
+  cursor: pointer;
 }
 
-.addCategoryButton:active, .addCategoryButton:focus, .editCategoryButton:active, .editCategoryButton:focus, .deleteCategoryButton:active, .deleteCategoryButton:focus{
+.addNewProductButton:active, .addNewProductButton:focus, .editProductsButton:active, .editProductsButton:focus, .deleteProductsButton:active, .deleteProductsButton:focus{
   outline: none !important;
  }
 

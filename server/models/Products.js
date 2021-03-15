@@ -32,6 +32,9 @@ export const Products = sequelize.define('Products', {
   imgTitle: {
     type: Sequelize.DataTypes.STRING,
   },
+  image: {
+    type: Sequelize.DataTypes.TEXT('long'),
+  },
   price: {
     type: Sequelize.DataTypes.DECIMAL(10, 2),
   },

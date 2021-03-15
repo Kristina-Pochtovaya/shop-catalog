@@ -3,6 +3,7 @@ import React from 'react';
 import postCategoryImage from '../api/post/postCategoryImage';
 import getCatalogImage from '../api/get/getCatalogImage';
 import noImage from '../../../assets/personal-account/noImage.png';
+import setImg from '../../../common/untils/setImg';
 
 class EditCategoryImage extends React.Component {
   constructor(props) {
@@ -58,7 +59,7 @@ class EditCategoryImage extends React.Component {
     if (imagePreviewUrl) {
       $imagePreview = (
         <img
-          src={imagePreviewUrl}
+          src={imagePreviewUrl == '' ? setImg(this.props.category) : imagePreviewUrl}
           className="imageCategory"
           title="image Category"
           alt="imageCategory"

@@ -1,0 +1,90 @@
+.addProduct-box{
+  margin: 0 auto;
+  max-width: 830px;
+  width:100%;
+  margin-top: 10px;
+	flex: 1 0 auto;
+
+  .productNameString, .categoryColorString{
+    @extend %changePasswordText;
+    
+  }
+
+  .productNameInput{
+    @extend %changePasswordInput;
+
+    width: 400px;
+  }
+
+  .addNewCategoryButton{
+    @extend %button;
+
+    margin-left: 200px;
+    margin-top: 30px;
+
+    cursor: pointer;
+  }
+
+  .imageColors, .productsCategories{
+    height: 40px;
+    margin-bottom: 20px;
+
+    border: 1px solid #ccd5db;
+  
+    background-color: #f8fafc;
+
+    cursor: pointer;
+  }
+  
+  .categoryColorString{
+    @extend %changePasswordText;
+
+    font-size: 16px;
+  }
+
+  .noImage{
+    border:dotted 1px black;
+    width: 256px;
+    height: 162.99px;
+  }
+
+  #upload-container div {
+    position: relative;
+    z-index: 10;
+  }
+
+  #upload-container input[type=file] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -10;
+  }
+
+    .addImageButton{
+      @extend %adminColumns;
+
+      margin: 0px;
+      padding-left: 20px;
+      padding-right: 0px;
+      width: 236px;
+      margin-bottom: 30px;
+
+      cursor: pointer;
+    }
+
+    .newImage{
+      width: 256px;
+      height: 162.99px;
+    }
+
+    .errorNewImage{
+      color: red;
+    }
+  
+}
+
+.addNewCategoryButton:active, .addNewCategoryButton:focus, .imageColors:active, .imageColors:focus{
+  outline: none !important;
+ }
+

@@ -20,6 +20,7 @@ import setImg from './common/untils/setImg';
 import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
 import EditCategoryPage from './pages/editCategory/components/EditCategoryPageComponent';
 import AddCategoryPage from './pages/editCategory/components/AddCategoryPageComponent';
+import AddProductPageComponent from './pages/editProducts/components/AddProductPageComponent';
 import EditProductsPage from './pages/editProducts/components/EditProductsPageComponent';
 
 const store = createStore();
@@ -33,13 +34,14 @@ export function AppShopCatalog() {
   const [errorProducts, setErrorProducts] = useState(false);
   const [popupBasketActive, setPopupBasketctive] = useState(false);
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(true);
+  const [isProductsUpdated, setIsProductsUpdated] = useState(false);
 
   useEffect(() => {
+    getProductsRequest(setProducts, setLoadingProducts, setErrorProducts);
     getCatalogCategories(
       setCategories, setLoadingCategory, setErrorCategory,
     );
-    (getProductsRequest(setProducts, setLoadingProducts, setErrorProducts));
-  }, []);
+  }, [isProductsUpdated]);
 
   if (!isLoadingProducts || !isLoadingCategory) {
     return <div className="-isLoading"> </div>;
@@ -61,6 +63,13 @@ export function AppShopCatalog() {
 
   return (
     <BrowserRouter>
+      {/*       <button
+        type="button"
+        onClick={() => (isProductsUpdated ? setIsProductsUpdated(false)
+          : setIsProductsUpdated(true))}
+      >
+        CLick
+      </button> */}
       <Provider store={store}>
         <Route path="/">
           <Redirect to="/main-page" />
@@ -130,8 +139,14 @@ export function AppShopCatalog() {
         <Route path="/add-category">
           <AddCategoryPage />
         </Route>
+        <Route path="/add-product">
+          <AddProductPageComponent />
+        </Route>
         <Route path="/edit-products">
-          <EditProductsPage />
+          <EditProductsPage
+            setIsProductsUpdated={setIsProductsUpdated}
+            isProductsUpdated={isProductsUpdated}
+          />
         </Route>
       </Provider>
     </BrowserRouter>

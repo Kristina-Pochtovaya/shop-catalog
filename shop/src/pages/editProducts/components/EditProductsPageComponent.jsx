@@ -3,13 +3,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
-import getCategories from '../../editCategory/api/get/getCategories';
 import getProducts from '../api/get/getProducts';
 import setImg from '../../../common/untils/setImg';
-import InputEditCategoryName from './InputEditCategoryNameComponent';
+import InputEditProductsCategory from './InputEditProductsCategoryComponent';
+import InputEditProductsInStock from './InputEditProductsInStockComponent';
+import InputEditProductsName from './InputEditProductsNameComponent';
+import InputEditProductsPrice from './InputEditCategoryPriceComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import EditCategoryImage from './EditCategoryImageComponent';
+import EditProductsImage from './EditProductsImageComponent';
 import postDeleteCategory from '../api/post/postDeleteCategory';
 
 class EditProductsPage extends React.Component {
@@ -24,30 +26,30 @@ class EditProductsPage extends React.Component {
       popupSmthWentWrongActive: true,
     };
     this.updateProducts = this.updateProducts.bind(this);
-    this.setErrorProducts = this.setErrorProducts.bind(this);
+    this.setError = this.setError.bind(this);
     this.setpopupSmthWentWrongActive = this.setpopupSmthWentWrongActive.bind(this);
     this.setEditActive = this.setEditActive.bind(this);
   }
 
   componentDidMount() {
     this.interval = setTimeout(async () => {
-      await getProducts(this.updateProducts, this.setErrorProducts);
+      await getProducts(this.updateProducts, this.setError);
     }, 10);
   }
 
-  /*   componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.isEditActiveId !== this.state.isEditActiveId) {
       this.interval = setTimeout(async () => {
-        await getCategories(this.updateData, this.setError);
+        await getProducts(this.updateProducts, this.setError);
       }, 100);
     }
-  } */
+  }
 
   componentWillUnmount() {
     clearTimeout(this.interval);
   }
 
-  setErrorProducts(errorMessage) {
+  setError(errorMessage) {
     this.setState({
       ErrorMessageProducts: errorMessage,
     });
@@ -101,20 +103,24 @@ class EditProductsPage extends React.Component {
         <div className="editProducts-box">
           <h1 className="personalAccount"> Товары </h1>
           <div className="editProducts-table">
-            {/*             <Link to="/add-category">
+            <Link to="/add-product">
               <button
                 type="button"
-                className="addCategoryButton"
+                className="addNewProductButton"
               >
                 Добавить товар
               </button>
-            </Link> */}
+            </Link>
             <ul className="listOrder-wrap">
               <div className="title">
                 <p className="titleImage">Изображение</p>
                 <p className="titleName">Категория</p>
                 <p className="titleName">Название</p>
                 <p className="titlePrice">Цена</p>
+                <p className="titleInStock">
+                  В
+                  наличии
+                </p>
                 <p className="titleEdit"> </p>
                 <p className="titleDelete"> </p>
               </div>
@@ -128,7 +134,7 @@ class EditProductsPage extends React.Component {
                             {product.image
                               ? (
                                 <img
-                                  className="imageCategory"
+                                  className="imageProducts"
                                   src={product.image}
                                   alt={product.imgAlt}
                                   title={product.imgTitle}
@@ -144,8 +150,9 @@ class EditProductsPage extends React.Component {
                           </>
                         )
                         : (
-                          <EditCategoryImage
+                          <EditProductsImage
                             id={product.id}
+                            description={product.description}
                           />
                         )}
                     </div>
@@ -153,11 +160,14 @@ class EditProductsPage extends React.Component {
                     <div className="columnCategory">
                       {isEditActive && product.id === isEditActiveId
                         ? (
-                          /* <InputEditCategoryName
+                          <InputEditProductsCategory
                             id={product.id}
                             category={product.category}
+                            categoryId={product.categoryId}
                             setEditActive={this.setEditActive}
-                          /> */ <div> </div>
+                            setIsProductsUpdated={this.props.setIsProductsUpdated}
+                            isProductsUpdated={this.props.isProductsUpdated}
+                          />
                         )
                         : <p>{product.category}</p>}
                     </div>
@@ -165,11 +175,13 @@ class EditProductsPage extends React.Component {
                     <div className="columnName">
                       {isEditActive && product.id === isEditActiveId
                         ? (
-                      /*  <InputEditCategoryName
+                          <InputEditProductsName
                             id={product.id}
-                            category={product.category}
+                            description={product.description}
                             setEditActive={this.setEditActive}
-                          /> */ <div> </div>
+                            setIsProductsUpdated={this.props.setIsProductsUpdated}
+                            isProductsUpdated={this.props.isProductsUpdated}
+                          />
                         )
                         : <p>{product.description}</p>}
                     </div>
@@ -177,24 +189,43 @@ class EditProductsPage extends React.Component {
                     <div className="columnPrice">
                       {isEditActive && product.id === isEditActiveId
                         ? (
-                      /*    <InputEditCategoryName
+                          <InputEditProductsPrice
                             id={product.id}
-                            category={product.category}
+                            price={product.price}
                             setEditActive={this.setEditActive}
-                          /> */ <div> </div>
+                            setIsProductsUpdated={this.props.setIsProductsUpdated}
+                            isProductsUpdated={this.props.isProductsUpdated}
+                          />
                         )
                         : <p>{product.price}</p>}
+                    </div>
+
+                    <div className="columnInStock">
+                      {isEditActive && product.id === isEditActiveId
+                        ? (
+                          <InputEditProductsInStock
+                            id={product.id}
+                            inStock={product.inStock}
+                            setEditActive={this.setEditActive}
+                            setIsProductsUpdated={this.props.setIsProductsUpdated}
+                            isProductsUpdated={this.props.isProductsUpdated}
+                          />
+                        )
+                        : <p className="inStockString">{Number(product.inStock) === 1 ? 'да' : 'нет'}</p>}
                     </div>
 
                     <div className="columnEdit">
                       <button
                         type="button"
-                        className="editCategoryButton"
+                        className="editProductsButton"
                         onClick={() => {
                           this.setState({
                             isEditActive: true,
                             isEditActiveId: product.id,
                           });
+                          this.props.isProductsUpdated
+                            ? this.props.setIsProductsUpdated(false)
+                            : this.props.setIsProductsUpdated(true);
                         }}
                       >
                         Редактировать
@@ -204,7 +235,7 @@ class EditProductsPage extends React.Component {
                     <div className="columnDelete">
                       <button
                         type="button"
-                        className="deleteCategoryButton"
+                        className="deleteProductsButton"
                         onClick={() => {
                           this.setState({
                             isEditActive: true,

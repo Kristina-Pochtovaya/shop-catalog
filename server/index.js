@@ -17,9 +17,14 @@ import userRole from './routes/userRoleRoute.js';
 import avatar from './routes/avatarRoute.js';
 import image from './routes/imageRoute.js';
 import editCategoryName from './routes/editCategoryNameRoute.js';
+import editProductsName from './routes/editProductsNameRoute.js';
+import editProductsPrice from './routes/editProductsPriceRoute.js';
+import editProductsInStock from './routes/editProductsInStockRoute.js';
+import editProductsCategory from './routes/editProductsCategoryRoute.js';
 import addCategory from './routes/addCategoryRoute.js';
 import deleteCategory from './routes/deleteCategoryRoute.js';
 import categoryImage from './routes/editCategoryImageRoute.js';
+import productsImage from './routes/editProductsImageRoute.js';
 import download from './routes/downloadRoute.js';
 
 const router = express.Router();
@@ -69,11 +74,21 @@ app.get('/category', category);
 
 app.all('/category-name', editCategoryName);
 
+app.all('/products-name', editProductsName);
+
+app.all('/products-instock', editProductsInStock);
+
+app.all('/products-price', editProductsPrice);
+
+app.all('/products-category', editProductsCategory);
+
 app.all('/add-category', addCategory);
 
 app.all('/delete-category', deleteCategory);
 
 app.all('/category-image', categoryImage);
+
+app.all('/products-image', productsImage);
 
 app.get('/products', product);
 
@@ -83,10 +98,10 @@ app.get('/download', download);
 
 app.get('/image', image);
 
-/* Users.destroy({
+/* Category.destroy({
   truncate: true,
-});
- */
+}); */
+
 app.use(router);
 
 app.listen(PORT, () => {

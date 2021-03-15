@@ -10,7 +10,6 @@ class InputEditCategoryName extends React.Component {
       id,
       categoryName: category,
     };
-    this.updateData = this.updateData.bind(this);
   }
 
   async handleImageChange(e) {
@@ -20,12 +19,6 @@ class InputEditCategoryName extends React.Component {
       categoryName: e.target.value,
     });
     postCategoryName(this.state.id, e.target.value);
-  }
-
-  updateData(value) {
-    this.setState({
-      categoryName: value,
-    });
   }
 
   render() {
