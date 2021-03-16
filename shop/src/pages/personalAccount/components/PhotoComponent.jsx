@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
 import personalAccount from '../../../assets/personal-account/personal-account.jpg';
@@ -16,7 +15,8 @@ class ImageUpload extends React.Component {
   }
 
   async componentDidMount() {
-    await getUserPhoto(this.props.pages.loginPersonalAccountReducer.clientEmail,
+    const { pages } = this.props;
+    await getUserPhoto(pages.loginPersonalAccountReducer.clientEmail,
       this.updateData);
   }
 
@@ -25,6 +25,8 @@ class ImageUpload extends React.Component {
   }
 
   handleImageChange(e) {
+    const { imagePreviewUrl } = this.state;
+    const { pages } = this.props;
     e.preventDefault();
 
     const reader = new FileReader();
@@ -36,8 +38,8 @@ class ImageUpload extends React.Component {
           imagePreviewUrl: reader.result,
         });
         await postUserPhoto(
-          this.props.pages.loginPersonalAccountReducer.clientEmail,
-          this.state.imagePreviewUrl,
+          pages.loginPersonalAccountReducer.clientEmail,
+          imagePreviewUrl,
         );
       };
 

@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import noImage from '../../../assets/personal-account/noImage.png';
 
@@ -15,6 +14,7 @@ class AddCategoryImage extends React.Component {
   }
 
   handleImageChange(e) {
+    const { updateImage } = this.props;
     e.preventDefault();
 
     const reader = new FileReader();
@@ -25,7 +25,7 @@ class AddCategoryImage extends React.Component {
         this.setState({
           imagePreviewUrl: reader.result,
         });
-        this.props.updateImage(reader.result);
+        updateImage(reader.result);
       };
 
       reader.readAsDataURL(file);

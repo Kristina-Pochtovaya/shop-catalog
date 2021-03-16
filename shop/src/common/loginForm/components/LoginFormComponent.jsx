@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
 import { LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
@@ -21,11 +20,12 @@ class LoginForm extends React.Component {
   }
 
    onClick = (event) => {
-     if (this.props.divRef.current.contains(event.target)) {
+     const { divRef, onLogin } = this.props;
+     if (divRef.current.contains(event.target)) {
        this.setState({ isVisible: true });
      } else {
        this.setState({ isVisible: false });
-       this.props.onLogin(false, false, false);
+       onLogin(false, false, false);
      }
    };
 

@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import postCategoryName from '../api/post/postCategoryName';
 
@@ -13,12 +12,13 @@ class InputEditCategoryName extends React.Component {
   }
 
   async handleImageChange(e) {
+    const { id } = this.state;
     e.preventDefault();
 
     this.setState({
       categoryName: e.target.value,
     });
-    postCategoryName(this.state.id, e.target.value);
+    postCategoryName(id, e.target.value);
   }
 
   render() {

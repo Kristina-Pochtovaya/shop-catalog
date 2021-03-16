@@ -61,8 +61,20 @@ $colorNoRed: #f00;
         height: 30px;
       }
 
-      .imgItem {
+      .imgItemCard {
           margin-top: 15px;
+          margin-right: 5px;
+
+          width:175px;
+          height: 140px;
+
+          .imgItem {
+            margin-top: 15px;
+            margin-right: 5px;
+        
+            width:175px;
+            height: 140px;
+          } 
         }
 
       .purchase {

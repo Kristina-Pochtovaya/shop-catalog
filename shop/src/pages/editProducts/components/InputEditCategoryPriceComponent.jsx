@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import postProductsPrice from '../api/post/postProductsPrice';
 
@@ -13,16 +12,18 @@ class InputEditCategoryPrice extends React.Component {
   }
 
   async handleProductsChange(e) {
+    const { id } = this.state;
     e.preventDefault();
 
     this.setState({
       productsPrice: e.target.value,
     });
-    postProductsPrice(this.state.id, e.target.value);
+    postProductsPrice(id, e.target.value);
   }
 
   render() {
     const { productsPrice } = this.state;
+    const { isProductsUpdated, setIsProductsUpdated } = this.props;
     return (
       <>
         <input
@@ -32,9 +33,9 @@ class InputEditCategoryPrice extends React.Component {
           onChange={async (e) => {
             this.handleProductsChange(e);
           }}
-          onBlur={() => (this.props.isProductsUpdated
-            ? this.props.setIsProductsUpdated(false)
-            : this.props.setIsProductsUpdated(true))}
+          onBlur={() => (isProductsUpdated
+            ? setIsProductsUpdated(false)
+            : setIsProductsUpdated(true))}
         />
       </>
     );

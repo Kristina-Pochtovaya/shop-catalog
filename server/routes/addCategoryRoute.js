@@ -13,7 +13,6 @@ addCategory.post('/add-category', urlencodedParser, (req, res) => {
     return res.sendStatus(500);
   }
   const response = req.body.payload.data;
-  console.log(response);
   Category.create({
     category: response.category,
     link: response.link,

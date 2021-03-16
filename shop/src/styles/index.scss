@@ -20,6 +20,7 @@
 @import '../pages/editCategory/styles/addCategory-box';
 @import '../pages/editProducts/styles/addProduct-box';
 @import '../pages/editProducts/styles/editProducts-box';
+@import '../pages/personalAccount/styles/personalInformation-box';
 
 $colorLightRedError: #fac1bd;
 
@@ -84,3 +85,4 @@ html, body{
 .-notNull{
   background-color: $colorLightRedError;
 }
+

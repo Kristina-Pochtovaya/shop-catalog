@@ -5,7 +5,9 @@ import { Users } from '../models/Users.js';
 const users = express.Router();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-users.get('/users', urlencodedParser, () => {
+users.get('/users', urlencodedParser, (req, res) => {
+  Users.findAll()
+    .then((user) => res.send(user));
 });
 
 users.post('/users', urlencodedParser, (req, res) => {
@@ -16,7 +18,6 @@ users.post('/users', urlencodedParser, (req, res) => {
     .then((newUser) => {
       if (newUser instanceof Users) {
         res.send(true);
-        console.log(req.body);
       } else {
         res.send(JSON.stringify(req.body));
         const response = req.body.data;

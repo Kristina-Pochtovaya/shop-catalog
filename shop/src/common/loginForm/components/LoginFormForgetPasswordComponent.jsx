@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import ConnectedForgetPassword from './ForgetPasswordComponent';
 
@@ -19,7 +18,8 @@ class LoginFormForgetPassword extends React.Component {
   }
 
    onClick = (event) => {
-     if (this.props.divRef.current.contains(event.target)) {
+     const { divRef } = this.props;
+     if (divRef.current.contains(event.target)) {
        this.setState({ isVisible: true });
      } else {
        this.setState({ isVisible: false });

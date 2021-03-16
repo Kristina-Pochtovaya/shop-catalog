@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
@@ -29,14 +28,15 @@ class InputEditProductsCategory extends React.Component {
   }
 
   async handleCategoryProductsChange(e) {
+    const { id, categoriesArray } = this.state;
     e.preventDefault();
 
     this.setState({
       categoryName: e.target.value,
     });
 
-    postProductsCategory(this.state.id, e.target.value,
-      this.state.categoriesArray.categories);
+    postProductsCategory(id, e.target.value,
+      categoriesArray.categories);
   }
 
   setError(value) {
@@ -61,8 +61,9 @@ class InputEditProductsCategory extends React.Component {
   render() {
     const {
       categoriesArray, errorMessage,
-      isLoading, popupSmthWentWrongActive,
+      isLoading, popupSmthWentWrongActive, categoryName,
     } = this.state;
+    const { isProductsUpdated, setIsProductsUpdated } = this.props;
 
     if (!isLoading) {
       return <div className="-isLoading"> </div>;
@@ -85,16 +86,16 @@ class InputEditProductsCategory extends React.Component {
       <>
         <select
           className="productsCategory"
-          value={this.state.categoryName}
+          value={categoryName}
           onChange={async (e) => {
             this.handleCategoryProductsChange(e);
-            (this.props.isProductsUpdated
-              ? this.props.setIsProductsUpdated(false)
-              : this.props.setIsProductsUpdated(true));
+            (isProductsUpdated
+              ? setIsProductsUpdated(false)
+              : setIsProductsUpdated(true));
           }}
-          onBlur={() => (this.props.isProductsUpdated
-            ? this.props.setIsProductsUpdated(false)
-            : this.props.setIsProductsUpdated(true))}
+          onBlur={() => (isProductsUpdated
+            ? setIsProductsUpdated(false)
+            : setIsProductsUpdated(true))}
         >
           {categoriesArray.categories.map((category) => (
             <option

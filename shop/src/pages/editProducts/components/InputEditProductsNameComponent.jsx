@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import postProductsName from '../api/post/postProductsName';
 
@@ -13,16 +12,18 @@ class InputEditProductsName extends React.Component {
   }
 
   async handleNameChange(e) {
+    const { id } = this.state;
     e.preventDefault();
 
     this.setState({
       productsName: e.target.value,
     });
-    postProductsName(this.state.id, e.target.value);
+    postProductsName(id, e.target.value);
   }
 
   render() {
     const { productsName } = this.state;
+    const { isProductsUpdated, setIsProductsUpdated } = this.props;
     return (
       <>
         <textarea
@@ -32,9 +33,9 @@ class InputEditProductsName extends React.Component {
           onChange={async (e) => {
             this.handleNameChange(e);
           }}
-          onBlur={() => (this.props.isProductsUpdated
-            ? this.props.setIsProductsUpdated(false)
-            : this.props.setIsProductsUpdated(true))}
+          onBlur={() => (isProductsUpdated
+            ? setIsProductsUpdated(false)
+            : setIsProductsUpdated(true))}
         />
       </>
     );

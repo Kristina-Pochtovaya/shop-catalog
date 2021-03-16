@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
@@ -12,7 +11,7 @@ import InputEditProductsPrice from './InputEditCategoryPriceComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
 import EditProductsImage from './EditProductsImageComponent';
-import postDeleteCategory from '../api/post/postDeleteCategory';
+import postDeleteProduct from '../api/post/postDeleteProduct';
 
 class EditProductsPage extends React.Component {
   constructor(props) {
@@ -31,23 +30,21 @@ class EditProductsPage extends React.Component {
     this.setEditActive = this.setEditActive.bind(this);
   }
 
-  componentDidMount() {
-    this.interval = setTimeout(async () => {
-      await getProducts(this.updateProducts, this.setError);
-    }, 10);
+  async componentDidMount() {
+    await getProducts(this.updateProducts, this.setError);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.isEditActiveId !== this.state.isEditActiveId) {
-      this.interval = setTimeout(async () => {
-        await getProducts(this.updateProducts, this.setError);
-      }, 100);
+  async componentDidUpdate(prevProps, prevState) {
+    const { isEditActiveId } = this.state;
+    if (prevState.isEditActiveId !== isEditActiveId) {
+      await getProducts(this.updateProducts, this.setError);
+      console.log('123');
     }
   }
-
+  /*
   componentWillUnmount() {
     clearTimeout(this.interval);
-  }
+  } */
 
   setError(errorMessage) {
     this.setState({
@@ -81,6 +78,7 @@ class EditProductsPage extends React.Component {
       productsArray, isLoadingProducts,
     } = this.state;
 
+    const { isProductsUpdated, setIsProductsUpdated } = this.props;
     if (!isLoadingProducts) {
       return <div className="-isLoading"> </div>;
     }
@@ -153,6 +151,8 @@ class EditProductsPage extends React.Component {
                           <EditProductsImage
                             id={product.id}
                             description={product.description}
+                            setIsProductsUpdated={setIsProductsUpdated}
+                            isProductsUpdated={isProductsUpdated}
                           />
                         )}
                     </div>
@@ -165,8 +165,8 @@ class EditProductsPage extends React.Component {
                             category={product.category}
                             categoryId={product.categoryId}
                             setEditActive={this.setEditActive}
-                            setIsProductsUpdated={this.props.setIsProductsUpdated}
-                            isProductsUpdated={this.props.isProductsUpdated}
+                            setIsProductsUpdated={setIsProductsUpdated}
+                            isProductsUpdated={isProductsUpdated}
                           />
                         )
                         : <p>{product.category}</p>}
@@ -179,8 +179,8 @@ class EditProductsPage extends React.Component {
                             id={product.id}
                             description={product.description}
                             setEditActive={this.setEditActive}
-                            setIsProductsUpdated={this.props.setIsProductsUpdated}
-                            isProductsUpdated={this.props.isProductsUpdated}
+                            setIsProductsUpdated={setIsProductsUpdated}
+                            isProductsUpdated={isProductsUpdated}
                           />
                         )
                         : <p>{product.description}</p>}
@@ -193,8 +193,8 @@ class EditProductsPage extends React.Component {
                             id={product.id}
                             price={product.price}
                             setEditActive={this.setEditActive}
-                            setIsProductsUpdated={this.props.setIsProductsUpdated}
-                            isProductsUpdated={this.props.isProductsUpdated}
+                            setIsProductsUpdated={setIsProductsUpdated}
+                            isProductsUpdated={isProductsUpdated}
                           />
                         )
                         : <p>{product.price}</p>}
@@ -207,8 +207,8 @@ class EditProductsPage extends React.Component {
                             id={product.id}
                             inStock={product.inStock}
                             setEditActive={this.setEditActive}
-                            setIsProductsUpdated={this.props.setIsProductsUpdated}
-                            isProductsUpdated={this.props.isProductsUpdated}
+                            setIsProductsUpdated={setIsProductsUpdated}
+                            isProductsUpdated={isProductsUpdated}
                           />
                         )
                         : <p className="inStockString">{Number(product.inStock) === 1 ? 'да' : 'нет'}</p>}
@@ -223,9 +223,9 @@ class EditProductsPage extends React.Component {
                             isEditActive: true,
                             isEditActiveId: product.id,
                           });
-                          this.props.isProductsUpdated
-                            ? this.props.setIsProductsUpdated(false)
-                            : this.props.setIsProductsUpdated(true);
+                          isProductsUpdated
+                            ? setIsProductsUpdated(false)
+                            : setIsProductsUpdated(true);
                         }}
                       >
                         Редактировать
@@ -241,7 +241,8 @@ class EditProductsPage extends React.Component {
                             isEditActive: true,
                             isEditActiveId: product.id,
                           });
-                          postDeleteCategory(product.id);
+                          postDeleteProduct(product.id, setIsProductsUpdated,
+                            isProductsUpdated);
                         }}
                       >
                         Удалить

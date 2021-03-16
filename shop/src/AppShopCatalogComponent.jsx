@@ -63,13 +63,6 @@ export function AppShopCatalog() {
 
   return (
     <BrowserRouter>
-      {/*       <button
-        type="button"
-        onClick={() => (isProductsUpdated ? setIsProductsUpdated(false)
-          : setIsProductsUpdated(true))}
-      >
-        CLick
-      </button> */}
       <Provider store={store}>
         <Route path="/">
           <Redirect to="/main-page" />
@@ -102,11 +95,12 @@ export function AppShopCatalog() {
                     img={(
                       <img
                         className="imgItem"
-                        src={setImg(product.description)}
+                        src={product.image ? product.image : setImg(product.imgAlt)}
                         alt={product.imgAlt}
                         title={product.imgTitle}
                       />
-     )}
+                        )}
+                    className="imgItem"
                     description={product.description}
                     inStock={product.inStock}
                     price={product.price}
@@ -140,7 +134,10 @@ export function AppShopCatalog() {
           <AddCategoryPage />
         </Route>
         <Route path="/add-product">
-          <AddProductPageComponent />
+          <AddProductPageComponent
+            setIsProductsUpdated={setIsProductsUpdated}
+            isProductsUpdated={isProductsUpdated}
+          />
         </Route>
         <Route path="/edit-products">
           <EditProductsPage

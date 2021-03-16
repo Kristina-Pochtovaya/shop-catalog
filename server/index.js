@@ -22,7 +22,9 @@ import editProductsPrice from './routes/editProductsPriceRoute.js';
 import editProductsInStock from './routes/editProductsInStockRoute.js';
 import editProductsCategory from './routes/editProductsCategoryRoute.js';
 import addCategory from './routes/addCategoryRoute.js';
+import addProduct from './routes/addProductRoute.js';
 import deleteCategory from './routes/deleteCategoryRoute.js';
+import deleteProduct from './routes/deleteProductRoute.js';
 import categoryImage from './routes/editCategoryImageRoute.js';
 import productsImage from './routes/editProductsImageRoute.js';
 import download from './routes/downloadRoute.js';
@@ -84,7 +86,11 @@ app.all('/products-category', editProductsCategory);
 
 app.all('/add-category', addCategory);
 
+app.all('/add-product', addProduct);
+
 app.all('/delete-category', deleteCategory);
+
+app.all('/delete-product', deleteProduct);
 
 app.all('/category-image', categoryImage);
 

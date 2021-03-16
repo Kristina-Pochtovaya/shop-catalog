@@ -17,7 +17,9 @@ export const CatalogItem = ({
         Наличие
       </p>
     </div>
-    {img}
+    <div className="imgItemCard">
+      {img}
+    </div>
     <h4 className="itemName">{description}</h4>
     <div className="purchase">
       <p>

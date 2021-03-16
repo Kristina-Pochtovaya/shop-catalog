@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
@@ -29,12 +28,13 @@ class InputEditProductsInStock extends React.Component {
   }
 
   async handleInStockProductsChange(e) {
+    const { id } = this.state;
     e.preventDefault();
 
     this.setState({
       inStock: e.target.value,
     });
-    postProductsInStock(this.state.id, e.target.value);
+    postProductsInStock(id, e.target.value);
   }
 
   setError(value) {
@@ -59,8 +59,9 @@ class InputEditProductsInStock extends React.Component {
   render() {
     const {
       productsArray, errorMessage,
-      isLoading, popupSmthWentWrongActive,
+      isLoading, popupSmthWentWrongActive, inStock,
     } = this.state;
+    const { isProductsUpdated, setIsProductsUpdated } = this.props;
 
     if (!isLoading) {
       return <div className="-isLoading"> </div>;
@@ -83,13 +84,13 @@ class InputEditProductsInStock extends React.Component {
       <>
         <select
           className="productsInStockInput"
-          value={this.state.inStock}
+          value={inStock}
           onChange={async (e) => {
             this.handleInStockProductsChange(e);
           }}
-          onBlur={() => (this.props.isProductsUpdated
-            ? this.props.setIsProductsUpdated(false)
-            : this.props.setIsProductsUpdated(true))}
+          onBlur={() => (isProductsUpdated
+            ? setIsProductsUpdated(false)
+            : setIsProductsUpdated(true))}
         >
           <option
             value="да"

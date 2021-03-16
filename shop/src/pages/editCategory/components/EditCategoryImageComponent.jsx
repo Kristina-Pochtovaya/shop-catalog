@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import postCategoryImage from '../api/post/postCategoryImage';
 import getCatalogImage from '../api/get/getCatalogImage';
@@ -17,7 +16,8 @@ class EditCategoryImage extends React.Component {
   }
 
   async componentDidMount() {
-    await getCatalogImage(this.state.id,
+    const { id } = this.state;
+    await getCatalogImage(id,
       this.updateData);
   }
 
@@ -26,6 +26,7 @@ class EditCategoryImage extends React.Component {
   }
 
   handleImageChange(e) {
+    const { id, imagePreviewUrl } = this.state;
     e.preventDefault();
 
     const reader = new FileReader();
@@ -37,8 +38,8 @@ class EditCategoryImage extends React.Component {
           imagePreviewUrl: reader.result,
         });
         await postCategoryImage(
-          this.state.id,
-          this.state.imagePreviewUrl,
+          id,
+          imagePreviewUrl,
         );
       };
 
@@ -54,12 +55,13 @@ class EditCategoryImage extends React.Component {
 
   render() {
     const { imagePreviewUrl } = this.state;
+    const { category } = this.props;
     let $imagePreview = null;
 
     if (imagePreviewUrl) {
       $imagePreview = (
         <img
-          src={imagePreviewUrl == '' ? setImg(this.props.category) : imagePreviewUrl}
+          src={imagePreviewUrl == '' ? setImg(category) : imagePreviewUrl}
           className="imageCategory"
           title="image Category"
           alt="imageCategory"

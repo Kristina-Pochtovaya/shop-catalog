@@ -5,12 +5,12 @@
   margin-top: 10px;
 	flex: 1 0 auto;
 
-  .productNameString, .categoryColorString{
+  .productNameString, .categoryColorString, .productPriceString, .productInStockString{
     @extend %changePasswordText;
     
   }
 
-  .productNameInput{
+  .productNameInput, .productPriceInput{
     @extend %changePasswordInput;
 
     width: 400px;
@@ -36,7 +36,7 @@
     cursor: pointer;
   }
   
-  .categoryColorString{
+  .productCategoriesString {
     @extend %changePasswordText;
 
     font-size: 16px;
@@ -79,6 +79,13 @@
     }
 
     .errorNewImage{
+      color: red;
+    }
+
+    .errorPrice{
+      margin: 0px;
+      margin-bottom: 2px;
+
       color: red;
     }
   

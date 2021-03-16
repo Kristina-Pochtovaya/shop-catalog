@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
@@ -35,7 +34,8 @@ class EditCategoryPage extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.isEditActiveId !== this.state.isEditActiveId) {
+    const { isEditActiveId } = this.state;
+    if (prevState.isEditActiveId !== isEditActiveId) {
       this.interval = setTimeout(async () => {
         await getCategories(this.updateData, this.setError);
       }, 100);

@@ -47,19 +47,24 @@ const Catalog = () => {
             <Link to={category.link}>
               {category.image
                 ? (
-                  <img
-                    className="imageCategory"
-                    src={category.image}
-                    alt={category.imgAlt}
-                    title={category.imgTitle}
-                  />
+                  <div className="imageCategoryCard">
+                    <img
+                      className="imageCategory"
+                      src={category.image}
+                      alt={category.imgAlt}
+                      title={category.imgTitle}
+                    />
+                  </div>
                 )
                 : (
-                  <img
-                    src={setImg(category.category)}
-                    alt={category.imgAlt}
-                    title={category.imgTitle}
-                  />
+                  <div className="imageCategoryCard">
+                    <img
+                      className="imageCategory"
+                      src={setImg(category.imgAlt)}
+                      alt={category.imgAlt}
+                      title={category.imgTitle}
+                    />
+                  </div>
                 )}
             </Link>
             <h3 className={category.className}>{category.category}</h3>

@@ -2,11 +2,12 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
-import AddCategoryImage from './AddCategoryImageComponent';
+import AddCategoryImage from '../../editCategory/components/AddCategoryImageComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import postNewCategory from '../api/post/postNewCategory';
+import postNewProduct from '../api/post/postNewProduct';
 import getCategories from '../../editCategory/api/get/getCategories';
+import checkOnlyNumbers from '../../../common/untils/checkOnlyNumbers';
 
 class AddCategoryPage extends React.Component {
   constructor(props) {
@@ -14,11 +15,14 @@ class AddCategoryPage extends React.Component {
     this.state = {
       productName: '',
       image: '',
-      titleColor: '1',
+      categoryName: 'Электротовары и свет',
+      productPrice: '',
+      productInStock: 'да',
       categoriesArray: [],
       errorMessage: '',
       isLoading: false,
       popupSmthWentWrongActive: true,
+      isPriceCorrect: false,
     };
     this.updateImage = this.updateImage.bind(this);
     this.setError = this.setError.bind(this);
@@ -58,19 +62,31 @@ class AddCategoryPage extends React.Component {
   render() {
     async function handleButtonClick() {
       const errorImage = document.getElementById('errorNewImage');
-      const result = await postNewCategory(productName, image, titleColor);
+      const result = await postNewProduct(
+        productName, image, categoryName, productPrice, productInStock, categoriesArray,
+      );
       if (result === true) {
-        history.push('/edit-category');
+        history.push('/main-page');
       } if (result === false) {
         errorImage.setAttribute('class', 'errorNewImage');
       }
+
+      isProductsUpdated
+        ? setIsProductsUpdated(false)
+        : setIsProductsUpdated(true);
+    }
+
+    function setErrorButtonClick() {
+      const errorPrice = document.getElementById('errorPrice');
+      errorPrice.setAttribute('class', 'errorPrice');
     }
 
     const {
-      productName, image, titleColor,
+      productName, image, categoryName, productPrice, productInStock,
       categoriesArray, errorMessage, isLoading, popupSmthWentWrongActive,
+      isPriceCorrect,
     } = this.state;
-    const { history } = this.props;
+    const { history, isProductsUpdated, setIsProductsUpdated } = this.props;
 
     if (!isLoading) {
       return <div className="-isLoading"> </div>;
@@ -96,10 +112,11 @@ class AddCategoryPage extends React.Component {
           <h2 className="">Добавить товар</h2>
           <div className="addProduct-container">
 
-            <p className="categoryColorString">Категория</p>
+            <p className="productCategoriesString">Категория</p>
             <select
               className="productsCategories"
-              onChange={(event) => this.setState({ titleColor: event.target.value })}
+              value={categoryName}
+              onChange={(event) => this.setState({ categoryName: event.target.value })}
             >
               {categoriesArray.categories.map((category) => (
                 <option
@@ -110,7 +127,6 @@ class AddCategoryPage extends React.Component {
                 </option>
               ))}
             </select>
-
             <p className="productNameString">Название</p>
             <input
               type="text"
@@ -118,31 +134,57 @@ class AddCategoryPage extends React.Component {
               value={productName}
               onChange={(e) => this.setState({ productName: e.target.value })}
             />
-
-            <p className="productNameString">Цена</p>
+            <p className="productPriceString">Цена</p>
+            <p id="errorPrice" className="errorPrice -disabled">Цена должна содержать только цифры</p>
             <input
               type="text"
-              className="productNameInput"
-              value={productName}
-              onChange={(e) => this.setState({ productName: e.target.value })}
-            />
+              className="productPriceInput"
+              value={productPrice}
+              onChange={(e) => {
+                this.setState({
+                  productPrice: e.target.value,
 
-            <p className="categoryColorString">В наличии</p>
+                });
+              }}
+              onBlur={(e) => {
+                this.setState({
+                  productPrice: `${e.target.value} РУБ.`,
+                  isPriceCorrect: checkOnlyNumbers(productPrice),
+                });
+              }}
+            />
+            <p className="productInStockString">В наличии</p>
             <select
               className="imageColors"
-              onChange={(event) => this.setState({ titleColor: event.target.value })}
+              onChange={(event) => this.setState({ productInStock: event.target.value })}
             >
               <option value defaultValue>да</option>
               <option value={false}>нет</option>
             </select>
             <AddCategoryImage updateImage={this.updateImage} />
-            <button
-              className="addNewCategoryButton"
-              type="button"
-              onClick={() => handleButtonClick()}
-            >
-              Добавить
-            </button>
+            { isPriceCorrect
+              ? (
+                <button
+                  className="addNewCategoryButton"
+                  type="button"
+                  onClick={() => {
+                    handleButtonClick();
+                  }}
+                >
+                  Добавить
+                </button>
+              ) : (
+                <button
+                  className="addNewCategoryButton"
+                  type="button"
+                  onClick={() => {
+                    setErrorButtonClick();
+                  }}
+                >
+                  Добавить
+                </button>
+              )}
+
           </div>
         </div>
         <Footer />

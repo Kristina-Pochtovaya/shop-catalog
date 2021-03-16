@@ -1,0 +1,87 @@
+.personalInformation-wrap{
+  @extend %wrap;
+
+  margin-top: -15px;
+
+  .personalInformation{
+    position: relative;
+  }
+  
+  .firstNameString, .lastNameString, .emailString, .phoneString, .addressString, .passwordNewString, .passwordNewRepeatString{
+    @extend %changePasswordText;
+  }
+
+  .firstNameString.-required:after, .lastNameString.-required::after, .emailString.-required:after, .passwordNewString.-required:after, .passwordNewRepeatString.-required:after{
+    @extend %required;
+}
+
+  .firstNameInput, .lastNameInput, .emailInput, .phoneInput, .addressInput, .passwordNewInput, .passwordNewRepeatInput{
+    @extend %changePasswordInput;
+  }
+
+  .changePasswordButton{
+    @extend %button;
+
+    height: 46px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+  }
+
+  .firstNameSymbol{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 36px;
+  }
+
+  .lastNameSymbol{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 132px;
+  }
+
+  .emailSymbol{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 224px;
+  }
+
+  .errorSymbolPasswordNew{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 505px;
+  }
+
+  .errorSymbolPasswordNewRepeat{
+    @extend %errorSymbol;
+    @extend %errorSymbolChangePassword;
+
+    top: 597px;
+  }
+
+  .-notNull{
+    background-color: #fac1bd;
+  }
+
+}
+
+.changePasswordButton:active, .changePasswordButton:focus  { 
+  outline: none !important;
+ }
+
+@media screen and (max-width: 980px) {
+  .changePassword-wrap{
+    margin-right: -15px;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .changePassword-wrap{
+    margin-right: -35px;
+  }
+}

@@ -1,4 +1,3 @@
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import postProductsImage from '../api/post/postProductsImage';
 import getProductsImage from '../api/get/getProductsImage';
@@ -17,7 +16,8 @@ class EditProductsImage extends React.Component {
   }
 
   async componentDidMount() {
-    await getProductsImage(this.state.id,
+    const { id } = this.state;
+    await getProductsImage(id,
       this.updateData);
   }
 
@@ -26,6 +26,7 @@ class EditProductsImage extends React.Component {
   }
 
   handleImageChange(e) {
+    const { id, imagePreviewUrl } = this.state;
     e.preventDefault();
 
     const reader = new FileReader();
@@ -37,8 +38,8 @@ class EditProductsImage extends React.Component {
           imagePreviewUrl: reader.result,
         });
         await postProductsImage(
-          this.state.id,
-          this.state.imagePreviewUrl,
+          id,
+          imagePreviewUrl,
         );
       };
 
@@ -54,12 +55,13 @@ class EditProductsImage extends React.Component {
 
   render() {
     const { imagePreviewUrl } = this.state;
+    const { description, isProductsUpdated, setIsProductsUpdated } = this.props;
     let $imagePreview = null;
 
     if (imagePreviewUrl) {
       $imagePreview = (
         <img
-          src={imagePreviewUrl == '' ? setImg(this.props.description) : imagePreviewUrl}
+          src={imagePreviewUrl == '' ? setImg(description) : imagePreviewUrl}
           className="imageProducts"
           title="image Products"
           alt="imageProducts"
@@ -90,6 +92,9 @@ class EditProductsImage extends React.Component {
                 onChange={async (e) => {
                   this.handleImageChange(e);
                 }}
+                onBlur={() => (isProductsUpdated
+                  ? setIsProductsUpdated(false)
+                  : setIsProductsUpdated(true))}
                 multiple
               />
 
