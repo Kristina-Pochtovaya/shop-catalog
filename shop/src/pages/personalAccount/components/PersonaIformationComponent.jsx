@@ -33,48 +33,22 @@ class PersonaIformation extends React.Component {
       isLoading: false,
       ErrorMessage: '',
     };
-    this.updateData = this.updateData.bind(this);
-    this.updateDataUsers = this.updateDataUsers.bind(this);
-    this.setError = this.setError.bind(this);
-    this.setpopupSmthWentWrongActive = this.setpopupSmthWentWrongActive.bind(this);
   }
 
   async componentDidMount() {
     const { pages } = this.props;
-    this.interval = setTimeout(async () => {
-      await getUsers(
-        pages.loginPersonalAccountReducer.clientEmail,
-        this.updateDataUsers, this.setError,
-      );
-    }, 10);
+    await getUsers(
+      pages.loginPersonalAccountReducer.clientEmail,
+      this.updateDataUsers, this.setError,
+    );
   }
 
-  /*   componentDidUpdate() {
-    this.interval = setTimeout(async () => {
-      const result = await getUsers(
-        this.props.pages.loginPersonalAccountReducer.clientEmail,
-        this.updateDataUsers, this.setError,
-      );
-      this.setState({
-        firstName: result.firstName,
-      });
-      console.log(result);
-    }, 10);
-  } */
+  setError = (errorMessage) => { this.setState({ ErrorMessage: errorMessage }); }
 
-  setError(errorMessage) {
-    this.setState({
-      ErrorMessage: errorMessage,
-    });
-  }
+  setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
-  setpopupSmthWentWrongActive(value) {
-    this.setState({
-      popupSmthWentWrongActive: value,
-    });
-  }
-
-  updateDataUsers(firstName, lastName, email, phoneNumber, address, valueIsLoading, passwordNew) {
+  updateDataUsers = (firstName, lastName,
+    email, phoneNumber, address, valueIsLoading, passwordNew) => {
     this.setState({
       firstName,
       lastName,
@@ -87,7 +61,7 @@ class PersonaIformation extends React.Component {
     });
   }
 
-  updateData(value, name) {
+  updateData = (value, name) => {
     if (name === 'firstName') { this.setState({ firstName: value }); }
     if (name === 'lastName') { this.setState({ lastName: value }); }
     if (name === 'email') { this.setState({ email: value }); }

@@ -1,5 +1,4 @@
 import React from 'react';
-import postCategoryImage from '../api/post/postCategoryImage';
 import getCatalogImage from '../api/get/getCatalogImage';
 import noImage from '../../../assets/personal-account/noImage.png';
 import setImg from '../../../common/untils/setImg';
@@ -12,7 +11,6 @@ class EditCategoryImage extends React.Component {
       id,
       imagePreviewUrl: '',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
   async componentDidMount() {
@@ -26,7 +24,7 @@ class EditCategoryImage extends React.Component {
   }
 
   handleImageChange(e) {
-    const { id, imagePreviewUrl } = this.state;
+    const { updateCategoryImage } = this.props;
     e.preventDefault();
 
     const reader = new FileReader();
@@ -37,31 +35,23 @@ class EditCategoryImage extends React.Component {
         this.setState({
           imagePreviewUrl: reader.result,
         });
-        await postCategoryImage(
-          id,
-          imagePreviewUrl,
-        );
+        updateCategoryImage(reader.result);
       };
 
       reader.readAsDataURL(file);
     }
   }
 
-  updateData(value) {
-    this.setState({
-      imagePreviewUrl: value,
-    });
-  }
+  updateData = (value) => { this.setState({ imagePreviewUrl: value }); }
 
   render() {
     const { imagePreviewUrl } = this.state;
-    const { category } = this.props;
     let $imagePreview = null;
 
     if (imagePreviewUrl) {
       $imagePreview = (
         <img
-          src={imagePreviewUrl == '' ? setImg(category) : imagePreviewUrl}
+          src={imagePreviewUrl == '' ? noImage : imagePreviewUrl}
           className="imageCategory"
           title="image Category"
           alt="imageCategory"

@@ -36,10 +36,9 @@ class Registration extends React.Component {
       ClassPasswordRepeatInput: 'passwordNewRepeatInputRegistration',
       ClassPasswordRepeatSymbol: 'errorSymbolPasswordNewRepeatRegistration',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
-  updateData(value, name) {
+  updateData = (value, name) => {
     if (name === 'firstName') { this.setState({ firstName: value }); }
     if (name === 'lastName') { this.setState({ lastName: value }); }
     if (name === 'email') { this.setState({ email: value }); }

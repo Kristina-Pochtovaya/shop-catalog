@@ -11,7 +11,6 @@ class ImageUpload extends React.Component {
     this.state = {
       imagePreviewUrl: '',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
   async componentDidMount() {
@@ -47,11 +46,7 @@ class ImageUpload extends React.Component {
     }
   }
 
-  updateData(value) {
-    this.setState({
-      imagePreviewUrl: value,
-    });
-  }
+  updateData = (value) => { this.setState({ imagePreviewUrl: value }); }
 
   render() {
     const { imagePreviewUrl } = this.state;

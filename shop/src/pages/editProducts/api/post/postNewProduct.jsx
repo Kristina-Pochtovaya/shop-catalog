@@ -11,14 +11,18 @@ async function postNewProduct(
   const imgAlt = transliterate(productName);
   const imgTitle = imgAlt;
 
-  const categoryId = categoriesArray.categories
-    .filter((category) => category.category === categoryName)
-    .map((category) => category.id);
+  const newCategory = categoryName === 'Электротовары и свет' ? categoriesArray.categories[0].category : categoryName;
+
+  let categoryId = categoriesArray.categories
+    .filter((category) => category.category === newCategory)
+    .map((category) => category.id).join('');
+
+  categoryId = Number(categoryId);
 
   let price = '';
 
   if (productPrice.slice(-1) === '.') {
-    price = productPrice.slice(0, -5);
+    price = productPrice.slice(0, -6);
   }
 
   const inStock = productInStock === 'да' ? Boolean(true) : Boolean(false);
@@ -26,7 +30,7 @@ async function postNewProduct(
   const payload = {
     data: {
       categoryId,
-      category: categoryName,
+      category: newCategory,
       description: productName,
       imgAlt,
       imgTitle,

@@ -1,24 +1,19 @@
 import React from 'react';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import postProductsInStock from '../api/post/postProductsInStock';
 import getProducts from '../api/get/getProducts';
 
 class InputEditProductsInStock extends React.Component {
   constructor(props) {
     super(props);
-    const { inStock, id } = this.props;
+    const { inStock } = this.props;
     this.state = {
-      id,
       inStock: Number(inStock) === 1 ? 'да' : 'нет',
       productsArray: [],
       errorMessage: '',
       isLoading: false,
       popupSmthWentWrongActive: true,
     };
-    this.setError = this.setError.bind(this);
-    this.updateData = this.updateData.bind(this);
-    this.setpopupSmthWentWrongActive = this.setpopupSmthWentWrongActive.bind(this);
   }
 
   componentDidMount() {
@@ -28,32 +23,21 @@ class InputEditProductsInStock extends React.Component {
   }
 
   async handleInStockProductsChange(e) {
-    const { id } = this.state;
+    const { updateProductInStock } = this.props;
     e.preventDefault();
 
     this.setState({
       inStock: e.target.value,
     });
-    postProductsInStock(id, e.target.value);
+    updateProductInStock(e.target.value === 'да' ? 1 : 0);
   }
 
-  setError(value) {
-    this.setState({
-      errorMessage: value,
-    });
-  }
+  setError=(value) => { this.setState({ errorMessage: value }); }
 
-  setpopupSmthWentWrongActive(value) {
-    this.setState({
-      popupSmthWentWrongActive: value,
-    });
-  }
+  setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
-  updateData(value, valueIsLoading) {
-    this.setState({
-      productsArray: value,
-      isLoading: valueIsLoading,
-    });
+  updateData=(value, valueIsLoading) => {
+    this.setState({ productsArray: value, isLoading: valueIsLoading });
   }
 
   render() {
@@ -61,7 +45,6 @@ class InputEditProductsInStock extends React.Component {
       productsArray, errorMessage,
       isLoading, popupSmthWentWrongActive, inStock,
     } = this.state;
-    const { isProductsUpdated, setIsProductsUpdated } = this.props;
 
     if (!isLoading) {
       return <div className="-isLoading"> </div>;
@@ -88,9 +71,6 @@ class InputEditProductsInStock extends React.Component {
           onChange={async (e) => {
             this.handleInStockProductsChange(e);
           }}
-          onBlur={() => (isProductsUpdated
-            ? setIsProductsUpdated(false)
-            : setIsProductsUpdated(true))}
         >
           <option
             value="да"

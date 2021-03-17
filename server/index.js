@@ -7,7 +7,6 @@ import features from './routes/featuresRoute.js';
 import root from './routes/rootRoute.js';
 import basket from './routes/basketRoute.js';
 import users from './routes/usersRoute.js';
-/* import { Users } from './models/Users.js'; */
 import addUnautherizedUserRoute from './routes/addUnautherizedUserRoute.js';
 import userInformation from './routes/usersInformationRoute.js';
 import forgetPassword from './routes/forgetPasswordRoute.js';
@@ -16,17 +15,12 @@ import login from './routes/loginRoute.js';
 import userRole from './routes/userRoleRoute.js';
 import avatar from './routes/avatarRoute.js';
 import image from './routes/imageRoute.js';
-import editCategoryName from './routes/editCategoryNameRoute.js';
-import editProductsName from './routes/editProductsNameRoute.js';
-import editProductsPrice from './routes/editProductsPriceRoute.js';
-import editProductsInStock from './routes/editProductsInStockRoute.js';
-import editProductsCategory from './routes/editProductsCategoryRoute.js';
+import editProducts from './routes/editProductsRoute.js';
 import addCategory from './routes/addCategoryRoute.js';
 import addProduct from './routes/addProductRoute.js';
 import deleteCategory from './routes/deleteCategoryRoute.js';
 import deleteProduct from './routes/deleteProductRoute.js';
-import categoryImage from './routes/editCategoryImageRoute.js';
-import productsImage from './routes/editProductsImageRoute.js';
+import editCategory from './routes/editCategoryRoute.js';
 import download from './routes/downloadRoute.js';
 
 const router = express.Router();
@@ -74,15 +68,7 @@ app.all('/forget-password', forgetPassword);
 
 app.get('/category', category);
 
-app.all('/category-name', editCategoryName);
-
-app.all('/products-name', editProductsName);
-
-app.all('/products-instock', editProductsInStock);
-
-app.all('/products-price', editProductsPrice);
-
-app.all('/products-category', editProductsCategory);
+app.post('/products-edit', editProducts);
 
 app.all('/add-category', addCategory);
 
@@ -92,9 +78,7 @@ app.all('/delete-category', deleteCategory);
 
 app.all('/delete-product', deleteProduct);
 
-app.all('/category-image', categoryImage);
-
-app.all('/products-image', productsImage);
+app.post('/category-edit', editCategory);
 
 app.get('/products', product);
 

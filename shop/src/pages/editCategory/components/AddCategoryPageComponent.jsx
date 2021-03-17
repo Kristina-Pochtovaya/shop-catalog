@@ -13,12 +13,9 @@ class AddCategoryPage extends React.Component {
       image: '',
       titleColor: '1',
     };
-    this.updateImage = this.updateImage.bind(this);
   }
 
-  updateImage(value) {
-    this.setState({ image: value });
-  }
+  updateImage = (value) => { this.setState({ image: value }); }
 
   render() {
     async function handleButtonClick() {

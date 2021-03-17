@@ -5,7 +5,7 @@ const deleteProduct = '/delete-product';
 
 async function postDeleteProduct(id,
   setIsProductsUpdated,
-  isProductsUpdated) {
+  isProductsUpdated, updateAfterDelete) {
   const payload = {
     data: {
       id,
@@ -18,6 +18,7 @@ async function postDeleteProduct(id,
     isProductsUpdated
       ? setIsProductsUpdated(false)
       : setIsProductsUpdated(true);
+    updateAfterDelete();
     return result;
   } catch (error) {
     return null;

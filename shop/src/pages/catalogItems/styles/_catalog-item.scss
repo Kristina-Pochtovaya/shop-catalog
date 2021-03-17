@@ -81,6 +81,11 @@ $colorNoRed: #f00;
         display: flex;
         justify-content: space-between;
 
+        .priceCard{
+          width: 86px;
+          height: 29px;
+        }
+
         .busketButton  {
           @extend %button;
           

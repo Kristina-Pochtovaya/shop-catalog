@@ -1,7 +1,7 @@
 import axios from 'axios';
 import serverUrl from '../../../../common/constants/urls';
 
-const productsImage = '/products-image';
+const productsImage = '/products';
 
 async function getProductsImage(id, updateData) {
   try {

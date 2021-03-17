@@ -70,11 +70,14 @@ $colorLightGrey: #f3f4f6;
     }
 
     .editCategoryButton, .deleteCategoryButton{
-      border: none;
-      border-bottom: dashed 1px blue;
+      @extend %button;
 
+      margin: 0px;
+
+      color: $colorLightGreenItem;
       background-color: white;
-      color: blue;
+
+      font-size: 14px;
       
       cursor: pointer;
     }

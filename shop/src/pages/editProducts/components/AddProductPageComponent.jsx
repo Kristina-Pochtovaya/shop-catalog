@@ -24,49 +24,34 @@ class AddCategoryPage extends React.Component {
       popupSmthWentWrongActive: true,
       isPriceCorrect: false,
     };
-    this.updateImage = this.updateImage.bind(this);
-    this.setError = this.setError.bind(this);
-    this.updateDataCategories = this.updateDataCategories.bind(this);
-    this.setpopupSmthWentWrongActive = this.setpopupSmthWentWrongActive.bind(this);
   }
 
-  componentDidMount() {
-    this.interval = setTimeout(async () => {
-      await getCategories(this.updateDataCategories, this.setError);
-    }, 10);
+  async componentDidMount() {
+    await getCategories(this.updateDataCategories, this.setError);
   }
 
-  setError(value) {
-    this.setState({
-      errorMessage: value,
-    });
-  }
+  setError = (value) => { this.setState({ errorMessage: value }); }
 
-  setpopupSmthWentWrongActive(value) {
-    this.setState({
-      popupSmthWentWrongActive: value,
-    });
-  }
+  setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
-  updateDataCategories(value, valueIsLoading) {
+  updateDataCategories = (value, valueIsLoading) => {
     this.setState({
       categoriesArray: value,
       isLoading: valueIsLoading,
     });
   }
 
-  updateImage(value) {
-    this.setState({ image: value });
-  }
+  updateImage = (value) => { this.setState({ image: value }); }
 
   render() {
     async function handleButtonClick() {
       const errorImage = document.getElementById('errorNewImage');
+
       const result = await postNewProduct(
         productName, image, categoryName, productPrice, productInStock, categoriesArray,
       );
       if (result === true) {
-        history.push('/main-page');
+        history.push('/edit-products');
       } if (result === false) {
         errorImage.setAttribute('class', 'errorNewImage');
       }
@@ -111,7 +96,6 @@ class AddCategoryPage extends React.Component {
         <div className="addProduct-box">
           <h2 className="">Добавить товар</h2>
           <div className="addProduct-container">
-
             <p className="productCategoriesString">Категория</p>
             <select
               className="productsCategories"
@@ -184,7 +168,6 @@ class AddCategoryPage extends React.Component {
                   Добавить
                 </button>
               )}
-
           </div>
         </div>
         <Footer />

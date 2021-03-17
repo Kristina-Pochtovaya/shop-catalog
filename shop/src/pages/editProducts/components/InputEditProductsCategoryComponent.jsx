@@ -1,24 +1,19 @@
 import React from 'react';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import postProductsCategory from '../api/post/postProductsCategory';
 import getCategories from '../../editCategory/api/get/getCategories';
 
 class InputEditProductsCategory extends React.Component {
   constructor(props) {
     super(props);
-    const { category, id } = this.props;
+    const { category } = this.props;
     this.state = {
-      id,
       categoryName: category,
       categoriesArray: [],
       errorMessage: '',
       isLoading: false,
       popupSmthWentWrongActive: true,
     };
-    this.setError = this.setError.bind(this);
-    this.updateDataCategories = this.updateDataCategories.bind(this);
-    this.setpopupSmthWentWrongActive = this.setpopupSmthWentWrongActive.bind(this);
   }
 
   componentDidMount() {
@@ -28,34 +23,22 @@ class InputEditProductsCategory extends React.Component {
   }
 
   async handleCategoryProductsChange(e) {
-    const { id, categoriesArray } = this.state;
+    const { categoriesArray } = this.state;
+    const { updateProductCategory } = this.props;
     e.preventDefault();
 
     this.setState({
       categoryName: e.target.value,
     });
-
-    postProductsCategory(id, e.target.value,
-      categoriesArray.categories);
+    updateProductCategory(e.target.value, categoriesArray.categories);
   }
 
-  setError(value) {
-    this.setState({
-      errorMessage: value,
-    });
-  }
+  setError = (value) => { this.setState({ errorMessage: value }); }
 
-  setpopupSmthWentWrongActive(value) {
-    this.setState({
-      popupSmthWentWrongActive: value,
-    });
-  }
+  setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
-  updateDataCategories(value, valueIsLoading) {
-    this.setState({
-      categoriesArray: value,
-      isLoading: valueIsLoading,
-    });
+  updateDataCategories = (value, valueIsLoading) => {
+    this.setState({ categoriesArray: value, isLoading: valueIsLoading });
   }
 
   render() {
@@ -63,7 +46,6 @@ class InputEditProductsCategory extends React.Component {
       categoriesArray, errorMessage,
       isLoading, popupSmthWentWrongActive, categoryName,
     } = this.state;
-    const { isProductsUpdated, setIsProductsUpdated } = this.props;
 
     if (!isLoading) {
       return <div className="-isLoading"> </div>;
@@ -89,13 +71,7 @@ class InputEditProductsCategory extends React.Component {
           value={categoryName}
           onChange={async (e) => {
             this.handleCategoryProductsChange(e);
-            (isProductsUpdated
-              ? setIsProductsUpdated(false)
-              : setIsProductsUpdated(true));
           }}
-          onBlur={() => (isProductsUpdated
-            ? setIsProductsUpdated(false)
-            : setIsProductsUpdated(true))}
         >
           {categoriesArray.categories.map((category) => (
             <option
@@ -106,7 +82,6 @@ class InputEditProductsCategory extends React.Component {
             </option>
           ))}
         </select>
-
       </>
     );
   }

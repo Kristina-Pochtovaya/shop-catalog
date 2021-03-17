@@ -1,29 +1,26 @@
 import React from 'react';
-import postProductsPrice from '../api/post/postProductsPrice';
 
 class InputEditCategoryPrice extends React.Component {
   constructor(props) {
     super(props);
-    const { price, id } = this.props;
+    const { price } = this.props;
     this.state = {
-      id,
       productsPrice: price,
     };
   }
 
   async handleProductsChange(e) {
-    const { id } = this.state;
+    const { updateProductPrice } = this.props;
     e.preventDefault();
 
     this.setState({
       productsPrice: e.target.value,
     });
-    postProductsPrice(id, e.target.value);
+    updateProductPrice(e.target.value);
   }
 
   render() {
     const { productsPrice } = this.state;
-    const { isProductsUpdated, setIsProductsUpdated } = this.props;
     return (
       <>
         <input
@@ -33,9 +30,6 @@ class InputEditCategoryPrice extends React.Component {
           onChange={async (e) => {
             this.handleProductsChange(e);
           }}
-          onBlur={() => (isProductsUpdated
-            ? setIsProductsUpdated(false)
-            : setIsProductsUpdated(true))}
         />
       </>
     );

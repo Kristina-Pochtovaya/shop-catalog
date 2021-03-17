@@ -22,7 +22,7 @@ export const CatalogItem = ({
     </div>
     <h4 className="itemName">{description}</h4>
     <div className="purchase">
-      <p>
+      <p className="priceCard">
         {price}
         {' '}
         РУБ.

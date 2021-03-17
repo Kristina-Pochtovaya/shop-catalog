@@ -1,24 +1,22 @@
 import React from 'react';
-import postCategoryName from '../api/post/postCategoryName';
 
 class InputEditCategoryName extends React.Component {
   constructor(props) {
     super(props);
-    const { category, id } = this.props;
+    const { category } = this.props;
     this.state = {
-      id,
       categoryName: category,
     };
   }
 
   async handleImageChange(e) {
-    const { id } = this.state;
+    const { updateCategoryName } = this.props;
     e.preventDefault();
 
     this.setState({
       categoryName: e.target.value,
     });
-    postCategoryName(id, e.target.value);
+    updateCategoryName(e.target.value);
   }
 
   render() {

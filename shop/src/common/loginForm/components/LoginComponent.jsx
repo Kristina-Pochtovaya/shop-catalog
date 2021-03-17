@@ -19,10 +19,9 @@ class Login extends React.Component {
       clientPasswordInput: 'passwordInput',
       clientPasswordSymbol: 'errorSymbolPassword',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
-  updateData(value, name) {
+  updateData = (value, name) => {
     if (name === 'clientLogin') { this.setState({ clientLogin: value }); }
     if (name === 'clientPassword') { this.setState({ clientPassword: value }); }
   }

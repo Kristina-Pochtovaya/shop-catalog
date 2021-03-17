@@ -22,10 +22,9 @@ class ChangePassword extends React.Component {
       passwordRepeatInput: 'passwordNewRepeatInput',
       passwordRepeatSymbol: 'errorSymbolPasswordNewRepeat',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
-  updateData(value, name) {
+  updateData = (value, name) => {
     if (name === 'clientEmail') { this.setState({ clientEmail: value }); }
     if (name === 'passwordNew') { this.setState({ passwordNew: value }); }
     if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }

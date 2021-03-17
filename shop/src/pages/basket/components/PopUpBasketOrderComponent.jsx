@@ -24,10 +24,9 @@ class PopUpBasketOrder extends React.Component {
       clientAddresSymbol: 'addressSymbol',
       clientMessage: '',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
-  updateData(value, name) {
+  updateData = (value, name) => {
     if (name === 'clientName') { this.setState({ clientName: value }); }
     if (name === 'clientAddress') { this.setState({ clientAddress: value }); }
   }

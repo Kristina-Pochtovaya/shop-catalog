@@ -1,5 +1,4 @@
 import React from 'react';
-import postProductsImage from '../api/post/postProductsImage';
 import getProductsImage from '../api/get/getProductsImage';
 import noImage from '../../../assets/personal-account/noImage.png';
 import setImg from '../../../common/untils/setImg';
@@ -12,7 +11,6 @@ class EditProductsImage extends React.Component {
       id,
       imagePreviewUrl: '',
     };
-    this.updateData = this.updateData.bind(this);
   }
 
   async componentDidMount() {
@@ -26,9 +24,8 @@ class EditProductsImage extends React.Component {
   }
 
   handleImageChange(e) {
-    const { id, imagePreviewUrl } = this.state;
+    const { updateImage } = this.props;
     e.preventDefault();
-
     const reader = new FileReader();
     const file = e.target.files[0];
 
@@ -37,25 +34,18 @@ class EditProductsImage extends React.Component {
         this.setState({
           imagePreviewUrl: reader.result,
         });
-        await postProductsImage(
-          id,
-          imagePreviewUrl,
-        );
+        updateImage(reader.result);
       };
 
       reader.readAsDataURL(file);
     }
   }
 
-  updateData(value) {
-    this.setState({
-      imagePreviewUrl: value,
-    });
-  }
+  updateData = (value) => { this.setState({ imagePreviewUrl: value }); }
 
   render() {
     const { imagePreviewUrl } = this.state;
-    const { description, isProductsUpdated, setIsProductsUpdated } = this.props;
+    const { description } = this.props;
     let $imagePreview = null;
 
     if (imagePreviewUrl) {
@@ -92,12 +82,8 @@ class EditProductsImage extends React.Component {
                 onChange={async (e) => {
                   this.handleImageChange(e);
                 }}
-                onBlur={() => (isProductsUpdated
-                  ? setIsProductsUpdated(false)
-                  : setIsProductsUpdated(true))}
                 multiple
               />
-
             </div>
           </label>
         </form>
