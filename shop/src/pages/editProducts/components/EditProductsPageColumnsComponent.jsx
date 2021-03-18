@@ -13,6 +13,8 @@ import postDeleteProduct from '../api/post/postDeleteProduct';
 import postProducts from '../api/post/postProducts';
 
 class EditProductsPageColumns extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -37,15 +39,23 @@ class EditProductsPageColumns extends React.Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     await getProducts(this.updateProducts, this.setError);
-    await getCategories(this.updateDataCategories, this.setErrorCategories);
+    await getCategories(this.updateDataCategories,
+      this.setErrorCategories);
   }
 
   async componentDidUpdate(prevProps, prevState) {
     const { isUpdated } = this.state;
     if (prevState.isUpdated !== isUpdated) {
       await getProducts(this.updateProducts, this.setError);
+      await getCategories(this.updateDataCategories,
+        this.setErrorCategories);
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   async handleButtonOnClick(e) {
@@ -74,9 +84,11 @@ class EditProductsPageColumns extends React.Component {
 
   updateImage = (value) => this.setState({ productImage: value });
 
-  updateProductCategory = (value, array) => this.setState({
-    productCategory: value, categoriesArray: array,
-  });
+  updateProductCategory = (value, array) => {
+    this.setState({
+      productCategory: value, categoriesArray: array,
+    });
+  }
 
   updateProductName = (value) => this.setState({ productName: value });
 
@@ -84,15 +96,23 @@ class EditProductsPageColumns extends React.Component {
 
   updateProductInStock = (value) => this.setState({ productInStock: value });
 
-  updateProducts = (value, valueIsLoading) => this.setState({
-    productsArray: value,
-    isLoadingProducts: valueIsLoading,
-  });
+  updateProducts = (value, valueIsLoading) => {
+    if (this._isMounted) {
+      this.setState({
+        productsArray: value,
+        isLoadingProducts: valueIsLoading,
+      });
+    }
+  }
 
-  updateDataCategories = (value, valueIsLoading) => this.setState({
-    categoriesArray: value.categories,
-    isLoadingCategories: valueIsLoading,
-  });
+  updateDataCategories = (value, valueIsLoading) => {
+    if (this._isMounted) {
+      this.setState({
+        categoriesArray: value.categories,
+        isLoadingCategories: valueIsLoading,
+      });
+    }
+  }
 
   updateAfterDelete = () => {
     const { isUpdated } = this.state;
@@ -103,9 +123,8 @@ class EditProductsPageColumns extends React.Component {
     const {
       isEditActive, isEditActiveId, ErrorMessageProducts, popupSmthWentWrongActive,
       productsArray, isLoadingProducts, IsSaveButtonVisible, IsEditButtonVisible,
-      isLoadingCategories, ErrorMessageCategories, isUpdated,
+      isLoadingCategories, ErrorMessageCategories, isUpdated, categoriesArray,
     } = this.state;
-
     const { isProductsUpdated, setIsProductsUpdated } = this.props;
     if (!isLoadingProducts || !isLoadingCategories) {
       return <div className="-isLoading"> </div>;
@@ -125,128 +144,147 @@ class EditProductsPageColumns extends React.Component {
     }
     return (
       <>
-        {productsArray.products.map((product) => (
-          <li key={product.id}>
-            <div className="columns">
-              <div className="columnImage">
-                {(isEditActive && product.id) !== isEditActiveId
-                  ? (
-                    <>
-                      {product.image
-                        ? (
-                          <img
-                            className="imageProducts"
-                            src={product.image}
-                            alt={product.imgAlt}
-                            title={product.imgTitle}
-                          />
-                        ) : (
-                          <img
-                            src={setImg(product.description)}
-                            alt={product.imgAlt}
-                            title={product.imgTitle}
-                          />
-                        )}
-                    </>
+        {
+          productsArray.products.map((product) => (
+            <li key={product.id}>
+              <div className="columns">
+                <div className="columnImage">
+                  {(isEditActive && product.id) !== isEditActiveId
+                    ? (
+                      <>
+                        {product.image
+                          ? (
+                            <img
+                              className="imageProducts"
+                              src={product.image}
+                              alt={product.imgAlt}
+                              title={product.imgTitle}
+                            />
+                          ) : (
+                            <img
+                              src={setImg(product.description)}
+                              alt={product.imgAlt}
+                              title={product.imgTitle}
+                            />
+                          )}
+                      </>
+                    ) : (
+                      <EditProductsImage
+                        id={product.id}
+                        description={product.description}
+                        updateImage={this.updateImage}
+                      />
+                    )}
+                </div>
+                <div className="columnCategory">
+                  {isEditActive && product.id === isEditActiveId
+                    ? (
+                      categoriesArray.map((category) => (
+                        product.categoryId === category.id
+                      && (
+                      <InputEditProductsCategory
+                        category={category.category}
+                        categoryId={product.categoryId}
+                        updateProductCategory={this.updateProductCategory}
+                      />
+                      )
+                      ))
+                    ) : categoriesArray.map((category) => (
+                      product.categoryId === category.id && (
+                      <p key={product.id}>
+                        { category.category }
+                      </p>
+                      )
+                    ))}
+                </div>
+                <div className="columnName">
+                  {isEditActive && product.id === isEditActiveId
+                    ? (
+                      <InputEditProductsName
+                        description={product.description}
+                        updateProductName={this.updateProductName}
+                      />
+                    ) : <p>{product.description}</p>}
+                </div>
+                <div className="columnPrice">
+                  {isEditActive && product.id === isEditActiveId
+                    ? (
+                      <InputEditProductsPrice
+                        price={product.price}
+                        updateProductPrice={this.updateProductPrice}
+                      />
+                    ) : <p>{product.price}</p>}
+                </div>
+                <div className="columnInStock">
+                  {isEditActive && product.id === isEditActiveId
+                    ? (
+                      <InputEditProductsInStock
+                        inStock={product.inStock}
+                        updateProductInStock={this.updateProductInStock}
+                      />
+                    )
+                    : <p className="inStockString">{Number(product.inStock) === 1 ? 'да' : 'нет'}</p>}
+                </div>
+                <div className="columnEdit">
+                  {IsEditButtonVisible && isEditActive && product.id === isEditActiveId ? (
+                    <button
+                      type="button"
+                      className="editProductsButton"
+                      onClick={() => {
+                        this.setState({
+                          isEditActive: false,
+                          isEditActiveId: product.id,
+                          IsSaveButtonVisible: true,
+                          IsEditButtonVisible: false,
+                        });
+                        this.handleButtonOnClick();
+                      }}
+                    >
+                      Сохранить
+                    </button>
                   ) : (
-                    <EditProductsImage
-                      id={product.id}
-                      description={product.description}
-                      updateImage={this.updateImage}
-                    />
+                    categoriesArray.map((category) => (
+                      product.categoryId === category.id
+                    && (
+                    <button
+                      key={product.id}
+                      type="button"
+                      className="editProductsButton"
+                      onClick={() => {
+                        this.setState({
+                          isEditActive: true,
+                          isEditActiveId: product.id,
+                          productImage: product.image,
+                          productCategory: category.category,
+                          productName: product.description,
+                          productPrice: product.price,
+                          productInStock: product.inStock,
+                          IsEditButtonVisible: true,
+                          IsSaveButtonVisible: false,
+                        });
+                      }}
+                    >
+                      Изменить
+                    </button>
+                    )))
                   )}
-              </div>
-              <div className="columnCategory">
-                {isEditActive && product.id === isEditActiveId
-                  ? (
-                    <InputEditProductsCategory
-                      category={product.category}
-                      categoryId={product.categoryId}
-                      updateProductCategory={this.updateProductCategory}
-                    />
-                  ) : <p>{product.category}</p>}
-              </div>
-              <div className="columnName">
-                {isEditActive && product.id === isEditActiveId
-                  ? (
-                    <InputEditProductsName
-                      description={product.description}
-                      updateProductName={this.updateProductName}
-                    />
-                  ) : <p>{product.description}</p>}
-              </div>
-              <div className="columnPrice">
-                {isEditActive && product.id === isEditActiveId
-                  ? (
-                    <InputEditProductsPrice
-                      price={product.price}
-                      updateProductPrice={this.updateProductPrice}
-                    />
-                  ) : <p>{product.price}</p>}
-              </div>
-              <div className="columnInStock">
-                {isEditActive && product.id === isEditActiveId
-                  ? (
-                    <InputEditProductsInStock
-                      inStock={product.inStock}
-                      updateProductInStock={this.updateProductInStock}
-                    />
-                  ) : <p className="inStockString">{Number(product.inStock) === 1 ? 'да' : 'нет'}</p>}
-              </div>
-              <div className="columnEdit">
-                {IsEditButtonVisible && isEditActive && product.id === isEditActiveId ? (
+                </div>
+                <div className="columnDelete">
                   <button
                     type="button"
-                    className="editProductsButton"
+                    className="deleteProductsButton"
                     onClick={() => {
-                      this.setState({
-                        isEditActive: false,
-                        isEditActiveId: product.id,
-                        IsSaveButtonVisible: true,
-                        IsEditButtonVisible: false,
-                      });
-                      this.handleButtonOnClick();
+                      postDeleteProduct(product.id, setIsProductsUpdated,
+                        isProductsUpdated, this.updateAfterDelete);
                     }}
                   >
-                    Сохранить
+                    Удалить
                   </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="editProductsButton"
-                    onClick={() => {
-                      this.setState({
-                        isEditActive: true,
-                        isEditActiveId: product.id,
-                        productImage: product.image,
-                        productCategory: product.category,
-                        productName: product.description,
-                        productPrice: product.price,
-                        productInStock: product.inStock,
-                        IsEditButtonVisible: true,
-                        IsSaveButtonVisible: false,
-                      });
-                    }}
-                  >
-                    Изменить
-                  </button>
-                )}
+                </div>
               </div>
-              <div className="columnDelete">
-                <button
-                  type="button"
-                  className="deleteProductsButton"
-                  onClick={() => {
-                    postDeleteProduct(product.id, setIsProductsUpdated,
-                      isProductsUpdated, this.updateAfterDelete);
-                  }}
-                >
-                  Удалить
-                </button>
-              </div>
-            </div>
-          </li>
-        ))}
+            </li>
+          ))
+      }
       </>
     );
   }

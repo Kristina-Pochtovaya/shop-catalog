@@ -9,6 +9,8 @@ import postDeleteCategory from '../api/post/postDeleteCategory';
 import postCategory from '../api/post/postCategory';
 
 class EditCategoryPageColumns extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,6 +29,7 @@ class EditCategoryPageColumns extends React.Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     await getCategories(this.updateData, this.setError);
   }
 
@@ -35,6 +38,10 @@ class EditCategoryPageColumns extends React.Component {
     if (prevState.isUpdated !== isUpdated) {
       await getCategories(this.updateData, this.setError);
     }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   async handleButtonOnClick(e) {
@@ -56,7 +63,9 @@ class EditCategoryPageColumns extends React.Component {
   setEditActive = (value) => { this.setState({ isEditActive: value }); }
 
   updateData = (value, valueisLoading) => {
-    this.setState({ categoriesArray: value, isLoading: valueisLoading });
+    if (this._isMounted) {
+      this.setState({ categoriesArray: value, isLoading: valueisLoading });
+    }
   }
 
   updateCategoryImage = (value) => this.setState({ categoryImage: value })

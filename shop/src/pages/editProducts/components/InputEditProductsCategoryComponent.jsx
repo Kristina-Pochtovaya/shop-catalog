@@ -16,10 +16,8 @@ class InputEditProductsCategory extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.interval = setTimeout(async () => {
-      await getCategories(this.updateDataCategories, this.setError);
-    }, 10);
+  async componentDidMount() {
+    await getCategories(this.updateDataCategories, this.setError);
   }
 
   async handleCategoryProductsChange(e) {

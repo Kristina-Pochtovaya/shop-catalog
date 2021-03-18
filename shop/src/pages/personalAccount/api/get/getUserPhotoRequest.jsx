@@ -8,7 +8,7 @@ async function getUserPhoto(email, updateData) {
     const response = await axios.get(`${serverUrl}${userPhoto}`);
     const result = response.data;
 
-    const photo = result.filter((item) => item.email === email).map((item) => item.photo);
+    const photo = result.filter((item) => item.email === email).map((item) => item.photo).join('');
     updateData(photo);
     return result;
   } catch (error) {

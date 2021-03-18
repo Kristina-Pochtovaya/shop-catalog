@@ -10,6 +10,8 @@ import getCategories from '../../editCategory/api/get/getCategories';
 import checkOnlyNumbers from '../../../common/untils/checkOnlyNumbers';
 
 class AddCategoryPage extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +29,12 @@ class AddCategoryPage extends React.Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     await getCategories(this.updateDataCategories, this.setError);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   setError = (value) => { this.setState({ errorMessage: value }); }
@@ -35,10 +42,12 @@ class AddCategoryPage extends React.Component {
   setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
   updateDataCategories = (value, valueIsLoading) => {
-    this.setState({
-      categoriesArray: value,
-      isLoading: valueIsLoading,
-    });
+    if (this._isMounted) {
+      this.setState({
+        categoriesArray: value,
+        isLoading: valueIsLoading,
+      });
+    }
   }
 
   updateImage = (value) => { this.setState({ image: value }); }

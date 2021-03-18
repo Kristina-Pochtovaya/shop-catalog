@@ -24,7 +24,6 @@ class ImageUpload extends React.Component {
   }
 
   handleImageChange(e) {
-    const { imagePreviewUrl } = this.state;
     const { pages } = this.props;
     e.preventDefault();
 
@@ -38,7 +37,7 @@ class ImageUpload extends React.Component {
         });
         await postUserPhoto(
           pages.loginPersonalAccountReducer.clientEmail,
-          imagePreviewUrl,
+          reader.result,
         );
       };
 

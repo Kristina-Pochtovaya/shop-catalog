@@ -9,6 +9,8 @@ import getUsers from '../api/get/getUsers';
 import postChangeUserInformation from '../api/post/postChangeUserInformation';
 
 class PersonaIformation extends React.Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -36,11 +38,16 @@ class PersonaIformation extends React.Component {
   }
 
   async componentDidMount() {
+    this._isMounted = true;
     const { pages } = this.props;
     await getUsers(
       pages.loginPersonalAccountReducer.clientEmail,
       this.updateDataUsers, this.setError,
     );
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   setError = (errorMessage) => { this.setState({ ErrorMessage: errorMessage }); }
@@ -49,16 +56,18 @@ class PersonaIformation extends React.Component {
 
   updateDataUsers = (firstName, lastName,
     email, phoneNumber, address, valueIsLoading, passwordNew) => {
-    this.setState({
-      firstName,
-      lastName,
-      email,
-      phoneNumber,
-      address,
-      passwordNew,
-      passwordNewRepeat: passwordNew,
-      isLoading: valueIsLoading,
-    });
+    if (this._isMounted) {
+      this.setState({
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        address,
+        passwordNew,
+        passwordNewRepeat: passwordNew,
+        isLoading: valueIsLoading,
+      });
+    }
   }
 
   updateData = (value, name) => {
