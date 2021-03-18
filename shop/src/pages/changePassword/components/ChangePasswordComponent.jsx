@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
+import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 import postChangePasswordRequest from '../api/post/postChangePasswordRequest';
 
@@ -21,6 +22,7 @@ class ChangePassword extends React.Component {
       passwordNewRepeat: '',
       passwordRepeatInput: 'passwordNewRepeatInput',
       passwordRepeatSymbol: 'errorSymbolPasswordNewRepeat',
+      errorLength: 'errorlengthString',
     };
   }
 
@@ -34,7 +36,7 @@ class ChangePassword extends React.Component {
     const {
       clientEmail, clientEmailInput, clientEmailSymbol,
       passwordNew, passwordNewInput, passwordNewSymbol,
-      passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol,
+      passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol, errorLength,
     } = this.state;
     const { history } = this.props;
     async function handleButtonClick() {
@@ -73,7 +75,10 @@ class ChangePassword extends React.Component {
                 classInput={passwordNewInput}
                 classSymbol={passwordNewSymbol}
                 updateData={this.updateData}
+                removeErrorLengthFunc="removeErrorLength"
+                classerrorLength={errorLength}
               />
+              <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
             </div>
             <div className="passwordNewRepeat">
               <p className="passwordNewRepeatString -required">Повторите пароль:</p>
@@ -106,6 +111,9 @@ class ChangePassword extends React.Component {
                       setErrorNotNull(passwordNewInput, passwordNewSymbol);
                     } if (passwordNew !== passwordNewRepeat) {
                       setErrorNotNull(passwordRepeatInput, passwordRepeatSymbol);
+                    }
+                    if (passwordNew.length < 9) {
+                      setErrorIncorrectLength(errorLength);
                     }
                   }}
                 >

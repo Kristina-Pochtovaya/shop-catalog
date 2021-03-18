@@ -1,9 +1,9 @@
-/* eslint-disable react/no-unused-state */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Header from '../../main/header/components/HeaderComponent';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
+import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import postUsers from '../api/post/postUsersRequest';
@@ -35,6 +35,7 @@ class Registration extends React.Component {
       passwordNewRepeat: '',
       ClassPasswordRepeatInput: 'passwordNewRepeatInputRegistration',
       ClassPasswordRepeatSymbol: 'errorSymbolPasswordNewRepeatRegistration',
+      errorLength: 'errorlengthString',
     };
   }
 
@@ -53,7 +54,7 @@ class Registration extends React.Component {
       ClassLastNameSymbol, email, ClassEmailInput, ClassEmailSymbol, phoneNumber,
       clientPhoneInput, clientPhoneSymbol, address, clientAddresInput, clientAddresSymbol, password,
       ClassPasswordNewInput, ClassPasswordNewSymbol, passwordNewRepeat,
-      ClassPasswordRepeatInput, ClassPasswordRepeatSymbol,
+      ClassPasswordRepeatInput, ClassPasswordRepeatSymbol, errorLength,
     } = this.state;
     const { onEnter, onLogin, history } = this.props;
 
@@ -62,6 +63,7 @@ class Registration extends React.Component {
       const result = await postUsers(firstName,
         lastName, email, password, phoneNumber, address);
       result === true ? existingUser.setAttribute('class', 'existingUserStringBlock') : history.push('/personal');
+      console.log(email, 'te');
     }
     return (
       <>
@@ -142,7 +144,10 @@ class Registration extends React.Component {
                 classInput={ClassPasswordNewInput}
                 classSymbol={ClassPasswordNewSymbol}
                 updateData={this.updateData}
+                removeErrorLengthFunc="removeErrorLength"
+                classerrorLength={errorLength}
               />
+              <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
             </div>
             <div className="passwordNewRepeat">
               <p className="passwordNewRepeatString -required">Повторите пароль:</p>
@@ -156,8 +161,8 @@ class Registration extends React.Component {
               />
             </div>
             <p className="existingUserString -disabled" id="existingUser">Пользователь с таким email уже существует</p>
-            {(firstName && lastName && email && passwordNewRepeat && phoneNumber)
-            && (password === passwordNewRepeat) ? (
+            {(firstName && lastName && email && passwordNewRepeat && phoneNumber && address)
+            && (password === passwordNewRepeat) && (password >= 9) ? (
               <button
                 type="button"
                 className="registrationButton"
@@ -186,6 +191,9 @@ class Registration extends React.Component {
                       setErrorNotNull(ClassPasswordNewInput, ClassPasswordNewSymbol);
                     } if (password !== passwordNewRepeat) {
                       setErrorNotNull(ClassPasswordRepeatInput, ClassPasswordRepeatSymbol);
+                    }
+                    if (password.length < 9) {
+                      setErrorIncorrectLength(errorLength);
                     }
                   }}
                 >

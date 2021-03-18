@@ -22,6 +22,8 @@ class ForgetPassword extends React.Component {
     } = this.props;
     const { emailInput, emailSymbol } = this.state;
 
+    console.log(pages.loginPersonalAccountReducer.clientEmail);
+
     async function handleButtonClick() {
       const userNotFound = document.getElementById('userNotFoundChangePassword');
       const result = await postLoginForgetPassword(pages.loginPersonalAccountReducer.clientEmail);
