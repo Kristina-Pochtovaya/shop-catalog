@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
@@ -56,18 +56,19 @@ class Registration extends React.Component {
       ClassPasswordNewInput, ClassPasswordNewSymbol, passwordNewRepeat,
       ClassPasswordRepeatInput, ClassPasswordRepeatSymbol, errorLength,
     } = this.state;
-    const { onEnter, onLogin, history } = this.props;
+    const {
+      onEnter, onLogin, history, onEnterEmail,
+    } = this.props;
 
     async function handleButtonClick() {
       const existingUser = document.getElementById('existingUser');
       const result = await postUsers(firstName,
         lastName, email, password, phoneNumber, address);
       result === true ? existingUser.setAttribute('class', 'existingUserStringBlock') : history.push('/personal');
-      console.log(email, 'te');
     }
     return (
       <>
-        <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
+        <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
         <div className="registration-wrap">
           <h2> Регистрация </h2>
           <form className="registration">
@@ -102,6 +103,9 @@ class Registration extends React.Component {
                 classInput={ClassEmailInput}
                 classSymbol={ClassEmailSymbol}
                 updateData={this.updateData}
+                removeErrorLengthFunc=""
+                classerrorLength=""
+                onEnterEmail={onEnterEmail}
               />
             </div>
             <div className="phone">

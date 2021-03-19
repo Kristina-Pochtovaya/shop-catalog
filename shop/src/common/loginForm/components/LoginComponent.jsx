@@ -101,6 +101,7 @@ class Login extends React.Component {
           className="forgotPasswordButton"
           onClick={() => {
             onLogin(true, false, true);
+            onEnterEmail(clientLogin);
           }}
         >
           Забыли пароль?

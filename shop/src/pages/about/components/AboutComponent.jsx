@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 
 const About = ({ setLoginForm }) => (
   <>
-    <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
+    <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
 
     <div className="about-wrap">
       <h1 className="headerH1">

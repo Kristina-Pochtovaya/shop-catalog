@@ -1,11 +1,9 @@
 import { React, createRef } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import ConnectedLoginForm from '../../../../common/loginForm/components/LoginFormComponent';
 import LoginFormForgetPassword from '../../../../common/loginForm/components/LoginFormForgetPasswordComponent';
 import logo from '../../../../assets/header/logo.png';
 import basket from '../../../../assets/common/basket.png';
-import { LOGIN } from '../../../../redux/actions/loginPersonalAccountActions';
 
 const Header = ({
   linkItem, link, disabled, pages, onLogin,
@@ -95,20 +93,4 @@ const Header = ({
   );
 };
 
-const ConnectedHeader = connect(
-  (state) => ({
-    pages: state,
-  }),
-  (dispatch) => ({
-    onLogin: (
-      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-    ) => dispatch({
-      type: LOGIN.type,
-      payload: {
-        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-      },
-    }),
-  }),
-)(Header);
-
-export default ConnectedHeader;
+export default Header;

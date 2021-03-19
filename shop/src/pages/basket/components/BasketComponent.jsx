@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
@@ -17,7 +17,7 @@ const Basket = () => {
 
   return (
     <>
-      <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled />
+      <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled />
       <div className="order-wrap">
         <h2 className="order"> Оформление заказа </h2>
         <ConnectedBusketTable />

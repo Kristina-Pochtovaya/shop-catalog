@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { ENTER, ENTEREMAIL, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
+import { Link } from 'react-router-dom';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
 import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
@@ -21,8 +19,6 @@ class ForgetPassword extends React.Component {
       onEnter, onLogin, onEnterEmail, pages, history,
     } = this.props;
     const { emailInput, emailSymbol } = this.state;
-
-    console.log(pages.loginPersonalAccountReducer.clientEmail);
 
     async function handleButtonClick() {
       const userNotFound = document.getElementById('userNotFoundChangePassword');
@@ -103,32 +99,4 @@ class ForgetPassword extends React.Component {
   }
 }
 
-const ConnectedForgetPassword = connect(
-  (state) => ({
-    pages: state,
-  }),
-  (dispatch) => ({
-    onEnter: (loginIsVisible, personAccountIsVisible) => dispatch({
-      type: ENTER.type,
-      payload: { loginIsVisible, personAccountIsVisible },
-    }),
-    onLogin: (
-      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-    ) => dispatch({
-      type: LOGIN.type,
-      payload: {
-        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-      },
-    }),
-    onEnterEmail: (
-      clientEmail,
-    ) => dispatch({
-      type: ENTEREMAIL.type,
-      payload: {
-        clientEmail,
-      },
-    }),
-  }),
-)(ForgetPassword);
-
-export default withRouter(ConnectedForgetPassword);
+export default ForgetPassword;

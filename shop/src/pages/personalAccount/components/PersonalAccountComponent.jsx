@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import { connect } from 'react-redux';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import ConnectedAdminPersonalAccount from './AdminPersonalAccountComponent';
 import postUsersRoles from '../api/post/postUsersRoles';
@@ -20,7 +20,7 @@ const PersonalAccount = ({ pages }) => {
 
   return (
     <>
-      <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
+      <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
       {
          isAdminVisible ? <ConnectedAdminPersonalAccount /> : null
         }

@@ -1,5 +1,5 @@
 import React from 'react';
-import ConnectedForgetPassword from './ForgetPasswordComponent';
+import ConnectedForgetPassword from '../container/ForgetPasswordContainer';
 
 class LoginFormForgetPassword extends React.Component {
   constructor(props) {
@@ -45,6 +45,7 @@ class LoginFormForgetPassword extends React.Component {
        >
          <h2>Личный кабинет</h2>
          <div
+           className="divCard"
            onClick={() => {
              this.setState({ isVisible: false });
            }}

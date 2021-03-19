@@ -17,7 +17,7 @@ exports[`should render Header Component 1`] = `
       />
     </div>
     <div
-      className="basket"
+      className="basket -disabled"
     >
       <Link
         to="/basket"
@@ -29,16 +29,20 @@ exports[`should render Header Component 1`] = `
         />
       </Link>
     </div>
-    <Link
-      to="/main-page"
+    <div
+      className="headerNavigationButton"
     >
-      <button
-        className="buttonBack"
-        type="button"
+      <Link
+        to="/main-page"
       >
-        Назад
-      </button>
-    </Link>
+        <button
+          className="buttonBack"
+          type="button"
+        >
+          Назад
+        </button>
+      </Link>
+    </div>
   </div>
 </div>
 `;

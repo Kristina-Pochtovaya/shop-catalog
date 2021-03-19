@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
@@ -26,11 +26,28 @@ class ChangePassword extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const { pages } = this.props;
+    this.setState({
+      clientEmail: pages.loginPersonalAccountReducer.clientEmail,
+    });
+  }
+
+  componentDidUpdate(previousProps, previousState) {
+    const { pages } = this.props;
+    if (previousProps.pages.loginPersonalAccountReducer.clientEmail
+      !== pages.loginPersonalAccountReducer.clientEmail) {
+      this.updateEmail(pages.loginPersonalAccountReducer.clientEmail);
+    }
+  }
+
   updateData = (value, name) => {
     if (name === 'clientEmail') { this.setState({ clientEmail: value }); }
     if (name === 'passwordNew') { this.setState({ passwordNew: value }); }
     if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
   }
+
+  updateEmail = (value) => { this.setState({ clientEmail: value }); }
 
   render() {
     const {
@@ -48,9 +65,10 @@ class ChangePassword extends React.Component {
         userNotFound.setAttribute('class', 'userNotFoundBlock');
       }
     }
+
     return (
       <>
-        <Header linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
+        <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
         <div className="changePassword-wrap">
           <h2> Смена пароля </h2>
           <form className="changePassword">

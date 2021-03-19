@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import EditCategoryPageHeader from './EditCategoryPageHeaderComponent';
 import EditCategoryPageColumns from './EditCategoryPageColumnsComponent';
 
 const EditCategoryPage = () => (
   <>
-    <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
+    <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
     <div className="editCatalog-box">
       <h1 className="personalAccount"> Категории </h1>
       <div className="editCategory-table">

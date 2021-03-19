@@ -4,7 +4,7 @@ import removeErrorNotNull from '../../untils/removeErrorNotNull';
 import removeErrorLength from '../../untils/removeErrorLength';
 
 const InputWitchCkeckingNotNull = ({
-  initialValue, classInput, classSymbol, updateData, type, name, removeErrorLengthFunc = '', classerrorLength = '',
+  initialValue, classInput, classSymbol, updateData, type, name, removeErrorLengthFunc = '', classerrorLength = '', onEnterEmail = '',
 }) => (
   <>
     <input
@@ -16,6 +16,7 @@ const InputWitchCkeckingNotNull = ({
         updateData(e.target.value, name);
         removeErrorNotNull(classInput, classSymbol);
         if (removeErrorLengthFunc !== '') { removeErrorLength(classerrorLength); }
+        if (onEnterEmail !== '') { onEnterEmail(initialValue); }
       }}
     />
     <ErrorSymbol Class={`${classSymbol} -disabled`} />

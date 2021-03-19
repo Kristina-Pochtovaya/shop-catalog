@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import Header from '../../main/header/components/HeaderComponent';
+import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import AddCategoryImage from '../../editCategory/components/AddCategoryImageComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
@@ -101,7 +101,7 @@ class AddCategoryPage extends React.Component {
 
     return (
       <>
-        <Header linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
+        <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
         <div className="addProduct-box">
           <h2 className="">Добавить товар</h2>
           <div className="addProduct-container">

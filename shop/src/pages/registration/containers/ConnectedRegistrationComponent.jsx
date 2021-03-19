@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
+import { ENTER, LOGIN, ENTEREMAIL } from '../../../redux/actions/loginPersonalAccountActions';
 import Registration from '../components/RegistrationComponent';
 
 const ConnectedRegistration = connect(
@@ -18,6 +18,14 @@ const ConnectedRegistration = connect(
       type: LOGIN.type,
       payload: {
         loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
+      },
+    }),
+    onEnterEmail: (
+      clientEmail,
+    ) => dispatch({
+      type: ENTEREMAIL.type,
+      payload: {
+        clientEmail,
       },
     }),
   }),

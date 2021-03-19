@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
-import ConnectedHeader from './pages/main/header/components/HeaderComponent';
+import ConnectedHeader from './pages/main/header/container/HeaderContainer';
 import Catalog from './pages/main/catalog/components/CatalogComponent';
 import Footer from './pages/main/footer/components/FooterComponent';
 import About from './pages/about/components/AboutComponent';
@@ -22,6 +22,8 @@ import EditCategoryPage from './pages/editCategory/components/EditCategoryPageCo
 import AddCategoryPage from './pages/editCategory/components/AddCategoryPageComponent';
 import AddProductPageComponent from './pages/editProducts/components/AddProductPageComponent';
 import EditProductsPage from './pages/editProducts/components/EditProductsPageComponent';
+import ImageContainer from './ImageContainterComponent';
+import ImageForm from './ImageFormComponent';
 
 const store = createStore();
 
@@ -35,6 +37,7 @@ export function AppShopCatalog() {
   const [popupBasketActive, setPopupBasketctive] = useState(false);
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(true);
   const [isProductsUpdated, setIsProductsUpdated] = useState(false);
+  const [newImage, setNewImage] = useState([]);
 
   useEffect(() => {
     getProductsRequest(setProducts, setLoadingProducts, setErrorProducts);
@@ -42,6 +45,10 @@ export function AppShopCatalog() {
       setCategories, setLoadingCategory, setErrorCategory,
     );
   }, [isProductsUpdated]);
+
+  const handleNewImage = () => {
+    setNewImage([...newImage, 'New Image!']);
+  };
 
   if (!isLoadingProducts || !isLoadingCategory) {
     return <div className="-isLoading"> </div>;
@@ -64,7 +71,7 @@ export function AppShopCatalog() {
   return (
     <BrowserRouter>
       <Provider store={store}>
-        <Route path="/">
+        <Route path="/shop-catalog">
           <Redirect to="/main-page" />
         </Route>
         <Route path="/main-page">
@@ -144,6 +151,10 @@ export function AppShopCatalog() {
             setIsProductsUpdated={setIsProductsUpdated}
             isProductsUpdated={isProductsUpdated}
           />
+        </Route>
+        <Route path="/test">
+          <ImageContainer newImage={newImage} />
+          <ImageForm handleNewImage={handleNewImage} />
         </Route>
       </Provider>
     </BrowserRouter>
