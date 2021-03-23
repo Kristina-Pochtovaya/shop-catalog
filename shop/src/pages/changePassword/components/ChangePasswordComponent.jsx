@@ -7,6 +7,8 @@ import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 import postChangePasswordRequest from '../api/post/postChangePasswordRequest';
+import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
+import removeErrorLength from '../../../common/untils/removeErrorLength';
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -82,6 +84,7 @@ class ChangePassword extends React.Component {
                 classInput={clientEmailInput}
                 classSymbol={clientEmailSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <div className="passwordNew">
@@ -93,7 +96,8 @@ class ChangePassword extends React.Component {
                 classInput={passwordNewInput}
                 classSymbol={passwordNewSymbol}
                 updateData={this.updateData}
-                removeErrorLengthFunc="removeErrorLength"
+                removeErrorNotNull={removeErrorNotNull}
+                removeErrorLength={removeErrorLength}
                 classerrorLength={errorLength}
               />
               <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
@@ -107,10 +111,11 @@ class ChangePassword extends React.Component {
                 classInput={passwordRepeatInput}
                 classSymbol={passwordRepeatSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             {(clientEmail && passwordNew && passwordNewRepeat)
-            && (passwordNew === passwordNewRepeat) ? (
+            && (passwordNew === passwordNewRepeat) && (passwordNew.length >= 9) ? (
               <button
                 type="button"
                 className="changePasswordButton"

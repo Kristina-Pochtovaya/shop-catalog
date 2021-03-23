@@ -4,11 +4,12 @@ import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
-import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import postUsers from '../api/post/postUsersRequest';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
+import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
+import removeErrorLength from '../../../common/untils/removeErrorLength';
 
 class Registration extends React.Component {
   constructor(props) {
@@ -81,6 +82,7 @@ class Registration extends React.Component {
                 classInput={ClassFirstNameInput}
                 classSymbol={ClassFirstNameSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <div className="lastName">
@@ -92,6 +94,7 @@ class Registration extends React.Component {
                 classInput={ClassLastNameInput}
                 classSymbol={ClassLastNameSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <div className="email">
@@ -103,7 +106,8 @@ class Registration extends React.Component {
                 classInput={ClassEmailInput}
                 classSymbol={ClassEmailSymbol}
                 updateData={this.updateData}
-                removeErrorLengthFunc=""
+                removeErrorNotNull={removeErrorNotNull}
+                removeErrorLength=""
                 classerrorLength=""
                 onEnterEmail={onEnterEmail}
               />
@@ -137,6 +141,7 @@ class Registration extends React.Component {
                 classInput={clientAddresInput}
                 classSymbol={clientAddresSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <div className="passwordNew">
@@ -148,7 +153,8 @@ class Registration extends React.Component {
                 classInput={ClassPasswordNewInput}
                 classSymbol={ClassPasswordNewSymbol}
                 updateData={this.updateData}
-                removeErrorLengthFunc="removeErrorLength"
+                removeErrorNotNull={removeErrorNotNull}
+                removeErrorLength={removeErrorLength}
                 classerrorLength={errorLength}
               />
               <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
@@ -162,11 +168,12 @@ class Registration extends React.Component {
                 classInput={ClassPasswordRepeatInput}
                 classSymbol={ClassPasswordRepeatSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <p className="existingUserString -disabled" id="existingUser">Пользователь с таким email уже существует</p>
             {(firstName && lastName && email && passwordNewRepeat && phoneNumber && address)
-            && (password === passwordNewRepeat) && (password >= 9) ? (
+            && (password === passwordNewRepeat) && (password.length >= 9) ? (
               <button
                 type="button"
                 className="registrationButton"

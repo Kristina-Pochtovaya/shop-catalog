@@ -114,6 +114,9 @@
         
         .errorSymbol{
           @extend %errorSymbol;
+
+          top:38px;
+          right: 14px;
         }
 
         .errorSymbolPassword{
@@ -125,6 +128,10 @@
         .userNotFoundBlock, .incorrectLoginOrPassword{
           color: red;
         }
+        }
+
+        .login{
+          position: relative;
         }
 
   .loginForm-box:after {

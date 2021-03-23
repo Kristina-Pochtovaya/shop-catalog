@@ -7,6 +7,8 @@ import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
 import getUsers from '../api/get/getUsers';
 import postChangeUserInformation from '../api/post/postChangeUserInformation';
+import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
+import removeErrorLength from '../../../common/untils/removeErrorLength';
 
 class PersonaIformation extends React.Component {
   _isMounted = false;
@@ -124,6 +126,7 @@ class PersonaIformation extends React.Component {
               classInput={firstNameInput}
               classSymbol={firstNameSymbol}
               updateData={this.updateData}
+              removeErrorNotNull={removeErrorNotNull}
             />
           </div>
           <div className="lastName">
@@ -135,6 +138,7 @@ class PersonaIformation extends React.Component {
               classInput={lastNameInput}
               classSymbol={lastNameSymbol}
               updateData={this.updateData}
+              removeErrorNotNull={removeErrorNotNull}
             />
           </div>
           <div className="email">
@@ -146,6 +150,7 @@ class PersonaIformation extends React.Component {
               classInput={emailInput}
               classSymbol={emailSymbol}
               updateData={this.updateData}
+              removeErrorNotNull={removeErrorNotNull}
             />
           </div>
           <div className="phone">
@@ -189,6 +194,7 @@ class PersonaIformation extends React.Component {
               classInput={passwordNewInput}
               classSymbol={passwordNewSymbol}
               updateData={this.updateData}
+              removeErrorNotNull={removeErrorNotNull}
             />
           </div>
           <div className="passwordNewRepeat">
@@ -200,6 +206,7 @@ class PersonaIformation extends React.Component {
               classInput={passwordRepeatInput}
               classSymbol={passwordRepeatSymbol}
               updateData={this.updateData}
+              removeErrorNotNull={removeErrorNotNull}
             />
           </div>
           {(firstName && lastName && email && passwordNew && passwordNewRepeat)

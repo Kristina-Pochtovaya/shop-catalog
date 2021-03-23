@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
-import {
-  ENTER, LOGIN, AUTOCOMPLETE, ENTEREMAIL,
-} from '../../../redux/actions/loginPersonalAccountActions';
-import setErrorNotNull from '../../untils/setErrorNotNull';
+import { Link } from 'react-router-dom';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
-import postLoginForgetPassword from '../../api/post/postLoginForgetPasswordRequest';
+import removeErrorNotNull from '../../untils/removeErrorNotNull';
+import processResultLoginForgetPassword from '../../untils/processResultLoginForgetPassword';
+import ButtonLogin from '../../button/components/ButtonLoginComponent';
+import setErrorNotNullGroupsLogin from '../../untils/setErrorNotNullGroupsLogin';
 
 class Login extends React.Component {
   constructor(props) {
@@ -31,19 +29,18 @@ class Login extends React.Component {
       clientLogin, clientLoginInput, clientLoginSymbol,
       clientPassword, clientPasswordInput, clientPasswordSymbol,
     } = this.state;
+
     const {
       onLogin, onEnter, history, onAdd, onEnterEmail,
     } = this.props;
-    async function handleButtonClick() {
-      const incorrectLoginOrPassword = document.getElementById('incorrectLoginOrPassword');
-      const result = await postLoginForgetPassword(clientLogin, clientPassword);
-      if (result === 'incorrectUserOrPassword') {
-        incorrectLoginOrPassword.setAttribute('class', 'incorrectLoginOrPassword');
-      } else {
-        onEnter(false, true) && onLogin(false, false, false) && history.push('/personal');
-        onAdd(result.firstName, result.phoneNumber, result.address);
-        onEnterEmail(clientLogin);
-      }
+
+    function handleButtonClick() {
+      clientLogin && clientPassword
+        ? processResultLoginForgetPassword(
+          onEnter, onLogin, history, onAdd, onEnterEmail, clientLogin, clientPassword,
+        )
+        : setErrorNotNullGroupsLogin(clientLogin, clientLoginInput, clientLoginSymbol,
+          clientPassword, clientPasswordInput, clientPasswordSymbol);
     }
     return (
       <form className="form">
@@ -57,6 +54,7 @@ class Login extends React.Component {
             classInput={clientLoginInput}
             classSymbol={clientLoginSymbol}
             updateData={this.updateData}
+            removeErrorNotNull={removeErrorNotNull}
           />
         </div>
         <div className="password">
@@ -68,52 +66,37 @@ class Login extends React.Component {
             classInput={clientPasswordInput}
             classSymbol={clientPasswordSymbol}
             updateData={this.updateData}
+            removeErrorNotNull={removeErrorNotNull}
           />
         </div>
-        {clientLogin && clientPassword ? (
-          <button
-            type="button"
-            className="entranceButton"
-            onClick={() => {
-              handleButtonClick();
-            }}
-          >
-            Войти
-          </button>
-        ) : (
-          <button
-            type="button"
-            className="entranceButton"
-            onClick={() => {
-              if (!clientLogin) {
-                setErrorNotNull(clientLoginInput, clientLoginSymbol);
-              }
-              if (!clientPassword) {
-                setErrorNotNull(clientPasswordInput, clientPasswordSymbol);
-              }
-            }}
-          >
-            Войти
-          </button>
-        )}
-        <button
-          type="button"
+        <ButtonLogin
+          className="entranceButton"
+          handleButtonClick={handleButtonClick}
+          onLogin=""
+          onEnterEmail=""
+          clientLogin=""
+        >
+          Войти
+        </ButtonLogin>
+        <ButtonLogin
           className="forgotPasswordButton"
-          onClick={() => {
-            onLogin(true, false, true);
-            onEnterEmail(clientLogin);
-          }}
+          handleButtonClick=""
+          onLogin={onLogin}
+          onEnterEmail={onEnterEmail}
+          clientLogin={clientLogin}
         >
           Забыли пароль?
-        </button>
+        </ButtonLogin>
         <Link to="/registration">
-          <button
-            type="button"
+          <ButtonLogin
             className="registrationButton"
-            onClick={() => onLogin(false, false, false)}
+            handleButtonClick=""
+            onLogin={onLogin}
+            onEnterEmail=""
+            clientLogin=""
           >
             Регистрация
-          </button>
+          </ButtonLogin>
         </Link>
       </form>
 
@@ -121,40 +104,4 @@ class Login extends React.Component {
   }
 }
 
-const ConnectedLogin = connect(
-  (state) => ({
-    pages: state,
-  }),
-  (dispatch) => ({
-    onEnter: (loginIsVisible, personAccountIsVisible) => dispatch({
-      type: ENTER.type,
-      payload: { loginIsVisible, personAccountIsVisible },
-    }),
-    onLogin: (
-      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-    ) => dispatch({
-      type: LOGIN.type,
-      payload: {
-        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-      },
-    }),
-    onAdd: (
-      firstName, phone, address,
-    ) => dispatch({
-      type: AUTOCOMPLETE.type,
-      payload: {
-        firstName, phone, address,
-      },
-    }),
-    onEnterEmail: (
-      clientEmail,
-    ) => dispatch({
-      type: ENTEREMAIL.type,
-      payload: {
-        clientEmail,
-      },
-    }),
-  }),
-)(Login);
-
-export default withRouter(ConnectedLogin);
+export default Login;

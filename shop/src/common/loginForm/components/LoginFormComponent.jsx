@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
-import ConnectedLogin from './LoginComponent';
+import ConnectedLogin from '../container/LoginComponentContainer';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -48,6 +46,7 @@ class LoginForm extends React.Component {
        >
          <h2>Личный кабинет</h2>
          <div
+           className="divCard"
            onClick={() => {
              this.setState({ isVisible: false });
            }}
@@ -66,20 +65,4 @@ class LoginForm extends React.Component {
    }
 }
 
-const ConnectedLoginForm = connect(
-  (state) => ({
-    pages: state,
-  }),
-  (dispatch) => ({
-    onLogin: (
-      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-    ) => dispatch({
-      type: LOGIN.type,
-      payload: {
-        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-      },
-    }),
-  }),
-)(LoginForm);
-
-export default ConnectedLoginForm;
+export default LoginForm;

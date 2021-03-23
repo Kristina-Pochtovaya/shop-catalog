@@ -3,10 +3,10 @@ import postBasketItemsRequest from '../api/post/postBasketItemsRequest';
 import addRemoveScroll from '../../../common/untils/addRemoveScroll';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
-import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 import postUnautherizedUser from '../api/post/postUnautherizedUserRequest';
+import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
@@ -80,6 +80,7 @@ class PopUpBasketOrder extends React.Component {
                 classInput={clinetNameInput}
                 classSymbol={clientNameSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <div className="phone">
@@ -111,6 +112,7 @@ class PopUpBasketOrder extends React.Component {
                 classInput={clientAddresInput}
                 classSymbol={clientAddresSymbol}
                 updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
               />
             </div>
             <div className="message">

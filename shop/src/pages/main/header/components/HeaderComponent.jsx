@@ -1,6 +1,6 @@
 import { React, createRef } from 'react';
 import { Link } from 'react-router-dom';
-import ConnectedLoginForm from '../../../../common/loginForm/components/LoginFormComponent';
+import ConnectedLoginForm from '../../../../common/loginForm/container/LoginFormComponentContainer';
 import LoginFormForgetPassword from '../../../../common/loginForm/components/LoginFormForgetPasswordComponent';
 import logo from '../../../../assets/header/logo.png';
 import basket from '../../../../assets/common/basket.png';
