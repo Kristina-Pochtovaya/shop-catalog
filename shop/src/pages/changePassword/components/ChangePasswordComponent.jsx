@@ -1,14 +1,16 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
-import setErrorNotNull from '../../../common/untils/setErrorNotNull';
-import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
-import postChangePasswordRequest from '../api/post/postChangePasswordRequest';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import removeErrorLength from '../../../common/untils/removeErrorLength';
+import processResultChangePassword from '../utils/processResultChangePassword';
+import setErrorNotNullGroupsChangePassword from '../utils/setErrorNotNullGroupsChangePassword';
+import ButtonForPassword from '../../../common/button/components/ButtonForPasswordComponent';
+import setClassErrorById from '../../../common/untils/setClassErrorById';
+import postChangePasswordRequest from '../api/post/postChangePasswordRequest';
+import setErrorNotNull from '../../../common/untils/setErrorNotNull';
+import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -58,16 +60,16 @@ class ChangePassword extends React.Component {
       passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol, errorLength,
     } = this.state;
     const { history } = this.props;
-    async function handleButtonClick() {
-      const userNotFound = document.getElementById('notRealUser');
-      const result = await postChangePasswordRequest(clientEmail, passwordNew, passwordNewRepeat);
-      if (result === true) {
-        history.push('/main-page');
-      } if (result === 'incorrectUserOrPassword') {
-        userNotFound.setAttribute('class', 'userNotFoundBlock');
-      }
-    }
 
+    async function handleButtonClick() {
+      (clientEmail && passwordNew && passwordNewRepeat)
+            && (passwordNew === passwordNewRepeat) && (passwordNew.length >= 9)
+        ? processResultChangePassword(clientEmail, passwordNew, passwordNewRepeat, history,
+          setClassErrorById, postChangePasswordRequest)
+        : setErrorNotNullGroupsChangePassword(clientEmail, clientEmailInput, clientEmailSymbol,
+          passwordNew, passwordNewInput, passwordNewSymbol, passwordNewRepeat, passwordRepeatInput,
+          passwordRepeatSymbol, errorLength, setErrorNotNull, setErrorIncorrectLength);
+    }
     return (
       <>
         <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
@@ -114,35 +116,12 @@ class ChangePassword extends React.Component {
                 removeErrorNotNull={removeErrorNotNull}
               />
             </div>
-            {(clientEmail && passwordNew && passwordNewRepeat)
-            && (passwordNew === passwordNewRepeat) && (passwordNew.length >= 9) ? (
-              <button
-                type="button"
-                className="changePasswordButton"
-                onClick={() => handleButtonClick()}
-              >
-                Изменить пароль
-              </button>
-              ) : (
-                <button
-                  type="button"
-                  className="changePasswordButton"
-                  onClick={() => {
-                    if (!clientEmail) {
-                      setErrorNotNull(clientEmailInput, clientEmailSymbol);
-                    } if (!passwordNew) {
-                      setErrorNotNull(passwordNewInput, passwordNewSymbol);
-                    } if (passwordNew !== passwordNewRepeat) {
-                      setErrorNotNull(passwordRepeatInput, passwordRepeatSymbol);
-                    }
-                    if (passwordNew.length < 9) {
-                      setErrorIncorrectLength(errorLength);
-                    }
-                  }}
-                >
-                  Изменить пароль
-                </button>
-              )}
+            <ButtonForPassword
+              className="changePasswordButton"
+              handleButtonClick={handleButtonClick}
+            >
+              Изменить пароль
+            </ButtonForPassword>
           </form>
         </div>
         <Footer />
@@ -151,10 +130,4 @@ class ChangePassword extends React.Component {
   }
 }
 
-const ConnectedChangePassword = connect(
-  (state) => ({
-    pages: state,
-  }),
-)(ChangePassword);
-
-export default withRouter(ConnectedChangePassword);
+export default ChangePassword;

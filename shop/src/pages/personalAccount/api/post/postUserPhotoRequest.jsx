@@ -3,8 +3,7 @@ import serverUrl from '../../../../common/constants/urls';
 
 const userPhoto = '/avatar';
 
-async function postUserPhoto(email, avatar) {
-  const errorPhoto = document.getElementById('errorPhoto');
+async function postUserPhoto(email, avatar, setClassErrorById) {
   const payload = {
     data: {
       email,
@@ -20,11 +19,11 @@ async function postUserPhoto(email, avatar) {
       },
     });
     const result = response.data;
-    errorPhoto.setAttribute('class', 'errorPhoto -disabled');
+    setClassErrorById('errorPhoto', 'errorPhoto -disabled');
     return result;
   } catch (error) {
-    errorPhoto.setAttribute('class', 'errorPhoto');
-    return error.message;
+    setClassErrorById('errorPhoto', 'errorPhoto');
+    return false;
   }
 }
 

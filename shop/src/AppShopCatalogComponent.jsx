@@ -11,7 +11,7 @@ import createStore from './redux/store';
 import getCatalogCategories from './pages/main/catalog/api/get/getCatalogCategories';
 import PopUp from './common/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalogItems/components/PopupBasketComponent';
-import ConnectedChangePassword from './pages/changePassword/components/ChangePasswordComponent';
+import ConnectedChangePassword from './pages/changePassword/containers/ChangePasswordContainer';
 import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
 import ConnectedRegistration from './pages/registration/containers/ConnectedRegistrationComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
@@ -19,7 +19,7 @@ import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogIte
 import setImg from './common/untils/setImg';
 import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
 import EditCategoryPage from './pages/editCategory/components/EditCategoryPageComponent';
-import AddCategoryPage from './pages/editCategory/components/AddCategoryPageComponent';
+import WithRouterAddCategoryPage from './pages/editCategory/containers/WithRouterAddCategoryPageComponent';
 import AddProductPageComponent from './pages/editProducts/components/AddProductPageComponent';
 import EditProductsPage from './pages/editProducts/components/EditProductsPageComponent';
 import ImageContainer from './ImageContainterComponent';
@@ -138,7 +138,7 @@ export function AppShopCatalog() {
           <EditCategoryPage />
         </Route>
         <Route path="/add-category">
-          <AddCategoryPage />
+          <WithRouterAddCategoryPage />
         </Route>
         <Route path="/add-product">
           <AddProductPageComponent

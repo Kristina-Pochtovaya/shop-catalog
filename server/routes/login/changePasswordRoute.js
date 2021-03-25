@@ -12,15 +12,16 @@ changePassword.post('/change-password', urlencodedParser, (req, res) => {
   if (!req.body) {
     return res.sendStatus(500);
   }
-  if (Users.findOne({ where: { email: req.body.data.email } })) {
+  if (Users.findOne({
+    where: { email: req.body.data.email }
+    && req.body.data.password === req.body.data.newPaswword,
+  })) {
     Users.findOne({ where: { email: req.body.data.email } })
       .then((existingUser) => {
         if (existingUser instanceof Users) {
           Users.update({
             password: req.body.data.password,
-          }, {
-            where: { email: req.body.data.email },
-          });
+          }, { where: { email: req.body.data.email } });
 
           res.send(true);
         } else res.send('incorrectUserOrPassword');

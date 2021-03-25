@@ -17,7 +17,7 @@ userRole.post('/user-role', urlencodedParser, (req, res) => {
       .then((existingUser) => {
         if (existingUser instanceof Users) {
           res.send(existingUser.role);
-        }
+        } else res.send(null);
       });
   }
   return null;

@@ -1,10 +1,8 @@
 import { React, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import ConnectedImageUpload from './PhotoComponent';
-import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
 import AdminPersonalAccountRows from './AdminPersonalAccountRowsComponent';
-import ConnectedPersonaIformation from './PersonaIformationComponent';
+import ConnectedPersonaIformation from '../containers/ConnectedPersonaIformation';
 
 const AdminPersonalAccount = ({ onEnter, onLogin }) => {
   const [isPersonalInformationVisible, setIsPersonalInformationVisible] = useState(false);
@@ -36,6 +34,7 @@ const AdminPersonalAccount = ({ onEnter, onLogin }) => {
           <button
             type="button"
             className="personalDataColumn"
+            onClick={() => setIsPersonalInformationVisible(true)}
           >
             Личные данные
           </button>
@@ -58,6 +57,7 @@ const AdminPersonalAccount = ({ onEnter, onLogin }) => {
         )
           : (
             <ConnectedPersonaIformation
+              className="connectedPersonaIformation"
               setIsPersonalInformationVisible={setIsPersonalInformationVisible}
             />
           )}
@@ -65,24 +65,4 @@ const AdminPersonalAccount = ({ onEnter, onLogin }) => {
     </div>
   );
 };
-const ConnectedAdminPersonalAccount = connect(
-  (state) => ({
-    pages: state,
-  }),
-  (dispatch) => ({
-    onEnter: (loginIsVisible, personAccountIsVisible) => dispatch({
-      type: ENTER.type,
-      payload: { loginIsVisible, personAccountIsVisible },
-    }),
-    onLogin: (
-      loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-    ) => dispatch({
-      type: LOGIN.type,
-      payload: {
-        loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
-      },
-    }),
-  }),
-)(AdminPersonalAccount);
-
-export default ConnectedAdminPersonalAccount;
+export default AdminPersonalAccount;

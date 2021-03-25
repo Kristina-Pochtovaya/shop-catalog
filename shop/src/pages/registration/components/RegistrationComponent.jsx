@@ -10,6 +10,11 @@ import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolCompo
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import removeErrorLength from '../../../common/untils/removeErrorLength';
+import processResultRegistration from '../utils/processResultRegistration';
+import setClassErrorById from '../../../common/untils/setClassErrorById';
+import executeFunctionsIfNoErrorsLoginRegistration from '../../../common/untils/executeFunctionsIfNoErrorsLoginRegistration';
+import setErrorNotNullGroupsRegistration from '../utils/setErrorNotNullGroupsRegistration';
+import ButtonLogin from '../../../common/button/components/ButtonLoginComponent';
 
 class Registration extends React.Component {
   constructor(props) {
@@ -47,6 +52,7 @@ class Registration extends React.Component {
     if (name === 'address') { this.setState({ address: value }); }
     if (name === 'password') { this.setState({ password: value }); }
     if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
+    if (name === 'PHONE') { this.setState({ phoneNumber: formatPhoneNumber(value) }); }
   }
 
   render() {
@@ -61,11 +67,21 @@ class Registration extends React.Component {
       onEnter, onLogin, history, onEnterEmail,
     } = this.props;
 
-    async function handleButtonClick() {
-      const existingUser = document.getElementById('existingUser');
-      const result = await postUsers(firstName,
-        lastName, email, password, phoneNumber, address);
-      result === true ? existingUser.setAttribute('class', 'existingUserStringBlock') : history.push('/personal');
+    function handleButtonClick() {
+      if ((firstName && lastName && email && passwordNewRepeat && phoneNumber && address)
+       && (password === passwordNewRepeat) && (password.length >= 9)) {
+        processResultRegistration(firstName, lastName, email, history, password, phoneNumber,
+          address, postUsers, setClassErrorById, onEnter, onLogin,
+          executeFunctionsIfNoErrorsLoginRegistration);
+      } else {
+        setErrorNotNullGroupsRegistration(firstName, ClassFirstNameInput,
+          ClassFirstNameSymbol, lastName, ClassLastNameInput, ClassLastNameSymbol,
+          email, ClassEmailInput, ClassEmailSymbol, errorLength, phoneNumber,
+          clientPhoneInput, clientPhoneSymbol, address, clientAddresInput,
+          clientAddresSymbol, password, ClassPasswordNewInput, ClassPasswordNewSymbol,
+          passwordNewRepeat, ClassPasswordRepeatInput, ClassPasswordRepeatSymbol,
+          setErrorNotNull, setErrorIncorrectLength);
+      }
     }
     return (
       <>
@@ -114,21 +130,18 @@ class Registration extends React.Component {
             </div>
             <div className="phone">
               <p className="phoneString -required">Телефон:</p>
-              <input
-                className={clientPhoneInput}
-                name="PHONE"
+              <InputWitchCkeckingNotNull
+                initialValue={phoneNumber}
                 type="tel"
+                name="PHONE"
+                classInput={clientPhoneInput}
+                classSymbol={clientPhoneSymbol}
+                updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
                 minLength="13"
                 maxLength="13"
                 placeholder="+375 (__) ___-__-__"
-                value={phoneNumber}
                 onFocus={() => this.setState({ phoneNumber: '+375' })}
-                onChange={(event) => {
-                  this.setState({
-                    phoneNumber: formatPhoneNumber(event.target.value),
-                  });
-                  removeErrorNotNull(clientPhoneInput, clientPhoneSymbol);
-                }}
               />
               <ErrorSymbol Class={`${clientPhoneSymbol} -disabled`} />
             </div>
@@ -172,45 +185,15 @@ class Registration extends React.Component {
               />
             </div>
             <p className="existingUserString -disabled" id="existingUser">Пользователь с таким email уже существует</p>
-            {(firstName && lastName && email && passwordNewRepeat && phoneNumber && address)
-            && (password === passwordNewRepeat) && (password.length >= 9) ? (
-              <button
-                type="button"
-                className="registrationButton"
-                onClick={() => {
-                  onEnter(false, true); onLogin(false, false, false); handleButtonClick();
-                }}
-              >
-                Зарегестрироваться
-              </button>
-              ) : (
-                <button
-                  type="button"
-                  className="registrationButton"
-                  onClick={() => {
-                    if (!firstName) {
-                      setErrorNotNull(ClassFirstNameInput, ClassFirstNameSymbol);
-                    } if (!lastName) {
-                      setErrorNotNull(ClassLastNameInput, ClassLastNameSymbol);
-                    } if (!email) {
-                      setErrorNotNull(ClassEmailInput, ClassEmailSymbol);
-                    } if (phoneNumber.length > 13) {
-                      setErrorNotNull(clientPhoneInput, clientPhoneSymbol);
-                    } if (!address) {
-                      setErrorNotNull(clientAddresInput, clientAddresSymbol);
-                    } if (!password) {
-                      setErrorNotNull(ClassPasswordNewInput, ClassPasswordNewSymbol);
-                    } if (password !== passwordNewRepeat) {
-                      setErrorNotNull(ClassPasswordRepeatInput, ClassPasswordRepeatSymbol);
-                    }
-                    if (password.length < 9) {
-                      setErrorIncorrectLength(errorLength);
-                    }
-                  }}
-                >
-                  Зарегестрироваться
-                </button>
-              )}
+            <ButtonLogin
+              className="registrationButton"
+              handleButtonClick={handleButtonClick}
+              onLogin=""
+              onEnterEmail=""
+              clientLogin=""
+            >
+              Зарегестрироваться
+            </ButtonLogin>
           </form>
         </div>
         <Footer />

@@ -10,6 +10,7 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       clientLogin: '',
       clientLoginInput: 'loginInput',
       clientLoginSymbol: 'errorSymbol',
@@ -25,19 +26,20 @@ class Login extends React.Component {
   }
 
   render() {
+    const updateId = (value) => this.setState({ id: value });
     const {
       clientLogin, clientLoginInput, clientLoginSymbol,
-      clientPassword, clientPasswordInput, clientPasswordSymbol,
+      clientPassword, clientPasswordInput, clientPasswordSymbol, id,
     } = this.state;
 
     const {
       onLogin, onEnter, history, onAdd, onEnterEmail,
     } = this.props;
-
     function handleButtonClick() {
       clientLogin && clientPassword
         ? processResultLoginForgetPassword(
-          onEnter, onLogin, history, onAdd, onEnterEmail, clientLogin, clientPassword,
+          onEnter, onLogin, history, id, onAdd, onEnterEmail, clientLogin, clientPassword,
+          updateId,
         )
         : setErrorNotNullGroupsLogin(clientLogin, clientLoginInput, clientLoginSymbol,
           clientPassword, clientPasswordInput, clientPasswordSymbol);

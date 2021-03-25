@@ -1,9 +1,10 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import AddCategoryImage from './AddCategoryImageComponent';
 import postNewCategory from '../api/post/postNewCategory';
+import setClassErrorById from '../../../common/untils/setClassErrorById';
+import processResultAddNewCategory from '../utils/processResultAddNewCategory';
 
 class AddCategoryPage extends React.Component {
   constructor(props) {
@@ -18,14 +19,9 @@ class AddCategoryPage extends React.Component {
   updateImage = (value) => { this.setState({ image: value }); }
 
   render() {
-    async function handleButtonClick() {
-      const errorImage = document.getElementById('errorNewImage');
-      const result = await postNewCategory(categoryName, image, titleColor);
-      if (result === true) {
-        history.push('/edit-category');
-      } if (result === false) {
-        errorImage.setAttribute('class', 'errorNewImage');
-      }
+    function handleButtonClick() {
+      processResultAddNewCategory(postNewCategory, categoryName, image, titleColor,
+        history, setClassErrorById);
     }
 
     const { categoryName, image, titleColor } = this.state;
@@ -68,4 +64,4 @@ class AddCategoryPage extends React.Component {
   }
 }
 
-export default withRouter(AddCategoryPage);
+export default AddCategoryPage;

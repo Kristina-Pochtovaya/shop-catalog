@@ -6,6 +6,10 @@
   .personalInformation{
     position: relative;
   }
+
+  .passwordNewRepeat{
+    position: relative;
+  }
   
   .firstNameString, .lastNameString, .emailString, .phoneString, .addressString, .passwordNewString, .passwordNewRepeatString{
     @extend %changePasswordText;
@@ -61,11 +65,15 @@
     @extend %errorSymbol;
     @extend %errorSymbolChangePassword;
 
-    top: 597px;
+    top: 38px;
   }
 
   .-notNull{
     background-color: #fac1bd;
+  }
+
+  .errorlengthString{
+    color: red;
   }
 
 }

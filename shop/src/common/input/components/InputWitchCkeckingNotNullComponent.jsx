@@ -2,8 +2,8 @@ import React from 'react';
 import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
 
 const InputWitchCkeckingNotNull = ({
-  initialValue, classInput, classSymbol, updateData = '', type, name, removeErrorNotNull = '',
-  removeErrorLength = '', classerrorLength = '', onEnterEmail = '',
+  initialValue, classInput, classSymbol, updateData = '', type, name, removeErrorNotNull = '', removeErrorLength = '',
+  classerrorLength = '', onEnterEmail = '', minLength = '', maxLength = '', placeholder = '', onFocus = '',
 }) => (
   <>
     <input
@@ -17,6 +17,10 @@ const InputWitchCkeckingNotNull = ({
         if (removeErrorLength !== '') { removeErrorLength(classerrorLength); }
         if (onEnterEmail !== '') { onEnterEmail(e.target.value); }
       }}
+      minLength={minLength || ''}
+      maxLength={maxLength || ''}
+      placeholder={placeholder || ''}
+      onFocus={onFocus || null}
     />
     <ErrorSymbol Class={`${classSymbol} -disabled`} />
   </>

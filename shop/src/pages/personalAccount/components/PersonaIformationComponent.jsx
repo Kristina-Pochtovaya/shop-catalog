@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
@@ -8,7 +7,9 @@ import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomet
 import getUsers from '../api/get/getUsers';
 import postChangeUserInformation from '../api/post/postChangeUserInformation';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
+import setErrorNotNullGroupsPersonalInformation from '../utils/setErrorNotNullGroupsPersonalInformation';
 import removeErrorLength from '../../../common/untils/removeErrorLength';
+import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
 
 class PersonaIformation extends React.Component {
   _isMounted = false;
@@ -16,6 +17,7 @@ class PersonaIformation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: '',
       firstName: '',
       firstNameInput: 'firstNameInput',
       firstNameSymbol: 'firstNameSymbol',
@@ -36,6 +38,7 @@ class PersonaIformation extends React.Component {
       popupSmthWentWrongActive: true,
       isLoading: false,
       ErrorMessage: '',
+      errorLength: 'errorlengthString',
     };
   }
 
@@ -43,7 +46,7 @@ class PersonaIformation extends React.Component {
     this._isMounted = true;
     const { pages } = this.props;
     await getUsers(
-      pages.loginPersonalAccountReducer.clientEmail,
+      pages.loginPersonalAccountReducer.id,
       this.updateDataUsers, this.setError,
     );
   }
@@ -56,17 +59,18 @@ class PersonaIformation extends React.Component {
 
   setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
-  updateDataUsers = (firstName, lastName,
-    email, phoneNumber, address, valueIsLoading, passwordNew) => {
+  updateDataUsers = (id, firstName, lastName,
+    email, phoneNumber, address, valueIsLoading) => {
     if (this._isMounted) {
       this.setState({
+        id,
         firstName,
         lastName,
         email,
         phoneNumber,
         address,
-        passwordNew,
-        passwordNewRepeat: passwordNew,
+        passwordNew: '',
+        passwordNewRepeat: '',
         isLoading: valueIsLoading,
       });
     }
@@ -78,24 +82,39 @@ class PersonaIformation extends React.Component {
     if (name === 'email') { this.setState({ email: value }); }
     if (name === 'passwordNew') { this.setState({ passwordNew: value }); }
     if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
+    if (name === 'PHONE') { this.setState({ phoneNumber: formatPhoneNumber(value) }); }
+    if (name === 'address') { this.setState({ address: value }); }
   }
+
+  updatePhone = () => this.setState({ phoneNumber: '+375' });
 
   render() {
     const {
       firstName, firstNameInput, firstNameSymbol,
       lastName, lastNameInput, lastNameSymbol,
       email, emailInput, emailSymbol,
-      phoneNumber, address,
+      phoneNumber, address, id, errorLength,
       passwordNew, passwordNewInput, passwordNewSymbol,
       passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol,
       popupSmthWentWrongActive, isLoading, ErrorMessage,
     } = this.state;
+
     const { setIsPersonalInformationVisible } = this.props;
 
     async function handleButtonClick() {
-      await postChangeUserInformation(
-        firstName, lastName, email, passwordNew, phoneNumber, address,
-      );
+      if ((firstName && lastName && email && passwordNew && passwordNewRepeat)
+      && (passwordNew === passwordNewRepeat) && (passwordNew.length >= 9)) {
+        await postChangeUserInformation(
+          id, firstName, lastName, email, passwordNew, phoneNumber, address,
+        ); setIsPersonalInformationVisible(false);
+      } else {
+        setErrorNotNullGroupsPersonalInformation(
+          firstName, firstNameInput, firstNameSymbol, lastName, lastNameInput, lastNameSymbol,
+          email, emailInput, emailSymbol, passwordNew, passwordNewInput, passwordNewSymbol,
+          passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol, setErrorNotNull,
+          setErrorIncorrectLength, errorLength,
+        );
+      }
     }
 
     if (!isLoading) {
@@ -155,34 +174,32 @@ class PersonaIformation extends React.Component {
           </div>
           <div className="phone">
             <p className="phoneString">Телефон:</p>
-            <input
-              className="phoneInput"
-              name="PHONE"
+            <InputWitchCkeckingNotNull
+              initialValue={phoneNumber}
               type="tel"
+              name="PHONE"
+              classInput="phoneInput"
+              classSymbol=""
+              updateData={this.updateData}
+              removeErrorNotNull=""
+              removeErrorLength=""
+              classerrorLength=""
+              onEnterEmail=""
               minLength="13"
               maxLength="13"
-              placeholder="+375 (__) ___-__-__"
-              value={phoneNumber}
-              onFocus={() => this.setState({ phoneNumber: '+375' })}
-              onChange={(event) => {
-                this.setState({
-                  phoneNumber: formatPhoneNumber(event.target.value),
-                });
-              }}
+              placeholder='+375 (__) ___-__-__"'
+              onFocus={this.updatePhone}
             />
           </div>
           <div className="address">
             <p className="addressString">Адрес:</p>
-            <input
-              className="addressInput"
+            <InputWitchCkeckingNotNull
+              initialValue={address}
               type="text"
               name="address"
-              value={address}
-              onChange={(e) => {
-                this.setState({
-                  address: e.target.value,
-                });
-              }}
+              classInput="addressInput"
+              classSymbol=""
+              updateData={this.updateData}
             />
           </div>
           <div className="passwordNew">
@@ -195,7 +212,10 @@ class PersonaIformation extends React.Component {
               classSymbol={passwordNewSymbol}
               updateData={this.updateData}
               removeErrorNotNull={removeErrorNotNull}
+              removeErrorLength={removeErrorLength}
+              classerrorLength={errorLength}
             />
+            <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
           </div>
           <div className="passwordNewRepeat">
             <p className="passwordNewRepeatString -required">Повторите пароль:</p>
@@ -209,49 +229,19 @@ class PersonaIformation extends React.Component {
               removeErrorNotNull={removeErrorNotNull}
             />
           </div>
-          {(firstName && lastName && email && passwordNew && passwordNewRepeat)
-  && (passwordNew === passwordNewRepeat) ? (
-    <button
-      type="button"
-      className="changePasswordButton"
-      onClick={() => {
-        handleButtonClick();
-        setIsPersonalInformationVisible(false);
-      }}
-    >
-      Сохранить
-    </button>
-            ) : (
-              <button
-                type="button"
-                className="changePasswordButton"
-                onClick={() => {
-                  if (!firstName) {
-                    setErrorNotNull(firstNameInput, firstNameSymbol);
-                  } if (!lastName) {
-                    setErrorNotNull(lastNameInput, lastNameSymbol);
-                  } if (!email) {
-                    setErrorNotNull(emailInput, emailSymbol);
-                  } if (!passwordNew) {
-                    setErrorNotNull(passwordNewInput, passwordNewSymbol);
-                  } if (passwordNew !== passwordNewRepeat) {
-                    setErrorNotNull(passwordRepeatInput, passwordRepeatSymbol);
-                  }
-                }}
-              >
-                Сохранить
-              </button>
-            )}
+          <button
+            type="button"
+            className="changePasswordButton"
+            onClick={() => {
+              handleButtonClick();
+            }}
+          >
+            Сохранить
+          </button>
         </form>
       </div>
     );
   }
 }
 
-const ConnectedPersonaIformation = connect(
-  (state) => ({
-    pages: state,
-  }),
-)(PersonaIformation);
-
-export default ConnectedPersonaIformation;
+export default PersonaIformation;

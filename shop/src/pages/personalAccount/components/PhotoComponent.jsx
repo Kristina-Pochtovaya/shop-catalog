@@ -4,6 +4,7 @@ import personalAccount from '../../../assets/personal-account/personal-account.j
 import { ADDPHOTO } from '../../../redux/actions/loginPersonalAccountActions';
 import postUserPhoto from '../api/post/postUserPhotoRequest';
 import getUserPhoto from '../api/get/getUserPhotoRequest';
+import setClassErrorById from '../../../common/untils/setClassErrorById';
 
 class ImageUpload extends React.Component {
   constructor(props) {
@@ -37,7 +38,7 @@ class ImageUpload extends React.Component {
         });
         await postUserPhoto(
           pages.loginPersonalAccountReducer.clientEmail,
-          reader.result,
+          reader.result, setClassErrorById,
         );
       };
 
@@ -49,7 +50,6 @@ class ImageUpload extends React.Component {
 
   render() {
     const { imagePreviewUrl } = this.state;
-    const { pages } = this.props;
     let $imagePreview = null;
 
     if (imagePreviewUrl) {
@@ -88,11 +88,8 @@ class ImageUpload extends React.Component {
                 name="avatar"
                 className="avatar"
                 type="file"
-                onChange={async (e) => {
+                onChange={(e) => {
                   this.handleImageChange(e);
-                  await postUserPhoto(
-                    pages.loginPersonalAccountReducer.clientEmail, imagePreviewUrl,
-                  );
                 }}
                 multiple
               />

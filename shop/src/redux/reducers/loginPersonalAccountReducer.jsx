@@ -13,6 +13,7 @@ const initialState = {
   phone: '',
   addres: '',
   photo: '',
+  id: '',
 };
 
 const loginPersonalAccountReducer = (state = initialState, action) => {
@@ -38,6 +39,7 @@ const loginPersonalAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         clientEmail: action.payload.clientEmail,
+        id: action.payload.id,
       };
     }
 

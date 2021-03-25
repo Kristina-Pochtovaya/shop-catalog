@@ -1,16 +1,16 @@
-import setClassIncorrectUser from './setClassIncorrectUser';
-import executeFunctionsIfLoggedSucessfully from './executeFunctionsIfLoggedSucessfully';
+import setClassErrorById from './setClassErrorById';
+import executeFunctionsIfNoErrorsLoginRegistration from './executeFunctionsIfNoErrorsLoginRegistration';
 import postLoginForgetPassword from '../api/post/postLoginForgetPasswordRequest';
 
 const processResultLoginForgetPassword = async (
-  onEnter, onLogin, history, onAdd, onEnterEmail, clientLogin, clientPassword,
+  onEnter, onLogin, history, id, onAdd, onEnterEmail, clientLogin, clientPassword, updateId,
 ) => {
-  const result = await postLoginForgetPassword(clientLogin, clientPassword);
+  const result = await postLoginForgetPassword(clientLogin, clientPassword, updateId, onEnterEmail);
   if (result === 'incorrectUserOrPassword') {
-    setClassIncorrectUser('incorrectLoginOrPassword');
+    setClassErrorById('incorrectLoginOrPassword', 'incorrectLoginOrPassword');
   } else {
-    executeFunctionsIfLoggedSucessfully(
-      onEnter, onLogin, history, onAdd, onEnterEmail, result, clientLogin,
+    executeFunctionsIfNoErrorsLoginRegistration(
+      onEnter, onLogin, history, id, onAdd, result, clientLogin,
     );
   }
 };

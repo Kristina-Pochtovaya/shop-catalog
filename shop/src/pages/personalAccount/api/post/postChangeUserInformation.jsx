@@ -4,10 +4,11 @@ import serverUrl from '../../../../common/constants/urls';
 const userInformation = '/user-information';
 
 async function postChangeUserInformation(
-  firstName, lastName, email, passwordNew, phoneNumber, address,
+  id, firstName, lastName, email, passwordNew, phoneNumber, address,
 ) {
   const payload = {
     data: {
+      id,
       firstName,
       lastName,
       email,

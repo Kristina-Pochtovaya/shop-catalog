@@ -31,11 +31,11 @@ const ConnectedLogin = connect(
       },
     }),
     onEnterEmail: (
-      clientEmail,
+      clientEmail, id,
     ) => dispatch({
       type: ENTEREMAIL.type,
       payload: {
-        clientEmail,
+        clientEmail, id,
       },
     }),
   }),

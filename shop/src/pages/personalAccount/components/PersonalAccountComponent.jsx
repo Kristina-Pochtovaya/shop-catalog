@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import { connect } from 'react-redux';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
-import ConnectedAdminPersonalAccount from './AdminPersonalAccountComponent';
+import ConnectedAdminPersonalAccount from '../containers/ConnectedAdminPersonalAccount';
 import postUsersRoles from '../api/post/postUsersRoles';
 
 const PersonalAccount = ({ pages }) => {

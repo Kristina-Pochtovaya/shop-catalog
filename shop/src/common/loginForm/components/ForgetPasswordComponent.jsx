@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import checkIfUserExists from '../../untils/checkIfUserExists';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
-import ButtonForgetPassword from '../../button/components/ButtonForgetPasswordComponent';
+import ButtonForPassword from '../../button/components/ButtonForPasswordComponent';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
 
 class ForgetPassword extends React.Component {
@@ -52,32 +52,32 @@ class ForgetPassword extends React.Component {
            type="button"
            className=""
          >
-           <ButtonForgetPassword
+           <ButtonForPassword
              className="entranceButton"
              handleButtonClick={this.handleButtonClick}
              onEnter=""
              onLogin=""
            >
              Отправить
-           </ButtonForgetPassword>
+           </ButtonForPassword>
          </div>
-         <ButtonForgetPassword
+         <ButtonForPassword
            className="forgotPasswordButton"
            handleButtonClick=""
            onEnter={onEnter}
            onLogin={onLogin}
          >
            Войти
-         </ButtonForgetPassword>
+         </ButtonForPassword>
          <Link to="/registration">
-           <ButtonForgetPassword
+           <ButtonForPassword
              className="registrationButton"
              handleButtonClick=""
              onEnter=""
              onLogin={onLogin}
            >
              Регистрация
-           </ButtonForgetPassword>
+           </ButtonForPassword>
          </Link>
        </form>
      );

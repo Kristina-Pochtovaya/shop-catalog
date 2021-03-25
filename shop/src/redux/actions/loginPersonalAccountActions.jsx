@@ -22,6 +22,7 @@ export const LOGIN = {
 export const ENTEREMAIL = {
   type: loginPersonalAccountActions.ENTEREMAIL,
   clientEmail: '',
+  id: '',
 };
 
 export const AUTOCOMPLETE = {

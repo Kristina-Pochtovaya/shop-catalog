@@ -12,25 +12,21 @@ userInformation.post('/user-information', urlencodedParser, (req, res) => {
   if (!req.body) {
     return res.sendStatus(500);
   }
-  Users.findOne({ where: { email: req.body.data.email } })
+  Users.findOne({ where: { id: req.body.data.id } })
     .then((user) => {
       if (user instanceof Users) {
-        const firstNameNew = (user.firstName === req.body.data.firstName)
-          ? user.firstName : req.body.firstName;
         Users.update({
           firstName: req.body.data.firstName,
           lastName: req.body.data.lastName,
-          /*          email: user.email === req.body.data.email ? user.email : req.body.email, */
-          password: req.body.data.password,
-          phoneNumber: req.body.phoneNumber,
-          address: req.body.address,
+          password: req.body.data.passwordNew,
+          email: req.body.data.email,
+          phoneNumber: req.body.data.phoneNumber,
+          address: req.body.data.address,
         }, {
-          where: { email: req.body.data.email },
+          where: { id: req.body.data.id },
         });
-
-        console.log(user.firstName, req.body.data.firstName,
-          user.firstName === req.body.data.firstName);
-      }
+        res.send(req.body.data);
+      } else res.send(null);
     });
   return null;
 });

@@ -4,14 +4,14 @@ import serverUrl from '../../../../common/constants/urls';
 const usersPath = '/users';
 
 async function getUsers(
-  email, updateDataUsers, setError,
+  id, updateDataUsers, setError,
 ) {
   try {
     const response = await axios.get(`${serverUrl}${usersPath}`);
     const result = response.data;
-    const oneUser = result.filter((user) => user.email === email)[0];
+    const oneUser = result.filter((user) => user.id === id)[0];
     updateDataUsers(
-      oneUser.firstName, oneUser.lastName, oneUser.email,
+      oneUser.id, oneUser.firstName, oneUser.lastName, oneUser.email,
       oneUser.phoneNumber, oneUser.address, true, oneUser.password,
     );
     return oneUser;

@@ -12,24 +12,6 @@ describe('Items API', () => {
 
   const data = [];
 
-  const clientName = 'Kristina';
-  const clientPhone = '+375293335577';
-  const clientAddress = 'city Minsk';
-  const clientMessage = 'Notes';
-  data.catalogItemsReducer = [
-    {
-      id: 1,
-      description: 'Светильник потолочный Box Silver',
-      price: 163,
-      counter: 1,
-      sum: 1 * 163,
-      clientName,
-      clientPhone,
-      clientAddress,
-      clientMessage,
-    },
-  ];
-
   test('it returns true when props email s not null', async () => {
     expect.assertions(1);
     const expected = true;
