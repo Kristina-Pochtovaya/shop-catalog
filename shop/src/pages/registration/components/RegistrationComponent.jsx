@@ -15,32 +15,20 @@ import setClassErrorById from '../../../common/untils/setClassErrorById';
 import executeFunctionsIfNoErrorsLoginRegistration from '../../../common/untils/executeFunctionsIfNoErrorsLoginRegistration';
 import setErrorNotNullGroupsRegistration from '../utils/setErrorNotNullGroupsRegistration';
 import ButtonLogin from '../../../common/button/components/ButtonLoginComponent';
+import inputRegistrationArray from '../constants/inputRegistrationArray';
+import setInitialValue from '../utils/setInitialValue';
 
 class Registration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       firstName: '',
-      ClassFirstNameInput: 'firtNameInput',
-      ClassFirstNameSymbol: 'errorSymbolFirtName',
       lastName: '',
-      ClassLastNameInput: 'lastNameInput',
-      ClassLastNameSymbol: 'errorSymbolLastName',
       email: '',
-      ClassEmailInput: 'emailRegistrationInput',
-      ClassEmailSymbol: 'errorSymbolRegistrationEmail',
       phoneNumber: '+375(__)___-__-__',
-      clientPhoneInput: 'phoneRegistrationInput',
-      clientPhoneSymbol: 'errorSymbolRegistrationPhone',
       address: '',
-      clientAddresInput: 'addressRegistrationInput',
-      clientAddresSymbol: 'errorSymbolRegistrationAddress',
       password: '',
-      ClassPasswordNewInput: 'passwordNewInputRegistration',
-      ClassPasswordNewSymbol: 'errorSymbolPasswordNewRegistration',
       passwordNewRepeat: '',
-      ClassPasswordRepeatInput: 'passwordNewRepeatInputRegistration',
-      ClassPasswordRepeatSymbol: 'errorSymbolPasswordNewRepeatRegistration',
       errorLength: 'errorlengthString',
     };
   }
@@ -52,7 +40,7 @@ class Registration extends React.Component {
     if (name === 'address') { this.setState({ address: value }); }
     if (name === 'password') { this.setState({ password: value }); }
     if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
-    if (name === 'PHONE') { this.setState({ phoneNumber: formatPhoneNumber(value) }); }
+    if (name === 'phone') { this.setState({ phoneNumber: formatPhoneNumber(value) }); }
   }
 
   render() {
@@ -89,6 +77,33 @@ class Registration extends React.Component {
         <div className="registration-wrap">
           <h2> Регистрация </h2>
           <form className="registration">
+            {inputRegistrationArray.map((input) => (
+              <div className={input.name} key={input.name}>
+                <p className={input.classNameOfString} key={input.classNameOfString}>
+                  {input.nameOfString}
+                </p>
+                <InputWitchCkeckingNotNull
+                  key={input.className}
+                  initialValue={setInitialValue(input.name, firstName, lastName, email,
+                    phoneNumber, address, password, passwordNewRepeat)}
+                  type={input.type}
+                  name={input.name}
+                  classInput={input.className}
+                  classSymbol={input.classNameSymbol}
+                  updateData={this.updateData}
+                  removeErrorNotNull={input.removeErrorNotNull ? removeErrorNotNull : ''}
+                  removeErrorLength={input.removeErrorLength ? removeErrorLength : ''}
+                  classerrorLength={input.classerrorLength ? errorLength : ''}
+                  minLength={input.minLength ? '13' : ''}
+                  maxLength={input.maxLength ? '13' : ''}
+                  placeholder={input.placeholder ? '+375 (__) ___-__-__' : ''}
+                  updatePhone={input.onFocus ? this.updatePhone : ''}
+                  classNameOfString={input.classNameOfString}
+                  nameOfString={input.nameOfString}
+                />
+                {input.name === 'passwordNew' && <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>}
+              </div>
+            ))}
             <div className="firstName">
               <p className="firstNameString -required">Имя:</p>
               <InputWitchCkeckingNotNull
@@ -133,7 +148,7 @@ class Registration extends React.Component {
               <InputWitchCkeckingNotNull
                 initialValue={phoneNumber}
                 type="tel"
-                name="PHONE"
+                name="phone"
                 classInput={clientPhoneInput}
                 classSymbol={clientPhoneSymbol}
                 updateData={this.updateData}

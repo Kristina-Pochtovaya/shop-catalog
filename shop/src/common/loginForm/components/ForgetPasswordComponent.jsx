@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import setErrorNotNull from '../../untils/setErrorNotNull';
 import checkIfUserExists from '../../untils/checkIfUserExists';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
 import ButtonForPassword from '../../button/components/ButtonForPasswordComponent';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
+import buttonForPasswordArray from '../constants/buttonForPasswordArray';
 
 class ForgetPassword extends React.Component {
   constructor(props) {
@@ -24,6 +24,11 @@ class ForgetPassword extends React.Component {
        ? checkIfUserExists(pages, onEnter, onLogin, history)
        : setErrorNotNull(emailInput, emailSymbol);
    };
+
+   link = () => {
+     const { history } = this.props;
+     history.push('/registration');
+   }
 
    render() {
      const {
@@ -48,37 +53,18 @@ class ForgetPassword extends React.Component {
              onEnterEmail={onEnterEmail}
            />
          </div>
-         <div
-           type="button"
-           className=""
-         >
+         {buttonForPasswordArray.map((button) => (
            <ButtonForPassword
-             className="entranceButton"
-             handleButtonClick={this.handleButtonClick}
-             onEnter=""
-             onLogin=""
+             key={button.className}
+             className={button.className}
+             handleButtonClick={button.handleButtonClick ? this.handleButtonClick : ''}
+             onEnter={button.onEnter ? onEnter : ''}
+             onLogin={button.onLogin ? onLogin : ''}
+             link={button.link ? this.link : ''}
            >
-             Отправить
+             {button.text}
            </ButtonForPassword>
-         </div>
-         <ButtonForPassword
-           className="forgotPasswordButton"
-           handleButtonClick=""
-           onEnter={onEnter}
-           onLogin={onLogin}
-         >
-           Войти
-         </ButtonForPassword>
-         <Link to="/registration">
-           <ButtonForPassword
-             className="registrationButton"
-             handleButtonClick=""
-             onEnter=""
-             onLogin={onLogin}
-           >
-             Регистрация
-           </ButtonForPassword>
-         </Link>
+         ))}
        </form>
      );
    }

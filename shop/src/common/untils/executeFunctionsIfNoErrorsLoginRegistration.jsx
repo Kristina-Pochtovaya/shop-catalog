@@ -1,5 +1,5 @@
 const executeFunctionsIfNoErrorsLoginRegistration = (
-  onEnter, onLogin, history, id = '', onAdd = '', result = '', clientLogin = '',
+  onEnter, onLogin, history, onAdd = '', result = '',
 ) => {
   onEnter(false, true) && onLogin(false, false, false)
   && history.push('/personal');

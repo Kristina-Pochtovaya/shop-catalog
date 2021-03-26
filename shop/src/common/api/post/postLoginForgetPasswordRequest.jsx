@@ -23,10 +23,10 @@ async function postLoginForgetPassword(
     }
     const response = await axios.post(`${serverUrl}${loginPath}`, payload);
     const result = response.data;
-    if (!updateId) {
+    if (updateId !== '') {
       updateId(response.data.id);
     }
-    if (!onEnterEmail) {
+    if (onEnterEmail !== '') {
       onEnterEmail(response.data.email, response.data.id);
     }
     return result;

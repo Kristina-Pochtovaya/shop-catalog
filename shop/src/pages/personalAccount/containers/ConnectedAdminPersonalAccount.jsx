@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import AdminPersonalAccount from '../components/AdminPersonalAccountComponent';
+import WithRouterAddCategoryPage from './WithRouterAdminPersonalAccountComponent';
 import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
 
 const ConnectedAdminPersonalAccount = connect(
@@ -20,6 +20,6 @@ const ConnectedAdminPersonalAccount = connect(
       },
     }),
   }),
-)(AdminPersonalAccount);
+)(WithRouterAddCategoryPage);
 
 export default ConnectedAdminPersonalAccount;

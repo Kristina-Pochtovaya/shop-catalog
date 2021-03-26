@@ -1,5 +1,4 @@
 import React from 'react';
-import setErrorNotNull from '../../../common/untils/setErrorNotNull';
 import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
 import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
 import PopUp from '../../../common/popup/components/PopUpComponent';
@@ -9,7 +8,8 @@ import postChangeUserInformation from '../api/post/postChangeUserInformation';
 import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
 import setErrorNotNullGroupsPersonalInformation from '../utils/setErrorNotNullGroupsPersonalInformation';
 import removeErrorLength from '../../../common/untils/removeErrorLength';
-import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
+import inputPersonalInformationArray from '../constants/inputPersonalInformationArray';
+import setInitialValue from '../utils/setInitialValue';
 
 class PersonaIformation extends React.Component {
   _isMounted = false;
@@ -19,22 +19,12 @@ class PersonaIformation extends React.Component {
     this.state = {
       id: '',
       firstName: '',
-      firstNameInput: 'firstNameInput',
-      firstNameSymbol: 'firstNameSymbol',
       lastName: '',
-      lastNameInput: 'lastNameInput',
-      lastNameSymbol: 'lastNameSymbol',
       email: '',
-      emailInput: 'emailInput',
-      emailSymbol: 'emailSymbol',
       phoneNumber: '+375(__)___-__-__',
       address: '',
       passwordNew: '',
-      passwordNewInput: 'passwordNewInput',
-      passwordNewSymbol: 'errorSymbolPasswordNew',
       passwordNewRepeat: '',
-      passwordRepeatInput: 'passwordNewRepeatInput',
-      passwordRepeatSymbol: 'errorSymbolPasswordNewRepeat',
       popupSmthWentWrongActive: true,
       isLoading: false,
       ErrorMessage: '',
@@ -82,7 +72,7 @@ class PersonaIformation extends React.Component {
     if (name === 'email') { this.setState({ email: value }); }
     if (name === 'passwordNew') { this.setState({ passwordNew: value }); }
     if (name === 'passwordNewRepeat') { this.setState({ passwordNewRepeat: value }); }
-    if (name === 'PHONE') { this.setState({ phoneNumber: formatPhoneNumber(value) }); }
+    if (name === 'phone') { this.setState({ phoneNumber: formatPhoneNumber(value) }); }
     if (name === 'address') { this.setState({ address: value }); }
   }
 
@@ -90,13 +80,8 @@ class PersonaIformation extends React.Component {
 
   render() {
     const {
-      firstName, firstNameInput, firstNameSymbol,
-      lastName, lastNameInput, lastNameSymbol,
-      email, emailInput, emailSymbol,
-      phoneNumber, address, id, errorLength,
-      passwordNew, passwordNewInput, passwordNewSymbol,
-      passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol,
-      popupSmthWentWrongActive, isLoading, ErrorMessage,
+      firstName, lastName, email, phoneNumber, address, id, errorLength, passwordNew,
+      passwordNewRepeat, popupSmthWentWrongActive, isLoading, ErrorMessage,
     } = this.state;
 
     const { setIsPersonalInformationVisible } = this.props;
@@ -108,12 +93,8 @@ class PersonaIformation extends React.Component {
           id, firstName, lastName, email, passwordNew, phoneNumber, address,
         ); setIsPersonalInformationVisible(false);
       } else {
-        setErrorNotNullGroupsPersonalInformation(
-          firstName, firstNameInput, firstNameSymbol, lastName, lastNameInput, lastNameSymbol,
-          email, emailInput, emailSymbol, passwordNew, passwordNewInput, passwordNewSymbol,
-          passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol, setErrorNotNull,
-          setErrorIncorrectLength, errorLength,
-        );
+        setErrorNotNullGroupsPersonalInformation(firstName, lastName, email, passwordNew,
+          passwordNewRepeat, errorLength);
       }
     }
 
@@ -136,99 +117,33 @@ class PersonaIformation extends React.Component {
     return (
       <div className="personalInformation-wrap">
         <form className="personalInformation">
-          <div className="firstName">
-            <p className="firstNameString -required">Имя:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={firstName}
-              type="text"
-              name="firstName"
-              classInput={firstNameInput}
-              classSymbol={firstNameSymbol}
-              updateData={this.updateData}
-              removeErrorNotNull={removeErrorNotNull}
-            />
-          </div>
-          <div className="lastName">
-            <p className="lastNameString -required">Фамилия:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={lastName}
-              type="text"
-              name="lastName"
-              classInput={lastNameInput}
-              classSymbol={lastNameSymbol}
-              updateData={this.updateData}
-              removeErrorNotNull={removeErrorNotNull}
-            />
-          </div>
-          <div className="email">
-            <p className="emailString -required">Email:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={email}
-              type="email"
-              name="email"
-              classInput={emailInput}
-              classSymbol={emailSymbol}
-              updateData={this.updateData}
-              removeErrorNotNull={removeErrorNotNull}
-            />
-          </div>
-          <div className="phone">
-            <p className="phoneString">Телефон:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={phoneNumber}
-              type="tel"
-              name="PHONE"
-              classInput="phoneInput"
-              classSymbol=""
-              updateData={this.updateData}
-              removeErrorNotNull=""
-              removeErrorLength=""
-              classerrorLength=""
-              onEnterEmail=""
-              minLength="13"
-              maxLength="13"
-              placeholder='+375 (__) ___-__-__"'
-              onFocus={this.updatePhone}
-            />
-          </div>
-          <div className="address">
-            <p className="addressString">Адрес:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={address}
-              type="text"
-              name="address"
-              classInput="addressInput"
-              classSymbol=""
-              updateData={this.updateData}
-            />
-          </div>
-          <div className="passwordNew">
-            <p className="passwordNewString -required">Пароль:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={passwordNew}
-              type="password"
-              name="passwordNew"
-              classInput={passwordNewInput}
-              classSymbol={passwordNewSymbol}
-              updateData={this.updateData}
-              removeErrorNotNull={removeErrorNotNull}
-              removeErrorLength={removeErrorLength}
-              classerrorLength={errorLength}
-            />
-            <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
-          </div>
-          <div className="passwordNewRepeat">
-            <p className="passwordNewRepeatString -required">Повторите пароль:</p>
-            <InputWitchCkeckingNotNull
-              initialValue={passwordNewRepeat}
-              type="password"
-              name="passwordNewRepeat"
-              classInput={passwordRepeatInput}
-              classSymbol={passwordRepeatSymbol}
-              updateData={this.updateData}
-              removeErrorNotNull={removeErrorNotNull}
-            />
-          </div>
+          {inputPersonalInformationArray.map((input) => (
+            <div className={input.name} key={input.name}>
+              <p className={input.classNameOfString} key={input.classNameOfString}>
+                {input.nameOfString}
+              </p>
+              <InputWitchCkeckingNotNull
+                key={input.className}
+                initialValue={setInitialValue(input.name, firstName, lastName, email,
+                  phoneNumber, address, passwordNew, passwordNewRepeat)}
+                type={input.type}
+                name={input.name}
+                classInput={input.className}
+                classSymbol={input.classNameSymbol}
+                updateData={this.updateData}
+                removeErrorNotNull={input.removeErrorNotNull ? removeErrorNotNull : ''}
+                removeErrorLength={input.removeErrorLength ? removeErrorLength : ''}
+                classerrorLength={input.classerrorLength ? errorLength : ''}
+                minLength={input.minLength ? '13' : ''}
+                maxLength={input.maxLength ? '13' : ''}
+                placeholder={input.placeholder ? '+375 (__) ___-__-__' : ''}
+                updatePhone={input.onFocus ? this.updatePhone : ''}
+                classNameOfString={input.classNameOfString}
+                nameOfString={input.nameOfString}
+              />
+              {input.name === 'passwordNew' && <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>}
+            </div>
+          ))}
           <button
             type="button"
             className="changePasswordButton"

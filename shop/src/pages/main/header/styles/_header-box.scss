@@ -56,18 +56,7 @@ $colorGreenHeader: #e6fae7;
 
       cursor: pointer;
     }
-  }
-
-  .personalAccountIcon{
-    position: absolute;
-    top: 19px;
-    right: 153px;
-
-    width: 13px;
-  
-    fill:$colorLightGreenItem;
-  }
-  
+  }  
   .personalAccountLink{
     @extend %button;
 
@@ -82,6 +71,16 @@ $colorGreenHeader: #e6fae7;
     border-color: $colorGreenHeader;
 
     cursor: pointer;
+  }
+
+  .personalAccountIcon{
+    position: absolute;
+    top: 19px;
+    right: 153px;
+
+    width: 13px;
+  
+    fill:$colorLightGreenItem;
   }
 }
 

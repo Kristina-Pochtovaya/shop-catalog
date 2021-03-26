@@ -115,14 +115,15 @@
         .errorSymbol{
           @extend %errorSymbol;
 
-          top:38px;
+          top:11px;
           right: 14px;
         }
 
         .errorSymbolPassword{
           @extend %errorSymbol;
 
-          top: 213px;
+          top:70px;
+          right: 14px;
         }
 
         .userNotFoundBlock, .incorrectLoginOrPassword{
@@ -130,7 +131,7 @@
         }
         }
 
-        .login{
+        .form{
           position: relative;
         }
 

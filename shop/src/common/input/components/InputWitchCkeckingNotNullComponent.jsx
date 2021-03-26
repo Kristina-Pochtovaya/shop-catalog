@@ -3,7 +3,7 @@ import ErrorSymbol from '../../errorSymbol/components/ErrorSymbolComponent';
 
 const InputWitchCkeckingNotNull = ({
   initialValue, classInput, classSymbol, updateData = '', type, name, removeErrorNotNull = '', removeErrorLength = '',
-  classerrorLength = '', onEnterEmail = '', minLength = '', maxLength = '', placeholder = '', onFocus = '',
+  classerrorLength = '', onEnterEmail = '', minLength = '', maxLength = '', placeholder = '', updatePhone = '',
 }) => (
   <>
     <input
@@ -20,7 +20,7 @@ const InputWitchCkeckingNotNull = ({
       minLength={minLength || ''}
       maxLength={maxLength || ''}
       placeholder={placeholder || ''}
-      onFocus={onFocus || null}
+      onFocus={() => { if (updatePhone !== '') { updatePhone(); } }}
     />
     <ErrorSymbol Class={`${classSymbol} -disabled`} />
   </>

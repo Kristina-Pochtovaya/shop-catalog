@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import InputWitchCkeckingNotNull from '../../input/components/InputWitchCkeckingNotNullComponent';
 import removeErrorNotNull from '../../untils/removeErrorNotNull';
 import processResultLoginForgetPassword from '../../untils/processResultLoginForgetPassword';
 import ButtonLogin from '../../button/components/ButtonLoginComponent';
-import setErrorNotNullGroupsLogin from '../../untils/setErrorNotNullGroupsLogin';
+import setErrorNotNullGroupsLogin from '../utils/setErrorNotNullGroupsLogin';
+import buttonLoginArray from '../constants/buttonLoginArray';
+import inputLoginArray from '../constants/inputLoginArray';
+import setInitialValue from '../utils/setInitialValue';
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,13 +14,27 @@ class Login extends React.Component {
     this.state = {
       id: '',
       clientLogin: '',
-      clientLoginInput: 'loginInput',
-      clientLoginSymbol: 'errorSymbol',
       clientPassword: '',
-      clientPasswordInput: 'passwordInput',
-      clientPasswordSymbol: 'errorSymbolPassword',
     };
   }
+
+  updateId = (value) => this.setState({ id: value });
+
+  handleButtonClick = () => {
+    const { clientLogin, clientPassword } = this.state;
+    const {
+      onLogin, onEnter, history, onAdd, onEnterEmail,
+    } = this.props;
+    (clientLogin && clientPassword)
+      ? processResultLoginForgetPassword(
+        onEnter, onLogin, history, onAdd, onEnterEmail, clientLogin, clientPassword, this.updateId,
+      ) : setErrorNotNullGroupsLogin(clientLogin, clientPassword);
+  };
+
+   link = () => {
+     const { history } = this.props;
+     history.push('/registration');
+   };
 
   updateData = (value, name) => {
     if (name === 'clientLogin') { this.setState({ clientLogin: value }); }
@@ -26,82 +42,39 @@ class Login extends React.Component {
   }
 
   render() {
-    const updateId = (value) => this.setState({ id: value });
-    const {
-      clientLogin, clientLoginInput, clientLoginSymbol,
-      clientPassword, clientPasswordInput, clientPasswordSymbol, id,
-    } = this.state;
+    const { clientLogin, clientPassword, id } = this.state;
+    const { onLogin, onEnterEmail } = this.props;
 
-    const {
-      onLogin, onEnter, history, onAdd, onEnterEmail,
-    } = this.props;
-    function handleButtonClick() {
-      clientLogin && clientPassword
-        ? processResultLoginForgetPassword(
-          onEnter, onLogin, history, id, onAdd, onEnterEmail, clientLogin, clientPassword,
-          updateId,
-        )
-        : setErrorNotNullGroupsLogin(clientLogin, clientLoginInput, clientLoginSymbol,
-          clientPassword, clientPasswordInput, clientPasswordSymbol);
-    }
     return (
       <form className="form">
         <p id="incorrectLoginOrPassword" className="userNotFoundBlock -disabled">Пользователя с таким email не существует или неверный пароль</p>
-        <div className="login">
-          <p className="loginString -required">Email:</p>
+        {inputLoginArray.map((input) => (
           <InputWitchCkeckingNotNull
-            initialValue={clientLogin}
-            type="email"
-            name="clientLogin"
-            classInput={clientLoginInput}
-            classSymbol={clientLoginSymbol}
+            key={input.className}
+            initialValue={setInitialValue(input.name, clientLogin, clientPassword)}
+            type={input.type}
+            name={input.name}
+            classInput={input.className}
+            classSymbol={input.classNameSymbol}
             updateData={this.updateData}
             removeErrorNotNull={removeErrorNotNull}
           />
-        </div>
-        <div className="password">
-          <p className="passwordString -required">Пароль:</p>
-          <InputWitchCkeckingNotNull
-            initialValue={clientPassword}
-            type="password"
-            name="clientPassword"
-            classInput={clientPasswordInput}
-            classSymbol={clientPasswordSymbol}
-            updateData={this.updateData}
-            removeErrorNotNull={removeErrorNotNull}
-          />
-        </div>
-        <ButtonLogin
-          className="entranceButton"
-          handleButtonClick={handleButtonClick}
-          onLogin=""
-          onEnterEmail=""
-          clientLogin=""
-        >
-          Войти
-        </ButtonLogin>
-        <ButtonLogin
-          className="forgotPasswordButton"
-          handleButtonClick=""
-          onLogin={onLogin}
-          onEnterEmail={onEnterEmail}
-          clientLogin={clientLogin}
-        >
-          Забыли пароль?
-        </ButtonLogin>
-        <Link to="/registration">
+        ))}
+        {buttonLoginArray.map((button) => (
           <ButtonLogin
-            className="registrationButton"
-            handleButtonClick=""
-            onLogin={onLogin}
-            onEnterEmail=""
-            clientLogin=""
+            key={button.className}
+            className={button.className}
+            handleButtonClick={button.handleButtonClick ? this.handleButtonClick : ''}
+            onEnterEmail={button.onEnterEmail ? onEnterEmail : ''}
+            onLogin={button.onLogin ? onLogin : ''}
+            link={button.link ? this.link : ''}
+            clientLogin={button.clientLogin ? clientLogin : ''}
+            id={id}
           >
-            Регистрация
+            {button.text}
           </ButtonLogin>
-        </Link>
+        ))}
       </form>
-
     );
   }
 }

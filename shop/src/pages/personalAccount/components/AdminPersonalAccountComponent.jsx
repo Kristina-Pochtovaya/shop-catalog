@@ -1,11 +1,18 @@
 import { React, useState } from 'react';
-import { Link } from 'react-router-dom';
 import ConnectedImageUpload from './PhotoComponent';
-import AdminPersonalAccountRows from './AdminPersonalAccountRowsComponent';
+import WithRouterAdminPersonalAccount from '../containers/WithRouterAdminPersonalAccountRowsComponent';
 import ConnectedPersonaIformation from '../containers/ConnectedPersonaIformation';
+import buttonAdminPageArray from '../constants/buttonAdminPageArray';
 
-const AdminPersonalAccount = ({ onEnter, onLogin }) => {
+const AdminPersonalAccount = ({ onEnter, onLogin, history }) => {
   const [isPersonalInformationVisible, setIsPersonalInformationVisible] = useState(false);
+
+  const handleButtonOnClick = (className) => {
+    if (className === 'categoryColumn') { history.push('./edit-category'); }
+    if (className === 'catalogOfGoodsColumn') { history.push('./edit-products'); }
+    if (className === 'personalDataColumn') { setIsPersonalInformationVisible(true); }
+    if (className === 'exitButton') { history.push('./main-page'); onEnter(true, false); onLogin(false, false, false); }
+  };
 
   return (
     <div className="admin-box">
@@ -15,52 +22,29 @@ const AdminPersonalAccount = ({ onEnter, onLogin }) => {
           <div className="adminPhotoColumn">
             <ConnectedImageUpload />
           </div>
-          <Link to="/edit-category" className="exitLink">
+          {buttonAdminPageArray.map((button) => (
+            button.type === 'column' && (
             <button
+              key={button.className}
+              className={button.className}
               type="button"
-              className="categoryColumn"
+              onClick={() => handleButtonOnClick(button.className)}
             >
-              Категории
+              {button.text}
             </button>
-          </Link>
-          <Link to="/edit-products" className="exitLink">
-            <button
-              type="button"
-              className="catalogOfGoodsColumn"
-            >
-              Каталог товаров
-            </button>
-          </Link>
-          <button
-            type="button"
-            className="personalDataColumn"
-            onClick={() => setIsPersonalInformationVisible(true)}
-          >
-            Личные данные
-          </button>
-          <Link to="/main-page" className="exitLink">
-            <button
-              type="button"
-              className="exitButton"
-              onClick={() => {
-                onEnter(true, false); onLogin(false, false, false);
-              }}
-            >
-              Выйти
-            </button>
-          </Link>
+            )
+          ))}
         </div>
         {!isPersonalInformationVisible ? (
-          <AdminPersonalAccountRows
+          <WithRouterAdminPersonalAccount
             setIsPersonalInformationVisible={setIsPersonalInformationVisible}
           />
-        )
-          : (
-            <ConnectedPersonaIformation
-              className="connectedPersonaIformation"
-              setIsPersonalInformationVisible={setIsPersonalInformationVisible}
-            />
-          )}
+        ) : (
+          <ConnectedPersonaIformation
+            className="connectedPersonaIformation"
+            setIsPersonalInformationVisible={setIsPersonalInformationVisible}
+          />
+        )}
       </div>
     </div>
   );
