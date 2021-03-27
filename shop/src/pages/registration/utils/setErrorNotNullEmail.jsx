@@ -1,9 +1,9 @@
-function setErrorNotNullLastName() {
-  const newClassInput = document.querySelector('.emailInput');
-  const newClassSymbol = document.querySelector('.emailSymbol');
+function setErrorNotNullEmail() {
+  const newClassInput = document.querySelector('.emailRegistrationInput');
+  const newClassSymbol = document.querySelector('.errorSymbolRegistrationEmail');
 
-  newClassInput.setAttribute('class', 'emailInput -notNull');
-  newClassSymbol.setAttribute('class', 'emailSymbol');
+  newClassInput.setAttribute('class', 'emailRegistrationInput -notNull');
+  newClassSymbol.setAttribute('class', 'errorSymbolRegistrationEmail');
 }
 
-export default setErrorNotNullLastName;
+export default setErrorNotNullEmail;

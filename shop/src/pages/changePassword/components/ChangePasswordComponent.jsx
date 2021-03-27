@@ -9,8 +9,8 @@ import setErrorNotNullGroupsChangePassword from '../utils/setErrorNotNullGroupsC
 import ButtonForPassword from '../../../common/button/components/ButtonForPasswordComponent';
 import setClassErrorById from '../../../common/untils/setClassErrorById';
 import postChangePasswordRequest from '../api/post/postChangePasswordRequest';
-import setErrorNotNull from '../../../common/untils/setErrorNotNull';
-import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
+import inputChangePasswordArray from '../constants/inputChangePasswordArray';
+import setInitialValue from '../utils/setInitialValue';
 
 class ChangePassword extends React.Component {
   constructor(props) {
@@ -18,14 +18,8 @@ class ChangePassword extends React.Component {
     const { pages } = this.props;
     this.state = {
       clientEmail: pages.loginPersonalAccountReducer.clientEmail,
-      clientEmailInput: 'emailChangePasswordInput',
-      clientEmailSymbol: 'emailChangePasswordErrorSymbol',
       passwordNew: '',
-      passwordNewInput: 'passwordNewInput',
-      passwordNewSymbol: 'errorSymbolPasswordNew',
       passwordNewRepeat: '',
-      passwordRepeatInput: 'passwordNewRepeatInput',
-      passwordRepeatSymbol: 'errorSymbolPasswordNewRepeat',
       errorLength: 'errorlengthString',
     };
   }
@@ -55,9 +49,7 @@ class ChangePassword extends React.Component {
 
   render() {
     const {
-      clientEmail, clientEmailInput, clientEmailSymbol,
-      passwordNew, passwordNewInput, passwordNewSymbol,
-      passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol, errorLength,
+      clientEmail, passwordNew, passwordNewRepeat, errorLength,
     } = this.state;
     const { history } = this.props;
 
@@ -66,9 +58,8 @@ class ChangePassword extends React.Component {
             && (passwordNew === passwordNewRepeat) && (passwordNew.length >= 9)
         ? processResultChangePassword(clientEmail, passwordNew, passwordNewRepeat, history,
           setClassErrorById, postChangePasswordRequest)
-        : setErrorNotNullGroupsChangePassword(clientEmail, clientEmailInput, clientEmailSymbol,
-          passwordNew, passwordNewInput, passwordNewSymbol, passwordNewRepeat, passwordRepeatInput,
-          passwordRepeatSymbol, errorLength, setErrorNotNull, setErrorIncorrectLength);
+        : setErrorNotNullGroupsChangePassword(clientEmail, passwordNew, passwordNewRepeat,
+          errorLength);
     }
     return (
       <>
@@ -77,45 +68,29 @@ class ChangePassword extends React.Component {
           <h2> Смена пароля </h2>
           <form className="changePassword">
             <p id="notRealUser" className="userNotFoundBlock -disabled">Пользователя с таким email не существует</p>
-            <div className="email">
-              <p className="emailString -required">Email:</p>
-              <InputWitchCkeckingNotNull
-                initialValue={clientEmail}
-                type="email"
-                name="clientEmail"
-                classInput={clientEmailInput}
-                classSymbol={clientEmailSymbol}
-                updateData={this.updateData}
-                removeErrorNotNull={removeErrorNotNull}
-              />
-            </div>
-            <div className="passwordNew">
-              <p className="passwordNewString -required">Пароль:</p>
-              <InputWitchCkeckingNotNull
-                initialValue={passwordNew}
-                type="password"
-                name="passwordNew"
-                classInput={passwordNewInput}
-                classSymbol={passwordNewSymbol}
-                updateData={this.updateData}
-                removeErrorNotNull={removeErrorNotNull}
-                removeErrorLength={removeErrorLength}
-                classerrorLength={errorLength}
-              />
-              <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>
-            </div>
-            <div className="passwordNewRepeat">
-              <p className="passwordNewRepeatString -required">Повторите пароль:</p>
-              <InputWitchCkeckingNotNull
-                initialValue={passwordNewRepeat}
-                type="password"
-                name="passwordNewRepeat"
-                classInput={passwordRepeatInput}
-                classSymbol={passwordRepeatSymbol}
-                updateData={this.updateData}
-                removeErrorNotNull={removeErrorNotNull}
-              />
-            </div>
+            {inputChangePasswordArray.map((input) => (
+              <div className={input.name} key={input.name}>
+                <p className={input.classNameOfString} key={input.classNameOfString}>
+                  {input.nameOfString}
+                </p>
+                <InputWitchCkeckingNotNull
+                  key={input.className}
+                  initialValue={setInitialValue(input.name, clientEmail, passwordNew,
+                    passwordNewRepeat)}
+                  type={input.type}
+                  name={input.name}
+                  classInput={input.className}
+                  classSymbol={input.classNameSymbol}
+                  updateData={this.updateData}
+                  removeErrorNotNull={input.removeErrorNotNull ? removeErrorNotNull : ''}
+                  removeErrorLength={input.removeErrorLength ? removeErrorLength : ''}
+                  classerrorLength={input.classerrorLength ? errorLength : ''}
+                  classNameOfString={input.classNameOfString}
+                  nameOfString={input.nameOfString}
+                />
+                {input.name === 'passwordNew' && <p className={`${errorLength} -disabled`}>Пароль должен быть не менее 9 символов</p>}
+              </div>
+            ))}
             <ButtonForPassword
               className="changePasswordButton"
               handleButtonClick={handleButtonClick}

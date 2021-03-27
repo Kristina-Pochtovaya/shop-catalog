@@ -34,6 +34,10 @@
     cursor: pointer;
   }
 
+  .passwordNewRepeat{
+    position: relative;
+  }
+
   .errorSymbolFirtName{
     @extend %errorSymbol;
     @extend %errorSymbolChangePassword;
@@ -81,7 +85,7 @@
     @extend %errorSymbol;
     @extend %errorSymbolChangePassword;
 
-    top: 600px;
+    top: 36px;
   }
 
   .existingUserStringBlock{

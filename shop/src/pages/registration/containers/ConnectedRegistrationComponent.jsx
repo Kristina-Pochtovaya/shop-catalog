@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ENTER, LOGIN, ENTEREMAIL } from '../../../redux/actions/loginPersonalAccountActions';
-import Registration from '../components/RegistrationComponent';
+import WithRouterRegistrationComponent from './WithRouterRegistrationComponent';
 
 const ConnectedRegistration = connect(
   (state) => ({
@@ -29,6 +29,6 @@ const ConnectedRegistration = connect(
       },
     }),
   }),
-)(Registration);
+)(WithRouterRegistrationComponent);
 
 export default withRouter(ConnectedRegistration);

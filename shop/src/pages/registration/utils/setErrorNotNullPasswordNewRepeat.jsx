@@ -1,9 +1,9 @@
 function setErrorNotNullPasswordNewRepeat() {
-  const newClassInput = document.querySelector('.passwordNewRepeatInput');
-  const newClassSymbol = document.querySelector('.errorSymbolPasswordNewRepeat');
+  const newClassInput = document.querySelector('.passwordNewRepeatInputRegistration');
+  const newClassSymbol = document.querySelector('.errorSymbolPasswordNewRepeatRegistration');
 
-  newClassInput.setAttribute('class', 'passwordNewRepeatInput -notNull');
-  newClassSymbol.setAttribute('class', 'errorSymbolPasswordNewRepeat');
+  newClassInput.setAttribute('class', 'passwordNewRepeatInputRegistration -notNull');
+  newClassSymbol.setAttribute('class', 'errorSymbolPasswordNewRepeatRegistration');
 }
 
 export default setErrorNotNullPasswordNewRepeat;

@@ -1,0 +1,35 @@
+const inputChangePasswordArray = [{
+  type: 'email',
+  name: 'clientEmail',
+  className: 'emailChangePasswordInput',
+  classNameSymbol: 'emailChangePasswordErrorSymbol',
+  removeErrorNotNull: true,
+  removeErrorLength: false,
+  classerrorLength: false,
+  classNameOfString: 'emailString -required',
+  nameOfString: 'Email:',
+},
+{
+  type: 'password',
+  name: 'passwordNew',
+  className: 'passwordNewInput',
+  classNameSymbol: 'errorSymbolPasswordNew',
+  removeErrorNotNull: true,
+  removeErrorLength: true,
+  classerrorLength: true,
+  classNameOfString: 'passwordNewString -required',
+  nameOfString: 'Пароль:',
+},
+{
+  type: 'password',
+  name: 'passwordNewRepeat',
+  className: 'passwordNewRepeatInput',
+  classNameSymbol: 'errorSymbolPasswordNewRepeat',
+  removeErrorNotNull: true,
+  removeErrorLength: false,
+  classerrorLength: false,
+  classNameOfString: 'passwordNewRepeatString -required',
+  nameOfString: 'Повторите пароль:',
+}];
+
+export default inputChangePasswordArray;

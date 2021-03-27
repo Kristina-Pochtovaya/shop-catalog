@@ -1,14 +1,17 @@
+import setErrorNotNullEmail from './setErrorNotNullEmail';
+import setErrorNotNullPassword from './setErrorNotNullPassword';
+import setErrorNotNullPasswordNewRepeat from './setErrorNotNullPasswordNewRepeat';
+import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
+
 const setErrorNotNullGroupsChangePassword = async (
-  clientEmail, clientEmailInput, clientEmailSymbol, passwordNew, passwordNewInput,
-  passwordNewSymbol, passwordNewRepeat, passwordRepeatInput, passwordRepeatSymbol, errorLength,
-  setErrorNotNull, setErrorIncorrectLength,
+  clientEmail, passwordNew, passwordNewRepeat, errorLength,
 ) => {
   if (!clientEmail) {
-    setErrorNotNull(clientEmailInput, clientEmailSymbol);
+    setErrorNotNullEmail();
   } if (!passwordNew) {
-    setErrorNotNull(passwordNewInput, passwordNewSymbol);
+    setErrorNotNullPassword();
   } if (passwordNew !== passwordNewRepeat) {
-    setErrorNotNull(passwordRepeatInput, passwordRepeatSymbol);
+    setErrorNotNullPasswordNewRepeat();
   }
   if (passwordNew.length < 9) {
     setErrorIncorrectLength(errorLength);

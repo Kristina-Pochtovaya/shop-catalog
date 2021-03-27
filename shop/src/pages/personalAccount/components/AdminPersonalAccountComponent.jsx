@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import ConnectedImageUpload from './PhotoComponent';
+import ConnectedImageUpload from '../containers/ConnectedImageUpload';
 import WithRouterAdminPersonalAccount from '../containers/WithRouterAdminPersonalAccountRowsComponent';
 import ConnectedPersonaIformation from '../containers/ConnectedPersonaIformation';
 import buttonAdminPageArray from '../constants/buttonAdminPageArray';
