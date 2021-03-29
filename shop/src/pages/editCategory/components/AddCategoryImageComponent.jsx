@@ -1,5 +1,7 @@
 import React from 'react';
-import noImage from '../../../assets/personal-account/noImage.png';
+import setImage from '../utils/setImage';
+import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
+import FormAddImagePhoto from '../../../common/forms/components/FormAddImagePhotoComponent';
 
 class AddCategoryImage extends React.Component {
   constructor(props) {
@@ -9,77 +11,42 @@ class AddCategoryImage extends React.Component {
     };
   }
 
-  handleSubmit(e) {
-    this.e.preventDefault();
-  }
+  handleSubmit = (e) => this.e.preventDefault();
 
-  handleImageChange(e) {
+  handleImageChange = (e) => {
     const { updateImage } = this.props;
     e.preventDefault();
-
     const reader = new FileReader();
     const file = e.target.files[0];
-
-    if (file) {
-      reader.onloadend = async () => {
-        this.setState({
-          imagePreviewUrl: reader.result,
-        });
-        updateImage(reader.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
+    setImage(reader, this.updateimagePreviewUrl, updateImage, file);
   }
+
+  updateimagePreviewUrl = (value) => this.setState({ imagePreviewUrl: value })
 
   render() {
     const { imagePreviewUrl } = this.state;
-    let $imagePreview = null;
 
+    let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = (
-        <img
-          src={imagePreviewUrl}
-          className="newImage"
-          title="newImage"
-          alt="newImage"
-        />
+        <ImagePhoto className="newImage" imagePreviewUrl={imagePreviewUrl} />
       );
     } else {
       $imagePreview = (
-        <img
-          src={noImage}
-          title="newImage"
-          alt="newImage"
-          className="noImage"
-        />
+        <ImagePhoto className="newImage" />
       );
     }
     return (
       <div className="previewComponent">
         <p className="errorNewImage -disabled" id="errorNewImage">Размер фото слишком большой</p>
-        <form onSubmit={(e) => this.handleSubmit(e)} id="upload-container">
-          {$imagePreview}
-          <div className="imgPreview">
-            <label htmlFor="newImageCatalog">
-              <p
-                className="addImageButton"
-              >
-                Выберите фото
-              </p>
-              <input
-                id="newImageCatalog"
-                name="imageCatalog"
-                className="imageCatalog"
-                type="file"
-                onChange={async (e) => {
-                  this.handleImageChange(e);
-                }}
-                multiple
-              />
-            </label>
-          </div>
-        </form>
+        <FormAddImagePhoto
+          handleSubmit={this.handleSubmit}
+          imagePreview={$imagePreview}
+          handleImageChange={this.handleImageChange}
+          htmlFor="newImageCatalog"
+          name="newImageCatalog"
+          classParagraph="addImageButton"
+        />
       </div>
     );
   }

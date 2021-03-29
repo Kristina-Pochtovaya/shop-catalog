@@ -1,9 +1,9 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import setClassErrorById from '../../../../common/untils/setClassErrorById';
+import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
 
 const userPhoto = '/avatar';
 
-async function postUserPhoto(email, avatar, setClassErrorById) {
+async function postUserPhoto(email, avatar) {
   const payload = {
     data: {
       email,
@@ -12,12 +12,7 @@ async function postUserPhoto(email, avatar, setClassErrorById) {
   };
 
   try {
-    const response = await axios.post(`${serverUrl}${userPhoto}`, {
-      payload,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = postRequestMultipartFormData(userPhoto, payload);
     const result = response.data;
     setClassErrorById('errorPhoto', 'errorPhoto -disabled');
     return result;

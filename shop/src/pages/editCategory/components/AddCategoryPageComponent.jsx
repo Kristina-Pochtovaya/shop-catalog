@@ -13,6 +13,7 @@ class AddCategoryPage extends React.Component {
       categoryName: '',
       image: '',
       titleColor: '1',
+      isAdminVisible: true,
     };
   }
 
@@ -24,40 +25,45 @@ class AddCategoryPage extends React.Component {
         history, setClassErrorById);
     }
 
-    const { categoryName, image, titleColor } = this.state;
+    const {
+      categoryName, image, titleColor, isAdminVisible,
+    } = this.state;
     const { history } = this.props;
+    window.addEventListener('load', () => this.setState({ isAdminVisible: false }));
     return (
       <>
         <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
-        <div className="addCategory-box">
-          <h2 className="">Добавить категорию</h2>
-          <div className="addCategory-container">
-            <p className="categoryNameString">Название</p>
-            <input
-              type="text"
-              className="categoryNameInput"
-              value={categoryName}
-              onChange={(e) => this.setState({ categoryName: e.target.value })}
-            />
-            <p className="categoryColorString">Цвет заголовка</p>
-            <select
-              className="imageColors"
-              onChange={(event) => this.setState({ titleColor: event.target.value })}
-            >
-              <option value="1" defaultValue>Фиолетовый</option>
-              <option value="2">Коричневый</option>
-              <option value="3">Зеленый</option>
-            </select>
-            <AddCategoryImage updateImage={this.updateImage} />
-            <button
-              className="addNewCategoryButton"
-              type="button"
-              onClick={() => handleButtonClick()}
-            >
-              Добавить
-            </button>
+        { isAdminVisible ? (
+          <div className="addCategory-box">
+            <h2 className="">Добавить категорию</h2>
+            <div className="addCategory-container">
+              <p className="categoryNameString">Название</p>
+              <input
+                type="text"
+                className="categoryNameInput"
+                value={categoryName}
+                onChange={(e) => this.setState({ categoryName: e.target.value })}
+              />
+              <p className="categoryColorString">Цвет заголовка</p>
+              <select
+                className="imageColors"
+                onChange={(event) => this.setState({ titleColor: event.target.value })}
+              >
+                <option value="1" defaultValue>Фиолетовый</option>
+                <option value="2">Коричневый</option>
+                <option value="3">Зеленый</option>
+              </select>
+              <AddCategoryImage updateImage={this.updateImage} />
+              <button
+                className="addNewCategoryButton"
+                type="button"
+                onClick={() => handleButtonClick()}
+              >
+                Добавить
+              </button>
+            </div>
           </div>
-        </div>
+        ) : null}
         <Footer />
       </>
     );

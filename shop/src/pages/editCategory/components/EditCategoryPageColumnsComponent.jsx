@@ -1,12 +1,13 @@
 import React from 'react';
 import getCategories from '../api/get/getCategories';
-import setImg from '../../../common/untils/setImg';
 import InputEditCategoryName from './InputEditCategoryNameComponent';
 import PopUp from '../../../common/popup/components/PopUpComponent';
 import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
 import EditCategoryImage from './EditCategoryImageComponent';
 import postDeleteCategory from '../api/post/postDeleteCategory';
 import postCategory from '../api/post/postCategory';
+import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
+import ButtonEditCategory from '../../../common/button/components/ButtonEditCategoryComponent';
 
 class EditCategoryPageColumns extends React.Component {
   _isMounted = false;
@@ -21,7 +22,6 @@ class EditCategoryPageColumns extends React.Component {
       ErrorMessage: '',
       popupSmthWentWrongActive: true,
       IsEditButtonVisible: true,
-      IsSaveButtonVisible: false,
       isUpdated: false,
       categoryImage: '',
       categoryName: '',
@@ -44,23 +44,30 @@ class EditCategoryPageColumns extends React.Component {
     this._isMounted = false;
   }
 
-  async handleButtonOnClick(e) {
-    const {
-      isEditActiveId, isUpdated, categoryImage, categoryName,
-    } = this.state;
-    await postCategory(
-      isEditActiveId, categoryName, categoryImage,
-    );
-    this.setState({
-      isUpdated: !isUpdated,
-    });
-  }
+   handleButtonOnSave = async (category) => {
+     const {
+       isEditActiveId, isUpdated, categoryImage, categoryName,
+     } = this.state;
+     await postCategory(isEditActiveId, categoryName, categoryImage);
+     this.setState({
+       isUpdated: !isUpdated,
+       isEditActive: false,
+       isEditActiveId: category.id,
+       IsEditButtonVisible: false,
+     });
+   }
 
-  setError = (errorMessage) => { this.setState({ ErrorMessage: errorMessage }); }
+   handleButtonOnEdit = (category) => {
+     this.setState({
+       isEditActive: true,
+       isEditActiveId: category.id,
+       IsEditButtonVisible: true,
+       categoryImage: category.image,
+       categoryName: category.category,
+     });
+   };
 
   setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
-
-  setEditActive = (value) => { this.setState({ isEditActive: value }); }
 
   updateData = (value, valueisLoading) => {
     if (this._isMounted) {
@@ -79,8 +86,8 @@ class EditCategoryPageColumns extends React.Component {
 
   render() {
     const {
-      categoriesArray, isEditActive, isEditActiveId, isLoading, isUpdated,
-      ErrorMessage, popupSmthWentWrongActive, IsEditButtonVisible, IsSaveButtonVisible,
+      categoriesArray, isEditActive, isEditActiveId, isLoading,
+      ErrorMessage, popupSmthWentWrongActive, IsEditButtonVisible,
     } = this.state;
 
     if (!isLoading) {
@@ -109,21 +116,8 @@ class EditCategoryPageColumns extends React.Component {
                   ? (
                     <>
                       {category.image
-                        ? (
-                          <img
-                            className="imageCategory"
-                            src={category.image}
-                            alt={category.imgAlt}
-                            title={category.imgTitle}
-                          />
-                        )
-                        : (
-                          <img
-                            src={setImg(category.imgAlt)}
-                            alt={category.imgAlt}
-                            title={category.imgTitle}
-                          />
-                        )}
+                        ? <ImagePhoto className="imageCategory" imagePreviewUrl={category.image} />
+                        : <ImagePhoto className="setImage" imagePreviewUrl={category.imgAlt} />}
                     </>
                   ) : (
                     <EditCategoryImage
@@ -138,53 +132,27 @@ class EditCategoryPageColumns extends React.Component {
                     <InputEditCategoryName
                       id={category.id}
                       category={category.category}
-                      setEditActive={this.setEditActive}
                       updateCategoryName={this.updateCategoryName}
                     />
-                  )
-                  : <p>{category.category}</p>}
+                  ) : <p>{category.category}</p>}
               </div>
               <div className="columnEdit">
-                {IsEditButtonVisible && isEditActive && category.id === isEditActiveId ? (
-                  <button
-                    type="button"
-                    className="editCategoryButton"
-                    onClick={() => {
-                      this.setState({
-                        isEditActive: false,
-                        isEditActiveId: category.id,
-                        IsSaveButtonVisible: true,
-                        IsEditButtonVisible: false,
-                      });
-                      this.handleButtonOnClick();
-                    }}
-                  >
-                    Сохранить
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="editCategoryButton"
-                    onClick={() => {
-                      this.setState({
-                        isEditActive: true,
-                        isEditActiveId: category.id,
-                        IsSaveButtonVisible: false,
-                        IsEditButtonVisible: true,
-                        categoryImage: category.image,
-                        categoryName: category.category,
-                      });
-                    }}
-                  >
-                    Изменить
-                  </button>
-                )}
+                <ButtonEditCategory
+                  className="editCategoryButton"
+                  category={category}
+                  handleButtonOnDelete=""
+                  handleButtonOnSave={this.handleButtonOnSave}
+                  handleButtonOnEdit={this.handleButtonOnEdit}
+                  IsEditButtonVisible={IsEditButtonVisible}
+                  isEditActive={isEditActive}
+                  isEditActiveId={isEditActiveId}
+                />
               </div>
               <div className="columnDelete">
                 <button
                   type="button"
                   className="deleteCategoryButton"
-                  onClick={() => { postDeleteCategory(category.id, this.updateAfterDelete); }}
+                  onClick={() => postDeleteCategory(category.id, this.updateAfterDelete)}
                 >
                   Удалить
                 </button>

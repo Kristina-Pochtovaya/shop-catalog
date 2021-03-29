@@ -1,11 +1,10 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import getRequest from '../../../../common/api/get/getRequest';
 
 const catalogImage = '/category';
 
 async function getCatalogImage(id, updateData) {
   try {
-    const response = await axios.get(`${serverUrl}${catalogImage}`);
+    const response = await getRequest(catalogImage);
     const result = response.data;
     const photo = result.filter((category) => category.id === id).map((item) => item.image);
     updateData(photo);

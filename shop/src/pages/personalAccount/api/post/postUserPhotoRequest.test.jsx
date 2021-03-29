@@ -1,67 +1,59 @@
 import { configure } from 'enzyme';
-import axios from 'axios';
 import Adapter from 'enzyme-adapter-react-16';
 import postUserPhoto from './postUserPhotoRequest';
-import serverUrl from '../../../../common/constants/urls';
+
+import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
+import setClassErrorById from '../../../../common/untils/setClassErrorById';
+
+jest.mock('../../../../common/api/post/postRequestMultipartFormData');
+jest.mock('../../../../common/untils/setClassErrorById');
 
 configure({ adapter: new Adapter() });
 
 describe('Items API', () => {
-  beforeAll(() => jest.spyOn(window, 'fetch'));
-
-  const data = {
-    email: 'pul@gmail.com',
-    incorrectEmail: '1254dsfgs@mail.ru',
-    avatar: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgHXjcWFcu7ajK9jYU4HfqWMAchk79nZ2eXNV1+mI',
-  };
-
-  const mySetClassIncorrectUser = jest.fn(() => true);
-
-  test('it return avatar if email is exists', async () => {
-    const DB = {
+  const res = {
+    data: [{
+      id: 1,
+      firstName: 'NEWtest',
+      lastName: 'lastNameTest',
       email: 'pul@gmail.com',
-      avatar: 'data:image/png;base64,testesttertesttsrdtswftttest',
-    };
-    const myPostUserPhoto = jest.spyOn(window, 'fetch').mockImplementation((userAvatar) => {
-      let result = '';
-      if (userAvatar.email === DB.email) {
-        result = DB.avatar;
-      } else {
-        result = userAvatar.avatar;
-      }
-      return Promise.resolve(result);
-    });
-    const response = await myPostUserPhoto(data);
-    expect(response).toEqual(DB.avatar);
+      passwordNew: '12345679',
+      phoneNumber: '12345679',
+      address: 'testAddress',
+    },
+    {
+      id: 2,
+      firstName: 'NEWtest',
+      lastName: 'lastNameTest',
+      email: 'testEmail@mail.ru',
+      passwordNew: '12345679',
+      phoneNumber: '12345679',
+      address: 'testAddress',
+    },
+    ],
+  };
+  jest.mock('../../../../common/api/get/getRequest', async () => ({
+    getRequest: jest.fn().mockImplementation(() => res),
+  }));
+  jest.mock('../../../../common/untils/setClassErrorById', () => ({
+    setClassErrorById: jest.fn().mockImplementation(() => true),
+  }));
+
+  test('it exucetes the functions postRequestMultipartFormData and setClassErrorById and return the array of objects', async () => {
+    postRequestMultipartFormData.mockReturnValueOnce(res);
+    expect(postRequestMultipartFormData).toHaveBeenCalledTimes(0);
+    expect(setClassErrorById).toHaveBeenCalledTimes(0);
+    const result = await postUserPhoto();
+    expect(result).toEqual(res.data);
+    expect(setClassErrorById).toHaveBeenCalledTimes(1);
+    expect(postRequestMultipartFormData).toHaveBeenCalledTimes(1);
   });
 
-  test('it returns false if user email is not in DB', async () => {
-    expect.assertions(1);
-    const response = await postUserPhoto(data.incorrectEmail, data.avatar, mySetClassIncorrectUser);
-    expect(response).toEqual(false);
-  });
-
-  test('it returns false when error occurs', async () => {
-    expect.assertions(1);
-    async function postUsersRolesFail(email, avatar, functiontest) {
-      const payload = {
-        data: {
-          email: 'pul@gmail.com',
-          avatar: 'data:image/png;base64,testesttertesttsrdtswftttest',
-        },
-      };
-
-      try {
-        const response = await axios.post(`${serverUrl}/avatarfail`, payload);
-        const result = response.data;
-        return result;
-      } catch (error) {
-        return false;
-      }
-    }
-
-    const error = await postUsersRolesFail(data.email);
-    await expect(error).toBe(false);
-    window.fetch.mockRestore();
+  test('it returns false if error occur and execute fucntion setClassErrorById', async () => {
+    postRequestMultipartFormData.mockReturnValueOnce();
+    expect(setClassErrorById).toHaveBeenCalledTimes(0);
+    const result = await postUserPhoto();
+    expect(result).toEqual(false);
+    expect(setClassErrorById).toHaveBeenCalledTimes(1);
   });
 });

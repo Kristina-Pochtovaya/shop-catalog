@@ -1,5 +1,5 @@
 import React from 'react';
-import getUserPhoto from '../api/get/getUserPhotoRequest';
+import getUserPhoto from '../api/get/getUserPhoto';
 import FormAddImagePhoto from '../../../common/forms/components/FormAddImagePhotoComponent';
 import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
 import setPhoto from '../utils/setPhoto';
@@ -54,6 +54,7 @@ class ImageUpload extends React.Component {
           handleImageChange={this.handleImageChange}
           htmlFor="avatar"
           name="avatar"
+          classParagraph="choosePhotoButton"
         />
       </div>
     );

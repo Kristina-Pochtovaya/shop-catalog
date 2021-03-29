@@ -1,14 +1,14 @@
 import React from 'react';
 
 const FormAddImagePhoto = ({
-  handleSubmit, imagePreview, handleImageChange, htmlFor, name,
+  handleSubmit, imagePreview, handleImageChange, htmlFor, name, classParagraph,
 }) => (
   <form onSubmit={(e) => handleSubmit(e)} id="upload-container">
     {imagePreview}
     <div className="imgPreview">
       <label htmlFor={htmlFor}>
         <p
-          className="choosePhotoButton"
+          className={classParagraph}
         >
           Выберите фото
         </p>
