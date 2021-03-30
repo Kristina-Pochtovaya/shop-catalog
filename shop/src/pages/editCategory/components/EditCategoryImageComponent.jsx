@@ -7,15 +7,13 @@ import FormEditImagePhoto from '../../../common/forms/components/FormEditImagePh
 class EditCategoryImage extends React.Component {
   constructor(props) {
     super(props);
-    const { id } = this.props;
     this.state = {
-      id,
       imagePreviewUrl: '',
     };
   }
 
   async componentDidMount() {
-    const { id } = this.state;
+    const { id } = this.props;
     await getCatalogImage(id,
       this.updateData);
   }

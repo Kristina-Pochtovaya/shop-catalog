@@ -4,16 +4,15 @@ import addRemoveScroll from '../../untils/addRemoveScroll';
 const PopUp = ({
   activeOrder, active, setActive, children,
 }) => {
-  const body = document.getElementById('body');
   if (active || activeOrder) {
-    body.setAttribute('class', '-noOverflow');
+    document.body.setAttribute('class', '-noOverflow');
   } else {
-    body.setAttribute('class', '');
+    document.body.setAttribute('class', '');
   }
   if (!activeOrder && !active) {
-    body.setAttribute('class', '');
+    document.body.setAttribute('class', '');
   } else {
-    body.setAttribute('class', '-noOverflow');
+    document.body.setAttribute('class', '-noOverflow');
   }
   return (
     <div

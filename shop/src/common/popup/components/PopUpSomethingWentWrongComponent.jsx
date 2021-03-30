@@ -4,6 +4,7 @@ import addRemoveScroll from '../../untils/addRemoveScroll';
 const PopUpSomethingWentWrong = ({ setpopupSmthWentWrongActive, text }) => (
   <div className="popupThanks-box">
     <div
+      className="popupThanksButton"
       onClick={() => {
         setpopupSmthWentWrongActive(false);
         addRemoveScroll();

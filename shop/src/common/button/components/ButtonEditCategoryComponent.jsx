@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ButtonEditCategory = ({
-  className = '', category, handleButtonOnSave = '', handleButtonOnEdit = '', handleButtonOnDelete = '',
+  className = '', category, handleButtonOnSave = '', handleButtonOnEdit = '',
   IsEditButtonVisible = false, isEditActive = false, isEditActiveId = false,
 }) => (
   <button

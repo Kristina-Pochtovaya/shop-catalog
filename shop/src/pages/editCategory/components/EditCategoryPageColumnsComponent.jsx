@@ -1,13 +1,11 @@
 import React from 'react';
 import getCategories from '../api/get/getCategories';
-import InputEditCategoryName from './InputEditCategoryNameComponent';
-import PopUp from '../../../common/popup/components/PopUpComponent';
-import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import EditCategoryImage from './EditCategoryImageComponent';
-import postDeleteCategory from '../api/post/postDeleteCategory';
+import NameColumnEditCategory from './NameColumnEditCategoryComponent';
+import PopUpErrorEditCategory from './PopUpErrorEditCategoryComponent';
+import ImageColumnEditCategory from './ImageColumnEditCategoryComponent';
 import postCategory from '../api/post/postCategory';
-import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
 import ButtonEditCategory from '../../../common/button/components/ButtonEditCategoryComponent';
+import ButtonDeleteCategory from '../../../common/button/components/ButtonDeleteCategoryComponent';
 
 class EditCategoryPageColumns extends React.Component {
   _isMounted = false;
@@ -30,13 +28,14 @@ class EditCategoryPageColumns extends React.Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    await getCategories(this.updateData, this.setError);
+    await getCategories(this.updateData);
   }
 
-  async componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { isUpdated } = this.state;
     if (prevState.isUpdated !== isUpdated) {
-      await getCategories(this.updateData, this.setError);
+      this._isMounted = true;
+      getCategories(this.updateData);
     }
   }
 
@@ -75,6 +74,8 @@ class EditCategoryPageColumns extends React.Component {
     }
   }
 
+  updateIsUpdate = (isUpdated) => this.setState({ isUpdated: !isUpdated });
+
   updateCategoryImage = (value) => this.setState({ categoryImage: value })
 
   updateCategoryName = (value) => this.setState({ categoryName: value })
@@ -85,6 +86,7 @@ class EditCategoryPageColumns extends React.Component {
   }
 
   render() {
+    const { isUpdated } = this.state;
     const {
       categoriesArray, isEditActive, isEditActiveId, isLoading,
       ErrorMessage, popupSmthWentWrongActive, IsEditButtonVisible,
@@ -95,15 +97,10 @@ class EditCategoryPageColumns extends React.Component {
     }
     if (ErrorMessage) {
       return (
-        <PopUp
-          active={popupSmthWentWrongActive}
-          setActive={this.setpopupSmthWentWrongActive}
-        >
-          <PopUpSomethingWentWrong
-            text="Попробуйте еще раз"
-            setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
-          />
-        </PopUp>
+        <PopUpErrorEditCategory
+          popupSmthWentWrongActive={popupSmthWentWrongActive}
+          setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
+        />
       );
     }
     return (
@@ -111,31 +108,22 @@ class EditCategoryPageColumns extends React.Component {
         {categoriesArray.categories.map((category) => (
           <li key={category.id}>
             <div className="columns">
-              <div className="columnImage">
-                {(isEditActive && category.id) !== isEditActiveId
-                  ? (
-                    <>
-                      {category.image
-                        ? <ImagePhoto className="imageCategory" imagePreviewUrl={category.image} />
-                        : <ImagePhoto className="setImage" imagePreviewUrl={category.imgAlt} />}
-                    </>
-                  ) : (
-                    <EditCategoryImage
-                      id={category.id}
-                      updateCategoryImage={this.updateCategoryImage}
-                    />
-                  )}
-              </div>
-              <div className="columnName">
-                {isEditActive && category.id === isEditActiveId
-                  ? (
-                    <InputEditCategoryName
-                      id={category.id}
-                      category={category.category}
-                      updateCategoryName={this.updateCategoryName}
-                    />
-                  ) : <p>{category.category}</p>}
-              </div>
+              <ImageColumnEditCategory
+                isEditActive={isEditActive}
+                id={category.id}
+                image={category.image}
+                imgAlt={category.imgAlt}
+                isEditActiveId={isEditActiveId}
+                updateCategoryImage={this.updateCategoryImage}
+                isUpdated={isUpdated}
+                updateData={this.updateData}
+              />
+              <NameColumnEditCategory
+                isEditActive={isEditActive}
+                category={category}
+                isEditActiveId={isEditActiveId}
+                updateCategoryName={this.updateCategoryName}
+              />
               <div className="columnEdit">
                 <ButtonEditCategory
                   className="editCategoryButton"
@@ -143,19 +131,18 @@ class EditCategoryPageColumns extends React.Component {
                   handleButtonOnDelete=""
                   handleButtonOnSave={this.handleButtonOnSave}
                   handleButtonOnEdit={this.handleButtonOnEdit}
+                  updateIsUpdate={this.updateIsUpdate}
+                  isUpdated={isUpdated}
                   IsEditButtonVisible={IsEditButtonVisible}
                   isEditActive={isEditActive}
                   isEditActiveId={isEditActiveId}
                 />
               </div>
               <div className="columnDelete">
-                <button
-                  type="button"
-                  className="deleteCategoryButton"
-                  onClick={() => postDeleteCategory(category.id, this.updateAfterDelete)}
-                >
-                  Удалить
-                </button>
+                <ButtonDeleteCategory
+                  category={category}
+                  updateAfterDelete={this.updateAfterDelete}
+                />
               </div>
             </div>
           </li>

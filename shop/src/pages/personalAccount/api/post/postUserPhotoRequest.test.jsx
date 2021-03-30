@@ -32,7 +32,7 @@ describe('Items API', () => {
     },
     ],
   };
-  jest.mock('../../../../common/api/get/getRequest', async () => ({
+  jest.mock('../../../../common/api/post/postRequestMultipartFormData', async () => ({
     getRequest: jest.fn().mockImplementation(() => res),
   }));
   jest.mock('../../../../common/untils/setClassErrorById', () => ({

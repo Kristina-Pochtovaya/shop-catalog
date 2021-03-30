@@ -22,7 +22,7 @@ async function postNewProduct(
   let price = '';
 
   if (productPrice.slice(-1) === '.') {
-    price = productPrice.slice(0, -6);
+    price = productPrice.slice(0, -5);
   }
 
   const inStock = productInStock === 'да' ? Boolean(true) : Boolean(false);

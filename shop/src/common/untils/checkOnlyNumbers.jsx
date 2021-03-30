@@ -1,6 +1,7 @@
 function checkOnlyNumbers(value) {
   let newValue = '';
-  if (value.slice(-1) === '.') {
+  const count = (value.match('РУБ') || []).length;
+  if (value.slice(-1) === '.' && count === 0) {
     newValue = value.slice(0, -5);
   } else {
     newValue = value;

@@ -1,18 +1,17 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import getRequest from '../../../../common/api/get/getRequest';
 
 const categoryPath = '/category';
 
 async function getCategories(
-  updateData, setError,
+  updateData,
 ) {
   try {
-    const response = await axios.get(`${serverUrl}${categoryPath}`);
+    const response = await getRequest(categoryPath);
     const result = response.data;
     updateData({ categories: result }, true);
     return result;
   } catch (error) {
-    return setError({ errorMessage: error.message });
+    return null;
   }
 }
 
