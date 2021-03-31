@@ -1,6 +1,6 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
 import transliterate from '../../../../common/untils/transliterate';
+import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
+import setClassErrorById from '../../../../common/untils/setClassErrorById';
 
 const newCategory = '/add-category';
 
@@ -31,17 +31,12 @@ async function postNewCategory(category, image, titleColor) {
   };
 
   try {
-    const response = await axios.post(`${serverUrl}${newCategory}`, {
-      payload,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    const result = response.data;
-    errorImage.setAttribute('class', 'errorNewImage -disabled');
+    const response = await postRequestMultipartFormData(newCategory, payload);
+    const result = (response.data).toString();
+    setClassErrorById('errorNewImage', 'errorNewImage -disabled');
     return result;
   } catch (error) {
-    errorImage.setAttribute('class', 'errorNewImage');
+    setClassErrorById('errorNewImage', 'errorNewImage');
     return null;
   }
 }

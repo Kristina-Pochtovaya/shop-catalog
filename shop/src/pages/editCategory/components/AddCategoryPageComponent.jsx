@@ -1,10 +1,8 @@
 import React from 'react';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
-import AddCategoryImage from './AddCategoryImageComponent';
-import postNewCategory from '../api/post/postNewCategory';
-import setClassErrorById from '../../../common/untils/setClassErrorById';
 import processResultAddNewCategory from '../utils/processResultAddNewCategory';
+import FormAddCategory from './FormAddCategoryComponent';
 
 class AddCategoryPage extends React.Component {
   constructor(props) {
@@ -19,16 +17,19 @@ class AddCategoryPage extends React.Component {
 
   updateImage = (value) => { this.setState({ image: value }); }
 
-  render() {
-    function handleButtonClick() {
-      processResultAddNewCategory(postNewCategory, categoryName, image, titleColor,
-        history, setClassErrorById);
-    }
+  updateName = (e) => { this.setState({ categoryName: e.target.value }); }
 
-    const {
-      categoryName, image, titleColor, isAdminVisible,
-    } = this.state;
-    const { history } = this.props;
+  updateColor = (e) => { this.setState({ titleColor: e.target.value }); }
+
+  handleButtonClick = () => {
+    const { categoryName, image, titleColor } = this.state;
+    const { history, isProductsUpdated, setIsProductsUpdated } = this.props;
+    processResultAddNewCategory(categoryName, image, titleColor, history, isProductsUpdated,
+      setIsProductsUpdated);
+  }
+
+  render() {
+    const { categoryName, isAdminVisible } = this.state;
     window.addEventListener('load', () => this.setState({ isAdminVisible: false }));
     return (
       <>
@@ -37,30 +38,13 @@ class AddCategoryPage extends React.Component {
           <div className="addCategory-box">
             <h2 className="">Добавить категорию</h2>
             <div className="addCategory-container">
-              <p className="categoryNameString">Название</p>
-              <input
-                type="text"
-                className="categoryNameInput"
-                value={categoryName}
-                onChange={(e) => this.setState({ categoryName: e.target.value })}
+              <FormAddCategory
+                categoryName={categoryName}
+                updateImage={this.updateImage}
+                updateName={this.updateName}
+                updateColor={this.updateColor}
+                handleButtonClick={this.handleButtonClick}
               />
-              <p className="categoryColorString">Цвет заголовка</p>
-              <select
-                className="imageColors"
-                onChange={(event) => this.setState({ titleColor: event.target.value })}
-              >
-                <option value="1" defaultValue>Фиолетовый</option>
-                <option value="2">Коричневый</option>
-                <option value="3">Зеленый</option>
-              </select>
-              <AddCategoryImage updateImage={this.updateImage} />
-              <button
-                className="addNewCategoryButton"
-                type="button"
-                onClick={() => handleButtonClick()}
-              >
-                Добавить
-              </button>
             </div>
           </div>
         ) : null}

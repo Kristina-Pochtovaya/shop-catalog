@@ -22,7 +22,7 @@ describe('Items API', () => {
   const category = 'Электротовары и свет';
   const image = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD';
   jest.mock('../../../../common/api/post/postRequestMultipartFormData', async () => ({
-    getRequest: jest.fn().mockImplementation(() => res),
+    postRequestMultipartFormData: jest.fn().mockImplementation(() => res),
   }));
   jest.mock('../../../../common/untils/setClassErrorById', () => ({
     setClassErrorById: jest.fn().mockImplementation(() => true),

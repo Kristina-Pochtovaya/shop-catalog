@@ -11,8 +11,6 @@ class AddCategoryImage extends React.Component {
     };
   }
 
-  handleSubmit = (e) => this.e.preventDefault();
-
   handleImageChange = (e) => {
     const { updateImage } = this.props;
     e.preventDefault();
@@ -33,14 +31,13 @@ class AddCategoryImage extends React.Component {
       );
     } else {
       $imagePreview = (
-        <ImagePhoto className="newImage" />
+        <ImagePhoto className="newImageEmpty" />
       );
     }
     return (
       <div className="previewComponent">
         <p className="errorNewImage -disabled" id="errorNewImage">Размер фото слишком большой</p>
         <FormAddImagePhoto
-          handleSubmit={this.handleSubmit}
           imagePreview={$imagePreview}
           handleImageChange={this.handleImageChange}
           htmlFor="newImageCatalog"

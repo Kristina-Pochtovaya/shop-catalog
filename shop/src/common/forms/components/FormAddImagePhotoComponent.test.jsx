@@ -20,13 +20,6 @@ describe('rendering', () => {
     name={name}
   />);
 
-  it('the function myHandleSubmit should be exucted after submitting the form', () => {
-    const form = component.find('#upload-container');
-    expect(myHandleSubmit.mock.calls.length).toBe(0);
-    form.simulate('submit');
-    expect(myHandleSubmit.mock.calls.length).toBe(1);
-  });
-
   it('the function myHandleImageChange should be exucted after chanching the input', () => {
     const input = component.find('.test');
     expect(myHandleImageChange.mock.calls.length).toBe(0);

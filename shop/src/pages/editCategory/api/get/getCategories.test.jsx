@@ -37,26 +37,23 @@ describe('Items API', () => {
   jest.mock('../../../../common/api/get/getRequest', async () => ({
     getRequest: jest.fn().mockImplementation(() => res),
   }));
-  const mySetError = jest.fn();
   const myUpdateData = jest.fn();
 
   test('it exucetes the functions getRequest, myUpdateData and return the array of objects', async () => {
     getRequest.mockReturnValueOnce(res);
     expect(getRequest).toHaveBeenCalledTimes(0);
     expect(myUpdateData).toHaveBeenCalledTimes(0);
-    expect(mySetError).toHaveBeenCalledTimes(0);
-    const result = await getCategories(myUpdateData, mySetError);
+    const result = await getCategories(myUpdateData);
     expect(result).toEqual(res.data);
     expect(myUpdateData).toHaveBeenCalledTimes(1);
     expect(getRequest).toHaveBeenCalledTimes(1);
-    expect(mySetError).toHaveBeenCalledTimes(0);
   });
 
-  test('it exucute  mySetError function if error occur', async () => {
+  test('should return null if error occurs', async () => {
     getRequest.mockReturnValueOnce('Error shold occur');
-    await getCategories('', mySetError);
+    const result = await getCategories();
+    expect(result).toEqual(null);
     expect(myUpdateData).toHaveBeenCalledTimes(0);
     expect(getRequest).toHaveBeenCalledTimes(1);
-    expect(mySetError).toHaveBeenCalledTimes(1);
   });
 });

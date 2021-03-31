@@ -1,9 +1,9 @@
 import React from 'react';
 
 const FormAddImagePhoto = ({
-  handleSubmit, imagePreview, handleImageChange, htmlFor, name, classParagraph,
+  imagePreview, handleImageChange, htmlFor, name, classParagraph,
 }) => (
-  <form onSubmit={(e) => handleSubmit(e)} id="upload-container">
+  <div id="upload-container">
     {imagePreview}
     <div className="imgPreview">
       <label htmlFor={htmlFor}>
@@ -24,6 +24,6 @@ const FormAddImagePhoto = ({
         />
       </label>
     </div>
-  </form>
+  </div>
 );
 export default FormAddImagePhoto;

@@ -13,15 +13,13 @@ describe('rendering LoginForm component', () => {
     component = setUp();
   });
 
-  it('Category Name should be changed if something was written in input', () => {
-    expect(component.state().categoryName).toBe('');
-    component.find('.categoryNameInput').simulate('change', { target: { value: 'testCategory' } });
-    expect(component.state().categoryName).toBe('testCategory');
+  it('should render the content of the component if isAdminVisible is true', () => {
+    expect(component.find('.addCategory-box')).toHaveLength(1);
   });
 
-  it('Color should be changed if user select another color', () => {
-    expect(component.state().titleColor).toBe('1');
-    component.find('.imageColors').simulate('change', { target: { value: '2' } });
-    expect(component.state().titleColor).toBe('2');
+  it('should not render the content of the component if isAdminVisible is set as false', () => {
+    global.open = jest.fn(() => component.setState({ isAdminVisible: false }));
+    global.open();
+    expect(component.find('.addCategory-box')).toHaveLength(0);
   });
 });

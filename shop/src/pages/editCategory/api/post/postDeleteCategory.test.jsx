@@ -1,23 +1,37 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import postDeleteCategory from './postDeleteCategory';
+import postRequest from '../../../../common/api/post/postRequest';
 
-const deleteCategory = '/delete-category';
+jest.mock('../../../../common/api/post/postRequest');
 
-async function postDeleteCategory(id, updateAfterDelete) {
-  const payload = {
-    data: {
-      id,
-    },
+configure({ adapter: new Adapter() });
+
+describe('Items API', () => {
+  const id = 1;
+  const myUpdateAfterDelete = jest.fn();
+  const res = {
+    data: [{ result: true }],
   };
+  jest.mock('../../../../common/api/post/postRequest', async () => ({
+    postRequest: jest.fn(),
+  }));
 
-  try {
-    const response = await axios.post(`${serverUrl}${deleteCategory}`, payload);
-    const result = response.data;
-    updateAfterDelete();
-    return result;
-  } catch (error) {
-    return null;
-  }
-}
+  test('it exucetes the functions postRequest  and myUpdateAfterDelete and return true', async () => {
+    postRequest.mockReturnValue(res);
+    expect(postRequest).toHaveBeenCalledTimes(0);
+    expect(myUpdateAfterDelete).toHaveBeenCalledTimes(0);
+    const result = await postDeleteCategory(id, myUpdateAfterDelete);
+    expect(result).toEqual(res.data);
+    expect(postRequest).toHaveBeenCalledTimes(1);
+    expect(myUpdateAfterDelete).toHaveBeenCalledTimes(1);
+  });
 
-export default postDeleteCategory;
+  test('it returns null if error occur and not exucute myUpdateAfterDelete function', async () => {
+    postRequest.mockReturnValueOnce();
+    expect(myUpdateAfterDelete).toHaveBeenCalledTimes(0);
+    const result = await postDeleteCategory();
+    expect(myUpdateAfterDelete).toHaveBeenCalledTimes(0);
+    expect(result).toEqual(null);
+  });
+});

@@ -138,7 +138,10 @@ export function AppShopCatalog() {
           <EditCategoryPage />
         </Route>
         <Route path="/add-category">
-          <WithRouterAddCategoryPage />
+          <WithRouterAddCategoryPage
+            setIsProductsUpdated={setIsProductsUpdated}
+            isProductsUpdated={isProductsUpdated}
+          />
         </Route>
         <Route path="/add-product">
           <AddProductPageComponent
