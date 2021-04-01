@@ -3,21 +3,21 @@ import serverUrl from '../../../../common/constants/urls';
 
 const productsEdit = '/products-edit';
 
-async function postProducts(id, image, category, categoriesArray, description, price, inStock) {
+async function postProducts(state) {
   const errorImage = document.getElementById('errorImageString');
 
-  const categoryId = categoriesArray.filter((categoryItem) => categoryItem.category === category)
+  const categoryId = state.categoriesArray
+    .filter((categoryItem) => categoryItem.category === state.productCategory)
     .map((categoryItem) => categoryItem.id);
-
   const payload = {
     data: {
-      id,
+      id: state.isEditActiveId,
       categoryId,
-      category,
-      description,
-      image,
-      price,
-      inStock,
+      category: state.productCategory,
+      description: state.productName,
+      image: state.productImage,
+      price: state.productPrice,
+      inStock: state.productInStock,
     },
   };
   try {

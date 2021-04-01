@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import AddCategoryImage from '../../editCategory/components/AddCategoryImageComponent';
@@ -9,7 +8,7 @@ import postNewProduct from '../api/post/postNewProduct';
 import getCategories from '../../editCategory/api/get/getCategories';
 import checkOnlyNumbers from '../../../common/untils/checkOnlyNumbers';
 
-class AddCategoryPage extends React.Component {
+class AddProductPage extends React.Component {
   _isMounted = false;
 
   constructor(props) {
@@ -80,7 +79,9 @@ class AddCategoryPage extends React.Component {
       categoriesArray, errorMessage, isLoading, popupSmthWentWrongActive,
       isPriceCorrect,
     } = this.state;
-    const { history, isProductsUpdated, setIsProductsUpdated } = this.props;
+    const {
+      history, isProductsUpdated, setIsProductsUpdated, pages,
+    } = this.props;
 
     if (!isLoading) {
       return <div className="-isLoading"> </div>;
@@ -102,87 +103,89 @@ class AddCategoryPage extends React.Component {
     return (
       <>
         <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
-        <div className="addProduct-box">
-          <h2 className="">Добавить товар</h2>
-          <div className="addProduct-container">
-            <p className="productCategoriesString">Категория</p>
-            <select
-              className="productsCategories"
-              value={categoryName}
-              onChange={(event) => this.setState({ categoryName: event.target.value })}
-            >
-              {categoriesArray.categories.map((category) => (
-                <option
-                  key={category.id}
-                  value={category.category}
-                >
-                  {category.category}
-                </option>
-              ))}
-            </select>
-            <p className="productNameString">Название</p>
-            <input
-              type="text"
-              className="productNameInput"
-              value={productName}
-              onChange={(e) => this.setState({ productName: e.target.value })}
-            />
-            <p className="productPriceString">Цена</p>
-            <p id="errorPrice" className="errorPrice -disabled">Цена должна содержать только цифры</p>
-            <input
-              type="text"
-              className="productPriceInput"
-              value={productPrice}
-              onChange={(e) => {
-                this.setState({
-                  productPrice: e.target.value,
+        {pages.loginPersonalAccountReducer.personAccountIsVisible ? (
+          <div className="addProduct-box">
+            <h2 className="">Добавить товар</h2>
+            <div className="addProduct-container">
+              <p className="productCategoriesString">Категория</p>
+              <select
+                className="productsCategories"
+                value={categoryName}
+                onChange={(event) => this.setState({ categoryName: event.target.value })}
+              >
+                {categoriesArray.categories.map((category) => (
+                  <option
+                    key={category.id}
+                    value={category.category}
+                  >
+                    {category.category}
+                  </option>
+                ))}
+              </select>
+              <p className="productNameString">Название</p>
+              <input
+                type="text"
+                className="productNameInput"
+                value={productName}
+                onChange={(e) => this.setState({ productName: e.target.value })}
+              />
+              <p className="productPriceString">Цена</p>
+              <p id="errorPrice" className="errorPrice -disabled">Цена должна содержать только цифры</p>
+              <input
+                type="text"
+                className="productPriceInput"
+                value={productPrice}
+                onChange={(e) => {
+                  this.setState({
+                    productPrice: e.target.value,
 
-                });
-              }}
-              onBlur={(e) => {
-                this.setState({
-                  productPrice: `${e.target.value} РУБ.`,
-                  isPriceCorrect: checkOnlyNumbers(productPrice),
-                });
-              }}
-            />
-            <p className="productInStockString">В наличии</p>
-            <select
-              className="imageColors"
-              onChange={(event) => this.setState({ productInStock: event.target.value })}
-            >
-              <option value defaultValue>да</option>
-              <option value={false}>нет</option>
-            </select>
-            <AddCategoryImage updateImage={this.updateImage} />
-            { isPriceCorrect
-              ? (
-                <button
-                  className="addNewCategoryButton"
-                  type="button"
-                  onClick={() => {
-                    handleButtonClick();
-                  }}
-                >
-                  Добавить
-                </button>
-              ) : (
-                <button
-                  className="addNewCategoryButton"
-                  type="button"
-                  onClick={() => {
-                    setErrorButtonClick();
-                  }}
-                >
-                  Добавить
-                </button>
-              )}
+                  });
+                }}
+                onBlur={(e) => {
+                  this.setState({
+                    productPrice: `${e.target.value} РУБ.`,
+                    isPriceCorrect: checkOnlyNumbers(productPrice),
+                  });
+                }}
+              />
+              <p className="productInStockString">В наличии</p>
+              <select
+                className="imageColors"
+                onChange={(event) => this.setState({ productInStock: event.target.value })}
+              >
+                <option value defaultValue>да</option>
+                <option value={false}>нет</option>
+              </select>
+              <AddCategoryImage updateImage={this.updateImage} />
+              { isPriceCorrect
+                ? (
+                  <button
+                    className="addNewCategoryButton"
+                    type="button"
+                    onClick={() => {
+                      handleButtonClick();
+                    }}
+                  >
+                    Добавить
+                  </button>
+                ) : (
+                  <button
+                    className="addNewCategoryButton"
+                    type="button"
+                    onClick={() => {
+                      setErrorButtonClick();
+                    }}
+                  >
+                    Добавить
+                  </button>
+                )}
+            </div>
           </div>
-        </div>
+        ) : null}
         <Footer />
       </>
     );
   }
 }
 
-export default withRouter(AddCategoryPage);
+export default AddProductPage;

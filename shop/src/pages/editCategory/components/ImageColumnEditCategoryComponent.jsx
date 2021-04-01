@@ -1,5 +1,5 @@
 import React from 'react';
-import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
+import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
 import EditCategoryImage from './EditCategoryImageComponent';
 
 const ImageColumnEditCategory = ({
@@ -11,7 +11,7 @@ const ImageColumnEditCategory = ({
         <>
           {image
             ? (
-              <ImagePhoto
+              <ImagePhotoCategoryProducts
                 className="imageCategory"
                 imagePreviewUrl={image}
                 isUpdated={isUpdated}
@@ -19,7 +19,7 @@ const ImageColumnEditCategory = ({
               />
             )
             : (
-              <ImagePhoto
+              <ImagePhotoCategoryProducts
                 className="setImage"
                 imagePreviewUrl={imgAlt}
                 isUpdated={isUpdated}

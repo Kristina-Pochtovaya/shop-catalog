@@ -6,7 +6,7 @@ import logo from '../../../../assets/header/logo.png';
 import basket from '../../../../assets/common/basket.png';
 
 const Header = ({
-  linkItem, link, disabled, pages, onLogin,
+  linkItem, link, disabled, pages, onLogin, setAdminVisible,
 }) => {
   const divRef = createRef();
 

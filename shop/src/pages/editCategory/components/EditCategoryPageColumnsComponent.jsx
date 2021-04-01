@@ -1,11 +1,11 @@
 import React from 'react';
 import getCategories from '../api/get/getCategories';
 import NameColumnEditCategory from './NameColumnEditCategoryComponent';
-import PopUpErrorEditCategory from './PopUpErrorEditCategoryComponent';
+import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
 import ImageColumnEditCategory from './ImageColumnEditCategoryComponent';
 import postCategory from '../api/post/postCategory';
 import ButtonEditCategory from '../../../common/button/components/ButtonEditCategoryComponent';
-import ButtonDeleteCategory from '../../../common/button/components/ButtonDeleteCategoryComponent';
+import ButtonDeleteCategoryProducts from '../../../common/button/components/ButtonDeleteCategoryProductsComponent';
 
 class EditCategoryPageColumns extends React.Component {
   _isMounted = false;
@@ -97,7 +97,7 @@ class EditCategoryPageColumns extends React.Component {
     }
     if (ErrorMessage) {
       return (
-        <PopUpErrorEditCategory
+        <PopUpErrorLoading
           popupSmthWentWrongActive={popupSmthWentWrongActive}
           setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
         />
@@ -139,8 +139,9 @@ class EditCategoryPageColumns extends React.Component {
                 />
               </div>
               <div className="columnDelete">
-                <ButtonDeleteCategory
-                  category={category}
+                <ButtonDeleteCategoryProducts
+                  item={category}
+                  category
                   updateAfterDelete={this.updateAfterDelete}
                 />
               </div>

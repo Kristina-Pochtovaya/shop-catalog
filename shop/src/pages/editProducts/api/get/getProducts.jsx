@@ -1,13 +1,10 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import getRequest from '../../../../common/api/get/getRequest';
 
 const productsPath = '/products';
 
-async function getProducts(
-  updateData, setError,
-) {
+async function getProducts(updateData, setError) {
   try {
-    const response = await axios.get(`${serverUrl}${productsPath}`);
+    const response = await getRequest(productsPath);
     const result = response.data;
     updateData({ products: result }, true);
     return result;

@@ -33,4 +33,15 @@ describe('should set dynamic src', () => {
     setPhotoImage('setImage', '');
     expect(setImg).toHaveBeenCalledTimes(1);
   });
+
+  it('setImg should be executed if name is imageProductsEmpty', () => {
+    expect(setImg).toHaveBeenCalledTimes(0);
+    setImg.mockReturnValueOnce(true);
+    setPhotoImage('imageProductsEmpty', 'imagePreviewUrl', 'description');
+    expect(setImg).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return imagePreviewUrl if name is imageProducts', () => {
+    expect((setPhotoImage('imageProducts', 'imagePreviewUrl'))).toBe('imagePreviewUrl');
+  });
 });

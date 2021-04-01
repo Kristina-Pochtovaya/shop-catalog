@@ -1,6 +1,6 @@
 import React from 'react';
-import setImage from '../utils/setImage';
-import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
+import setImage from '../../../common/untils/setImage';
+import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
 import FormAddImagePhoto from '../../../common/forms/components/FormAddImagePhotoComponent';
 
 class AddCategoryImage extends React.Component {
@@ -27,11 +27,11 @@ class AddCategoryImage extends React.Component {
     let $imagePreview = null;
     if (imagePreviewUrl) {
       $imagePreview = (
-        <ImagePhoto className="newImage" imagePreviewUrl={imagePreviewUrl} />
+        <ImagePhotoCategoryProducts className="newImage" imagePreviewUrl={imagePreviewUrl} />
       );
     } else {
       $imagePreview = (
-        <ImagePhoto className="newImageEmpty" />
+        <ImagePhotoCategoryProducts className="newImageEmpty" />
       );
     }
     return (

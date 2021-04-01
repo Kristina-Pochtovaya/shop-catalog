@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ImageColumnEditCategory from './ImageColumnEditCategoryComponent';
-import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
+import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
 import EditCategoryImage from './EditCategoryImageComponent';
 
-jest.doMock('../../../common/image/components/ImagePhotoComponent');
+jest.doMock('../../../common/image/components/ImagePhotoCategoryProductsComponent');
 jest.doMock('./EditCategoryImageComponent');
 
 configure({ adapter: new Adapter() });
@@ -19,7 +19,7 @@ describe('rendering PopUp component', () => {
   jest.doMock('./EditCategoryImageComponent', () => ({
     EditCategoryImage: <div className="EditCategoryImage" />,
   }));
-  jest.doMock('../../../common/image/components/ImagePhotoComponent', () => ({
+  jest.doMock('../../../common/image/components/ImagePhotoCategoryProductsComponent', () => ({
     ImagePhoto: jest.fn().mockImplementation(() => <div className="ImagePhoto" />),
   }));
 
@@ -34,7 +34,7 @@ describe('rendering PopUp component', () => {
         updateCategoryImage={myUpdateCategoryImage}
       />,
     );
-    expect(component.find(ImagePhoto)).toHaveLength(0);
+    expect(component.find(ImagePhotoCategoryProducts)).toHaveLength(0);
     expect(component.find(EditCategoryImage)).toHaveLength(1);
   });
 
@@ -49,7 +49,7 @@ describe('rendering PopUp component', () => {
         updateCategoryImage={myUpdateCategoryImage}
       />,
     );
-    expect(component.find(ImagePhoto)).toHaveLength(1);
+    expect(component.find(ImagePhotoCategoryProducts)).toHaveLength(1);
     expect(component.find('.imageCategory')).toHaveLength(1);
     expect(component.find('.setImage')).toHaveLength(0);
     expect(component.find(EditCategoryImage)).toHaveLength(0);
@@ -66,7 +66,7 @@ describe('rendering PopUp component', () => {
         updateCategoryImage={myUpdateCategoryImage}
       />,
     );
-    expect(component.find(ImagePhoto)).toHaveLength(1);
+    expect(component.find(ImagePhotoCategoryProducts)).toHaveLength(1);
     expect(component.find('.imageCategory')).toHaveLength(0);
     expect(component.find('.setImage')).toHaveLength(1);
     expect(component.find(EditCategoryImage)).toHaveLength(0);

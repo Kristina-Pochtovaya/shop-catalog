@@ -18,10 +18,10 @@ import getProductsRequest from './common/api/get/getProductsRequest';
 import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogItemComponent';
 import setImg from './common/untils/setImg';
 import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
-import EditCategoryPage from './pages/editCategory/components/EditCategoryPageComponent';
+import ConnectedEditCategoryPage from './pages/editCategory/containers/ConnectedEditCategoryPage';
 import WithRouterAddCategoryPage from './pages/editCategory/containers/WithRouterAddCategoryPageComponent';
-import AddProductPageComponent from './pages/editProducts/components/AddProductPageComponent';
-import EditProductsPage from './pages/editProducts/components/EditProductsPageComponent';
+import WithRouterAddProductPage from './pages/editProducts/containers/WithRouterAddCategoryPageComponent';
+import ConnectedEditProductsPage from './pages/editProducts/containers/ConnectedEditProductsPage';
 import ImageContainer from './ImageContainterComponent';
 import ImageForm from './ImageFormComponent';
 
@@ -135,7 +135,7 @@ export function AppShopCatalog() {
           <ConnectedRegistration />
         </Route>
         <Route path="/edit-category">
-          <EditCategoryPage />
+          <ConnectedEditCategoryPage />
         </Route>
         <Route path="/add-category">
           <WithRouterAddCategoryPage
@@ -144,13 +144,13 @@ export function AppShopCatalog() {
           />
         </Route>
         <Route path="/add-product">
-          <AddProductPageComponent
+          <WithRouterAddProductPage
             setIsProductsUpdated={setIsProductsUpdated}
             isProductsUpdated={isProductsUpdated}
           />
         </Route>
         <Route path="/edit-products">
-          <EditProductsPage
+          <ConnectedEditProductsPage
             setIsProductsUpdated={setIsProductsUpdated}
             isProductsUpdated={isProductsUpdated}
           />

@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
-import AddCategoryPage from '../components/AddCategoryPageComponent';
+import ConnectedAddCategoryPage from './ConnectedAddCategoryPage';
 
-const WithRouterAddCategoryPage = withRouter(AddCategoryPage);
+const WithRouterAddCategoryPage = withRouter(ConnectedAddCategoryPage);
 
 export default WithRouterAddCategoryPage;

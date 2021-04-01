@@ -1,7 +1,7 @@
 import React from 'react';
 import getUserPhoto from '../api/get/getUserPhoto';
 import FormAddImagePhoto from '../../../common/forms/components/FormAddImagePhotoComponent';
-import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
+import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
 import setPhoto from '../utils/setPhoto';
 
 class ImageUpload extends React.Component {
@@ -38,11 +38,11 @@ class ImageUpload extends React.Component {
 
     if (imagePreviewUrl) {
       $imagePreview = (
-        <ImagePhoto className="photoPersonalAccount" imagePreviewUrl={imagePreviewUrl} />
+        <ImagePhotoCategoryProducts className="photoPersonalAccount" imagePreviewUrl={imagePreviewUrl} />
       );
     } else {
       $imagePreview = (
-        <ImagePhoto className="photoPersonalAccountEmpty" />
+        <ImagePhotoCategoryProducts className="photoPersonalAccountEmpty" />
       );
     }
     return (

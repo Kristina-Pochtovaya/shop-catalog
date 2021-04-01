@@ -1,7 +1,7 @@
 import React from 'react';
-import getCatalogImage from '../api/get/getCatalogImage';
-import ImagePhoto from '../../../common/image/components/ImagePhotoComponent';
-import setImage from '../utils/setImage';
+import getCatalogProductsImage from '../../../common/api/get/getCatalogProductsImage';
+import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
+import setImage from '../../../common/untils/setImage';
 import FormEditImagePhoto from '../../../common/forms/components/FormEditImagePhotoComponent';
 
 class EditCategoryImage extends React.Component {
@@ -14,8 +14,7 @@ class EditCategoryImage extends React.Component {
 
   async componentDidMount() {
     const { id } = this.props;
-    await getCatalogImage(id,
-      this.updateData);
+    await getCatalogProductsImage(id, this.updateData, '/category');
   }
 
   handleSubmit = (e) => this.e.preventDefault();
@@ -36,11 +35,11 @@ class EditCategoryImage extends React.Component {
 
     if (imagePreviewUrl) {
       $imagePreview = (
-        <ImagePhoto className="imageCategory" imagePreviewUrl={imagePreviewUrl} />
+        <ImagePhotoCategoryProducts className="imageCategory" imagePreviewUrl={imagePreviewUrl} />
       );
     } else {
       $imagePreview = (
-        <ImagePhoto className="errorImage" />
+        <ImagePhotoCategoryProducts className="errorImage" />
       );
     }
     return (

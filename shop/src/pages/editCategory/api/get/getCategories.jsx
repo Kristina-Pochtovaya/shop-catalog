@@ -2,9 +2,7 @@ import getRequest from '../../../../common/api/get/getRequest';
 
 const categoryPath = '/category';
 
-async function getCategories(
-  updateData,
-) {
+async function getCategories(updateData) {
   try {
     const response = await getRequest(categoryPath);
     const result = response.data;

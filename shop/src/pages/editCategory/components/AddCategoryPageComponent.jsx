@@ -11,7 +11,6 @@ class AddCategoryPage extends React.Component {
       categoryName: '',
       image: '',
       titleColor: '1',
-      isAdminVisible: true,
     };
   }
 
@@ -29,12 +28,12 @@ class AddCategoryPage extends React.Component {
   }
 
   render() {
-    const { categoryName, isAdminVisible } = this.state;
-    window.addEventListener('load', () => this.setState({ isAdminVisible: false }));
+    const { categoryName } = this.state;
+    const { pages } = this.props;
     return (
       <>
         <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
-        { isAdminVisible ? (
+        { pages.loginPersonalAccountReducer.personAccountIsVisible ? (
           <div className="addCategory-box">
             <h2 className="">Добавить категорию</h2>
             <div className="addCategory-container">
