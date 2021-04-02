@@ -1,4 +1,5 @@
 import React from 'react';
+import processInputOnChange from '../utils/processInputOnChange';
 
 class InputEditProductsName extends React.Component {
   constructor(props) {
@@ -10,14 +11,11 @@ class InputEditProductsName extends React.Component {
   }
 
   async handleNameChange(e) {
-    const { updateProductName } = this.props;
-    e.preventDefault();
-
-    this.setState({
-      productsName: e.target.value,
-    });
-    updateProductName(e.target.value);
+    const { updateData } = this.props;
+    processInputOnChange(e, this.updateProductsName, updateData, 'updateProductName');
   }
+
+  updateProductsName = (e) => this.setState({ productsName: e.target.value });
 
   render() {
     const { productsName } = this.state;

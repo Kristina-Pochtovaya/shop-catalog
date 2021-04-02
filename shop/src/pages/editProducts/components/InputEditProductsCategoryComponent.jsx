@@ -1,7 +1,7 @@
 import React from 'react';
-import PopUp from '../../../common/popup/components/PopUpComponent';
-import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
+import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
 import getCategories from '../../editCategory/api/get/getCategories';
+import processCategoryOnChange from '../utils/processCategoryOnChange';
 
 class InputEditProductsCategory extends React.Component {
   constructor(props) {
@@ -17,21 +17,16 @@ class InputEditProductsCategory extends React.Component {
   }
 
   async componentDidMount() {
-    await getCategories(this.updateDataCategories, this.setError);
+    await getCategories(this.updateDataCategories);
   }
 
   async handleCategoryProductsChange(e) {
     const { categoriesArray } = this.state;
-    const { updateProductCategory } = this.props;
-    e.preventDefault();
-
-    this.setState({
-      categoryName: e.target.value,
-    });
-    updateProductCategory(e.target.value, categoriesArray.categories);
+    const { updateData } = this.props;
+    processCategoryOnChange(e, this.updateCategoryName, updateData, categoriesArray);
   }
 
-  setError = (value) => { this.setState({ errorMessage: value }); }
+  updateCategoryName = (e) => this.setState({ categoryName: e.target.value });
 
   setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
@@ -41,8 +36,7 @@ class InputEditProductsCategory extends React.Component {
 
   render() {
     const {
-      categoriesArray, errorMessage,
-      isLoading, popupSmthWentWrongActive, categoryName,
+      categoriesArray, errorMessage, isLoading, popupSmthWentWrongActive, categoryName,
     } = this.state;
 
     if (!isLoading) {
@@ -50,15 +44,10 @@ class InputEditProductsCategory extends React.Component {
     }
     if (errorMessage) {
       return (
-        <PopUp
-          active={popupSmthWentWrongActive}
-          setActive={this.setpopupSmthWentWrongActive}
-        >
-          <PopUpSomethingWentWrong
-            text="Попробуйте еще раз"
-            setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
-          />
-        </PopUp>
+        <PopUpErrorLoading
+          popupSmthWentWrongActive={popupSmthWentWrongActive}
+          setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
+        />
       );
     }
 

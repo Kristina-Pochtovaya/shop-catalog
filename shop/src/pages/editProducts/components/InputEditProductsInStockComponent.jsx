@@ -1,7 +1,7 @@
 import React from 'react';
-import PopUp from '../../../common/popup/components/PopUpComponent';
-import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
+import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
 import getProducts from '../api/get/getProducts';
+import processInStockOnChange from '../utils/processInStockOnChange';
 
 class InputEditProductsInStock extends React.Component {
   constructor(props) {
@@ -16,23 +16,18 @@ class InputEditProductsInStock extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.interval = setTimeout(async () => {
-      await getProducts(this.updateData, this.setError);
-    }, 10);
+  async componentDidMount() {
+    await getProducts(this.updateData, this.setError);
   }
 
   async handleInStockProductsChange(e) {
-    const { updateProductInStock } = this.props;
-    e.preventDefault();
-
-    this.setState({
-      inStock: e.target.value,
-    });
-    updateProductInStock(e.target.value === 'да' ? 1 : 0);
+    const { updateData } = this.props;
+    processInStockOnChange(e, this.updateinStock, updateData, 'updateProductInStock');
   }
 
-  setError=(value) => { this.setState({ errorMessage: value }); }
+  setError=(value) => this.setState({ errorMessage: value });
+
+  updateinStock = (e) => this.setState({ inStock: e.target.value });
 
   setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
@@ -42,24 +37,16 @@ class InputEditProductsInStock extends React.Component {
 
   render() {
     const {
-      productsArray, errorMessage,
-      isLoading, popupSmthWentWrongActive, inStock,
+      productsArray, errorMessage, isLoading, popupSmthWentWrongActive, inStock,
     } = this.state;
 
-    if (!isLoading) {
-      return <div className="-isLoading"> </div>;
-    }
+    if (!isLoading) { return <div className="-isLoading"> </div>; }
     if (errorMessage) {
       return (
-        <PopUp
-          active={popupSmthWentWrongActive}
-          setActive={this.setpopupSmthWentWrongActive}
-        >
-          <PopUpSomethingWentWrong
-            text="Попробуйте еще раз"
-            setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
-          />
-        </PopUp>
+        <PopUpErrorLoading
+          popupSmthWentWrongActive={popupSmthWentWrongActive}
+          setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
+        />
       );
     }
 
@@ -72,14 +59,9 @@ class InputEditProductsInStock extends React.Component {
             this.handleInStockProductsChange(e);
           }}
         >
-          <option
-            value="да"
-          >
-            да
-          </option>
+          <option value="да"> да </option>
           <option value="нет">нет</option>
         </select>
-
       </>
     );
   }

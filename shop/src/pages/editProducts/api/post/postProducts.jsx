@@ -1,11 +1,9 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
+import setClassErrorById from '../../../../common/untils/setClassErrorById';
 
 const productsEdit = '/products-edit';
 
 async function postProducts(state) {
-  const errorImage = document.getElementById('errorImageString');
-
   const categoryId = state.categoriesArray
     .filter((categoryItem) => categoryItem.category === state.productCategory)
     .map((categoryItem) => categoryItem.id);
@@ -21,17 +19,12 @@ async function postProducts(state) {
     },
   };
   try {
-    const response = await axios.post(`${serverUrl}${productsEdit}`, {
-      payload,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = postRequestMultipartFormData(productsEdit, payload);
     const result = response.data;
-    errorImage.setAttribute('class', 'errorImageString -disabled');
+    setClassErrorById('errorImageString', 'errorImageString -disabled');
     return result;
   } catch (error) {
-    errorImage.setAttribute('class', 'errorImageString');
+    setClassErrorById('errorImageString', 'errorImageString');
     return null;
   }
 }

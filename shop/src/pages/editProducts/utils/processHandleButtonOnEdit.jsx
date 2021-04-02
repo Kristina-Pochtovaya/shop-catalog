@@ -1,9 +1,9 @@
 import postProducts from '../api/post/postProducts';
 
-const processHandleButtonOnEdit = async (state, product, updateData, isProductsUpdated,
+const processHandleButtonOnEdit = async (setState, state, product, updateData, isProductsUpdated,
   setIsProductsUpdated) => {
   await postProducts(state);
-  updateData(true, state, product);
+  updateData(setState, true, state, product);
   isProductsUpdated ? setIsProductsUpdated(false) : setIsProductsUpdated(true);
 };
 

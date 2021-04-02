@@ -4,7 +4,7 @@ const ButtonEditProducts = ({
   category, product, handleButtonOnClick,
   IsEditButtonVisible = false, isEditActive = false, isEditActiveId = false,
 }) => (
-  <div className="columnEdit" key={product.id}>
+  <div className="columnEdit">
     <button
       type="button"
       className="editProductsButton"

@@ -22,11 +22,11 @@ class EditProductsImage extends React.Component {
   handleSubmit = (e) => this.e.preventDefault();
 
   handleImageChange = (e) => {
-    const { updateImage } = this.props;
+    const { updateData } = this.props;
     e.preventDefault();
     const reader = new FileReader();
     const file = e.target.files[0];
-    setImage(reader, this.updateData, updateImage, file);
+    setImage(reader, this.updateData, updateData, file);
   }
 
   updateData = (value) => { this.setState({ imagePreviewUrl: value }); }

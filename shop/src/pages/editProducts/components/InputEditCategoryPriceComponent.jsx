@@ -1,4 +1,5 @@
 import React from 'react';
+import processInputOnChange from '../utils/processInputOnChange';
 
 class InputEditCategoryPrice extends React.Component {
   constructor(props) {
@@ -10,14 +11,11 @@ class InputEditCategoryPrice extends React.Component {
   }
 
   async handleProductsChange(e) {
-    const { updateProductPrice } = this.props;
-    e.preventDefault();
-
-    this.setState({
-      productsPrice: e.target.value,
-    });
-    updateProductPrice(e.target.value);
+    const { updateData } = this.props;
+    processInputOnChange(e, this.updatePrice, updateData, 'updateProductPrice');
   }
+
+  updatePrice = (e) => this.setState({ productsPrice: e.target.value });
 
   render() {
     const { productsPrice } = this.state;

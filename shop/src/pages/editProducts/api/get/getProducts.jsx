@@ -6,10 +6,10 @@ async function getProducts(updateData, setError) {
   try {
     const response = await getRequest(productsPath);
     const result = response.data;
-    updateData({ products: result }, true);
+    updateData({ products: result }, true, 'updateProducts');
     return result;
   } catch (error) {
-    return setError({ errorMessage: error.message });
+    return setError({ errorMessage: error.message }, 'setError');
   }
 }
 

@@ -1,11 +1,8 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import postRequest from '../../../../common/api/post/postRequest';
 
 const deleteProduct = '/delete-product';
 
-async function postDeleteProduct(id,
-  setIsProductsUpdated,
-  isProductsUpdated, updateAfterDelete) {
+async function postDeleteProduct(id, setIsProductsUpdated, isProductsUpdated, updateAfterDelete) {
   const payload = {
     data: {
       id,
@@ -13,11 +10,9 @@ async function postDeleteProduct(id,
   };
 
   try {
-    const response = await axios.post(`${serverUrl}${deleteProduct}`, payload);
+    const response = await postRequest(deleteProduct, payload);
     const result = response.data;
-    isProductsUpdated
-      ? setIsProductsUpdated(false)
-      : setIsProductsUpdated(true);
+    isProductsUpdated ? setIsProductsUpdated(false) : setIsProductsUpdated(true);
     updateAfterDelete();
     return result;
   } catch (error) {

@@ -7,6 +7,7 @@ import IsEditNotActiveColumnsComponent from './IsEditNotActiveColumnsComponent';
 import processHandleButtonOnEdit from '../utils/processHandleButtonOnEdit';
 import ButtonEditProducts from '../../../common/button/components/ButtonEditProductsComponent';
 import ButtonDeleteCategoryProducts from '../../../common/button/components/ButtonDeleteCategoryProductsComponent';
+import updateDataOnClick from '../utils/updateDataOnClick';
 
 class EditProductsPageColumns extends React.Component {
   _isMounted = false;
@@ -35,15 +36,15 @@ class EditProductsPageColumns extends React.Component {
 
   async componentDidMount() {
     this._isMounted = true;
-    await getProducts(this.updateProducts, this.setError);
-    await getCategories(this.updateDataCategories);
+    await getProducts(this.updateCategoriesProducts, this.setError);
+    await getCategories(this.updateCategoriesProducts);
   }
 
   async componentDidUpdate(prevProps, prevState) {
     const { isUpdated } = this.state;
     if (prevState.isUpdated !== isUpdated) {
-      await getProducts(this.updateProducts, this.setError);
-      await getCategories(this.updateDataCategories);
+      await getProducts(this.updateCategoriesProducts, this.setError);
+      await getCategories(this.updateCategoriesProducts);
     }
   }
 
@@ -51,70 +52,39 @@ class EditProductsPageColumns extends React.Component {
     this._isMounted = false;
   }
 
+ setState = this.setState.bind(this)
+
    handleButtonOnClick = async (product, category = false) => {
      const { isProductsUpdated, setIsProductsUpdated } = this.props;
      if (!category) {
-       processHandleButtonOnEdit(this.state, product, this.updateData, isProductsUpdated,
-         setIsProductsUpdated);
+       processHandleButtonOnEdit(this.setState, this.state, product, updateDataOnClick,
+         isProductsUpdated, setIsProductsUpdated);
      } else {
-       this.updateData(false, this.state, product, category);
+       updateDataOnClick(this.setState, false, this.state, product, category);
      }
    }
 
-  updateData = (save, state, product, category) => {
-    this.setState({
-      isUpdated: save ? !state.isUpdated : state.isUpdated,
-      isEditActive: !save,
-      isEditActiveId: product.id,
-      IsSaveButtonVisible: !!save,
-      IsEditButtonVisible: !save,
-      productImage: product.image,
-      productCategory: save ? state.productCategory : category.category,
-      productName: save ? state.productName : product.description,
-      productPrice: save ? state.productPrice : product.price,
-      productInStock: save ? state.productInStock : product.inStock,
-    });
+  updateData=(value, name, array = '') => {
+    if (name === 'setError') this.setState({ ErrorMessageProducts: value });
+    if (name === 'updateImage') this.setState({ productImage: value });
+    if (name === 'updateProductName') this.setState({ productName: value });
+    if (name === 'updateProductPrice') this.setState({ productPrice: value });
+    if (name === 'updateProductInStock') this.setState({ productInStock: value });
+    if (name === 'updateProductCategory') this.setState({ productCategory: value, categoriesArray: array });
   }
-
-  setError = (errorMessage) => this.setState({ ErrorMessageProducts: errorMessage });
 
   setpopupSmthWentWrongActive = (value) => this.setState({ popupSmthWentWrongActive: value });
-
-  setEditActive = (value) => this.setState({ isEditActive: value });
-
-  updateImage = (value) => this.setState({ productImage: value });
-
-  updateProductCategory = (value, array) => {
-    this.setState({ productCategory: value, categoriesArray: array });
-  }
-
-  updateProductName = (value) => this.setState({ productName: value });
-
-  updateProductPrice = (value) => this.setState({ productPrice: value });
-
-  updateProductInStock = (value) => this.setState({ productInStock: value });
-
-  updateProducts = (value, valueIsLoading) => {
-    if (this._isMounted) {
-      this.setState({
-        productsArray: value,
-        isLoadingProducts: valueIsLoading,
-      });
-    }
-  }
-
-  updateDataCategories = (value, valueIsLoading) => {
-    if (this._isMounted) {
-      this.setState({
-        categoriesArray: value.categories,
-        isLoadingCategories: valueIsLoading,
-      });
-    }
-  }
 
   updateAfterDelete = () => {
     const { isUpdated } = this.state;
     this.setState({ isUpdated: !isUpdated });
+  }
+
+  updateCategoriesProducts=(value, valueIsLoading, name) => {
+    if (this._isMounted) {
+      if (name === 'updateProducts') this.setState({ productsArray: value, isLoadingProducts: valueIsLoading });
+      if (name === 'updateCategories') this.setState({ categoriesArray: value.categories, isLoadingCategories: valueIsLoading });
+    }
   }
 
   render() {
@@ -144,11 +114,7 @@ class EditProductsPageColumns extends React.Component {
                   <IsEditActiveColumnsComponent
                     product={product}
                     categoriesArray={categoriesArray}
-                    updateImage={this.updateImage}
-                    updateProductCategory={this.updateProductCategory}
-                    updateProductName={this.updateProductName}
-                    updateProductPrice={this.updateProductPrice}
-                    updateProductInStock={this.updateProductInStock}
+                    updateData={this.updateData}
                   />
                 ) : (
                   <IsEditNotActiveColumnsComponent
@@ -156,9 +122,10 @@ class EditProductsPageColumns extends React.Component {
                     categoriesArray={categoriesArray}
                   />
                 )}
-              { categoriesArray.map((category) => (
+              {categoriesArray.map((category) => (
                 product.categoryId === category.id && (
                 <ButtonEditProducts
+                  key={product.id}
                   category={category}
                   product={product}
                   handleButtonOnClick={this.handleButtonOnClick}

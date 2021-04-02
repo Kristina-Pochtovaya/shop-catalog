@@ -6,14 +6,13 @@ import InputEditProductsPrice from './InputEditCategoryPriceComponent';
 import InputEditProductsInStock from './InputEditProductsInStockComponent';
 
 const IsEditActiveColumnsComponent = ({
-  product, categoriesArray, updateImage, updateProductCategory, updateProductName,
-  updateProductPrice, updateProductInStock,
+  product, categoriesArray, updateData,
 }) => (
   <>
     <div className="columnImage">
       <EditProductsImage
         id={product.id}
-        updateImage={updateImage}
+        updateData={updateData}
       />
     </div>
     <div className="columnCategory">
@@ -24,26 +23,26 @@ const IsEditActiveColumnsComponent = ({
                           key={product.id}
                           category={category.category}
                           categoryId={product.categoryId}
-                          updateProductCategory={updateProductCategory}
+                          updateData={updateData}
                         />
                       )))}
     </div>
     <div className="columnName">
       <InputEditProductsName
         description={product.description}
-        updateProductName={updateProductName}
+        updateData={updateData}
       />
     </div>
     <div className="columnPrice">
       <InputEditProductsPrice
         price={product.price}
-        updateProductPrice={updateProductPrice}
+        updateData={updateData}
       />
     </div>
     <div className="columnInStock">
       <InputEditProductsInStock
         inStock={product.inStock}
-        updateProductInStock={updateProductInStock}
+        updateData={updateData}
       />
     </div>
   </>
