@@ -62,9 +62,9 @@ describe('rendering EditProductsPageColumns component', () => {
 
   it('should Loading div at first rendering', async () => {
     component.setState({ isLoadingProducts: false });
-    component.setState({ isLoadingCategories: false });
     expect(component.find('.-isLoading')).toHaveLength(1);
     expect(component.find('ButtonDeleteCategoryProducts')).toHaveLength(0);
+    expect(component.find('IsEditActiveColumnsComponent')).toHaveLength(0);
     expect(component.find('IsEditNotActiveColumnsComponent')).toHaveLength(0);
     expect(component.find('ButtonEditProducts')).toHaveLength(0);
   });
@@ -84,7 +84,25 @@ describe('rendering EditProductsPageColumns component', () => {
     expect(component.find('ButtonEditProducts')).toHaveLength(0);
   });
 
-  it('should render edit buttons if category array is loaded', async () => {
+  it('should render edit buttons if category array is loaded and isEditActiveId is equal to ones of product id and ', async () => {
+    getProducts.mockReturnValueOnce(productsArray);
+    getCategories.mockReturnValueOnce(categoriesArray);
+    component.setState({
+      productsArray,
+    });
+    component.setState({
+      categoriesArray,
+    });
+    const result = getProducts(updateCategoriesProducts, mySetIsProductsUpdated);
+    expect(result).toBe(productsArray);
+    component.setState({ isLoadingProducts: true });
+    component.setState({ isLoadingCategories: true });
+    expect(component.find('.isLoading')).toHaveLength(0);
+    expect(component.find('ButtonDeleteCategoryProducts')).toHaveLength(3);
+    expect(component.find('IsEditNotActiveColumnsComponent')).toHaveLength(3);
+  });
+
+  it('should render one IsEditActiveColumnsComponent if  isEditActiveId is equal to ones of product id and isEditActive is true', async () => {
     getProducts.mockReturnValueOnce(productsArray);
     getCategories.mockReturnValueOnce(categoriesArray);
     component.setState({
@@ -99,10 +117,64 @@ describe('rendering EditProductsPageColumns component', () => {
     expect(result).toBe(productsArray);
     component.setState({ isLoadingProducts: true });
     component.setState({ isLoadingCategories: true });
-    expect(component.find('.isLoading')).toHaveLength(0);
-    expect(component.find('ButtonDeleteCategoryProducts')).toHaveLength(3);
     expect(component.find('IsEditNotActiveColumnsComponent')).toHaveLength(2);
     expect(component.find('IsEditActiveColumnsComponent')).toHaveLength(1);
-    expect(component.find('ButtonEditProducts')).toHaveLength(3);
+  });
+
+  it('should render just  IsEditActiveColumnsComponents if  isEditActiveId is NOT equal to ones of product id and isEditActive is true', async () => {
+    getProducts.mockReturnValueOnce(productsArray);
+    getCategories.mockReturnValueOnce(categoriesArray);
+    component.setState({
+      productsArray,
+    });
+    component.setState({
+      categoriesArray,
+    });
+    component.setState({ isEditActive: true });
+    component.setState({ isEditActiveId: 15 });
+    const result = getProducts(updateCategoriesProducts, mySetIsProductsUpdated);
+    expect(result).toBe(productsArray);
+    component.setState({ isLoadingProducts: true });
+    component.setState({ isLoadingCategories: true });
+    expect(component.find('IsEditNotActiveColumnsComponent')).toHaveLength(3);
+    expect(component.find('IsEditActiveColumnsComponent')).toHaveLength(0);
+  });
+
+  it('should render just  IsEditActiveColumnsComponents if  isEditActiveId is equal to ones of product id, but isEditActive is false', async () => {
+    getProducts.mockReturnValueOnce(productsArray);
+    getCategories.mockReturnValueOnce(categoriesArray);
+    component.setState({
+      productsArray,
+    });
+    component.setState({
+      categoriesArray,
+    });
+    component.setState({ isEditActive: false });
+    component.setState({ isEditActiveId: 1 });
+    const result = getProducts(updateCategoriesProducts, mySetIsProductsUpdated);
+    expect(result).toBe(productsArray);
+    component.setState({ isLoadingProducts: true });
+    component.setState({ isLoadingCategories: true });
+    expect(component.find('IsEditNotActiveColumnsComponent')).toHaveLength(3);
+    expect(component.find('IsEditActiveColumnsComponent')).toHaveLength(0);
+  });
+
+  it('should render just  IsEditActiveColumnsComponents if  isEditActiveId is not equal to ones of product id and isEditActive is false', async () => {
+    getProducts.mockReturnValueOnce(productsArray);
+    getCategories.mockReturnValueOnce(categoriesArray);
+    component.setState({
+      productsArray,
+    });
+    component.setState({
+      categoriesArray,
+    });
+    component.setState({ isEditActive: false });
+    component.setState({ isEditActiveId: 15 });
+    const result = getProducts(updateCategoriesProducts, mySetIsProductsUpdated);
+    expect(result).toBe(productsArray);
+    component.setState({ isLoadingProducts: true });
+    component.setState({ isLoadingCategories: true });
+    expect(component.find('IsEditNotActiveColumnsComponent')).toHaveLength(3);
+    expect(component.find('IsEditActiveColumnsComponent')).toHaveLength(0);
   });
 });

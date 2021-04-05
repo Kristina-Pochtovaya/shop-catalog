@@ -1,7 +1,7 @@
 import React from 'react';
 import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
 import getProducts from '../api/get/getProducts';
-import processInStockOnChange from '../utils/processInStockOnChange';
+import handleInStockProductsChange from '../utils/handleInStockProductsChange';
 
 class InputEditProductsInStock extends React.Component {
   constructor(props) {
@@ -20,11 +20,6 @@ class InputEditProductsInStock extends React.Component {
     await getProducts(this.updateData, this.setError);
   }
 
-  async handleInStockProductsChange(e) {
-    const { updateData } = this.props;
-    processInStockOnChange(e, this.updateinStock, updateData, 'updateProductInStock');
-  }
-
   setError=(value) => this.setState({ errorMessage: value });
 
   updateinStock = (e) => this.setState({ inStock: e.target.value });
@@ -39,6 +34,7 @@ class InputEditProductsInStock extends React.Component {
     const {
       productsArray, errorMessage, isLoading, popupSmthWentWrongActive, inStock,
     } = this.state;
+    const { updateData } = this.props;
 
     if (!isLoading) { return <div className="-isLoading"> </div>; }
     if (errorMessage) {
@@ -56,7 +52,7 @@ class InputEditProductsInStock extends React.Component {
           className="productsInStockInput"
           value={inStock}
           onChange={async (e) => {
-            this.handleInStockProductsChange(e);
+            handleInStockProductsChange(e, this.updateinStock, updateData, 'updateProductInStock');
           }}
         >
           <option value="да"> да </option>

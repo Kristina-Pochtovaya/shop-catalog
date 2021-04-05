@@ -1,5 +1,5 @@
 import React from 'react';
-import AddCategoryImage from './AddCategoryImageComponent';
+import AddCategoryProductImage from './AddCategoryProductImage';
 
 const FormAddCategory = ({
   categoryName, updateImage, updateName, updateColor, handleButtonClick,
@@ -26,7 +26,7 @@ const FormAddCategory = ({
         <option value="2">Коричневый</option>
         <option value="3">Зеленый</option>
       </select>
-      <AddCategoryImage updateImage={updateImage} />
+      <AddCategoryProductImage updateImage={updateImage} />
       <button
         className="addNewCategoryButton"
         type="button"

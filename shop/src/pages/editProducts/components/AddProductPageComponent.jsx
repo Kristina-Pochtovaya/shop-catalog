@@ -1,10 +1,8 @@
 import React from 'react';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
-import AddCategoryImage from '../../editCategory/components/AddCategoryImageComponent';
-import PopUp from '../../../common/popup/components/PopUpComponent';
-import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import postNewProduct from '../api/post/postNewProduct';
+import FormAddProduct from './FormAddProductComponent';
+import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
 import getCategories from '../../editCategory/api/get/getCategories';
 import checkOnlyNumbers from '../../../common/untils/checkOnlyNumbers';
 
@@ -49,35 +47,25 @@ class AddProductPage extends React.Component {
     }
   }
 
+  updateData = (name, e) => {
+    if (name === 'categoryName') this.setState({ categoryName: e.target.value });
+    if (name === 'productName') this.setState({ productName: e.target.value });
+    if (name === 'productPrice') this.setState({ productPrice: e.target.value });
+    if (name === 'productInStock') this.setState({ productInStock: e.target.value });
+    if (name === 'onBlur') {
+      this.setState({
+        isPriceCorrect: checkOnlyNumbers(e.target.value),
+        productPrice: `${e.target.value} РУБ.`,
+      });
+    }
+  }
+
   updateImage = (value) => { this.setState({ image: value }); }
 
   render() {
-    async function handleButtonClick() {
-      const errorImage = document.getElementById('errorNewImage');
-
-      const result = await postNewProduct(
-        productName, image, categoryName, productPrice, productInStock, categoriesArray,
-      );
-      if (result === true) {
-        history.push('/edit-products');
-      } if (result === false) {
-        errorImage.setAttribute('class', 'errorNewImage');
-      }
-
-      isProductsUpdated
-        ? setIsProductsUpdated(false)
-        : setIsProductsUpdated(true);
-    }
-
-    function setErrorButtonClick() {
-      const errorPrice = document.getElementById('errorPrice');
-      errorPrice.setAttribute('class', 'errorPrice');
-    }
-
     const {
-      productName, image, categoryName, productPrice, productInStock,
-      categoriesArray, errorMessage, isLoading, popupSmthWentWrongActive,
-      isPriceCorrect,
+      errorMessage, isLoading, popupSmthWentWrongActive, image, productName,
+      categoryName, productPrice, productInStock, categoriesArray, isPriceCorrect,
     } = this.state;
     const {
       history, isProductsUpdated, setIsProductsUpdated, pages,
@@ -88,18 +76,12 @@ class AddProductPage extends React.Component {
     }
     if (errorMessage) {
       return (
-        <PopUp
-          active={popupSmthWentWrongActive}
-          setActive={this.setpopupSmthWentWrongActive}
-        >
-          <PopUpSomethingWentWrong
-            text="Попробуйте еще раз"
-            setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
-          />
-        </PopUp>
+        <PopUpErrorLoading
+          popupSmthWentWrongActive={popupSmthWentWrongActive}
+          setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
+        />
       );
     }
-
     return (
       <>
         <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/personal" disabled={false} />
@@ -107,78 +89,14 @@ class AddProductPage extends React.Component {
           <div className="addProduct-box">
             <h2 className="">Добавить товар</h2>
             <div className="addProduct-container">
-              <p className="productCategoriesString">Категория</p>
-              <select
-                className="productsCategories"
-                value={categoryName}
-                onChange={(event) => this.setState({ categoryName: event.target.value })}
-              >
-                {categoriesArray.categories.map((category) => (
-                  <option
-                    key={category.id}
-                    value={category.category}
-                  >
-                    {category.category}
-                  </option>
-                ))}
-              </select>
-              <p className="productNameString">Название</p>
-              <input
-                type="text"
-                className="productNameInput"
-                value={productName}
-                onChange={(e) => this.setState({ productName: e.target.value })}
+              <FormAddProduct
+                updateData={this.updateData}
+                updateImage={this.updateImage}
+                state={this.state}
+                history={history}
+                isProductsUpdated={isProductsUpdated}
+                setIsProductsUpdated={setIsProductsUpdated}
               />
-              <p className="productPriceString">Цена</p>
-              <p id="errorPrice" className="errorPrice -disabled">Цена должна содержать только цифры</p>
-              <input
-                type="text"
-                className="productPriceInput"
-                value={productPrice}
-                onChange={(e) => {
-                  this.setState({
-                    productPrice: e.target.value,
-
-                  });
-                }}
-                onBlur={(e) => {
-                  this.setState({
-                    productPrice: `${e.target.value} РУБ.`,
-                    isPriceCorrect: checkOnlyNumbers(productPrice),
-                  });
-                }}
-              />
-              <p className="productInStockString">В наличии</p>
-              <select
-                className="imageColors"
-                onChange={(event) => this.setState({ productInStock: event.target.value })}
-              >
-                <option value defaultValue>да</option>
-                <option value={false}>нет</option>
-              </select>
-              <AddCategoryImage updateImage={this.updateImage} />
-              { isPriceCorrect
-                ? (
-                  <button
-                    className="addNewCategoryButton"
-                    type="button"
-                    onClick={() => {
-                      handleButtonClick();
-                    }}
-                  >
-                    Добавить
-                  </button>
-                ) : (
-                  <button
-                    className="addNewCategoryButton"
-                    type="button"
-                    onClick={() => {
-                      setErrorButtonClick();
-                    }}
-                  >
-                    Добавить
-                  </button>
-                )}
             </div>
           </div>
         ) : null}

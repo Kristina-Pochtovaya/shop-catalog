@@ -1,7 +1,7 @@
 import React from 'react';
 import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
 import getCategories from '../../editCategory/api/get/getCategories';
-import processCategoryOnChange from '../utils/processCategoryOnChange';
+import handleCategoryProductsChange from '../utils/handleCategoryProductsChange';
 
 class InputEditProductsCategory extends React.Component {
   constructor(props) {
@@ -20,58 +20,53 @@ class InputEditProductsCategory extends React.Component {
     await getCategories(this.updateDataCategories);
   }
 
-  async handleCategoryProductsChange(e) {
-    const { categoriesArray } = this.state;
-    const { updateData } = this.props;
-    processCategoryOnChange(e, this.updateCategoryName, updateData, categoriesArray);
-  }
-
   updateCategoryName = (e) => this.setState({ categoryName: e.target.value });
 
   setpopupSmthWentWrongActive = (value) => { this.setState({ popupSmthWentWrongActive: value }); }
 
-  updateDataCategories = (value, valueIsLoading) => {
-    this.setState({ categoriesArray: value, isLoading: valueIsLoading });
-  }
-
-  render() {
-    const {
-      categoriesArray, errorMessage, isLoading, popupSmthWentWrongActive, categoryName,
-    } = this.state;
-
-    if (!isLoading) {
-      return <div className="-isLoading"> </div>;
+    updateDataCategories = (value, valueIsLoading) => {
+      this.setState({ categoriesArray: value, isLoading: valueIsLoading });
     }
-    if (errorMessage) {
+
+    render() {
+      const {
+        categoriesArray, errorMessage, isLoading, popupSmthWentWrongActive, categoryName,
+      } = this.state;
+      const { updateData } = this.props;
+
+      if (!isLoading) {
+        return <div className="-isLoading"> </div>;
+      }
+      if (errorMessage) {
+        return (
+          <PopUpErrorLoading
+            popupSmthWentWrongActive={popupSmthWentWrongActive}
+            setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
+          />
+        );
+      }
+
       return (
-        <PopUpErrorLoading
-          popupSmthWentWrongActive={popupSmthWentWrongActive}
-          setpopupSmthWentWrongActive={this.setpopupSmthWentWrongActive}
-        />
+        <>
+          <select
+            className="productsCategory"
+            value={categoryName}
+            onChange={async (e) => {
+              handleCategoryProductsChange(e, this.updateCategoryName, updateData, categoriesArray);
+            }}
+          >
+            {categoriesArray.categories.map((category) => (
+              <option
+                key={category.id}
+                value={category.category}
+              >
+                {category.category}
+              </option>
+            ))}
+          </select>
+        </>
       );
     }
-
-    return (
-      <>
-        <select
-          className="productsCategory"
-          value={categoryName}
-          onChange={async (e) => {
-            this.handleCategoryProductsChange(e);
-          }}
-        >
-          {categoriesArray.categories.map((category) => (
-            <option
-              key={category.id}
-              value={category.category}
-            >
-              {category.category}
-            </option>
-          ))}
-        </select>
-      </>
-    );
-  }
 }
 
 export default InputEditProductsCategory;

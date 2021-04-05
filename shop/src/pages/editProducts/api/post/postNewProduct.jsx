@@ -4,16 +4,14 @@ import transliterate from '../../../../common/untils/transliterate';
 
 const newProduct = '/add-product';
 
-async function postNewProduct(
-  productName, image, categoryName, productPrice, productInStock, categoriesArray,
-) {
+async function postNewProduct(state) {
   const errorImage = document.getElementById('errorNewImage');
-  const imgAlt = transliterate(productName);
+  const imgAlt = transliterate(state.productName);
   const imgTitle = imgAlt;
 
-  const newCategory = categoryName === 'Электротовары и свет' ? categoriesArray.categories[0].category : categoryName;
+  const newCategory = state.categoryName === 'Электротовары и свет' ? state.categoriesArray.categories[0].category : state.categoryName;
 
-  let categoryId = categoriesArray.categories
+  let categoryId = state.categoriesArray.categories
     .filter((category) => category.category === newCategory)
     .map((category) => category.id).join('');
 
@@ -21,20 +19,20 @@ async function postNewProduct(
 
   let price = '';
 
-  if (productPrice.slice(-1) === '.') {
-    price = productPrice.slice(0, -5);
+  if (state.productPrice.slice(-1) === '.') {
+    price = state.productPrice.slice(0, -5);
   }
 
-  const inStock = productInStock === 'да' ? Boolean(true) : Boolean(false);
+  const inStock = state.productInStock === 'да' ? Boolean(true) : Boolean(false);
 
   const payload = {
     data: {
       categoryId,
       category: newCategory,
-      description: productName,
+      description: state.productName,
       imgAlt,
       imgTitle,
-      image,
+      image: state.image,
       price,
       counter: 1,
       inStock,
