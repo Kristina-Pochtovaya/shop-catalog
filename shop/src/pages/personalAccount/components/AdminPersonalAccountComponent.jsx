@@ -1,19 +1,14 @@
 import { React, useState } from 'react';
 import ConnectedImageUpload from '../containers/ConnectedImageUpload';
-import WithRouterAdminPersonalAccount from '../containers/WithRouterAdminPersonalAccountRowsComponent';
+import WithRouterAdminPersonalAccountRows from '../containers/WithRouterAdminPersonalAccountRowsComponent';
 import ConnectedPersonaIformation from '../containers/ConnectedPersonaIformation';
 import buttonAdminPageArray from '../constants/buttonAdminPageArray';
+import handleButtonOnClick from '../utils/handleButtonOnClick';
 
-const AdminPersonalAccount = ({ onEnter, onLogin, history }) => {
+const AdminPersonalAccount = ({
+  onEnter, onLogin, history, onDelete,
+}) => {
   const [isPersonalInformationVisible, setIsPersonalInformationVisible] = useState(false);
-
-  const handleButtonOnClick = (className) => {
-    if (className === 'categoryColumn') { history.push('./edit-category'); }
-    if (className === 'catalogOfGoodsColumn') { history.push('./edit-products'); }
-    if (className === 'personalDataColumn') { setIsPersonalInformationVisible(true); }
-    if (className === 'exitButton') { history.push('./main-page'); onEnter(true, false); onLogin(false, false, false); }
-  };
-
   return (
     <div className="admin-box">
       <h1 className="personalAccount"> Личный кабинет </h1>
@@ -28,7 +23,8 @@ const AdminPersonalAccount = ({ onEnter, onLogin, history }) => {
               key={button.className}
               className={button.className}
               type="button"
-              onClick={() => handleButtonOnClick(button.className)}
+              onClick={() => handleButtonOnClick(button.className, history,
+                setIsPersonalInformationVisible, onEnter, onLogin, onDelete)}
             >
               {button.text}
             </button>
@@ -36,7 +32,7 @@ const AdminPersonalAccount = ({ onEnter, onLogin, history }) => {
           ))}
         </div>
         {!isPersonalInformationVisible ? (
-          <WithRouterAdminPersonalAccount
+          <WithRouterAdminPersonalAccountRows
             setIsPersonalInformationVisible={setIsPersonalInformationVisible}
           />
         ) : (

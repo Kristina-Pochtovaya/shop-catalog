@@ -1,9 +1,10 @@
 import { React, createRef } from 'react';
 import { Link } from 'react-router-dom';
-import ConnectedLoginForm from '../../../../common/loginForm/container/LoginFormComponentContainer';
-import LoginFormForgetPassword from '../../../../common/loginForm/components/LoginFormForgetPasswordComponent';
-import logo from '../../../../assets/header/logo.png';
-import basket from '../../../../assets/common/basket.png';
+import ConnectedLoginForm from '../../../../common/components/loginForm/container/LoginFormComponentContainer';
+import LoginFormForgetPassword from '../../../../common/components/loginForm/components/LoginFormForgetPasswordComponent';
+import logo from '../../../../common/assets/header/logo.png';
+import basket from '../../../../common/assets/common/basket.png';
+import PersonalAccountSymbol from '../../../../common/components/icons/components/PersonalAccountSymbol';
 
 const Header = ({
   linkItem, link, disabled, pages, onLogin, setAdminVisible,
@@ -26,7 +27,6 @@ const Header = ({
             {linkItem}
           </Link>
         </div>
-
         { String(pages.loginPersonalAccountReducer.loginIsVisible) === 'true'
           ? (
             <div ref={divRef}>
@@ -50,32 +50,21 @@ const Header = ({
                     <ConnectedLoginForm
                       divRef={divRef}
                     />
-                  )
-                  : null}
-
+                  ) : null}
                 {String(pages.loginPersonalAccountReducer.loginFormIsVisible) === 'true'
                  && String(pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible) === 'true'
                   ? (
                     <LoginFormForgetPassword
                       divRef={divRef}
                     />
-                  )
-                  : null}
-
+                  ) : null}
               </div>
             </div>
-          )
-          : null}
-
+          ) : null}
         {String(pages.loginPersonalAccountReducer.personAccountIsVisible) === 'true'
           ? (
             <div className="personalAccountDiv">
-              <svg viewBox="0 0 12.61 15" className="personalAccountIcon">
-                <g>
-                  <circle cx="6.3" cy="3.48" r="3.48" />
-                  <path d="M6.3,8.7A6.3,6.3,0,0,0,0,15H12.61A6.3,6.3,0,0,0,6.3,8.7Z" />
-                </g>
-              </svg>
+              <PersonalAccountSymbol className="personalAccountIcon" />
               <Link to="/personal">
                 <button
                   className="personalAccountLink"
@@ -85,9 +74,7 @@ const Header = ({
                 </button>
               </Link>
             </div>
-          )
-          : null}
-
+          ) : null}
       </div>
     </div>
   );

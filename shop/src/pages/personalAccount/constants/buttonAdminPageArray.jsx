@@ -1,5 +1,5 @@
-import adminCatalog from '../../../assets/personal-account/admin-catalog.jpg';
-import adminProducts from '../../../assets/personal-account/admin-products.png';
+import adminCatalog from '../../../common/assets/personal-account/admin-catalog.jpg';
+import adminProducts from '../../../common/assets/personal-account/admin-products.png';
 
 const buttonAdminPageArray = [{
   className: 'categoryColumn',

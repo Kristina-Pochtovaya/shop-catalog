@@ -1,10 +1,10 @@
 import { React, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import getCategoriesCatalogRequest from '../api/get/getCatalogCategories';
-import setImg from '../../../../common/untils/setImg';
-import addScroll from '../../../../common/untils/addScroll';
-import PopUp from '../../../../common/popup/components/PopUpComponent';
-import PopUpSomethingWentWrong from '../../../../common/popup/components/PopUpSomethingWentWrongComponent';
+import setImg from '../../../../common/utils/setImg';
+import addScroll from '../../../../common/utils/addScroll';
+import PopUp from '../../../../common/components/popup/components/PopUpComponent';
+import PopUpSomethingWentWrong from '../../../../common/components/popup/components/PopUpSomethingWentWrongComponent';
 
 const Catalog = () => {
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(true);
@@ -67,7 +67,7 @@ const Catalog = () => {
                   </div>
                 )}
             </Link>
-            <h3 className={category.className}>{category.category}</h3>
+            <h3 className={category.className}><span className="titleCategory">{category.category}</span></h3>
           </div>
         ))}
       </div>

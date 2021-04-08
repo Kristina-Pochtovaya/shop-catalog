@@ -1,4 +1,4 @@
-import setClassErrorById from '../../../../common/untils/setClassErrorById';
+import setClassErrorById from '../../../../common/utils/setClassErrorById';
 import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
 
 const userPhoto = '/avatar';

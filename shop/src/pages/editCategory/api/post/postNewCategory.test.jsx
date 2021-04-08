@@ -2,12 +2,12 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import postNewCategory from './postNewCategory';
 import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
-import transliterate from '../../../../common/untils/transliterate';
-import setClassErrorById from '../../../../common/untils/setClassErrorById';
+import transliterate from '../../../../common/utils/transliterate';
+import setClassErrorById from '../../../../common/utils/setClassErrorById';
 
 jest.mock('../../../../common/api/post/postRequestMultipartFormData');
-jest.mock('../../../../common/untils/transliterate');
-jest.mock('../../../../common/untils/setClassErrorById');
+jest.mock('../../../../common/utils/transliterate');
+jest.mock('../../../../common/utils/setClassErrorById');
 
 configure({ adapter: new Adapter() });
 
@@ -27,10 +27,10 @@ describe('Items API', () => {
   jest.mock('../../../../common/api/post/postRequestMultipartFormData', async () => ({
     postRequestMultipartFormData: jest.fn().mockImplementation(() => res),
   }));
-  jest.mock('../../../../common/untils/transliterate', () => ({
+  jest.mock('../../../../common/utils/transliterate', () => ({
     transliterate: jest.fn().mockImplementation(() => true),
   }));
-  jest.mock('../../../../common/untils/setClassErrorById', () => ({
+  jest.mock('../../../../common/utils/setClassErrorById', () => ({
     setClassErrorById: jest.fn().mockImplementation(() => true),
   }));
 

@@ -1,0 +1,90 @@
+.ordersHistory-box {
+    margin: 0 auto;
+    max-width: 800px;
+
+    width:100%;
+    flex: 1 0 auto;
+
+    .orders {
+        width: 100%;
+
+        font-family: Arial, Helvetica, sans-serif;
+    }
+  .listOrder-wrap {
+        width: 100%;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;    
+        margin-bottom: 15px;
+        padding: 0;
+
+
+  .title {
+    @extend %busketTable;
+
+    height: 25px;
+    border-top: solid 1px #9294a5;
+
+    background: $colorLightGrey;
+
+    .titleGood{
+        flex-basis: 31%;
+    }
+    
+    .titleQuantity {
+        flex-basis: 20%;
+    }
+
+    .titleAmount{
+        flex-basis: 20%;
+        padding-right: 70px;
+    }
+
+    .titleQuantity,  .columnQuantity, .columnAmount {
+        text-align: center;
+    }
+    .titleAmount{
+        text-align: end;
+    }
+    }
+    .columns {
+      @extend %busketTable;
+
+      margin: 0px;
+
+      .columnGoodNameTitle{
+          font-size: 13px;
+          padding: 0;
+          margin: 0;
+      }
+
+      .columnGood {
+          flex-basis: 30%;
+      }
+      .columnQuantity, .columnAmount{
+        flex-basis: 17%;
+      }
+    }
+
+      .orderImage{
+        width: 180px;
+        height: 140px;
+      }
+
+      li {
+        list-style-type: none;
+    }
+  }
+}
+
+
+@media screen and (max-width: 729px) {
+    .titleGood, .titleQuantity, .titleAmount{
+        display: none;
+    }
+
+    .columns {
+        flex-direction: column;
+    }
+  }
+  

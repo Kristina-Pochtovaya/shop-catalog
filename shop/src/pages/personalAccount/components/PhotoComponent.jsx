@@ -1,7 +1,7 @@
 import React from 'react';
 import getUserPhoto from '../api/get/getUserPhoto';
-import FormAddImagePhoto from '../../../common/forms/components/FormAddImagePhotoComponent';
-import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
+import FormAddImagePhoto from '../../../common/components/forms/components/FormAddImagePhotoComponent';
+import ImagePhotoCategoryProducts from '../../../common/components/image/components/ImagePhotoCategoryProductsComponent';
 import setPhoto from '../utils/setPhoto';
 
 class ImageUpload extends React.Component {

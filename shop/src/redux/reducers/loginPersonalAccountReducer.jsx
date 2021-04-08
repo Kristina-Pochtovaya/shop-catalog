@@ -1,5 +1,5 @@
 import {
-  ENTER, LOGIN, ENTEREMAIL, AUTOCOMPLETE, ADDPHOTO,
+  ENTER, LOGIN, ENTEREMAIL, AUTOCOMPLETE, ADDPHOTO, DELETE,
 } from '../actions/loginPersonalAccountActions';
 
 const initialState = {
@@ -56,6 +56,18 @@ const loginPersonalAccountReducer = (state = initialState, action) => {
       return {
         ...state,
         photo: action.payload.photo,
+      };
+    }
+
+    case DELETE.type: {
+      return {
+        ...state,
+        firstName: '',
+        phone: '',
+        address: '',
+        clientEmail: '',
+        id: '',
+        photo: '',
       };
     }
 

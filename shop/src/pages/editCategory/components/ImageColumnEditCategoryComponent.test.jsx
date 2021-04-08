@@ -2,10 +2,10 @@ import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ImageColumnEditCategory from './ImageColumnEditCategoryComponent';
-import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
+import ImagePhotoCategoryProducts from '../../../common/components/image/components/ImagePhotoCategoryProductsComponent';
 import EditCategoryImage from './EditCategoryImageComponent';
 
-jest.doMock('../../../common/image/components/ImagePhotoCategoryProductsComponent');
+jest.doMock('../../../common/components/image/components/ImagePhotoCategoryProductsComponent');
 jest.doMock('./EditCategoryImageComponent');
 
 configure({ adapter: new Adapter() });
@@ -19,7 +19,7 @@ describe('rendering PopUp component', () => {
   jest.doMock('./EditCategoryImageComponent', () => ({
     EditCategoryImage: <div className="EditCategoryImage" />,
   }));
-  jest.doMock('../../../common/image/components/ImagePhotoCategoryProductsComponent', () => ({
+  jest.doMock('../../../common/components/image/components/ImagePhotoCategoryProductsComponent', () => ({
     ImagePhoto: jest.fn().mockImplementation(() => <div className="ImagePhoto" />),
   }));
 

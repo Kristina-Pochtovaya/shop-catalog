@@ -5,7 +5,7 @@ import setErrorIncorrectLengthPhoneNumber from './setErrorIncorrectLengthPhoneNu
 import setErrorNotNullAddress from './setErrorNotNullAddress';
 import setErrorNotNullPassword from './setErrorNotNullPassword';
 import setErrorNotNullPasswordNewRepeat from './setErrorNotNullPasswordNewRepeat';
-import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
+import setErrorIncorrectLength from '../../../common/utils/setErrorIncorrectLength';
 
 const setErrorNotNullGroupsRegistration = (
   firstName, lastName, email, errorLength, phoneNumber, address, password, passwordNewRepeat,

@@ -1,13 +1,13 @@
 import { React, useState } from 'react';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
-import PopUp from '../../../common/popup/components/PopUpComponent';
+import PopUp from '../../../common/components/popup/components/PopUpComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
 import PopupBasket from '../../catalogItems/components/PopupBasketComponent';
-import addRemoveScroll from '../../../common/untils/addRemoveScroll';
+import addRemoveScroll from '../../../common/utils/addRemoveScroll';
 import ConnectedPopUpBasketOrderToUsers from '../containers/ConnectedPopUpBasketOrderComponent';
-import PopUpSomethingWentWrong from '../../../common/popup/components/PopUpSomethingWentWrongComponent';
-import PopUpThanks from '../../../common/popup/components/PopUpThanksComponent';
+import PopUpSomethingWentWrong from '../../../common/components/popup/components/PopUpSomethingWentWrongComponent';
+import PopUpThanks from '../../../common/components/popup/components/PopUpThanksComponent';
 
 const Basket = () => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);

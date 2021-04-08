@@ -1,6 +1,6 @@
 import { withRouter } from 'react-router-dom';
 import AdminPersonalAccountRows from '../components/AdminPersonalAccountRowsComponent';
 
-const WithRouterAdminPersonalAccount = withRouter(AdminPersonalAccountRows);
+const WithRouterAdminPersonalAccountRows = withRouter(AdminPersonalAccountRows);
 
-export default WithRouterAdminPersonalAccount;
+export default WithRouterAdminPersonalAccountRows;

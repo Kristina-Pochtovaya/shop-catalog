@@ -1,5 +1,5 @@
 import React from 'react';
-import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
+import ImagePhotoCategoryProducts from '../../../common/components/image/components/ImagePhotoCategoryProductsComponent';
 import EditCategoryImage from './EditCategoryImageComponent';
 
 const ImageColumnEditCategory = ({

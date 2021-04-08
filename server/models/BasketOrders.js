@@ -21,11 +21,20 @@ const BasketOrders = sequelize.define('Products', {
   description: {
     type: Sequelize.DataTypes.STRING,
   },
+  image: {
+    type: Sequelize.DataTypes.TEXT('long'),
+  },
   counter: {
     type: Sequelize.DataTypes.INTEGER,
   },
   sum: {
     type: Sequelize.DataTypes.DECIMAL(10, 2),
+  },
+  clientEmail: {
+    type: Sequelize.DataTypes.STRING,
+  },
+  clientId: {
+    type: Sequelize.DataTypes.INTEGER,
   },
   clientName: {
     type: Sequelize.DataTypes.STRING,

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import WithRouterAddCategoryPage from './WithRouterAdminPersonalAccountComponent';
-import { ENTER, LOGIN } from '../../../redux/actions/loginPersonalAccountActions';
+import { ENTER, LOGIN, DELETE } from '../../../redux/actions/loginPersonalAccountActions';
 
 const ConnectedAdminPersonalAccount = connect(
   (state) => ({
@@ -18,6 +18,9 @@ const ConnectedAdminPersonalAccount = connect(
       payload: {
         loginFormIsVisible, loginFormLoginPageIsVisible, loginFormForgetPasswordIsVisible,
       },
+    }),
+    onDelete: () => dispatch({
+      type: DELETE.type,
     }),
   }),
 )(WithRouterAddCategoryPage);

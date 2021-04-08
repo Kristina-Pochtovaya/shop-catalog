@@ -1,5 +1,5 @@
 import React from 'react';
-import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
+import PopUpErrorLoading from '../../../common/components/popup/components/PopUpErrorLoadingComponent';
 import getProducts from '../api/get/getProducts';
 import handleInStockProductsChange from '../utils/handleInStockProductsChange';
 

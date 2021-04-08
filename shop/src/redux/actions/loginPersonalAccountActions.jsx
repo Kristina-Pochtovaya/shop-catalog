@@ -4,6 +4,7 @@ export const loginPersonalAccountActions = {
   ENTEREMAIL: 'enter email',
   AUTOCOMPLETE: 'autocomplete user information',
   ADDPHOTO: 'add photo',
+  DELETE: 'delete',
 };
 
 export const ENTER = {
@@ -34,5 +35,15 @@ export const AUTOCOMPLETE = {
 
 export const ADDPHOTO = {
   type: loginPersonalAccountActions.ADDPHOTO,
+  photo: '',
+};
+
+export const DELETE = {
+  type: loginPersonalAccountActions.DELETE,
+  firstName: '',
+  phone: '',
+  address: '',
+  clientEmail: '',
+  id: '',
   photo: '',
 };

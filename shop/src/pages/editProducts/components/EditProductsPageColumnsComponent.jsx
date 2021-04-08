@@ -1,12 +1,12 @@
 import React from 'react';
 import getProducts from '../api/get/getProducts';
 import getCategories from '../../editCategory/api/get/getCategories';
-import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
+import PopUpErrorLoading from '../../../common/components/popup/components/PopUpErrorLoadingComponent';
 import IsEditActiveColumnsComponent from './IsEditActiveColumnsComponent';
 import IsEditNotActiveColumnsComponent from './IsEditNotActiveColumnsComponent';
 import processHandleButtonOnEdit from '../utils/processHandleButtonOnEdit';
-import ButtonEditProducts from '../../../common/button/components/ButtonEditProductsComponent';
-import ButtonDeleteCategoryProducts from '../../../common/button/components/ButtonDeleteCategoryProductsComponent';
+import ButtonEditProducts from '../../../common/components/button/components/ButtonEditProductsComponent';
+import ButtonDeleteCategoryProducts from '../../../common/components/button/components/ButtonDeleteCategoryProductsComponent';
 import updateDataOnClick from '../utils/updateDataOnClick';
 
 class EditProductsPageColumns extends React.Component {

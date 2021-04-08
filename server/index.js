@@ -5,9 +5,8 @@ import commonCategory from './routes/commonCategoryRoute.js';
 import commonProducts from './routes/commonProductsRoute.js';
 import commonUsers from './routes/commonUsersRoute.js';
 import commonLogin from './routes/commonLoginRoute.js';
+import commonBasket from './routes/commonBasketRoute.js';
 import features from './routes/featuresRoute.js';
-/* import root from './routes/rootRoute.js'; */
-import basket from './routes/basketRoute.js';
 import image from './routes/imageRoute.js';
 import download from './routes/downloadRoute.js';
 import imageTest from './routes/imageTestRoute.js';
@@ -37,11 +36,9 @@ Authicate();
 
 app.use(express.static('uploads'));
 
-/* app.all('/', root); */
-
-app.all('/basket', basket);
-
 app.all('/', imageTest);
+
+app.use(commonBasket);
 
 app.use(commonCategory);
 

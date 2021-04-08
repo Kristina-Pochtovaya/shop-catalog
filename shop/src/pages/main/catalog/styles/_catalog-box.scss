@@ -1,7 +1,8 @@
 %title-itemCard{
   margin: 0;
   max-width: 256px;
-
+  height: 45px;
+  align-items: center;
   color: white;
 };
 
@@ -34,6 +35,11 @@ $colorLightGrey: #575b71;
     .item {
       flex: 0 1 33.333%;
       margin-bottom: 5px;
+
+      .titleCategory{
+        vertical-align: middle;
+        margin-left: 3px;
+      }
 
       .titleElectricalGoodsAndLights {
         background-color: $colorLightPupleItem; 

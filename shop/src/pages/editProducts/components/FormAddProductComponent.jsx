@@ -1,7 +1,7 @@
 import React from 'react';
 import AddCategoryProductImage from '../../editCategory/components/AddCategoryProductImage';
 import handleButtonClick from '../utils/handleButtonClick';
-import setClassErrorById from '../../../common/untils/setClassErrorById';
+import setClassErrorById from '../../../common/utils/setClassErrorById';
 
 const FormAddProduct = ({
   updateData, updateImage, state, history, isProductsUpdated, setIsProductsUpdated,

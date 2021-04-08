@@ -1,7 +1,7 @@
 import setErrorNotNullEmail from './setErrorNotNullEmail';
 import setErrorNotNullPassword from './setErrorNotNullPassword';
 import setErrorNotNullPasswordNewRepeat from './setErrorNotNullPasswordNewRepeat';
-import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
+import setErrorIncorrectLength from '../../../common/utils/setErrorIncorrectLength';
 
 const setErrorNotNullGroupsChangePassword = async (
   clientEmail, passwordNew, passwordNewRepeat, errorLength,

@@ -2,10 +2,10 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import postCategory from './postCategory';
 import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
-import setClassErrorById from '../../../../common/untils/setClassErrorById';
+import setClassErrorById from '../../../../common/utils/setClassErrorById';
 
 jest.mock('../../../../common/api/post/postRequestMultipartFormData');
-jest.mock('../../../../common/untils/setClassErrorById');
+jest.mock('../../../../common/utils/setClassErrorById');
 
 configure({ adapter: new Adapter() });
 
@@ -24,7 +24,7 @@ describe('Items API', () => {
   jest.mock('../../../../common/api/post/postRequestMultipartFormData', async () => ({
     postRequestMultipartFormData: jest.fn().mockImplementation(() => res),
   }));
-  jest.mock('../../../../common/untils/setClassErrorById', () => ({
+  jest.mock('../../../../common/utils/setClassErrorById', () => ({
     setClassErrorById: jest.fn().mockImplementation(() => true),
   }));
 

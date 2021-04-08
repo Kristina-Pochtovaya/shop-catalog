@@ -1,6 +1,6 @@
 import postNewCategory from '../api/post/postNewCategory';
-import setClassErrorById from '../../../common/untils/setClassErrorById';
-import checkOnSymbols from '../../../common/untils/checkOnSymbols';
+import setClassErrorById from '../../../common/utils/setClassErrorById';
+import checkOnSymbols from '../../../common/utils/checkOnSymbols';
 
 const processResultAddNewCategory = async (categoryName, image, titleColor, history,
   isProductsUpdated, setIsProductsUpdated) => {

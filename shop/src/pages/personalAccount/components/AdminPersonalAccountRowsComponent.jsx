@@ -1,23 +1,19 @@
 import React from 'react';
 import buttonAdminPageArray from '../constants/buttonAdminPageArray';
+import handleButtonOnClick from '../utils/handleButtonOnClick';
+import PersonalAccountSymbol from '../../../common/components/icons/components/PersonalAccountSymbol';
 
-const AdminPersonalAccountRows = ({ setIsPersonalInformationVisible, history }) => {
-  const handleButtonOnClick = (className) => {
-    if (className === 'categoryRow') { history.push('./edit-category'); }
-    if (className === 'catalogOfGoodsRow') { history.push('./edit-products'); }
-    if (className === 'personalDataRow') { setIsPersonalInformationVisible(true); }
-  };
-
-  return (
-    <div className="admin-row">
-      {buttonAdminPageArray.map((button) => (
-        button.type === 'row'
+const AdminPersonalAccountRows = ({ setIsPersonalInformationVisible, history }) => (
+  <div className="admin-row">
+    {buttonAdminPageArray.map((button) => (
+      button.type === 'row'
       && (
       <button
         key={button.className}
         className={button.className}
         type="button"
-        onClick={() => handleButtonOnClick(button.className)}
+        onClick={() => handleButtonOnClick(button.className, history,
+          setIsPersonalInformationVisible)}
       >
         { button.className !== 'personalDataRow' ? (
           <img
@@ -27,18 +23,12 @@ const AdminPersonalAccountRows = ({ setIsPersonalInformationVisible, history }) 
             className={button.image}
           />
         ) : (
-          <svg viewBox="0 0 12.61 15" className="personalAccountIcon">
-            <g>
-              <circle cx="6.3" cy="3.48" r="3.48" />
-              <path d="M6.3,8.7A6.3,6.3,0,0,0,0,15H12.61A6.3,6.3,0,0,0,6.3,8.7Z" />
-            </g>
-          </svg>
+          <PersonalAccountSymbol className="personalAccountIcon" />
         )}
         <p className={button.classNameString}>{button.text}</p>
       </button>
       )))}
-    </div>
-  );
-};
+  </div>
+);
 
 export default AdminPersonalAccountRows;

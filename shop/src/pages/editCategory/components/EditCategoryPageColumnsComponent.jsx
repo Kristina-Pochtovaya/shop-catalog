@@ -1,11 +1,11 @@
 import React from 'react';
 import getCategories from '../api/get/getCategories';
 import NameColumnEditCategory from './NameColumnEditCategoryComponent';
-import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
+import PopUpErrorLoading from '../../../common/components/popup/components/PopUpErrorLoadingComponent';
 import ImageColumnEditCategory from './ImageColumnEditCategoryComponent';
 import postCategory from '../api/post/postCategory';
-import ButtonEditCategory from '../../../common/button/components/ButtonEditCategoryComponent';
-import ButtonDeleteCategoryProducts from '../../../common/button/components/ButtonDeleteCategoryProductsComponent';
+import ButtonEditCategory from '../../../common/components/button/components/ButtonEditCategoryComponent';
+import ButtonDeleteCategoryProducts from '../../../common/components/button/components/ButtonDeleteCategoryProductsComponent';
 
 class EditCategoryPageColumns extends React.Component {
   _isMounted = false;

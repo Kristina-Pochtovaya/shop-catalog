@@ -1,11 +1,11 @@
-import setErrorNotNullFirstName from './setErrorNotNullFirstName';
-import setErrorNotNullLastName from './setErrorNotNullLastName';
+import setErrorNotNullFirstName from '../../registration/utils/setErrorNotNullFirstName';
+import setErrorNotNullLastName from '../../registration/utils/setErrorNotNullLastName';
 import setErrorNotNullEmail from './setErrorNotNullEmail';
-import setErrorIncorrectLengthPhoneNumber from './setErrorIncorrectLengthPhoneNumber';
-import setErrorNotNullAddress from './setErrorNotNullAddress';
+import setErrorIncorrectLengthPhoneNumber from '../../registration/utils/setErrorIncorrectLengthPhoneNumber';
+import setErrorNotNullAddress from '../../registration/utils/setErrorNotNullAddress';
 import setErrorNotNullPassword from './setErrorNotNullPassword';
 import setErrorNotNullPasswordNewRepeat from './setErrorNotNullPasswordNewRepeat';
-import setErrorIncorrectLength from '../../../common/untils/setErrorIncorrectLength';
+import setErrorIncorrectLength from '../../../common/utils/setErrorIncorrectLength';
 
 const setErrorNotNullGroupsRegistration = (
   firstName, lastName, email, errorLength, phoneNumber, address, password, passwordNewRepeat,

@@ -1,12 +1,13 @@
 import React from 'react';
 import postBasketItemsRequest from '../api/post/postBasketItemsRequest';
-import addRemoveScroll from '../../../common/untils/addRemoveScroll';
-import formatPhoneNumber from '../../../common/untils/formatPhoneNumber';
-import setErrorNotNull from '../../../common/untils/setErrorNotNull';
-import ErrorSymbol from '../../../common/errorSymbol/components/ErrorSymbolComponent';
-import InputWitchCkeckingNotNull from '../../../common/input/components/InputWitchCkeckingNotNullComponent';
+import addRemoveScroll from '../../../common/utils/addRemoveScroll';
+import formatPhoneNumber from '../../../common/utils/formatPhoneNumber';
+import setErrorNotNull from '../../../common/utils/setErrorNotNull';
+import ErrorSymbol from '../../../common/components/icons/components/ErrorSymbolComponent';
+import InputWitchCkeckingNotNull from '../../../common/components/input/components/InputWitchCkeckingNotNullComponent';
 import postUnautherizedUser from '../api/post/postUnautherizedUserRequest';
-import removeErrorNotNull from '../../../common/untils/removeErrorNotNull';
+import removeErrorNotNull from '../../../common/utils/removeErrorNotNull';
+import BackSymbol from '../../../common/components/icons/components/BackSymbol';
 
 class PopUpBasketOrder extends React.Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class PopUpBasketOrder extends React.Component {
     async function handleButtonClick() {
       setPopupOrderActive(false);
       const result = await postBasketItemsRequest(items.catalogItemsReducer,
-        clientName, clientPhone, clientAddress, clientMessage);
+        clientName, clientPhone, clientAddress, clientMessage, pages);
       result === null ? setpopupSmthWentWrongActive(true) : setPopupThanksActive(true);
     }
     async function handleAddUnautherizedUser() {
@@ -63,12 +64,7 @@ class PopUpBasketOrder extends React.Component {
             }}
             role="presentation"
           >
-            <svg className="backSymbol" viewBox="0 0 20 20">
-              <g>
-                <path d="M17.89,0H2.11A2.11,2.11,0,0,0,0,2.11V17.89A2.11,2.11,0,0,0,2.11,20H17.89A2.11,2.11,0,0,0,20,17.89V2.11A2.11,2.11,0,0,0,17.89,0ZM19,17.89A1.11,1.11,0,0,1,17.89,19H2.11A1.11,1.11,0,0,1,1,17.89V2.11A1.11,1.11,0,0,1,2.11,1H17.89A1.11,1.11,0,0,1,19,2.11V17.89Z" />
-                <path d="M13,7a.5.5,0,0,0-.71,0L10,9.29,7.68,7A.5.5,0,0,0,7,7.68L9.29,10,7,12.32a.5.5,0,0,0,.71.71L10,10.71,12.32,13a.5.5,0,0,0,.71-.71L10.71,10,13,7.68A.5.5,0,0,0,13,7Z" />
-              </g>
-            </svg>
+            <BackSymbol className="backSymbol" />
           </div>
           <form className="form">
             <div className="name">

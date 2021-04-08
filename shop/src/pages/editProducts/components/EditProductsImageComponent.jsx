@@ -1,8 +1,8 @@
 import React from 'react';
 import getCatalogProductsImage from '../../../common/api/get/getCatalogProductsImage';
-import setImage from '../../../common/untils/setImage';
-import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
-import FormEditImagePhoto from '../../../common/forms/components/FormEditImagePhotoComponent';
+import setImage from '../../../common/utils/setImage';
+import ImagePhotoCategoryProducts from '../../../common/components/image/components/ImagePhotoCategoryProductsComponent';
+import FormEditImagePhoto from '../../../common/components/forms/components/FormEditImagePhotoComponent';
 
 class EditProductsImage extends React.Component {
   constructor(props) {

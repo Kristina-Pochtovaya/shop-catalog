@@ -5,25 +5,26 @@ import ConnectedHeader from './pages/main/header/container/HeaderContainer';
 import Catalog from './pages/main/catalog/components/CatalogComponent';
 import Footer from './pages/main/footer/components/FooterComponent';
 import About from './pages/about/components/AboutComponent';
-import aboutUS from './assets/header/about-us.png';
+import aboutUS from './common/assets/header/about-us.png';
 import ConnectedBasket from './pages/basket/containers/ConnectedBasketComponent';
 import createStore from './redux/store';
 import getCatalogCategories from './pages/main/catalog/api/get/getCatalogCategories';
-import PopUp from './common/popup/components/PopUpComponent';
+import PopUp from './common/components/popup/components/PopUpComponent';
 import PopupBasket from './pages/catalogItems/components/PopupBasketComponent';
 import ConnectedChangePassword from './pages/changePassword/containers/ChangePasswordContainer';
 import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
 import ConnectedRegistration from './pages/registration/containers/ConnectedRegistrationComponent';
 import getProductsRequest from './common/api/get/getProductsRequest';
-import { ConnectedCatalogItem } from './pages/catalogItems/components/CatalogItemComponent';
-import setImg from './common/untils/setImg';
-import PopUpSomethingWentWrong from './common/popup/components/PopUpSomethingWentWrongComponent';
+import ConnectedCatalogItem from './pages/catalogItems/containers/ConnectedCatalogItem';
+import setImg from './common/utils/setImg';
+import PopUpSomethingWentWrong from './common/components/popup/components/PopUpSomethingWentWrongComponent';
 import ConnectedEditCategoryPage from './pages/editCategory/containers/ConnectedEditCategoryPage';
 import WithRouterAddCategoryPage from './pages/editCategory/containers/WithRouterAddCategoryPageComponent';
 import WithRouterAddProductPage from './pages/editProducts/containers/WithRouterAddCategoryPageComponent';
 import ConnectedEditProductsPage from './pages/editProducts/containers/ConnectedEditProductsPage';
-import ImageContainer from './ImageContainterComponent';
-import ImageForm from './ImageFormComponent';
+import ImageContainer from './common/components/imagesFromServer/components/ImageContainterComponent';
+import ImageForm from './common/components/imagesFromServer/components/ImageFormComponent';
+import ConnectedOrdersHistory from './pages/ordersHistory/containers/ConnectedOrdersHistoryComponent';
 
 const store = createStore();
 
@@ -97,6 +98,7 @@ export function AppShopCatalog() {
                 {productsArray.products.map((product) => (product.categoryId === category.id
                   && (
                   <ConnectedCatalogItem
+                    product={product}
                     key={product.id}
                     id={product.id}
                     img={(
@@ -154,6 +156,9 @@ export function AppShopCatalog() {
             setIsProductsUpdated={setIsProductsUpdated}
             isProductsUpdated={isProductsUpdated}
           />
+        </Route>
+        <Route path="/orders-history">
+          <ConnectedOrdersHistory />
         </Route>
         <Route path="/test">
           <ImageContainer newImage={newImage} />

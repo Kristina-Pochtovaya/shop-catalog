@@ -1,6 +1,6 @@
-import transliterate from '../../../../common/untils/transliterate';
+import transliterate from '../../../../common/utils/transliterate';
 import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
-import setClassErrorById from '../../../../common/untils/setClassErrorById';
+import setClassErrorById from '../../../../common/utils/setClassErrorById';
 
 const newCategory = '/add-category';
 

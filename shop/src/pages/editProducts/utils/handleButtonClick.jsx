@@ -1,4 +1,4 @@
-import setClassErrorById from '../../../common/untils/setClassErrorById';
+import setClassErrorById from '../../../common/utils/setClassErrorById';
 import postNewProduct from '../api/post/postNewProduct';
 
 const handleButtonClick = async (state, history, isProductsUpdated, setIsProductsUpdated) => {
@@ -8,7 +8,6 @@ const handleButtonClick = async (state, history, isProductsUpdated, setIsProduct
   } if (result === false) {
     setClassErrorById('errorNewImage', 'errorNewImage');
   }
-
   isProductsUpdated
     ? setIsProductsUpdated(false)
     : setIsProductsUpdated(true);

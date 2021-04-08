@@ -1,5 +1,5 @@
 import React from 'react';
-import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
+import PopUpErrorLoading from '../../../common/components/popup/components/PopUpErrorLoadingComponent';
 import getCategories from '../../editCategory/api/get/getCategories';
 import handleCategoryProductsChange from '../utils/handleCategoryProductsChange';
 

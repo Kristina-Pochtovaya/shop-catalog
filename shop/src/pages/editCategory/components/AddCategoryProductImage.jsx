@@ -1,7 +1,7 @@
 import React from 'react';
-import setImage from '../../../common/untils/setImage';
-import ImagePhotoCategoryProducts from '../../../common/image/components/ImagePhotoCategoryProductsComponent';
-import FormAddImagePhoto from '../../../common/forms/components/FormAddImagePhotoComponent';
+import setImage from '../../../common/utils/setImage';
+import ImagePhotoCategoryProducts from '../../../common/components/image/components/ImagePhotoCategoryProductsComponent';
+import FormAddImagePhoto from '../../../common/components/forms/components/FormAddImagePhotoComponent';
 
 class AddCategoryProductImage extends React.Component {
   constructor(props) {

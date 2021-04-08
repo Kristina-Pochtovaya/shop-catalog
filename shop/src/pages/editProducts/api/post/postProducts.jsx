@@ -1,5 +1,5 @@
 import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
-import setClassErrorById from '../../../../common/untils/setClassErrorById';
+import setClassErrorById from '../../../../common/utils/setClassErrorById';
 
 const productsEdit = '/products-edit';
 

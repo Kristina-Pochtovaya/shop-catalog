@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import ConnectedAdminPersonalAccount from '../containers/ConnectedAdminPersonalAccount';
+import ConnectedAuthorizedPersonalAccount from '../containers/ConnectedAuthorizedPersonalAccount';
 import postUsersRoles from '../api/post/postUsersRoles';
 
 const PersonalAccount = ({ pages }) => {
@@ -14,6 +15,7 @@ const PersonalAccount = ({ pages }) => {
       pages.loginPersonalAccountReducer.clientEmail,
     );
     result === 'admin' ? setAdminVisible(true) : setAdminVisible(false);
+    result === 'authorized' ? setAutherizedVisible(true) : setAutherizedVisible(false);
   }
 
   handleOnLoad();
@@ -21,9 +23,8 @@ const PersonalAccount = ({ pages }) => {
   return (
     <>
       <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
-      {
-         isAdminVisible ? <ConnectedAdminPersonalAccount /> : null
-        }
+      {isAdminVisible ? <ConnectedAdminPersonalAccount /> : null}
+      {isAutherizedVisible ? <ConnectedAuthorizedPersonalAccount /> : null}
       <Footer />
     </>
   );

@@ -2,9 +2,9 @@ import React from 'react';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 import FormAddProduct from './FormAddProductComponent';
-import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
+import PopUpErrorLoading from '../../../common/components/popup/components/PopUpErrorLoadingComponent';
 import getCategories from '../../editCategory/api/get/getCategories';
-import checkOnlyNumbers from '../../../common/untils/checkOnlyNumbers';
+import checkOnlyNumbers from '../../../common/utils/checkOnlyNumbers';
 
 class AddProductPage extends React.Component {
   _isMounted = false;

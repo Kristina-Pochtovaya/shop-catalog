@@ -1,56 +1,18 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
-import transliterate from '../../../../common/untils/transliterate';
+import postRequestMultipartFormData from '../../../../common/api/post/postRequestMultipartFormData';
+import processInputData from '../../utils/processInputData';
+import setClassErrorById from '../../../../common/utils/setClassErrorById';
 
 const newProduct = '/add-product';
 
 async function postNewProduct(state) {
-  const errorImage = document.getElementById('errorNewImage');
-  const imgAlt = transliterate(state.productName);
-  const imgTitle = imgAlt;
-
-  const newCategory = state.categoryName === 'Электротовары и свет' ? state.categoriesArray.categories[0].category : state.categoryName;
-
-  let categoryId = state.categoriesArray.categories
-    .filter((category) => category.category === newCategory)
-    .map((category) => category.id).join('');
-
-  categoryId = Number(categoryId);
-
-  let price = '';
-
-  if (state.productPrice.slice(-1) === '.') {
-    price = state.productPrice.slice(0, -5);
-  }
-
-  const inStock = state.productInStock === 'да' ? Boolean(true) : Boolean(false);
-
-  const payload = {
-    data: {
-      categoryId,
-      category: newCategory,
-      description: state.productName,
-      imgAlt,
-      imgTitle,
-      image: state.image,
-      price,
-      counter: 1,
-      inStock,
-    },
-  };
-
+  const payload = processInputData(state);
   try {
-    const response = await axios.post(`${serverUrl}${newProduct}`, {
-      payload,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
+    const response = await postRequestMultipartFormData(newProduct, payload);
     const result = response.data;
-    errorImage.setAttribute('class', 'errorNewImage -disabled');
+    setClassErrorById('errorNewImage', 'errorNewImage -disabled');
     return result;
   } catch (error) {
-    errorImage.setAttribute('class', 'errorNewImage');
+    setClassErrorById('errorNewImage', 'errorNewImage');
     return null;
   }
 }

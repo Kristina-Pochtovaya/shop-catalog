@@ -1,5 +1,5 @@
 import React from 'react';
-import ImagePhotoProducts from '../../../common/image/components/ImagePhotoProductsComponent';
+import ImagePhotoProducts from '../../../common/components/image/components/ImagePhotoProductsComponent';
 
 const IsEditNotActiveColumnsComponent = ({ product, categoriesArray }) => (
   <>

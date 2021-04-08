@@ -4,10 +4,10 @@ import Adapter from 'enzyme-adapter-react-16';
 import InputEditProductsInStock from './InputEditProductsInStockComponent';
 
 import handleInStockProductsChange from '../utils/handleInStockProductsChange';
-import PopUpErrorLoading from '../../../common/popup/components/PopUpErrorLoadingComponent';
+import PopUpErrorLoading from '../../../common/components/popup/components/PopUpErrorLoadingComponent';
 
 jest.mock('../utils/handleInStockProductsChange');
-jest.mock('../../../common/popup/components/PopUpErrorLoadingComponent');
+jest.mock('../../../common/components/popup/components/PopUpErrorLoadingComponent');
 
 configure({ adapter: new Adapter() });
 

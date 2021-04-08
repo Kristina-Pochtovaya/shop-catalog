@@ -2,12 +2,12 @@ import { configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import processResultAddNewCategory from './processResultAddNewCategory';
 import postNewCategory from '../api/post/postNewCategory';
-import setClassErrorById from '../../../common/untils/setClassErrorById';
-import checkOnSymbols from '../../../common/untils/checkOnSymbols';
+import setClassErrorById from '../../../common/utils/setClassErrorById';
+import checkOnSymbols from '../../../common/utils/checkOnSymbols';
 
 jest.mock('../api/post/postNewCategory');
-jest.mock('../../../common/untils/setClassErrorById');
-jest.mock('../../../common/untils/checkOnSymbols');
+jest.mock('../../../common/utils/setClassErrorById');
+jest.mock('../../../common/utils/checkOnSymbols');
 
 configure({ adapter: new Adapter() });
 
@@ -27,10 +27,10 @@ describe('Items API', () => {
   jest.mock('../api/post/postNewCategory', async () => ({
     postNewCategory: jest.fn().mockImplementation(() => category),
   }));
-  jest.mock('../../../common/untils/setClassErrorById', () => ({
+  jest.mock('../../../common/utils/setClassErrorById', () => ({
     setClassErrorById: jest.fn().mockImplementation(() => true),
   }));
-  jest.mock('../../../common/untils/checkOnSymbols', () => ({
+  jest.mock('../../../common/utils/checkOnSymbols', () => ({
     checkOnSymbols: jest.fn(() => true),
   }));
 
