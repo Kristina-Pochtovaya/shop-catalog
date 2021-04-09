@@ -3,9 +3,7 @@ import BasketTableHeader from './BasketTableHeaderComponent';
 import ConnectedBusketTableColumns from '../containers/ConnectedBasketColumnsComponent';
 import BackSymbol from '../../../common/components/icons/components/BackSymbol';
 
-const BasketTable = ({
-  items, OnDeleteAll,
-}) => (
+const BasketTable = ({ items, OnDeleteAll }) => (
   <ul className="listOrder-wrap">
     <BasketTableHeader />
     <ConnectedBusketTableColumns />

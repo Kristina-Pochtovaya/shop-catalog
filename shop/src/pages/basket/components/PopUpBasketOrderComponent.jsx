@@ -3,7 +3,6 @@ import postBasketItemsRequest from '../api/post/postBasketItemsRequest';
 import addRemoveScroll from '../../../common/utils/addRemoveScroll';
 import formatPhoneNumber from '../../../common/utils/formatPhoneNumber';
 import setErrorNotNull from '../../../common/utils/setErrorNotNull';
-import ErrorSymbol from '../../../common/components/icons/components/ErrorSymbolComponent';
 import InputWitchCkeckingNotNull from '../../../common/components/input/components/InputWitchCkeckingNotNullComponent';
 import postUnautherizedUser from '../api/post/postUnautherizedUserRequest';
 import removeErrorNotNull from '../../../common/utils/removeErrorNotNull';
@@ -30,7 +29,10 @@ class PopUpBasketOrder extends React.Component {
   updateData = (value, name) => {
     if (name === 'clientName') { this.setState({ clientName: value }); }
     if (name === 'clientAddress') { this.setState({ clientAddress: value }); }
+    if (name === 'phone') { this.setState({ clientPhone: formatPhoneNumber(value) }); }
   }
+
+  updatePhone = () => this.setState({ clientPhone: '+375' });
 
   render() {
     const {
@@ -81,23 +83,22 @@ class PopUpBasketOrder extends React.Component {
             </div>
             <div className="phone">
               <p className="phoneString -required">Телефон:</p>
-              <input
-                className={clientPhoneInput}
-                name="PHONE"
+              <InputWitchCkeckingNotNull
+                initialValue={clientPhone}
                 type="tel"
+                name="phone"
+                classInput={clientPhoneInput}
+                classSymbol={clientPhoneSymbol}
+                updateData={this.updateData}
+                removeErrorNotNull={removeErrorNotNull}
+                removeErrorLength={false}
+                classerrorLength=""
+                onEnterEmail=""
                 minLength="13"
                 maxLength="13"
                 placeholder="+375 (__) ___-__-__"
-                value={clientPhone}
-                onFocus={() => this.setState({ clientPhone: '+375' })}
-                onChange={(event) => {
-                  this.setState({
-                    clientPhone: formatPhoneNumber(event.target.value),
-                  });
-                  removeErrorNotNull(clientPhoneInput, clientPhoneSymbol);
-                }}
+                updatePhone={this.updatePhone}
               />
-              <ErrorSymbol Class={`${clientPhoneSymbol} -disabled`} />
             </div>
             <div className="address">
               <p className="addressString -required">Адрес:</p>

@@ -2,10 +2,9 @@ import React from 'react';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
 
-const About = ({ setLoginForm }) => (
+const About = () => (
   <>
     <ConnectedHeader linkItem={<button type="button" className="buttonBack">Назад</button>} link="/main-page" disabled={false} />
-
     <div className="about-wrap">
       <h1 className="headerH1">
         ВСЕ ДЛЯ ДОМА – строительный гипермаркет
@@ -19,7 +18,6 @@ const About = ({ setLoginForm }) => (
         {' '}
         формата DIY, соответствующий высоким стандартам обслуживания европейского уровня.
       </p>
-
       <p className="paragraph">
         DIY (Do It Yourself) - английское название
         {' '}
@@ -31,7 +29,6 @@ const About = ({ setLoginForm }) => (
         удобная навигация отделов упрощают поиск товара,
         а профессиональные продавцы магазина предоставляют необходимую консультацию.
       </p>
-
       <ul className="list">
         <p className="paragraph">
           <b className="boldBlock">Магазин стройматериалов имеет торговую площадь 7500 кв.м., покупателям предлагается более 45 000 различных товаров, которые представлены в девяти отделах:</b>
@@ -45,11 +42,8 @@ const About = ({ setLoginForm }) => (
           <li className="listItem">садовый мир.</li>
         </p>
       </ul>
-
       <p className="paragraph">Качество предлагаемых товаров гарантировано и сертифицировано.</p>
-
       <h2 className="headerH2">Отличительными особенностями строительного гипермаркета  &quot;ВСЕ ДЛЯ ДОМА&quot; являются:</h2>
-
       <ul className="list">
         <p className="paragraph">
           <li className="listItem">широкий ассортимент продукции,</li>
@@ -62,7 +56,6 @@ const About = ({ setLoginForm }) => (
           <li className="listItem">удобное время работы – ежедневно с 9 до 22 часов.</li>
         </p>
       </ul>
-
       <p className="paragraph">
         <i>Магазин стройматериалов &quot;ВСЕ ДЛЯ ДОМА&quot; </i>
         {' '}
@@ -74,7 +67,6 @@ const About = ({ setLoginForm }) => (
         &quot;ВСЕ ДЛЯ ДОМА&quot; - доступен каждому, это комфортабельный
         строительный гипермаркет, который уважает своих покупателей.
       </p>
-
       <h3 className="headerH3">Добро пожаловать в строительную цивилизацию «ВСЕ ДЛЯ ДОМА»</h3>
     </div>
     <Footer />

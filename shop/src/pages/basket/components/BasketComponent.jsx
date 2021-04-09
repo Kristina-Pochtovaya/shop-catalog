@@ -1,19 +1,18 @@
 import { React, useState } from 'react';
 import ConnectedHeader from '../../main/header/container/HeaderContainer';
 import Footer from '../../main/footer/components/FooterComponent';
-import PopUp from '../../../common/components/popup/components/PopUpComponent';
 import ConnectedBusketTable from '../containers/ConnectedBasketTableComponent';
-import PopupBasket from '../../catalogItems/components/PopupBasketComponent';
+import WithRouterPopupBasket from '../../catalogItems/containers/WithRouterPopupBasket';
 import addRemoveScroll from '../../../common/utils/addRemoveScroll';
-import ConnectedPopUpBasketOrderToUsers from '../containers/ConnectedPopUpBasketOrderComponent';
-import PopUpSomethingWentWrong from '../../../common/components/popup/components/PopUpSomethingWentWrongComponent';
-import PopUpThanks from '../../../common/components/popup/components/PopUpThanksComponent';
+import PopUpsWrapper from './PopUpsWrapperComponent';
+import PopUpsThanks from './PopUpsThanksComponent';
+import PopUpsError from './PopUpsErrorComponent';
 
 const Basket = () => {
   const [popupOrderActive, setPopupOrderActive] = useState(false);
   const [popupThanksActive, setPopupThanksActive] = useState(false);
   const [popupSmthWentWrongActive, setpopupSmthWentWrongActive] = useState(false);
-  const [popupBasketActive, setPopupBasketctive] = useState(false);
+  const [popupBasketActive, setPopupBasketActive] = useState(false);
 
   return (
     <>
@@ -26,65 +25,33 @@ const Basket = () => {
             id="continueBut"
             className="buttonOrderBuy"
             type="button"
-            onClick={() => {
-              setPopupOrderActive(true);
-              addRemoveScroll();
-            }}
+            onClick={() => { setPopupOrderActive(true); addRemoveScroll(); }}
           >
             Продолжить
           </button>
         </div>
       </div>
       <Footer />
-      <div
-        className={popupOrderActive ? 'popup-box -active' : 'popup-box'}
-      >
-        { popupOrderActive ? (
-          <PopUp
-            active={popupOrderActive}
-            setActive={setPopupOrderActive}
-          >
-            <ConnectedPopUpBasketOrderToUsers
-              setPopupOrderActive={setPopupOrderActive}
-              setPopupThanksActive={setPopupThanksActive}
-              setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}
-            />
-          </PopUp>
-        )
-          : null }
-      </div>
-      <div
-        className={popupThanksActive ? 'popup-box -active' : 'popup-box'}
-      >
-        { popupThanksActive ? (
-
-          <PopUp
-            active={popupThanksActive}
-            setActive={setPopupThanksActive}
-            activeOrder={popupOrderActive}
-          >
-            <PopUpThanks setPopupThanksActive={setPopupThanksActive} />
-          </PopUp>
-        )
-          : null }
-      </div>
+      <PopUpsWrapper
+        popupOrderActive={popupOrderActive}
+        setPopupOrderActive={setPopupOrderActive}
+        setPopupThanksActive={setPopupThanksActive}
+        setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}
+      />
+      <PopUpsThanks
+        popupThanksActive={popupThanksActive}
+        setPopupThanksActive={setPopupThanksActive}
+        popupOrderActive={popupOrderActive}
+      />
       <div
         className={popupSmthWentWrongActive ? 'popup-box -active' : 'popup-box'}
       >
-        {popupSmthWentWrongActive ? (
-          <PopUp
-            active={popupSmthWentWrongActive}
-            setActive={setpopupSmthWentWrongActive}
-            activeOrder={popupOrderActive}
-          >
-            <PopUpSomethingWentWrong
-              text="Попробуйте, сделать заказ еще раз"
-              setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}
-            />
-          </PopUp>
-        )
-          : null }
-        {popupBasketActive ? (<PopupBasket closePopup={setPopupBasketctive} />) : null }
+        <PopUpsError
+          popupSmthWentWrongActive={popupSmthWentWrongActive}
+          setpopupSmthWentWrongActive={setpopupSmthWentWrongActive}
+          popupOrderActive={popupOrderActive}
+        />
+        {popupBasketActive ? (<WithRouterPopupBasket className="popupBasket" closePopup={setPopupBasketActive} />) : null }
       </div>
     </>
   );

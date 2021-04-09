@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { ADD } from '../../../redux/actions/catalogItemsActions';
-import { CatalogItem } from '../components/CatalogItemComponent';
+import CatalogItem from '../components/CatalogItemComponent';
 
 const ConnectedCatalogItem = connect(
   (state) => ({

@@ -1,11 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import addRemoveScroll from '../../../common/utils/addRemoveScroll';
 import BackSymbol from '../../../common/components/icons/components/BackSymbol';
+import buttonPopupBasketArray from '../constants/ButtonPopupBasketArray';
 
-const PopupBasket = ({ closePopup }) => (
+const PopupBasket = ({ closePopup, history }) => (
   <div className="popupBasket-box">
     <div
+      className="popupBasket"
       onClick={() => closePopup(false)}
       role="presentation"
     >
@@ -13,27 +14,21 @@ const PopupBasket = ({ closePopup }) => (
     </div>
     <h2>Товар добавлен в корзину</h2>
     <div className="popupBasketButtons-box">
-      <button
-        type="button"
-        className="popupBasketButton"
-        onClick={() => closePopup(false)}
-      >
-        Продолжить покупки
-      </button>
-      <Link to="/basket">
+      {buttonPopupBasketArray.map((button) => (
         <button
+          key={button.id}
           type="button"
-          className="popupBasketButton"
+          className={button.className}
           onClick={() => {
-            closePopup(false);
-            addRemoveScroll();
+            if (button.closePopup) { closePopup(false); }
+            if (button.addRemoveScroll) { addRemoveScroll(); }
+            if (button.link) { history.push('./basket'); }
           }}
         >
-          Перейти в корзину
+          {button.text}
         </button>
-      </Link>
+      ))}
     </div>
   </div>
 );
-
 export default PopupBasket;

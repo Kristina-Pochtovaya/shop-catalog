@@ -1,39 +1,30 @@
 import React from 'react';
 import basket from '../../../common/assets/common/basket.png';
 import InStockSymbol from '../../../common/components/icons/components/InStockSymbol';
+import handleButtonOnClick from '../utils/handleButtonOnClickCatalogItems';
 
-export const CatalogItem = ({
-  product, img, description, price, inStock, id, setPopupBasketctive, counter, onAdd, category,
+const CatalogItem = ({
+  product, img, setPopupBasketctive, onAdd,
 }) => (
-  <div className="item-wrap" id={id}>
+  <div className="item-wrap" id={product.id}>
     <div className="info">
-      <p className={inStock ? '-yes' : '-no'}>
+      <p className={product.inStock ? '-yes' : '-no'}>
         <InStockSymbol className="inStock" />
         Наличие
       </p>
     </div>
     <div className="imgItemCard">{img}</div>
-    <h4 className="itemName">{description}</h4>
+    <h4 className="itemName">{product.description}</h4>
     <div className="purchase">
       <p className="priceCard">
-        {price}
+        {product.price}
         {' '}
         РУБ.
       </p>
       <button
-        className={inStock ? 'busketButton' : 'busketButton -disabled'}
+        className={product.inStock ? 'busketButton' : 'busketButton -disabled'}
         type="button"
-        onClick={() => {
-          setPopupBasketctive(true);
-          onAdd({
-            img,
-            description,
-            id,
-            price,
-            counter,
-            category,
-          });
-        }}
+        onClick={() => handleButtonOnClick(product, img, setPopupBasketctive, onAdd)}
       >
         <img className="imgBascet" src={basket} alt="Корзина" title="Корзина" />
         <span className="stringBascet">В корзину</span>

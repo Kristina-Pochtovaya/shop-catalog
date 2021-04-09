@@ -14,7 +14,6 @@ const BasketTableColumns = ({
           </div>
           <p className="columnPrice">
             <span className="priceNumbers">{item.price}</span>
-            {' '}
             <br />
             <span className="priceLetters">руб. за шт</span>
           </p>
@@ -52,13 +51,11 @@ const BasketTableColumns = ({
           </p>
           <div className="columnDelete">
             <div
+              className="deleteOneItem"
               onClick={() => {
                 OnDelete(item.id);
               }}
-              onKeyPress={OnDelete}
-              role="button"
-              tabIndex="0"
-              className="deleteOneItem"
+              role="presentation"
             >
               <BackSymbol className="backSymbol" />
             </div>

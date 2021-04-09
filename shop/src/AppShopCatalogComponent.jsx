@@ -10,7 +10,7 @@ import ConnectedBasket from './pages/basket/containers/ConnectedBasketComponent'
 import createStore from './redux/store';
 import getCatalogCategories from './pages/main/catalog/api/get/getCatalogCategories';
 import PopUp from './common/components/popup/components/PopUpComponent';
-import PopupBasket from './pages/catalogItems/components/PopupBasketComponent';
+import WithRouterPopupBasket from './pages/catalogItems/containers/WithRouterPopupBasket';
 import ConnectedChangePassword from './pages/changePassword/containers/ChangePasswordContainer';
 import PersonalAccount from './pages/personalAccount/components/PersonalAccountComponent';
 import ConnectedRegistration from './pages/registration/containers/ConnectedRegistrationComponent';
@@ -98,9 +98,8 @@ export function AppShopCatalog() {
                 {productsArray.products.map((product) => (product.categoryId === category.id
                   && (
                   <ConnectedCatalogItem
-                    product={product}
                     key={product.id}
-                    id={product.id}
+                    product={product}
                     img={(
                       <img
                         className="imgItem"
@@ -109,20 +108,14 @@ export function AppShopCatalog() {
                         title={product.imgTitle}
                       />
                         )}
-                    className="imgItem"
-                    description={product.description}
-                    inStock={product.inStock}
-                    price={product.price}
                     setPopupBasketctive={setPopupBasketctive}
-                    counter={product.counter}
-                    category={product.category}
                   />
                   )
                 ))}
               </div>
             </div>
             <PopUp active={popupBasketActive} setActive={setPopupBasketctive}>
-              <PopupBasket closePopup={setPopupBasketctive} />
+              <WithRouterPopupBasket closePopup={setPopupBasketctive} />
             </PopUp>
             <Footer />
           </Route>
