@@ -1,5 +1,5 @@
 import {
-  ENTER, LOGIN, ENTEREMAIL, AUTOCOMPLETE, ADDPHOTO, DELETE,
+  ENTER, LOGIN, ENTEREMAIL, AUTOCOMPLETE, ADDPHOTO, CLEAR,
 } from '../actions/loginPersonalAccountActions';
 
 const initialState = {
@@ -59,7 +59,7 @@ const loginPersonalAccountReducer = (state = initialState, action) => {
       };
     }
 
-    case DELETE.type: {
+    case CLEAR.type: {
       return {
         ...state,
         firstName: '',

@@ -4,7 +4,7 @@ export const loginPersonalAccountActions = {
   ENTEREMAIL: 'enter email',
   AUTOCOMPLETE: 'autocomplete user information',
   ADDPHOTO: 'add photo',
-  DELETE: 'delete',
+  CLEAR: 'clear',
 };
 
 export const ENTER = {
@@ -38,8 +38,8 @@ export const ADDPHOTO = {
   photo: '',
 };
 
-export const DELETE = {
-  type: loginPersonalAccountActions.DELETE,
+export const CLEAR = {
+  type: loginPersonalAccountActions.CLEAR,
   firstName: '',
   phone: '',
   address: '',

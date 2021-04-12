@@ -65,7 +65,7 @@ class Registration extends React.Component {
         <ConnectedHeader linkItem={<button type="button" className="buttonBack">Главная</button>} link="/main-page" disabled={false} />
         <div className="registration-wrap">
           <h2> Регистрация </h2>
-          <form className="registration">
+          <form className="registration" autoComplete="off">
             {inputRegistrationArray.map((input) => (
               <div className={input.name} key={input.name}>
                 <p className={input.classNameOfString} key={input.classNameOfString}>

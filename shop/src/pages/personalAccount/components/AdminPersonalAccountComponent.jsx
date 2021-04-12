@@ -6,7 +6,7 @@ import buttonAdminPageArray from '../constants/buttonAdminPageArray';
 import handleButtonOnClick from '../utils/handleButtonOnClick';
 
 const AdminPersonalAccount = ({
-  onEnter, onLogin, history, onDelete,
+  onEnter, onLogin, history, onDelete, onDeleteAll,
 }) => {
   const [isPersonalInformationVisible, setIsPersonalInformationVisible] = useState(false);
   return (
@@ -24,7 +24,7 @@ const AdminPersonalAccount = ({
               className={button.className}
               type="button"
               onClick={() => handleButtonOnClick(button.className, history,
-                setIsPersonalInformationVisible, onEnter, onLogin, onDelete)}
+                setIsPersonalInformationVisible, onEnter, onLogin, onDelete, onDeleteAll)}
             >
               {button.text}
             </button>

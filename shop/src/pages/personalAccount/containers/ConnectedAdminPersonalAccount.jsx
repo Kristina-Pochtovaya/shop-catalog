@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import WithRouterAddCategoryPage from './WithRouterAdminPersonalAccountComponent';
-import { ENTER, LOGIN, DELETE } from '../../../redux/actions/loginPersonalAccountActions';
+import { ENTER, LOGIN, CLEAR } from '../../../redux/actions/loginPersonalAccountActions';
+import { DELETEALL } from '../../../redux/actions/catalogItemsActions';
 
 const ConnectedAdminPersonalAccount = connect(
   (state) => ({
@@ -20,7 +21,10 @@ const ConnectedAdminPersonalAccount = connect(
       },
     }),
     onDelete: () => dispatch({
-      type: DELETE.type,
+      type: CLEAR.type,
+    }),
+    onDeleteAll: () => dispatch({
+      type: DELETEALL.type,
     }),
   }),
 )(WithRouterAddCategoryPage);

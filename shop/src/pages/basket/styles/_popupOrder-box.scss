@@ -50,14 +50,14 @@
         fill:red;
     }
 
-    .name .nameString{
+    .clientName .nameString{
         @extend %stringPopup;
 
         &.-required:after{
             @extend %required;
         }
     }
-    .name .nameInput{
+    .clientName .nameInput{
         @extend %inputPopup;
     }
 
@@ -73,14 +73,14 @@
 
     }
 
-    .address .addressString{
+    .clientAddress .addressString{
         @extend %stringPopup;
 
         &.-required::after{
             @extend %required;
         }
     }
-    .address .addressInput{
+    .clientAddress .addressInput{
         @extend %inputPopup;
     }
 
@@ -96,18 +96,20 @@
 
     .nameSymbol{
         @extend %errorPopUp;
+
+        top:36px;
     }
 
     .phoneSymbol{
         @extend %errorPopUp;
 
-        top: 198px;
+        top: 122px;
     }
 
     .addressSymbol{
         @extend %errorPopUp;
 
-        top: 281px;
+        top: 202px;
     }
 
     .buttonOrder{

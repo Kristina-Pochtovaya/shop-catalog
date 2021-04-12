@@ -4,7 +4,7 @@ import serverUrl from '../../../../common/constants/urls';
 const unautherizedUser = '/add-unautherizedUser';
 
 async function postUnautherizedUser(
-  firstName, phoneNumber, address,
+  firstName, phoneNumber, address, pages,
 ) {
   const payload = {
     data: {
@@ -16,9 +16,14 @@ async function postUnautherizedUser(
   };
 
   try {
-    const response = await axios.post(`${serverUrl}${unautherizedUser}`, payload);
-    const result = response.data;
-    return result;
+    if (!pages.loginPersonalAccountReducer.firstName
+      && !pages.loginPersonalAccountReducer.phone
+      && !pages.loginPersonalAccountReducer.address) {
+      const response = await axios.post(`${serverUrl}${unautherizedUser}`, payload);
+      const result = response.data;
+      return result;
+    }
+    return '';
   } catch (error) {
     return null;
   }

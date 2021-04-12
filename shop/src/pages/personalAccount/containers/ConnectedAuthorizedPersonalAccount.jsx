@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import WithRouterAuthorizedPersonalAccount from './WithRouterAuthorizedPersonalAccountComponent';
-import { ENTER, LOGIN, DELETE } from '../../../redux/actions/loginPersonalAccountActions';
+import { ENTER, LOGIN, CLEAR } from '../../../redux/actions/loginPersonalAccountActions';
+import { DELETEALL } from '../../../redux/actions/catalogItemsActions';
 
 const ConnectedAuthorizedPersonalAccount = connect(
   (state) => ({
@@ -20,7 +21,10 @@ const ConnectedAuthorizedPersonalAccount = connect(
       },
     }),
     onDelete: () => dispatch({
-      type: DELETE.type,
+      type: CLEAR.type,
+    }),
+    onDeleteAll: () => dispatch({
+      type: DELETEALL.type,
     }),
   }),
 )(WithRouterAuthorizedPersonalAccount);
