@@ -1,77 +1,76 @@
 import { configure } from 'enzyme';
-import axios from 'axios';
 import Adapter from 'enzyme-adapter-react-16';
 import postLoginForgetPassword from './postLoginForgetPasswordRequest';
-import 'whatwg-fetch';
-import serverUrl from '../../constants/urls';
+import postRequest from './postRequest';
+
+jest.mock('./postRequest');
 
 configure({ adapter: new Adapter() });
 
 describe('Items API', () => {
-  beforeAll(() => jest.spyOn(window, 'fetch'));
+  const payload = {
+    data: {
+      email: 'test@mail.ru',
+      password: '',
+    },
+  };
+  const email = 'test@mail.ru';
+  const myUpdateId = jest.fn();
+  const myOnEnterEmail = jest.fn();
 
-  const data = [];
-
-  test('it returns true when props email s not null', async () => {
-    expect.assertions(1);
-    const expected = true;
-    jest.spyOn(window, 'fetch').mockImplementation(() => {
-      const fetchResponse = {
-        ok: true,
-        json: () => Promise.resolve(expected),
-      };
-      return Promise.resolve(fetchResponse);
-    });
-    const json = await postLoginForgetPassword('v.pupkin@gmail.com',
-      '');
-    expect(json).toEqual(expected);
-    window.fetch.mockRestore();
+  test('it executes postRequest with arguments forgetPasswordPath, payload if no errors occurs and password is null', async () => {
+    const password = '';
+    expect(postRequest).toHaveBeenCalledTimes(0);
+    await postLoginForgetPassword(email, password, myUpdateId, myOnEnterEmail);
+    expect(postRequest).toHaveBeenCalledWith('/forget-password', payload);
+    expect(myUpdateId).toHaveBeenCalledTimes(0);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(0);
   });
 
-  test('it returns an object of user when props password is not null', async () => {
-    expect.assertions(1);
-    const expected = 'g. Mogilev, ul. Stroitelei, 78/27';
-    jest.spyOn(window, 'fetch').mockImplementation(() => {
-      const fetchResponse = {
-        ok: true,
-        json: () => Promise.resolve(expected),
-      };
-      return Promise.resolve(fetchResponse);
-    });
-    const json = await postLoginForgetPassword('pul@gmail.com', '28Kris2021');
-    expect(json.address).toEqual(expected);
-    window.fetch.mockRestore();
+  test('it executes postRequest with arguments loginPath, payload if no errors occurs and password is not null', async () => {
+    const password = '123456789';
+    payload.data.password = '123456789';
+    expect(postRequest).toHaveBeenCalledTimes(0);
+    await postLoginForgetPassword(email, password, myUpdateId, myOnEnterEmail);
+    expect(postRequest).toHaveBeenCalledWith('/login', payload);
   });
 
-  test('it returns null when error occurs', async () => {
-    expect.assertions(1);
-    async function postLoginForgetPasswordFail(
-      email, password,
-    ) {
-      const payload = {
-        data: {
-          email: 'test@mail.ru',
-          password: '1',
-        },
-      };
+  test('it executes myUpdateId and myOnEnterEmail is they are not false', async () => {
+    const password = '123456789';
+    payload.data.password = '123456789';
+    expect(myUpdateId).toHaveBeenCalledTimes(0);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(0);
+    postRequest.mockReturnValueOnce(payload);
+    await postLoginForgetPassword(email, password, myUpdateId, myOnEnterEmail);
+    expect(myUpdateId).toHaveBeenCalledTimes(1);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(1);
+  });
 
-      try {
-        const response = await axios.post(`${serverUrl}/error`, payload);
-        const result = response.data;
-        return result;
-      } catch (error) {
-        return null;
-      }
-    }
+  test('it does not execute myUpdateId and myOnEnterEmail if they are not in arguments of postLoginForgetPassword function', async () => {
+    const password = '123456789';
+    payload.data.password = '123456789';
+    expect(myUpdateId).toHaveBeenCalledTimes(0);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(0);
+    postRequest.mockReturnValueOnce(payload);
+    await postLoginForgetPassword(email, password, false, false);
+    expect(myUpdateId).toHaveBeenCalledTimes(0);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(0);
+  });
 
-    jest.spyOn(window, 'fetch').mockImplementation(() => {
-      new Promise((reject) => {
-        reject(new Error('error'));
-      }).catch((err) => err);
-    });
-    const error = await postLoginForgetPasswordFail(data.email,
-      data.password);
-    await expect(error).toBe(null);
-    window.fetch.mockRestore();
+  test('it does execute myUpdateId and not execute myOnEnterEmail if myOnEnterEmail is onlly not in arguments of postLoginForgetPassword function', async () => {
+    const password = '123456789';
+    payload.data.password = '123456789';
+    expect(myUpdateId).toHaveBeenCalledTimes(0);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(0);
+    postRequest.mockReturnValueOnce(payload);
+    await postLoginForgetPassword(email, password, myUpdateId, false);
+    expect(myUpdateId).toHaveBeenCalledTimes(1);
+    expect(myOnEnterEmail).toHaveBeenCalledTimes(0);
+  });
+
+  test('it return null if error occurs', async () => {
+    postRequest.mockReturnValue();
+    const result = await postLoginForgetPassword(email, '', myUpdateId, false);
+    expect(result).toBe(null);
   });
 });

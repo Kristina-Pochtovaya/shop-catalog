@@ -1,99 +1,61 @@
 import { configure } from 'enzyme';
-import axios from 'axios';
 import Adapter from 'enzyme-adapter-react-16';
 import postBasketItemsRequest from './postBasketItemsRequest';
-import 'whatwg-fetch';
-import serverUrl from '../../../../common/constants/urls';
+import postRequest from '../../../../common/api/post/postRequest';
+
+jest.mock('../../../../common/api/post/postRequest');
 
 configure({ adapter: new Adapter() });
 
 describe('Items API', () => {
-  beforeAll(() => jest.spyOn(window, 'fetch'));
-
-  const data = [];
-
-  const clientName = 'Kristina';
-  const clientPhone = '+375293335577';
-  const clientAddress = 'city Minsk';
-  const clientMessage = 'Notes';
-  data.catalogItemsReducer = [
-    {
-      id: 1,
-      description: 'Светильник потолочный Box Silver',
-      price: 163,
+  const payload = {
+    data: {
+      id: '1',
+      category: 'category',
+      description: 'description',
       counter: 1,
-      sum: 1 * 163,
-      clientName,
-      clientPhone,
-      clientAddress,
-      clientMessage,
+      sum: 11,
+      image: 'src',
+      clientName: 'testName',
+      clientPhone: '+375291113355',
+      clientAddress: 'testAddress',
+      clientMessage: 'testMessage',
+      clientEmail: 'test@mail.ru',
+      clientId: 3,
     },
-  ];
+  };
+  const itemsArray = [{
+    id: 1,
+    category: 'category',
+    description: 'description',
+    counter: 1,
+    price: 11,
+    img: { props: { src: 'src' } },
+  }];
+  const clientName = 'testName';
+  const clientPhone = '+375291113355';
+  const clientAddress = 'testAddress';
+  const clientMessage = 'testMessage';
+  const pages = {
+    loginPersonalAccountReducer: {
+      clientEmail: 'test@mail.ru',
+      clientId: 3,
+    },
+  };
 
-  test('it returns an array of items', async () => {
-    expect.assertions(1);
-    const expected = [
-      {
-        id: 1,
-        description: 'Светильник потолочный Box Silver',
-        counter: 1,
-        sum: 1 * 163,
-        clientName: 'Kristina',
-        clientAddress: 'city Minsk',
-        clientMessage: 'Notes',
-      },
-    ];
-    jest.spyOn(window, 'fetch').mockImplementation(() => {
-      const fetchResponse = {
-        ok: true,
-        json: () => Promise.resolve(expected),
-      };
-      return Promise.resolve(fetchResponse);
-    });
-    const json = await postBasketItemsRequest(data.catalogItemsReducer,
-      clientName, clientPhone, clientAddress, clientMessage);
-    expect(json.data).toMatchObject(expected);
-    window.fetch.mockRestore();
+  test('it executes postRequest return result if no errors occurs', async () => {
+    expect(postRequest).toHaveBeenCalledTimes(0);
+    postRequest.mockReturnValue(payload);
+    const result = await postBasketItemsRequest(itemsArray, clientName, clientPhone,
+      clientAddress, clientMessage, pages);
+    expect(postRequest).toHaveBeenCalledTimes(1);
+    expect(result).toBe(payload.data);
   });
 
-  test('it returns null when error occurs', async () => {
-    expect.assertions(1);
-    async function postBasketItemsRequestFail(
-      itemsArraytest, clientNametest, clientPhonetest, clientAddresstest, clientMessagetest,
-    ) {
-      const payload = {
-        data: itemsArraytest.map((item) => (
-          {
-            id: item.id,
-            category: item.category,
-            description: item.description,
-            counter: item.counter,
-            sum: item.counter * item.price,
-            clientNametest,
-            clientPhonetest,
-            clientAddresstest,
-            clientMessagetest,
-          }
-        )),
-      };
-
-      try {
-        const response = await axios.post(`${serverUrl}/basketsad`, payload);
-        const result = response.data;
-        return result;
-      } catch (error) {
-        return null;
-      }
-    }
-
-    jest.spyOn(window, 'fetch').mockImplementation(() => {
-      new Promise((reject) => {
-        reject(new Error('error'));
-      }).catch((err) => err);
-    });
-    const error = await postBasketItemsRequestFail(data.catalogItemsReducer,
-      clientName, clientPhone, clientAddress, clientMessage);
-    await expect(error).toBe(null);
-    window.fetch.mockRestore();
+  test('it return null if error occurs', async () => {
+    postRequest.mockReturnValue();
+    const result = await postBasketItemsRequest(itemsArray, clientName, clientPhone,
+      clientAddress, clientMessage, pages);
+    expect(result).toBe(null);
   });
 });

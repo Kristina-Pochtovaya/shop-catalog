@@ -24,7 +24,7 @@ describe('rendering Basket components', () => {
     jest.clearAllMocks();
   });
 
-  it('should call setState and addRemoveScroll functions after clicking on teh button .buttonOrderBuy', () => {
+  it('should call setState and addRemoveScroll functions after clicking on the button .buttonOrderBuy', () => {
     expect(addRemoveScroll).toHaveBeenCalledTimes(0);
     expect(setState).toHaveBeenCalledTimes(0);
     component.find('.buttonOrderBuy').simulate('click');

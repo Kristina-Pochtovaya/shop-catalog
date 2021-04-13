@@ -10,7 +10,7 @@ describe('rendering LoginForm component', () => {
   const divRef = forgetPassword.find('.divCard');
 
   it('component shows if click inside', () => {
-    expect(forgetPassword.find('svg')).toHaveLength(1);
+    expect(forgetPassword.find('BackSymbol')).toHaveLength(1);
   });
 
   it('component disappears when click outside', () => {

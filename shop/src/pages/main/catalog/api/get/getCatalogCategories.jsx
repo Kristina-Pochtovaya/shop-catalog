@@ -1,5 +1,4 @@
-import axios from 'axios';
-import serverUrl from '../../../../../common/constants/urls';
+import getRequest from '../../../../../common/api/get/getRequest';
 
 const categoryPath = '/category';
 
@@ -7,13 +6,13 @@ async function getCatalogCategories(
   setCategories, setLoading, setError,
 ) {
   try {
-    const response = await axios.get(`${serverUrl}${categoryPath}`);
+    const response = await getRequest(categoryPath);
     const result = response.data;
     setCategories({ categories: result });
     setLoading(true);
     return result;
   } catch (error) {
-    return setError({ errorMessage: error.message });
+    return (setLoading(true), setError({ errorMessage: error.message }));
   }
 }
 

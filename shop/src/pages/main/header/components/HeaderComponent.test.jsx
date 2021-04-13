@@ -1,51 +1,110 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import Header from './HeaderComponent';
-import aboutUS from '../../../../common/assets/header/about-us.png';
 
 configure({ adapter: new Adapter() });
+describe('rendering Header component', () => {
+  const linkItem = 'linkItem';
+  const link = 'link';
+  let disabled;
+  const pages = {
+    loginPersonalAccountReducer: {
+      loginIsVisible: 'true',
+      loginFormIsVisible: 'true',
+      loginFormLoginPageIsVisible: 'true',
+      loginFormForgetPasswordIsVisible: 'true',
+      personAccountIsVisible: 'true',
+    },
+  };
+  const myOnLogin = jest.fn();
 
-const pages = {
-  loginPersonalAccountReducer: {
-    loginFormIsVisible: true,
-  },
-};
-
-const myMethod = jest.fn().mockImplementation(() => true, true, false);
-
-test('should render Header Component', () => {
-  const header = shallow(<Header
-    linkItem={<button type="button" className="buttonBack">Назад</button>}
-    link="/main-page"
-    disabled
+  let component;
+  const setUp = () => shallow(<Header
+    linkItem={linkItem}
+    link={link}
+    disabled={disabled}
     pages={pages}
-    onLogin={myMethod}
+    onLogin={myOnLogin}
   />);
 
-  expect(toJson(header)).toMatchSnapshot();
-});
+  beforeEach(() => {
+    disabled = false;
+    pages.loginPersonalAccountReducer.loginIsVisible = 'true';
+    pages.loginPersonalAccountReducer.loginFormIsVisible = 'true';
+    pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible = 'true';
+    pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible = 'true';
+    pages.loginPersonalAccountReducer.personAccountIsVisible = 'true';
+    component = setUp();
+  });
 
-test('if componenent has props with element button, it renders it', () => {
-  const header = shallow(<Header
-    linkItem={<button type="button" className="buttonBack">Назад</button>}
-    link="/main-page"
-    pages={pages}
-    onLogin={myMethod}
-  />);
+  it('should set class basket if disabled prop is false ', () => {
+    expect(component.find('.basket')).toHaveLength(1);
+  });
 
-  expect(header.find('button')).toHaveLength(1);
-});
+  it('should set class basket  -disabled if disabled prop is true ', () => {
+    disabled = true;
+    component = setUp();
+    expect(component.find('.basket.\-disabled')).toHaveLength(1);
+  });
 
-test('if componenent has props with img element, it renders it', () => {
-  const header = shallow(<Header
-    linkItem={<img src={aboutUS} alt="О нас" />}
-    link="/about"
-    pages={pages}
-    onLogin={myMethod}
-  />);
+  it('should render the div .loginDiv if pages.loginPersonalAccountReducer.loginIsVisible is true', () => {
+    expect(component.find('.loginDiv')).toHaveLength(1);
+  });
 
-  expect(header.find('img')).toHaveLength(3);
-  expect(header.find('button')).toHaveLength(0);
+  it('should not render the div .loginDiv if pages.loginPersonalAccountReducer.loginIsVisible is false', () => {
+    pages.loginPersonalAccountReducer.loginIsVisible = 'false';
+    component = setUp();
+    expect(component.find('.loginDiv')).toHaveLength(0);
+  });
+
+  it('should call onLogin function after clicking on .buttonLogin button', () => {
+    expect(myOnLogin).toHaveBeenCalledTimes(0);
+    component.find('.buttonLogin').simulate('click');
+    expect(myOnLogin).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render ConnectedLoginForm if pages.loginPersonalAccountReducer.loginFormIsVisible and  pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible are true', () => {
+    expect(component.find('.connectedLoginForm')).toHaveLength(1);
+  });
+
+  it('should not render ConnectedLoginForm if pages.loginPersonalAccountReducer.loginFormIsVisible and  pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible are false', () => {
+    pages.loginPersonalAccountReducer.loginFormIsVisible = 'false';
+    pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible = 'false';
+    component = setUp();
+    expect(component.find('.connectedLoginForm')).toHaveLength(0);
+  });
+
+  it('should not render ConnectedLoginForm if pages.loginPersonalAccountReducer.loginFormIsVisible is false', () => {
+    pages.loginPersonalAccountReducer.loginFormIsVisible = 'false';
+    component = setUp();
+    expect(component.find('.connectedLoginForm')).toHaveLength(0);
+  });
+
+  it('should render ConnectedLoginForm if pages.loginPersonalAccountReducer.loginFormIsVisible and  pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible are true', () => {
+    expect(component.find('.loginFormForgetPassword')).toHaveLength(1);
+  });
+
+  it('should render ConnectedLoginForm if pages.loginPersonalAccountReducer.loginFormIsVisible and  pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible are false', () => {
+    pages.loginPersonalAccountReducer.loginFormIsVisible = 'false';
+    pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible = 'false';
+    component = setUp();
+    expect(component.find('.loginFormForgetPassword')).toHaveLength(0);
+  });
+
+  it('should render ConnectedLoginForm if pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible is false', () => {
+    pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible = 'false';
+    component = setUp();
+    expect(component.find('.loginFormForgetPassword')).toHaveLength(0);
+  });
+
+  it('should render .personalAccountDiv if pages.loginPersonalAccountReducer.personAccountIsVisible is true', () => {
+    expect(component.find('.personalAccountDiv')).toHaveLength(1);
+  });
+
+  it('should not render .personalAccountDiv if pages.loginPersonalAccountReducer.personAccountIsVisible is false', () => {
+    pages.loginPersonalAccountReducer.personAccountIsVisible = 'false';
+    component = setUp();
+    expect(component.find('.personalAccountDiv')).toHaveLength(0);
+  });
 });

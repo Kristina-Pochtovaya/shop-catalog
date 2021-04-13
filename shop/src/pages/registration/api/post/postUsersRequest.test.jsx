@@ -1,80 +1,41 @@
 import { configure } from 'enzyme';
-import axios from 'axios';
 import Adapter from 'enzyme-adapter-react-16';
 import postUsers from './postUsersRequest';
-import serverUrl from '../../../../common/constants/urls';
+import postRequest from '../../../../common/api/post/postRequest';
+
+jest.mock('../../../../common/api/post/postRequest');
 
 configure({ adapter: new Adapter() });
 
 describe('Items API', () => {
-  beforeAll(() => jest.spyOn(window, 'fetch'));
-
-  const data = {
-    firstName: 'testUser',
-    lastName: 'lastNameTest',
-    email: 'test24032021@mail.ru',
-    password: '123456789',
-    phoneNumber: '+375292094942',
-    address: 'testAddress',
-  };
-
-  test('it returns newUser if email is new', async () => {
-    expect.assertions(1);
-    const expected = {
-      firstName: 'testUser',
-      lastName: 'lastNameTest',
-      email: 'test24032021@mail.ru',
+  const payload = {
+    data: {
+      firstName: 'testName',
+      lastName: 'testLastName',
+      email: 'test@mail.ru',
       password: '123456789',
-      phoneNumber: '+375292094942',
+      phoneNumber: '+375291234567',
       address: 'testAddress',
-    };
-    const myPostUsers = jest.spyOn(window, 'fetch').mockImplementation(() => Promise.resolve(expected));
-    const result = await myPostUsers();
-    expect(result).toMatchObject(expected);
-    window.fetch.mockRestore();
+    },
+  };
+  const firstName = 'testName';
+  const lastName = 'testLastName';
+  const email = 'test@mail.ru';
+  const password = '123456789';
+  const phoneNumber = '+375291234567';
+  const address = 'testAddress';
+
+  test('it executes postRequest return result if no errors occurs', async () => {
+    expect(postRequest).toHaveBeenCalledTimes(0);
+    postRequest.mockReturnValue(payload);
+    const result = await postUsers(firstName, lastName, email, password, phoneNumber, address);
+    expect(postRequest).toHaveBeenCalledTimes(1);
+    expect(result).toBe(payload.data);
   });
 
-  test('it returns true if user already exist', async () => {
-    expect.assertions(1);
-    const expected = true;
-    const json = await postUsers(data.firstName, data.lastName,
-      data.email, data.password, data.phoneNumber, data.address);
-    expect(json).toEqual(expected);
-  });
-
-  test('it returns null when error occurs', async () => {
-    expect.assertions(1);
-    async function postUsersFail(
-      email, password, repeatedPassword,
-    ) {
-      const payload = {
-        data: {
-          firstName: 'testUser',
-          lastName: 'lastNameTest',
-          email: 'test24032021@mail.ru',
-          password: '123456789',
-          phoneNumber: '+375292094942',
-          address: 'testAddress',
-        },
-      };
-
-      try {
-        const response = await axios.post(`${serverUrl}/usersfail`, payload);
-        const result = response.data;
-        return result;
-      } catch (error) {
-        return null;
-      }
-    }
-
-    jest.spyOn(window, 'fetch').mockImplementation(() => {
-      new Promise((reject) => {
-        reject(new Error('error'));
-      }).catch((err) => err);
-    });
-    const error = await postUsersFail(data.email,
-      data.password, data.repeatedPassword);
-    await expect(error).toBe(null);
-    window.fetch.mockRestore();
+  test('it return null if error occurs', async () => {
+    postRequest.mockReturnValue();
+    const result = await postUsers(firstName, lastName, email, password, phoneNumber, address);
+    expect(result).toBe(null);
   });
 });

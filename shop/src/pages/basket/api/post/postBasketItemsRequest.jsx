@@ -1,5 +1,4 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import postRequest from '../../../../common/api/post/postRequest';
 
 const basketItemPath = '/basket';
 
@@ -26,7 +25,7 @@ async function postBasketItemsRequest(
     )),
   };
   try {
-    const response = await axios.post(`${serverUrl}${basketItemPath}`, payload);
+    const response = await postRequest(basketItemPath, payload);
     const result = response.data;
     return result;
   } catch (error) {

@@ -42,6 +42,7 @@ class PopUpBasketOrder extends React.Component {
         <div className="popupOrder-box">
           <h2>Купить в 1 клик</h2>
           <div
+            className="popupOrder"
             onClick={() => { setPopupOrderActive(false); addRemoveScroll(); }}
             role="presentation"
           >

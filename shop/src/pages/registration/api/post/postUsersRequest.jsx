@@ -1,5 +1,4 @@
-import axios from 'axios';
-import serverUrl from '../../../../common/constants/urls';
+import postRequest from '../../../../common/api/post/postRequest';
 
 const usersPath = '/users';
 
@@ -19,7 +18,7 @@ async function postUsers(
   };
 
   try {
-    const response = await axios.post(`${serverUrl}${usersPath}`, payload);
+    const response = await postRequest(usersPath, payload);
     const result = response.data;
     return result;
   } catch (error) {

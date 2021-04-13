@@ -3,7 +3,6 @@ import SocialButton from './SocialButtonComponent';
 
 const Footer = () => (
   <div className="footer-wrap">
-
     <div className="footer-box">
       <div>
         <SocialButton type="facebook" />

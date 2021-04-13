@@ -7,7 +7,7 @@ import basket from '../../../../common/assets/common/basket.png';
 import PersonalAccountSymbol from '../../../../common/components/icons/components/PersonalAccountSymbol';
 
 const Header = ({
-  linkItem, link, disabled, pages, onLogin, setAdminVisible,
+  linkItem, link, disabled, pages, onLogin,
 }) => {
   const divRef = createRef();
 
@@ -48,6 +48,7 @@ const Header = ({
                 && String(pages.loginPersonalAccountReducer.loginFormLoginPageIsVisible) === 'true'
                   ? (
                     <ConnectedLoginForm
+                      className="connectedLoginForm"
                       divRef={divRef}
                     />
                   ) : null}
@@ -55,6 +56,7 @@ const Header = ({
                  && String(pages.loginPersonalAccountReducer.loginFormForgetPasswordIsVisible) === 'true'
                   ? (
                     <LoginFormForgetPassword
+                      className="loginFormForgetPassword"
                       divRef={divRef}
                     />
                   ) : null}
